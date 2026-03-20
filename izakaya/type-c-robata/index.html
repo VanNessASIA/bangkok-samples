@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>炉端 蔵人 | Robata Kurando - Phrom Phong, Bangkok</title>
+<meta name="description" content="炭火と日本酒の真髄。バンコク・プロンポンの炉端焼きと厳選日本酒の店、蔵人。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --charcoal: #1a1714;
+  --warm-black: #2c2520;
+  --ember: #c4713b;
+  --ember-glow: #e8935a;
+  --ash: #a39585;
+  --smoke: #d4ccc2;
+  --cream: #f0ebe4;
+  --sake-white: #f7f4ef;
+  --cedar: #6b5744;
+  --deep-red: #8b3a3a;
+}
+
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Noto Serif JP', 'Georgia', serif;
+  background-color: var(--charcoal);
+  color: var(--smoke);
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+/* ─── Navigation ─── */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+nav.scrolled {
+  background: rgba(26, 23, 20, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-brand {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--sake-white);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--ember-glow);
+}
+
+/* ─── Hero ─── */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 6vw 8vh;
+  background:
+    linear-gradient(180deg,
+      rgba(26,23,20,0.15) 0%,
+      rgba(26,23,20,0.0) 30%,
+      rgba(26,23,20,0.3) 60%,
+      rgba(26,23,20,0.92) 100%),
+    linear-gradient(135deg,
+      #2c2018 0%, #3d2c1e 25%, #1a1410 50%, #2a1f18 75%, #1a1714 100%);
+  background-size: cover;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 30% 60%, rgba(196,113,59,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 500px at 70% 40%, rgba(139,58,58,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--sake-white);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+
+.hero-title-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ash);
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.hero-lead {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--smoke);
+  max-width: 520px;
+}
+
+/* ─── Sections shared ─── */
+
+section {
+  padding: 8rem 6vw;
+}
+
+.section-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 1.8rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--sake-white);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.section-title-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cedar);
+  margin-bottom: 2.5rem;
+}
+
+.section-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 2.1;
+  color: var(--smoke);
+  max-width: 620px;
+}
+
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--ember);
+  margin: 3rem 0;
+  opacity: 0.6;
+}
+
+/* ─── Philosophy (Robata) ─── */
+
+.philosophy {
+  background: var(--charcoal);
+  position: relative;
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.philosophy-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background:
+    linear-gradient(160deg, #3d2c1e 0%, #2a1c14 40%, #1a1410 100%);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.philosophy-visual::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background:
+    radial-gradient(ellipse at 50% 90%, rgba(196,113,59,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.philosophy-visual .visual-text {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(196,113,59,0.12);
+  letter-spacing: 0.2em;
+  writing-mode: vertical-rl;
+}
+
+.philosophy-quote {
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 2.2;
+  color: var(--cream);
+  margin-top: 2rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--ember);
+  opacity: 0.9;
+}
+
+/* ─── Seasonal Dishes ─── */
+
+.seasonal {
+  background: var(--warm-black);
+  position: relative;
+  overflow: hidden;
+}
+
+.seasonal::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,113,59,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.seasonal-intro {
+  max-width: 700px;
+  margin-bottom: 5rem;
+}
+
+.dish-showcase {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: start;
+}
+
+.dish-showcase:nth-child(even) {
+  grid-template-columns: 1fr 1.2fr;
+}
+
+.dish-showcase:nth-child(even) .dish-image {
+  order: 2;
+}
+
+.dish-image {
+  aspect-ratio: 3 / 2;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dish-image-1 {
+  background: linear-gradient(135deg, #3d2c1e 0%, #5a3d28 30%, #2a1c14 100%);
+}
+
+.dish-image-2 {
+  background: linear-gradient(135deg, #2a2520 0%, #4a3830 40%, #1a1714 100%);
+}
+
+.dish-image-3 {
+  background: linear-gradient(135deg, #352a22 0%, #4d3828 30%, #1e1812 100%);
+}
+
+.dish-image .image-label {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240,235,228,0.4);
+}
+
+.dish-text {
+  padding-top: 1rem;
+}
+
+.dish-name {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--sake-white);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+.dish-name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--cedar);
+  margin-bottom: 1.5rem;
+}
+
+.dish-desc {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--ash);
+}
+
+/* ─── Sake Pairing ─── */
+
+.sake {
+  background: var(--charcoal);
+  position: relative;
+}
+
+.sake-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem;
+  max-width: 1200px;
+  align-items: start;
+}
+
+.sake-visual {
+  position: relative;
+}
+
+.sake-bottles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.sake-bottle {
+  aspect-ratio: 2 / 5;
+  border-radius: 2px;
+  position: relative;
+}
+
+.sake-bottle:nth-child(1) {
+  background: linear-gradient(180deg, #2a2520 0%, #3d3028 50%, #1a1714 100%);
+  margin-top: 2rem;
+}
+
+.sake-bottle:nth-child(2) {
+  background: linear-gradient(180deg, #352820 0%, #4a3828 50%, #2a1f18 100%);
+}
+
+.sake-bottle .bottle-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  writing-mode: vertical-rl;
+  font-size: 0.85rem;
+  color: rgba(240,235,228,0.15);
+  letter-spacing: 0.3em;
+}
+
+.sake-content {
+  padding-top: 1rem;
+}
+
+.sake-list {
+  margin-top: 3rem;
+}
+
+.sake-item {
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(163,149,133,0.12);
+}
+
+.sake-item:first-child {
+  border-top: 1px solid rgba(163,149,133,0.12);
+}
+
+.sake-item-name {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--cream);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.sake-item-origin {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  color: var(--cedar);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+}
+
+.sake-item-note {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ash);
+  line-height: 1.8;
+}
+
+/* ─── Space / Counter ─── */
+
+.space {
+  background: var(--warm-black);
+  position: relative;
+}
+
+.space-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  align-items: end;
+}
+
+.space-images {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.space-image-main {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #2c2018 0%, #3d2c1e 40%, #1a1410 100%);
+  border-radius: 2px;
+  position: relative;
+}
+
+.space-image-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 40% 70%, rgba(196,113,59,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(107,87,68,0.06) 0%, transparent 50%);
+}
+
+.space-image-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.space-image-sm {
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+}
+
+.space-image-sm:nth-child(1) {
+  background: linear-gradient(135deg, #352a22 0%, #2a1f18 100%);
+}
+
+.space-image-sm:nth-child(2) {
+  background: linear-gradient(135deg, #2a2520 0%, #3d2c1e 100%);
+}
+
+.space-text {
+  padding-bottom: 2rem;
+}
+
+.space-detail {
+  margin-top: 2.5rem;
+}
+
+.space-detail-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(163,149,133,0.08);
+}
+
+.space-detail-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ember);
+  min-width: 80px;
+  padding-top: 0.15rem;
+}
+
+.space-detail-value {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--smoke);
+  line-height: 1.7;
+}
+
+/* ─── Reservation / Access ─── */
+
+.reservation {
+  background: var(--charcoal);
+  text-align: center;
+  padding: 10rem 6vw;
+  position: relative;
+}
+
+.reservation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ember), transparent);
+  opacity: 0.3;
+}
+
+.reservation .section-label,
+.reservation .section-title,
+.reservation .section-title-en {
+  text-align: center;
+}
+
+.reservation .section-body {
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.res-details {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.res-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(163,149,133,0.1);
+}
+
+.res-label {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ash);
+  min-width: 100px;
+  text-align: right;
+}
+
+.res-value {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--cream);
+  min-width: 200px;
+  text-align: left;
+}
+
+.res-cta {
+  margin-top: 4rem;
+}
+
+.res-cta a {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sake-white);
+  text-decoration: none;
+  padding: 1rem 3rem;
+  border: 1px solid var(--ember);
+  transition: all 0.4s ease;
+}
+
+.res-cta a:hover {
+  background: var(--ember);
+  color: var(--charcoal);
+}
+
+.res-map-note {
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ash);
+  line-height: 1.8;
+}
+
+/* ─── Footer ─── */
+
+footer {
+  background: var(--charcoal);
+  padding: 3rem 6vw;
+  border-top: 1px solid rgba(163,149,133,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--ash);
+}
+
+.footer-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(163,149,133,0.5);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 900px) {
+  html { font-size: 16px; }
+
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+
+  .hero { padding: 0 5vw 6vh; }
+
+  section { padding: 5rem 5vw; }
+
+  .philosophy-grid,
+  .sake-layout,
+  .space-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .philosophy-visual {
+    aspect-ratio: 3 / 2;
+  }
+
+  .dish-showcase,
+  .dish-showcase:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .dish-showcase:nth-child(even) .dish-image {
+    order: 0;
+  }
+
+  .sake-bottles {
+    max-width: 300px;
+  }
+
+  .space-image-main { aspect-ratio: 4 / 3; }
+
+  .res-row {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+  }
+
+  .res-label, .res-value {
+    text-align: center;
+    min-width: auto;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title { letter-spacing: 0.04em; }
+  .sake-bottles { grid-template-columns: 1fr; max-width: 160px; }
+  .space-image-row { grid-template-columns: 1fr; }
+}
+
+/* ─── Subtle animations ─── */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="nav">
+  <div class="nav-brand">蔵人</div>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Robata</a></li>
+    <li><a href="#seasonal">Seasonal</a></li>
+    <li><a href="#sake">Sake</a></li>
+    <li><a href="#space">Space</a></li>
+    <li><a href="#reservation">Reserve</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <p class="hero-tagline">Charcoal &middot; Sake &middot; Craft</p>
+    <h1 class="hero-title">炉端 蔵人</h1>
+    <p class="hero-title-en">Robata Kurando</p>
+    <p class="hero-lead">
+      備長炭の熾火と、蔵元から届く酒。<br>
+      素材の声に耳を澄ませ、<br>
+      一串一皿に想いを込める。<br>
+      プロンポンの路地裏に灯る、大人の炉端。
+    </p>
+  </div>
+</section>
+
+<!-- Philosophy -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-grid">
+    <div class="philosophy-visual fade-in">
+      <span class="visual-text">炭火</span>
+    </div>
+    <div class="fade-in">
+      <p class="section-label">Philosophy</p>
+      <h2 class="section-title">炭と向き合う</h2>
+      <p class="section-title-en">The discipline of charcoal</p>
+      <div class="section-body">
+        <p>
+          蔵人の炉端は、備長炭の遠赤外線でじっくりと焼き上げる。
+          表面は香ばしく、中はしっとりと。炭の温度を見極め、
+          素材ごとに最適な距離と時間を計る。
+          それは技術であり、同時に対話でもある。
+        </p>
+        <div class="divider"></div>
+        <p>
+          毎朝、築地と契約農家から届く食材。
+          その日の炭の状態を見て、焼き方を微調整する。
+          同じ素材でも、昨日と今日では最適解が異なる。
+          だからこそ、炉端に立つ者は常に考え続ける。
+        </p>
+      </div>
+      <blockquote class="philosophy-quote">
+        「炭は嘘をつかない。<br>
+        手を抜けば、そのまま味に出る。」<br>
+        <span style="font-size: 0.85rem; color: var(--cedar);">&mdash; 料理長</span>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- Seasonal Dishes -->
+<section class="seasonal" id="seasonal">
+  <div class="seasonal-intro fade-in">
+    <p class="section-label">Seasonal Selection</p>
+    <h2 class="section-title">旬を、炭火で</h2>
+    <p class="section-title-en">What the season brings to the grill</p>
+    <div class="section-body">
+      <p>
+        献立は季節とともに移ろう。春の山菜、夏の鮎、秋の茸、冬の寒鰤。
+        旬の食材が持つ力を、炭火が最大限に引き出す。
+        蔵人の皿は、日本の四季そのものである。
+      </p>
+    </div>
+  </div>
+
+  <div class="dish-showcase fade-in">
+    <div class="dish-image dish-image-1">
+      <span class="image-label">Seasonal</span>
+    </div>
+    <div class="dish-text">
+      <h3 class="dish-name">のどぐろの塩焼き</h3>
+      <p class="dish-name-en">Salt-grilled Nodoguro</p>
+      <p class="dish-desc">
+        日本海から空輸されるのどぐろを、強めの遠火でゆっくりと。
+        皮目はパリッと、身は脂がじわりと滲み出す。
+        塩のみで仕上げる潔さが、素材への敬意。
+        添えるのは、すだちと大根おろしだけ。
+      </p>
+    </div>
+  </div>
+
+  <div class="dish-showcase fade-in">
+    <div class="dish-image dish-image-2">
+      <span class="image-label">Signature</span>
+    </div>
+    <div class="dish-text">
+      <h3 class="dish-name">和牛サーロインの藁焼き</h3>
+      <p class="dish-name-en">Wagyu sirloin, straw-smoked</p>
+      <p class="dish-desc">
+        A5ランクの和牛を藁で一瞬燻し、備長炭で仕上げる。
+        藁の香ばしさが肉の旨味と溶け合い、
+        噛むほどに深い余韻が広がる。
+        わさびと粗塩で、肉そのものを味わう。
+      </p>
+    </div>
+  </div>
+
+  <div class="dish-showcase fade-in">
+    <div class="dish-image dish-image-3">
+      <span class="image-label">Garden</span>
+    </div>
+    <div class="dish-text">
+      <h3 class="dish-name">焼き茸の土瓶蒸し</h3>
+      <p class="dish-name-en">Grilled mushroom dobin-mushi</p>
+      <p class="dish-desc">
+        松茸、舞茸、椎茸を軽く炭火であぶってから、
+        昆布と鰹の出汁で蒸し上げる。
+        炭の香りが出汁に移り、奥行きのある一杯に。
+        すだちを絞れば、秋の山が口の中に広がる。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Sake Pairing -->
+<section class="sake" id="sake">
+  <div class="sake-layout">
+    <div class="sake-visual fade-in">
+      <div class="sake-bottles">
+        <div class="sake-bottle">
+          <span class="bottle-label">純米大吟醸</span>
+        </div>
+        <div class="sake-bottle">
+          <span class="bottle-label">山廃仕込</span>
+        </div>
+      </div>
+    </div>
+    <div class="sake-content fade-in">
+      <p class="section-label">Sake Pairing</p>
+      <h2 class="section-title">酒と炭火の邂逅</h2>
+      <p class="section-title-en">Where sake meets fire</p>
+      <div class="section-body">
+        <p>
+          蔵人では、全国の蔵元から厳選した日本酒を常時40種以上揃える。
+          炉端焼きとの相性を第一に考え、料理長と利酒師が
+          季節ごとにペアリングを組み立てる。
+          炭火の香ばしさと、酒の旨味が重なる瞬間がある。
+        </p>
+      </div>
+
+      <div class="sake-list">
+        <div class="sake-item">
+          <p class="sake-item-name">十四代 純米大吟醸</p>
+          <p class="sake-item-origin">Yamagata &mdash; Takagi Shuzo</p>
+          <p class="sake-item-note">
+            華やかな吟醸香と、透明感のある甘み。
+            白身魚の塩焼きと合わせると、互いの繊細さが際立つ。
+          </p>
+        </div>
+        <div class="sake-item">
+          <p class="sake-item-name">新政 No.6 X-type</p>
+          <p class="sake-item-origin">Akita &mdash; Aramasa Shuzo</p>
+          <p class="sake-item-note">
+            木桶仕込みの複雑な酸味。
+            和牛の藁焼きに添えると、脂の甘みを酸が切り、余韻が長い。
+          </p>
+        </div>
+        <div class="sake-item">
+          <p class="sake-item-name">而今 山田錦 火入れ</p>
+          <p class="sake-item-origin">Mie &mdash; Kiyasho Shuzo</p>
+          <p class="sake-item-note">
+            穏やかな旨味と、きれいな後味。
+            焼き茸や根菜の炉端焼きとの相性が抜群。
+          </p>
+        </div>
+        <div class="sake-item">
+          <p class="sake-item-name">飛露喜 特別純米</p>
+          <p class="sake-item-origin">Fukushima &mdash; Hiroki Shuzo</p>
+          <p class="sake-item-note">
+            柔らかな口当たりと、じんわり広がる米の旨味。
+            土瓶蒸しの出汁と寄り添うように調和する。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Space -->
+<section class="space" id="space">
+  <div class="space-grid">
+    <div class="space-images fade-in">
+      <div class="space-image-main"></div>
+      <div class="space-image-row">
+        <div class="space-image-sm"></div>
+        <div class="space-image-sm"></div>
+      </div>
+    </div>
+    <div class="space-text fade-in">
+      <p class="section-label">Counter &amp; Space</p>
+      <h2 class="section-title">炉端を囲む</h2>
+      <p class="section-title-en">Gathering around the hearth</p>
+      <div class="section-body">
+        <p>
+          蔵人の中心には、8席のカウンター。
+          目の前で炭火が踊り、食材が焼ける音と香りに包まれる。
+          料理人との距離が近い、それが炉端の醍醐味。
+        </p>
+        <p style="margin-top: 1rem;">
+          奥には個室を2室。接待にも使える落ち着いた空間。
+          杉と檜を使った内装は、日本の木造建築へのオマージュ。
+          照明は控えめに、炭火の赤が空間を染める。
+        </p>
+      </div>
+
+      <div class="space-detail">
+        <div class="space-detail-item">
+          <span class="space-detail-label">Counter</span>
+          <span class="space-detail-value">炉端カウンター 8席</span>
+        </div>
+        <div class="space-detail-item">
+          <span class="space-detail-label">Table</span>
+          <span class="space-detail-value">テーブル席 16席</span>
+        </div>
+        <div class="space-detail-item">
+          <span class="space-detail-label">Private</span>
+          <span class="space-detail-value">個室 2室 (4名 / 8名)</span>
+        </div>
+        <div class="space-detail-item">
+          <span class="space-detail-label">Interior</span>
+          <span class="space-detail-value">杉・檜・備長炭・和紙</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reservation -->
+<section class="reservation" id="reservation">
+  <div class="fade-in">
+    <p class="section-label">Reservation</p>
+    <h2 class="section-title">ご予約</h2>
+    <p class="section-title-en">Reserve your seat at the hearth</p>
+    <div class="section-body">
+      <p>
+        カウンター席は特にお席に限りがございます。<br>
+        ご来店の際は、事前のご予約をお勧めいたします。
+      </p>
+    </div>
+
+    <div class="res-details">
+      <div class="res-row">
+        <span class="res-label">所在地</span>
+        <span class="res-value">Bangkok, Sukhumvit Soi 24<br>Phrom Phong</span>
+      </div>
+      <div class="res-row">
+        <span class="res-label">営業時間</span>
+        <span class="res-value">17:30 - 23:30 (L.O. 23:00)</span>
+      </div>
+      <div class="res-row">
+        <span class="res-label">定休日</span>
+        <span class="res-value">日曜日</span>
+      </div>
+      <div class="res-row">
+        <span class="res-label">電話</span>
+        <span class="res-value">02-XXX-XXXX</span>
+      </div>
+    </div>
+
+    <div class="res-cta">
+      <a href="#reservation">Reserve a Table</a>
+    </div>
+
+    <p class="res-map-note">
+      BTS プロンポン駅 4番出口より徒歩3分<br>
+      Sukhumvit Soi 24, エンポリアム裏手
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-brand">炉端 蔵人 &mdash; Robata Kurando</div>
+  <div class="footer-copy">Phrom Phong, Bangkok</div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const observerOpts = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      fadeObserver.unobserve(e.target);
+    }
+  });
+}, observerOpts);
+faders.forEach(el => fadeObserver.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+</body>
+</html>

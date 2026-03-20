@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>炭火横丁 たけし | Sumibi Yokocho Takeshi | Thonglor Bangkok</title>
+  <meta name="description" content="炭火の香り、提灯の灯り、路地裏の熱気。トンローで味わう、東京横丁のような本格焼き鳥居酒屋『炭火横丁 たけし』のサンプルサイト。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #120f0d;
+      --bg-soft: #191512;
+      --panel: #211a16;
+      --panel-2: #2a211c;
+      --line: rgba(255, 225, 184, 0.14);
+      --text: #f6efe7;
+      --muted: #c7b8a8;
+      --dim: #988575;
+      --amber: #d2863a;
+      --amber-soft: #e0b06a;
+      --red: #7f2416;
+      --max: 1240px;
+      --shadow: 0 24px 80px rgba(0,0,0,.38);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(210,134,58,.08), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(127,36,22,.10), transparent 24%),
+        linear-gradient(180deg, #130f0d 0%, #110e0c 100%);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      transition: background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-nav.is-scrolled {
+      background: rgba(14, 11, 10, 0.82);
+      backdrop-filter: blur(16px);
+      border-color: rgba(255,255,255,.08);
+    }
+
+    .nav-inner {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .brand-ja {
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .brand-en {
+      font-size: .76rem;
+      letter-spacing: .18em;
+      color: var(--amber-soft);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .nav-links a { transition: color .25s ease; }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border: 1px solid rgba(224,176,106,.38);
+      border-radius: 999px;
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(210,134,58,.18), rgba(210,134,58,.06));
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 10px 0 10px 10px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: currentColor;
+      margin: 5px 0;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      padding: 112px 0 32px;
+      overflow: clip;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      background:
+        linear-gradient(180deg, rgba(7,6,6,.24) 0%, rgba(7,6,6,.55) 55%, rgba(7,6,6,.92) 100%),
+        radial-gradient(circle at 20% 26%, rgba(255, 180, 86, 0.18), transparent 20%),
+        radial-gradient(circle at 76% 18%, rgba(255, 136, 78, 0.10), transparent 18%),
+        linear-gradient(135deg, rgba(18,15,13,.74), rgba(18,15,13,.20));
+      z-index: 1;
+    }
+
+    .hero::after {
+      background:
+        radial-gradient(circle at 18% 68%, rgba(255,255,255,.08), transparent 15%),
+        radial-gradient(circle at 68% 56%, rgba(255,255,255,.06), transparent 18%),
+        radial-gradient(circle at 52% 40%, rgba(255,255,255,.04), transparent 20%);
+      mix-blend-mode: screen;
+      opacity: .55;
+      filter: blur(12px);
+      z-index: 1;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(15,11,10,.10) 0%, rgba(15,11,10,.32) 100%),
+        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1800&q=80') center center / cover no-repeat;
+      transform: scale(1.04);
+      filter: saturate(.78) contrast(1.05) brightness(.58);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 420px);
+      gap: 44px;
+      align-items: end;
+    }
+
+    .hero-copy { max-width: 760px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(25, 19, 17, .48);
+      color: var(--amber-soft);
+      font-size: .88rem;
+      letter-spacing: .08em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: clamp(3rem, 8vw, 6.2rem);
+      line-height: 1.04;
+      letter-spacing: .05em;
+      text-shadow: 0 6px 30px rgba(0,0,0,.35);
+    }
+
+    .hero h1 small {
+      display: block;
+      margin-top: 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      letter-spacing: .18em;
+      color: var(--amber-soft);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .hero-lead {
+      margin: 26px 0 0;
+      max-width: 42rem;
+      font-size: clamp(1.08rem, 1.8vw, 1.28rem);
+      color: rgba(246,239,231,.88);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button,
+    .ghost-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: .98rem;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .button {
+      background: linear-gradient(180deg, #d9944d, #b86e30);
+      color: #1a120d;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(210,134,58,.24);
+    }
+
+    .ghost-button {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+    }
+
+    .button:hover,
+    .ghost-button:hover { transform: translateY(-2px); }
+
+    .hero-note {
+      display: grid;
+      gap: 18px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(40,31,26,.9), rgba(24,19,17,.82));
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-note-heading {
+      font-size: .92rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--amber-soft);
+    }
+
+    .today-strip {
+      display: grid;
+      gap: 14px;
+    }
+
+    .today-item {
+      display: grid;
+      gap: 4px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .today-item:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .today-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .today-copy {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--dim);
+      font-size: .9rem;
+    }
+
+    main { position: relative; z-index: 2; }
+
+    section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    .kicker {
+      color: var(--amber-soft);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .84rem;
+    }
+
+    .title {
+      margin: 0;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.16;
+      letter-spacing: .05em;
+    }
+
+    .section-copy,
+    .intro-copy {
+      font-size: 1.06rem;
+      color: var(--muted);
+      max-width: 46rem;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .8fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .concept-photo,
+    .concept-text,
+    .dish-feature,
+    .counter-copy,
+    .drinks-copy,
+    .access-panel,
+    .access-map {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(36,28,23,.94), rgba(24,19,17,.96));
+      box-shadow: var(--shadow);
+    }
+
+    .concept-photo {
+      min-height: 640px;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(17,13,11,.18), rgba(17,13,11,.70)),
+        url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1400&q=80') center center / cover no-repeat;
+      filter: saturate(.82) contrast(1.02);
+    }
+
+    .concept-photo::after,
+    .feature-visual::after,
+    .counter-visual::after,
+    .drink-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 35%, rgba(8,7,6,.72) 100%),
+        radial-gradient(circle at 75% 24%, rgba(255, 181, 87, .20), transparent 18%),
+        radial-gradient(circle at 26% 78%, rgba(255,255,255,.06), transparent 14%);
+      pointer-events: none;
+    }
+
+    .concept-caption {
+      position: absolute;
+      left: 26px;
+      bottom: 24px;
+      right: 26px;
+      z-index: 1;
+      display: grid;
+      gap: 8px;
+    }
+
+    .caption-label {
+      color: var(--amber-soft);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .82rem;
+    }
+
+    .caption-main {
+      font-family: 'Zen Old Mincho', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.28;
+    }
+
+    .concept-text {
+      padding: 34px;
+      display: grid;
+      align-content: space-between;
+      gap: 30px;
+    }
+
+    .concept-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .concept-item {
+      display: grid;
+      gap: 8px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .concept-item:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .concept-item h3,
+    .dish-copy h3,
+    .counter-copy h3,
+    .drinks-copy h3,
+    .access-panel h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .concept-item p,
+    .dish-copy p,
+    .counter-copy p,
+    .drinks-copy p,
+    .access-panel p,
+    .access-line,
+    .detail-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .recommend {
+      padding-top: 26px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: grid;
+      gap: 12px;
+    }
+
+    .recommend-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .recommend-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .recommend-row:last-child { border-bottom: 0; }
+
+    .recommend-row strong { font-size: 1rem; }
+    .recommend-row span { color: var(--amber-soft); font-weight: 700; }
+
+    .signature-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .78fr);
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .signature-stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .dish-feature {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      min-height: 270px;
+    }
+
+    .dish-copy {
+      padding: 30px;
+      display: grid;
+      align-content: center;
+      gap: 14px;
+    }
+
+    .dish-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--amber-soft);
+      font-size: .92rem;
+    }
+
+    .feature-visual,
+    .counter-visual,
+    .drink-visual {
+      position: relative;
+      min-height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: saturate(.84) brightness(.82);
+    }
+
+    .feature-visual.one {
+      background-image: linear-gradient(180deg, rgba(16,12,10,.18), rgba(16,12,10,.50)), url('https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1200&q=80');
+    }
+
+    .feature-visual.two {
+      background-image: linear-gradient(180deg, rgba(16,12,10,.18), rgba(16,12,10,.50)), url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80');
+    }
+
+    .detail-panel {
+      display: grid;
+      gap: 18px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(34,27,22,.94), rgba(22,18,16,.96));
+      box-shadow: var(--shadow);
+    }
+
+    .detail-item {
+      display: grid;
+      gap: 6px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .detail-item:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .detail-label {
+      color: var(--amber-soft);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .82rem;
+    }
+
+    .counter-layout,
+    .drinks-layout,
+    .access-layout {
+      display: grid;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .counter-layout { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
+    .drinks-layout { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); }
+    .access-layout { grid-template-columns: minmax(320px, .92fr) minmax(0, 1.08fr); }
+
+    .counter-copy,
+    .drinks-copy,
+    .access-panel {
+      padding: 34px;
+      display: grid;
+      align-content: center;
+      gap: 18px;
+    }
+
+    .counter-visual {
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background-image: linear-gradient(180deg, rgba(16,12,10,.14), rgba(16,12,10,.54)), url('https://images.unsplash.com/photo-1579027989536-b7b1f875659b?auto=format&fit=crop&w=1400&q=80');
+    }
+
+    .drink-visual {
+      min-height: 560px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background-image: linear-gradient(180deg, rgba(16,12,10,.14), rgba(16,12,10,.54)), url('https://images.unsplash.com/photo-1516100882582-96c3a05fe590?auto=format&fit=crop&w=1400&q=80');
+    }
+
+    .drink-list,
+    .space-list,
+    .access-details {
+      display: grid;
+      gap: 14px;
+    }
+
+    .space-line,
+    .drink-line,
+    .access-line {
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .space-line:last-child,
+    .drink-line:last-child,
+    .access-line:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .drink-line strong,
+    .space-line strong,
+    .access-line strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 1.02rem;
+    }
+
+    .access-map {
+      min-height: 100%;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(20,16,14,.22), rgba(20,16,14,.70)),
+        url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1400&q=80') center center / cover no-repeat;
+    }
+
+    .map-overlay {
+      position: absolute;
+      inset: auto 22px 22px 22px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 20px;
+      background: rgba(17, 13, 12, .74);
+      backdrop-filter: blur(8px);
+    }
+
+    .map-overlay h4 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .map-overlay p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    .reservation-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .reservation-chip {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: .96rem;
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--dim);
+    }
+
+    .footer-inner {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      font-size: .92rem;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .concept-grid,
+      .signature-layout,
+      .counter-layout,
+      .drinks-layout,
+      .access-layout,
+      .dish-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 120px;
+      }
+
+      .hero-note { max-width: 520px; }
+      .concept-photo,
+      .counter-visual,
+      .drink-visual { min-height: 420px; }
+      .access-map { min-height: 420px; }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        position: fixed;
+        inset: 76px 20px auto 20px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 18px;
+        border: 1px solid rgba(255,255,255,.1);
+        border-radius: 20px;
+        background: rgba(18,14,12,.96);
+      }
+
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: block; }
+      .nav-cta { text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      .container,
+      .nav-inner,
+      .hero-grid,
+      .footer-inner { width: min(calc(100% - 28px), var(--max)); }
+
+      section { padding: 82px 0; }
+      .hero h1 { letter-spacing: .03em; }
+      .hero-lead,
+      .section-copy,
+      .intro-copy,
+      .concept-item p,
+      .dish-copy p,
+      .counter-copy p,
+      .drinks-copy p,
+      .access-panel p,
+      .detail-copy,
+      .access-line,
+      .today-copy { font-size: .98rem; }
+
+      .hero-note,
+      .concept-text,
+      .dish-copy,
+      .counter-copy,
+      .drinks-copy,
+      .access-panel,
+      .detail-panel { padding: 24px; }
+
+      .concept-photo,
+      .counter-visual,
+      .drink-visual,
+      .access-map { min-height: 340px; }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="炭火横丁 たけし ホーム">
+        <span class="brand-ja">炭火横丁 たけし</span>
+        <span class="brand-en">Sumibi Yokocho Takeshi</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#concept">店の空気</a>
+        <a href="#skewers">焼き鳥と肴</a>
+        <a href="#counter">カウンター</a>
+        <a href="#drinks">酒とハイボール</a>
+        <a href="#access" class="nav-cta">アクセス・予約</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-media"></div>
+    <div class="hero-grid">
+      <div class="hero-copy fade-up">
+        <div class="eyebrow">Thonglor, Bangkok / Tokyo alley after dark</div>
+        <h1>
+          炭火横丁 たけし
+          <small>Sumibi Yokocho Takeshi</small>
+        </h1>
+        <p class="hero-lead">
+          提灯の赤、炭の匂い、焼き台の熱。
+          トンローの夜に、東京の路地裏をそのまま引き寄せたような一軒。
+          気取らないのに深く残る、焼き鳥居酒屋の熱気を届けます。
+        </p>
+        <div class="hero-actions">
+          <a href="#access" class="button">席をおさえる</a>
+          <a href="#skewers" class="ghost-button">今夜の焼き台を見る</a>
+        </div>
+      </div>
+
+      <aside class="hero-note fade-up">
+        <div class="hero-note-heading">Today’s charcoal recommendations</div>
+        <div class="today-strip">
+          <div class="today-item">
+            <div class="today-name">大山鶏 もも 塩</div>
+            <div class="today-copy">炭の香りをまっすぐ感じる一本。最初のビールと合わせたい定番。</div>
+          </div>
+          <div class="today-item">
+            <div class="today-name">つくね 月見だれ</div>
+            <div class="today-copy">ほどける肉感と甘辛だれ。卵黄をからめて、二杯目が進む味。</div>
+          </div>
+          <div class="today-item">
+            <div class="today-name">白レバー ごま油塩</div>
+            <div class="today-copy">火入れを浅く、香りは濃く。横丁らしい余韻を残す一皿。</div>
+          </div>
+        </div>
+        <div class="meta-row">
+          <span>17:30 — 01:00</span>
+          <span>BTS Thong Lo 6 min</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="concept">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div class="kicker">Concept</div>
+          <h2 class="title">細い路地、炭の煙、<br>深夜まで続く灯り。</h2>
+          <div class="intro-copy">
+            豪華さで見せる店ではなく、空気で選ばれる店へ。<br>
+            焼き鳥の匂いが服に少し残るくらいがちょうどいい。
+            そんな横丁感を、質感ごとトンローに落とし込んだタイプAの居酒屋サンプルです。
+          </div>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-photo fade-up">
+            <div class="concept-caption">
+              <div class="caption-label">Lantern / smoke / charcoal</div>
+              <div class="caption-main">高級すぎず、雑すぎない。<br>焼き台の熱が主役の夜。</div>
+            </div>
+          </div>
+
+          <div class="concept-text fade-up">
+            <div class="concept-list">
+              <div class="concept-item">
+                <h3>横丁の距離感</h3>
+                <p>厨房の音と客席の会話が近い。少し狭く感じるくらいの密度が、店の温度をつくります。</p>
+              </div>
+              <div class="concept-item">
+                <h3>炭火中心の構成</h3>
+                <p>メニューの軸は焼き鳥と炭焼き。揚げ物や締めは脇役に徹して、一本目の印象を強く残します。</p>
+              </div>
+              <div class="concept-item">
+                <h3>写真で伝わる湿度</h3>
+                <p>均一なカードの羅列ではなく、寄りの焼き台、斜めのカウンター、暗がりの提灯で編集する構成です。</p>
+              </div>
+            </div>
+
+            <div class="recommend">
+              <div class="detail-label">For people who want</div>
+              <div class="recommend-grid">
+                <div class="recommend-row"><strong>仕事帰りの一杯目に説得力がある店</strong><span>01</span></div>
+                <div class="recommend-row"><strong>バンコクで“日本の夜”を感じたい客層</strong><span>02</span></div>
+                <div class="recommend-row"><strong>写真で店内の熱気まで伝えたいブランド</strong><span>03</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skewers">
+      <div class="container">
+        <div class="section-head fade-up">
+          <div class="kicker">Signature skewers & dishes</div>
+          <h2 class="title">焼き鳥を中心に、<br>酒が止まらない肴を添える。</h2>
+          <div class="section-copy">
+            見せたいのは“品数の多さ”ではなく、焼き台の芯。
+            炭火の主役を真ん中に置きながら、合いの手になる皿をリズムよく差し込みます。
+          </div>
+        </div>
+
+        <div class="signature-layout">
+          <div class="signature-stack">
+            <article class="dish-feature fade-up">
+              <div class="dish-copy">
+                <div class="detail-label">Skewers</div>
+                <h3>たけし盛り 六本</h3>
+                <p>もも、ねぎま、かわ、ぼんじり、つくね、白レバー。塩とたれの流れまで考えて組む、店の入口になる盛り合わせ。</p>
+                <div class="dish-meta">
+                  <span>備長炭</span>
+                  <span>一本ごとの火入れ</span>
+                  <span>最初の注文に最適</span>
+                </div>
+              </div>
+              <div class="feature-visual one"></div>
+            </article>
+
+            <article class="dish-feature fade-up">
+              <div class="dish-copy">
+                <div class="detail-label">Side dish</div>
+                <h3>炭焼き厚揚げ と 薬味ねぎ</h3>
+                <p>派手さはないのに必ず残る一皿。外は香ばしく、中は湯気が立つ。合間に挟むことで、焼き鳥の余韻がさらに伸びます。</p>
+                <div class="dish-meta">
+                  <span>熱いまま出す</span>
+                  <span>だし醤油</span>
+                  <span>酒の中盤向き</span>
+                </div>
+              </div>
+              <div class="feature-visual two"></div>
+            </article>
+          </div>
+
+          <aside class="detail-panel fade-up">
+            <div class="detail-item">
+              <div class="detail-label">Closing dish</div>
+              <div class="detail-copy">焼きおにぎり鶏だし茶漬け。締めは重くせず、横丁らしく静かに落とします。</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Quick bites</div>
+              <div class="detail-copy">梅水晶、たたき胡瓜、冷やしトマト。最初の一杯を待たせないスピード感を重視。</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Visual tone</div>
+              <div class="detail-copy">正面の完璧な料理写真より、少し斜めで湯気が見える寄りの画づくりが似合います。</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Recommended range</div>
+              <div class="detail-copy">客単価の想定は中価格帯。気軽さは保ちつつ、炭火の品質でちゃんと選ばれる立ち位置。</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="counter">
+      <div class="container">
+        <div class="counter-layout">
+          <div class="counter-copy fade-up">
+            <div class="kicker">Counter / late-night mood</div>
+            <h2 class="title">一人でも入りやすく、<br>二軒目でも帰りたくない。</h2>
+            <p>
+              カウンターは“ただの席数”ではなく、ブランドそのもの。
+              焼き台の手元が見えること、グラスの音が届くこと、会話が少し漏れること。
+              その近さが、深夜帯の再訪理由になります。
+            </p>
+            <div class="space-list">
+              <div class="space-line">
+                <strong>カウンター 12席</strong>
+                焼き場を正面にした主役席。炭の表情と手仕事がそのまま演出になる配置。
+              </div>
+              <div class="space-line">
+                <strong>奥の小上がり 16席</strong>
+                会社帰りの少人数グループにちょうどいい密度。騒がしすぎず、静かすぎない空気感。
+              </div>
+              <div class="space-line">
+                <strong>深夜の照明設計</strong>
+                明るく見せるのではなく、顔色がよく見える低い暖色。提灯と木肌が主役になる照度に調整。
+              </div>
+            </div>
+          </div>
+
+          <div class="counter-visual fade-up"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="drinks">
+      <div class="container">
+        <div class="drinks-layout">
+          <div class="drink-visual fade-up"></div>
+
+          <div class="drinks-copy fade-up">
+            <div class="kicker">Sake / highball / first drink</div>
+            <h2 class="title">ハイボールは軽く、<br>日本酒は温度で魅せる。</h2>
+            <p>
+              このタイプではドリンクも“映える棚”ではなく、料理を押し上げる役回り。
+              最初の一杯の爽快感と、終盤に向けた日本酒の深さを両方置ける構成が似合います。
+            </p>
+            <div class="drink-list">
+              <div class="drink-line">
+                <strong>角ハイボール</strong>
+                炭火の脂をすっと切る、細かい泡の一杯。最初の注文率が高い看板ドリンク。
+              </div>
+              <div class="drink-line">
+                <strong>赤星 中瓶</strong>
+                横丁感に合う、古びたラベルの説得力。焼き鳥の塩と最短距離でつながる組み合わせ。
+              </div>
+              <div class="drink-line">
+                <strong>燗で出す純米酒</strong>
+                冷酒だけで終わらせず、深夜帯に温度のある提案を入れることで、店の記憶が残りやすくなります。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="access">
+      <div class="container">
+        <div class="access-layout">
+          <div class="access-panel fade-up">
+            <div class="kicker">Access / reservation</div>
+            <h2 class="title">トンローの中で、<br>少しだけ奥まった一軒へ。</h2>
+            <p>
+              路地の空気を守るため、表通りに開きすぎない入口設計を想定。
+              その代わり、見つけた時に“当たりの店っぽい”と思わせる提灯と炭の香りを強く残します。
+            </p>
+
+            <div class="access-details">
+              <div class="access-line"><strong>店名</strong>炭火横丁 たけし / Sumibi Yokocho Takeshi</div>
+              <div class="access-line"><strong>場所</strong>Thonglor, Bangkok / BTS Thong Lo 駅から徒歩約6分</div>
+              <div class="access-line"><strong>営業時間</strong>17:30–01:00 / 金土は 02:00 まで</div>
+              <div class="access-line"><strong>想定客層</strong>仕事帰り、夜の会食前後、日本感のある店を探すバンコク在住者・旅行者</div>
+            </div>
+
+            <div class="reservation-row">
+              <div class="reservation-chip">予約電話 02-XXX-XXXX</div>
+              <div class="reservation-chip">LINE予約 @takeshi-yokocho</div>
+              <div class="reservation-chip">Walk-in 可</div>
+            </div>
+          </div>
+
+          <div class="access-map fade-up">
+            <div class="map-overlay">
+              <h4>Thonglor backstreet mood</h4>
+              <p>実際の地図埋め込みに置き換える前提で、現段階では周辺の夜気を感じるイメージ面として構成。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>炭火横丁 たけし — Yakitori Alley sample for Bangkok SNS</div>
+      <div>Single-file HTML / responsive / Japanese-first visual direction</div>
+    </div>
+  </footer>
+
+  <script>
+    const siteNav = document.getElementById('siteNav');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      siteNav.classList.toggle('is-scrolled', window.scrollY > 24);
+    }, { passive: true });
+
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
