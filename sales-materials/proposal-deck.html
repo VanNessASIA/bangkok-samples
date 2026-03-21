@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEEB - バンコク飲食店向け Web・SNS運用サービスのご提案</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --navy: #1a2332;
+    --charcoal: #2d3748;
+    --dark-slate: #334155;
+    --warm-accent: #c8956c;
+    --accent-light: #e8c4a8;
+    --accent-deep: #a07050;
+    --white: #ffffff;
+    --off-white: #f8f6f3;
+    --light-gray: #e8e6e3;
+    --text-primary: #1a2332;
+    --text-secondary: #4a5568;
+    --text-light: #94a3b8;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    background: var(--off-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.8;
+  }
+
+  /* ─── Section Base ─── */
+  section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ─── Page Number ─── */
+  .page-num {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+  }
+
+  .page-num.light {
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ─── Dark Header Sections ─── */
+  .dark-header {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--charcoal) 100%);
+    color: var(--white);
+  }
+
+  /* ─── Typography ─── */
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--warm-accent);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .subtitle.light {
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ─── Layout Helpers ─── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    width: 100%;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  /* ─── Cards ─── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card-dark {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .card-accent {
+    border-left: 3px solid var(--warm-accent);
+  }
+
+  /* ─── Number Marker ─── */
+  .num-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--warm-accent);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-right: 1rem;
+  }
+
+  .num-marker.outline {
+    background: transparent;
+    border: 2px solid var(--warm-accent);
+    color: var(--warm-accent);
+  }
+
+  .num-marker.dark {
+    background: rgba(200,149,108,0.15);
+    color: var(--warm-accent);
+  }
+
+  /* ─── Divider ─── */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--warm-accent);
+    margin: 1.5rem 0;
+    border-radius: 2px;
+  }
+
+  .divider.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ─── Tags / Badges ─── */
+  .tag {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 100px;
+    letter-spacing: 0.03em;
+  }
+
+  .tag-accent {
+    background: rgba(200,149,108,0.12);
+    color: var(--accent-deep);
+  }
+
+  .tag-navy {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  /* ─── Placeholder Boxes ─── */
+  .placeholder {
+    background: var(--light-gray);
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* ─── Pricing Table ─── */
+  .plan-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    transition: transform 0.2s;
+  }
+
+  .plan-card.featured {
+    border: 2px solid var(--warm-accent);
+    transform: scale(1.03);
+    box-shadow: 0 8px 30px rgba(200,149,108,0.15);
+  }
+
+  .plan-card .price {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .plan-card .price-unit {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .plan-card ul {
+    list-style: none;
+    text-align: left;
+    margin-top: 1.5rem;
+  }
+
+  .plan-card ul li {
+    padding: 0.4rem 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .plan-card ul li:last-child {
+    border-bottom: none;
+  }
+
+  .plan-card ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--warm-accent);
+    margin-right: 0.6rem;
+    vertical-align: middle;
+  }
+
+  /* ─── Timeline ─── */
+  .timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--warm-accent), var(--accent-light));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.3rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--warm-accent);
+    border: 3px solid var(--off-white);
+  }
+
+  /* ─── Section-specific header band ─── */
+  .section-header-band {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--charcoal) 100%);
+    color: var(--white);
+    padding: 3.5rem 0 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .section-body {
+    flex: 1;
+    padding: 2.5rem 0 3rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /* ─── Comparison Table ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .compare-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .compare-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .compare-table tr:nth-child(even) td {
+    background: rgba(0,0,0,0.015);
+  }
+
+  /* ─── CTA Button ─── */
+  .cta-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--warm-accent);
+    color: var(--white);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: var(--accent-deep);
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .container { padding: 0 1.5rem; }
+    .plan-card.featured { transform: none; }
+  }
+
+  @media (max-width: 600px) {
+    .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* ─── Print ─── */
+  @media print {
+    html { scroll-snap-type: none; }
+    section {
+      min-height: auto;
+      height: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
+      padding: 2rem 0;
+    }
+    section:last-child { page-break-after: auto; }
+    .page-num { display: none; }
+    body { font-size: 11pt; }
+    .section-header-band { padding: 1.5rem 0; }
+    @page { margin: 1.5cm; size: A4; }
+  }
+
+  /* ─── Scroll indicator (cover only) ─── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: pulse-down 2s ease-in-out infinite;
+  }
+
+  .scroll-hint span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid rgba(255,255,255,0.4);
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    transform: rotate(45deg);
+  }
+
+  @keyframes pulse-down {
+    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.8; transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ─── Subtle decoration lines ─── */
+  .deco-line {
+    position: absolute;
+    background: var(--warm-accent);
+    opacity: 0.15;
+  }
+
+  .month-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--warm-accent);
+  }
+
+  .month-card h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.8rem;
+  }
+
+  .step-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .contact-item {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .contact-item .icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(200,149,108,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .icon-circle svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--warm-accent);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Additional helper for sample grid */
+  .sample-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .sample-cell {
+    aspect-ratio: 9/16;
+    background: var(--light-gray);
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  .sample-cell .qr-box {
+    width: 40px;
+    height: 40px;
+    border: 1px dashed #bbb;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+  }
+
+  @media (max-width: 900px) {
+    .sample-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── Highlight stat ─── */
+  .stat-highlight {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--warm-accent);
+    line-height: 1;
+  }
+
+  .note-box {
+    background: rgba(200,149,108,0.08);
+    border-left: 3px solid var(--warm-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+  }
+
+  .feature-list {
+    list-style: none;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .feature-list li .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--warm-accent);
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+    margin-right: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 1 : COVER
+     ═══════════════════════════════════════════════════════════ -->
+<section class="dark-header" style="justify-content: center; text-align: center;">
+  <div class="deco-line" style="width: 200px; height: 1px; top: 30%; left: -40px; transform: rotate(-30deg);"></div>
+  <div class="deco-line" style="width: 300px; height: 1px; bottom: 25%; right: -60px; transform: rotate(20deg);"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div style="margin-bottom: 2rem;">
+      <div style="display: inline-block; border: 2px solid var(--warm-accent); border-radius: 16px; padding: 1.2rem 3rem;">
+        <div style="font-family: 'Inter', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: 0.15em; line-height: 1;">JEEB</div>
+        <div style="font-size: 1.1rem; font-weight: 300; letter-spacing: 0.3em; margin-top: 0.3rem; color: rgba(255,255,255,0.7);">&#12472;&#12540;&#12502;</div>
+      </div>
+    </div>
+    <div class="divider center" style="margin: 2rem auto;"></div>
+    <h1 style="font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 500; line-height: 1.6; letter-spacing: 0.02em;">
+      &#12496;&#12531;&#12467;&#12463;&#39154;&#39135;&#24215;&#21521;&#12369;<br>
+      Web&#12539;SNS&#36939;&#29992;&#12469;&#12540;&#12499;&#12473;&#12398;&#12372;&#25552;&#26696;
+    </h1>
+    <div style="margin-top: 3rem; font-size: 0.85rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em;">2026&#24180;3&#26376;</div>
+  </div>
+
+  <div class="scroll-hint"><span></span></div>
+  <div class="page-num light">01 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 2 : THE PROBLEM
+     ═══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-header-band">
+    <div class="container">
+      <div class="section-label">Problem</div>
+      <h2>&#12496;&#12531;&#12467;&#12463;&#12398;&#26085;&#31995;&#39154;&#39135;&#24215;&#12364;&#25265;&#12360;&#12427;<br>3&#12388;&#12398;&#35506;&#38988;</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container" style="width: 100%;">
+      <div class="grid-3" style="margin-bottom: 2rem;">
+
+        <div class="card card-accent">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <span class="num-marker">1</span>
+            <h3 style="font-size: 1.1rem;">Web&#12469;&#12452;&#12488;&#12364;&#12394;&#12356;</h3>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            &#12450;&#12525;&#12540;&#12452;&#12539;&#12510;&#12540;&#12395;&#25522;&#36617;&#12398;&#32004;<span class="stat-highlight" style="font-size: 1.5rem; margin: 0 0.2rem;">170</span>&#24215;&#33303;&#12398;&#12411;&#12412;&#20840;&#12390;&#12364;HP&#26410;&#25972;&#20633;&#12290;
+          </p>
+          <p style="font-size: 0.8rem; color: var(--text-light);">
+            Google&#26908;&#32034;&#12391;&#35211;&#12388;&#12363;&#12425;&#12394;&#12356;&#12289;<br>&#22320;&#22259;&#12450;&#12503;&#12522;&#38972;&#12415;&#12398;&#38598;&#23458;&#12395;&#20381;&#23384;
+          </p>
+        </div>
+
+        <div class="card card-accent">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <span class="num-marker">2</span>
+            <h3 style="font-size: 1.1rem;">&#12513;&#12491;&#12517;&#12540;&#12364;&#20253;&#12431;&#12425;&#12394;&#12356;</h3>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            &#12479;&#12452;&#35486;&#12398;&#12415;&#12398;&#12513;&#12491;&#12517;&#12540;&#34920;&#12290;&#12300;&#25562;&#12370;&#20986;&#12375;&#35910;&#33104;&#12301;&#12300;&#22303;&#29942;&#33976;&#12375;&#12301;&#12398;&#21619;&#12364;&#24819;&#20687;&#12391;&#12365;&#12394;&#12356;&#12290;
+          </p>
+          <p style="font-size: 0.8rem; color: var(--text-light);">
+            &#22806;&#22269;&#20154;&#23458;&#12398;&#21462;&#12426;&#12371;&#12412;&#12375;&#12289;<br>&#27880;&#25991;&#21336;&#20385;&#12364;&#19978;&#12364;&#12425;&#12394;&#12356;
+          </p>
+        </div>
+
+        <div class="card card-accent">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <span class="num-marker">3</span>
+            <h3 style="font-size: 1.1rem;">SNS&#12364;&#32154;&#12363;&#12394;&#12356;</h3>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            &#22987;&#12417;&#12390;&#12418;1&#65374;2&#12534;&#26376;&#12391;&#25237;&#31295;&#12364;&#27490;&#12414;&#12427;&#12290;&#20309;&#12434;&#25237;&#31295;&#12377;&#12428;&#12400;&#12356;&#12356;&#12363;&#20998;&#12363;&#12425;&#12394;&#12356;&#12290;
+          </p>
+          <p style="font-size: 0.8rem; color: var(--text-light);">
+            &#26009;&#29702;&#12392;&#25509;&#23458;&#12391;&#25163;&#19968;&#26479;&#12289;<br>SNS&#12414;&#12391;&#25163;&#12364;&#22238;&#12425;&#12394;&#12356;
+          </p>
+        </div>
+
+      </div>
+
+      <div class="note-box">
+        <strong>&#24467;&#26469;&#12398;&#36984;&#25246;&#32930;&#65306;</strong>Web&#21046;&#20316;&#20250;&#31038;&#12395;&#20381;&#38972;&#12377;&#12427;&#12392; <strong>20&#65374;30&#19975;&#12496;&#12540;&#12484;</strong>&#12290;&#12381;&#12428;&#12391;&#12418;&#26356;&#26032;&#12364;&#32154;&#12363;&#12378;&#12289;&#25918;&#32622;&#12373;&#12428;&#12427;&#12465;&#12540;&#12473;&#12364;&#22823;&#21322;&#12290;
+      </div>
+    </div>
+  </div>
+  <div class="page-num">02 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 3 : OUR SOLUTION
+     ═══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-header-band">
+    <div class="container">
+      <div class="section-label">Solution</div>
+      <h2>JEEB&#12398;3&#12388;&#12398;&#26609;</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container" style="width: 100%;">
+      <div class="grid-3">
+
+        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
+          <div class="num-marker dark" style="margin: 0 auto 1.2rem; width: 3rem; height: 3rem; font-size: 1.1rem;">1</div>
+          <h3 style="margin-bottom: 0.5rem;">AI&#39640;&#36895;Web&#21046;&#20316;</h3>
+          <div class="divider center"></div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            &#26989;&#31278;&#21029;&#12486;&#12531;&#12503;&#12524;&#12540;&#12488;&#12391;<br><strong>&#21363;&#26085;&#12469;&#12531;&#12503;&#12523;&#20316;&#25104;</strong>
+          </p>
+          <ul class="feature-list" style="text-align: left;">
+            <li><span class="dot"></span>&#12521;&#12540;&#12513;&#12531;&#12539;&#23621;&#37202;&#23627;&#12539;&#23551;&#21496;&#31561;&#23550;&#24540;</li>
+            <li><span class="dot"></span>&#12473;&#12510;&#12507;&#26368;&#36969;&#21270;&#28168;&#12415;</li>
+            <li><span class="dot"></span>Google Maps&#36899;&#25658;</li>
+          </ul>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
+          <div class="num-marker dark" style="margin: 0 auto 1.2rem; width: 3rem; height: 3rem; font-size: 1.1rem;">2</div>
+          <h3 style="margin-bottom: 0.5rem;">&#12513;&#12491;&#12517;&#12540;&#22810;&#35328;&#35486;&#21270;</h3>
+          <div class="divider center"></div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            &#12479;&#12452;&#26009;&#29702;<strong>200&#31278;</strong>&#12398;&#12487;&#12540;&#12479;&#12505;&#12540;&#12473;<br>&#26085;&#26412;&#26009;&#29702;&#12418;AI&#35299;&#35500;&#21205;&#30011;&#20184;&#12365;
+          </p>
+          <ul class="feature-list" style="text-align: left;">
+            <li><span class="dot"></span>&#26085;&#26412;&#35486;&#12539;&#33521;&#35486;&#12539;&#12479;&#12452;&#35486;&#12539;&#20013;&#22269;&#35486;</li>
+            <li><span class="dot"></span>&#26009;&#29702;&#12398;&#39749;&#21147;&#12364;&#20253;&#12431;&#12427;&#35299;&#35500;</li>
+            <li><span class="dot"></span>&#27880;&#25991;&#21336;&#20385;&#21521;&#19978;&#12395;&#30452;&#32080;</li>
+          </ul>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
+          <div class="num-marker dark" style="margin: 0 auto 1.2rem; width: 3rem; height: 3rem; font-size: 1.1rem;">3</div>
+          <h3 style="margin-bottom: 0.5rem;">SNS&#36939;&#29992;&#20195;&#34892;</h3>
+          <div class="divider center"></div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            &#27598;&#26085;&#12300;&#20170;&#26085;&#12399;&#12371;&#12428;&#12434;&#25774;&#12387;&#12390;&#12301;&#12392;<br><strong>&#20855;&#20307;&#30340;&#12395;&#25351;&#31034;</strong>&#12289;&#36913;3&#26412;&#25237;&#31295;
+          </p>
+          <ul class="feature-list" style="text-align: left;">
+            <li><span class="dot"></span>&#25774;&#24433;&#25351;&#31034;&#12434;LINE&#12391;&#36865;&#20449;</li>
+            <li><span class="dot"></span>&#32232;&#38598;&#12539;&#25237;&#31295;&#12399;&#20840;&#12390;&#12362;&#12414;&#12363;&#12379;</li>
+            <li><span class="dot"></span>&#12495;&#12483;&#12471;&#12517;&#12479;&#12464;&#25126;&#30053;&#21547;&#12416;</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="page-num">03 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 4 : PRODUCTION SAMPLES
+     ═══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-header-band">
+    <div class="container">
+      <div class="section-label">Samples</div>
+      <h2>&#21046;&#20316;&#12469;&#12531;&#12503;&#12523;</h2>
+      <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">&#26989;&#31278; &times; &#12479;&#12452;&#12503;&#12391;&#24481;&#31038;&#12395;&#26368;&#36969;&#12394;&#12418;&#12398;&#12434;&#36984;&#12409;&#12414;&#12377;</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container" style="width: 100%;">
+
+      <div style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem; font-size: 1rem;"><span class="tag tag-navy">&#12521;&#12540;&#12513;&#12531;</span><span style="margin-left: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">4&#12479;&#12452;&#12503;</span></h3>
+        <div class="sample-grid">
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type A</div>
+            <div>&#12480;&#12452;&#12490;&#12511;&#12483;&#12463;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type B</div>
+            <div>&#12511;&#12491;&#12510;&#12523;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type C</div>
+            <div>&#12501;&#12457;&#12488;&#37325;&#35222;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type D</div>
+            <div>&#21644;&#39080;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 1rem; font-size: 1rem;"><span class="tag tag-navy">&#23621;&#37202;&#23627;</span><span style="margin-left: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">4&#12479;&#12452;&#12503;</span></h3>
+        <div class="sample-grid">
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type A</div>
+            <div>&#12514;&#12480;&#12531;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type B</div>
+            <div>&#12463;&#12521;&#12471;&#12483;&#12463;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type C</div>
+            <div>&#12459;&#12472;&#12517;&#12450;&#12523;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+          <div class="sample-cell">
+            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type D</div>
+            <div>&#39640;&#32026;&#36335;&#32218;</div>
+            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
+            <div class="qr-box">QR</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-num">04 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 5 : SNS OPERATION SYSTEM
+     ═══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-header-band">
+    <div class="container">
+      <div class="section-label">Operation</div>
+      <h2>SNS&#36939;&#29992;&#12471;&#12473;&#12486;&#12512;</h2>
+      <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">&#20837;&#20250;&#24460;3&#12534;&#26376;&#12398;&#12471;&#12490;&#12522;&#12458;</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container" style="width: 100%;">
+
+      <div class="grid-3" style="margin-bottom: 2.5rem;">
+        <div class="month-card">
+          <h4>Month 1</h4>
+          <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">&#22522;&#30990;&#12467;&#12531;&#12486;&#12531;&#12484;</h3>
+          <ul class="feature-list">
+            <li><span class="dot"></span>&#22806;&#35251;&#12539;&#20869;&#35251;&#12398;&#25774;&#24433;</li>
+            <li><span class="dot"></span>&#12513;&#12491;&#12517;&#12540;&#20840;&#21697;&#25774;&#24433;</li>
+            <li><span class="dot"></span>&#20154;&#27671;&#26009;&#29702;&#12398;&#35519;&#29702;&#39080;&#26223;</li>
+            <li><span class="dot"></span>&#12503;&#12525;&#12501;&#12451;&#12540;&#12523;&#25972;&#20633;</li>
+          </ul>
+        </div>
+
+        <div class="month-card">
+          <h4>Month 2</h4>
+          <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">&#21453;&#24540;&#12434;&#35211;&#12390;&#24375;&#21270;</h3>
+          <ul class="feature-list">
+            <li><span class="dot"></span>&#20154;&#27671;&#12513;&#12491;&#12517;&#12540;&#12398;&#28145;&#25496;&#12426;</li>
+            <li><span class="dot"></span>&#12473;&#12479;&#12483;&#12501;&#32057;&#20171;</li>
+            <li><span class="dot"></span>&#23395;&#31680;&#12539;&#12452;&#12505;&#12531;&#12488;&#36899;&#21205;</li>
+            <li><span class="dot"></span>&#12501;&#12457;&#12525;&#12527;&#12540;&#22679;&#21152;&#26045;</span></li>
+          </ul>
+        </div>
+
+        <div class="month-card">
+          <h4>Month 3</h4>
+          <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">&#20998;&#26512;&#12505;&#12540;&#12473;&#12398;&#26368;&#36969;&#21270;</h3>
+          <ul class="feature-list">
+            <li><span class="dot"></span>&#25237;&#31295;&#26178;&#38291;&#12539;&#26332;&#26085;&#26368;&#36969;&#21270;</li>
+            <li><span class="dot"></span>&#12456;&#12531;&#12466;&#12540;&#12472;&#12513;&#12531;&#12488;&#20998;&#26512;</li>
+            <li><span class="dot"></span>&#12495;&#12483;&#12471;&#12517;&#12479;&#12464;&#25126;&#30053;&#35211;&#30452;&#12375;</li>
+            <li><span class="dot"></span>&#26376;&#27425;&#12524;&#12509;&#12540;&#12488;&#38283;&#22987;</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--warm-accent);">&#12300;&#20170;&#26085;&#12399;&#12371;&#12428;&#12434;&#25774;&#12387;&#12390;&#12301;&#12398;&#23455;&#20363;</h3>
+          <div style="background: #f1f0ed; border-radius: 8px; padding: 1.2rem; font-size: 0.85rem; line-height: 1.8;">
+            <div style="color: var(--text-light); font-size: 0.75rem; margin-bottom: 0.5rem;">LINE&#12513;&#12483;&#12475;&#12540;&#12472;&#12452;&#12513;&#12540;&#12472;</div>
+            <p><strong>&#9632; &#26412;&#26085;&#12398;&#25237;&#31295;&#32032;&#26448;&#12522;&#12463;&#12456;&#12473;&#12488;</strong></p>
+            <p style="margin-top: 0.5rem;">&#12539; &#20170;&#26085;&#12398;&#12362;&#12377;&#12377;&#12417;&#12521;&#12531;&#12481;&#12434;&#30495;&#19978;&#12363;&#12425;&#25774;&#24433;</p>
+            <p>&#12539; &#12473;&#12540;&#12503;&#12399;&#28271;&#27671;&#12364;&#31435;&#12387;&#12390;&#12427;&#29366;&#24907;&#12391;</p>
+            <p>&#12539; &#33258;&#28982;&#20809;&#12364;&#20837;&#12427;&#24109;&#12391;&#25774;&#12427;&#12392;&#12505;&#12473;&#12488;</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--warm-accent);">API&#12450;&#12490;&#12522;&#12486;&#12451;&#12463;&#12473;&#12398;&#20385;&#20516;</h3>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>&#27161;&#28310;&#65288;&#12450;&#12503;&#12522;&#65289;</th>
+                <th>JEEB</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#12501;&#12457;&#12525;&#12527;&#12540;&#25512;&#31227;</td>
+                <td style="text-align: center;">&#9675;</td>
+                <td style="text-align: center;">&#9675;</td>
+              </tr>
+              <tr>
+                <td>&#25237;&#31295;&#21029;&#12522;&#12540;&#12481;</td>
+                <td style="text-align: center;">&#9651;</td>
+                <td style="text-align: center;">&#9675;</td>
+              </tr>
+              <tr>
+                <td>&#12501;&#12457;&#12525;&#12527;&#12540;&#23646;&#24615;</td>
+                <td style="text-align: center;">&mdash;</td>
+                <td style="text-align: center;">&#9675;</td>
+              </tr>
+              <tr>
+                <td>&#26368;&#36969;&#25237;&#31295;&#26178;&#38291;</td>
+                <td style="text-align: center;">&mdash;</td>
+                <td style="text-align: center;">&#9675;</td>
+              </tr>
+              <tr>
+                <td>&#31478;&#21512;&#27604;&#36611;</td>
+                <td style="text-align: center;">&mdash;</td>
+                <td style="text-align: center;">&#9675;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-num">05 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 6 : PRICING
+     ═══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-header-band">
+    <div class="container">
+      <div class="section-label">Pricing</div>
+      <h2>&#26009;&#37329;&#12503;&#12521;&#12531;</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container" style="width: 100%;">
+
+      <div class="grid-3" style="margin-bottom: 2.5rem; align-items: start;">
+
+        <!-- Light Plan -->
+        <div class="plan-card">
+          <div class="tag tag-accent" style="margin-bottom: 1rem;">&#12521;&#12452;&#12488;</div>
+          <div class="price">2,000</div>
+          <div class="price-unit">THB / &#26376;</div>
+          <div class="divider center" style="margin: 1rem auto;"></div>
+          <ul>
+            <li>Web&#12469;&#12452;&#12488;&#21046;&#20316;&#12539;&#20445;&#23432;</li>
+            <li>&#12513;&#12491;&#12517;&#12540;&#22810;&#35328;&#35486;&#21270;</li>
+            <li>Google Maps &#26368;&#36969;&#21270;</li>
+            <li>&#26376;1&#22238;&#26356;&#26032;</li>
+          </ul>
+        </div>
+
+        <!-- Standard Plan -->
+        <div class="plan-card featured">
+          <div style="position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--warm-accent); color: white; font-size: 0.7rem; font-weight: 600; padding: 0.3rem 1.2rem; border-radius: 0 0 8px 8px; letter-spacing: 0.05em;">&#12362;&#12377;&#12377;&#12417;</div>
+          <div class="tag tag-accent" style="margin-bottom: 1rem;">&#12473;&#12479;&#12531;&#12480;&#12540;&#12489;</div>
+          <div class="price">5,000</div>
+          <div class="price-unit">THB / &#26376;</div>
+          <div class="divider center" style="margin: 1rem auto;"></div>
+          <ul>
+            <li>&#12521;&#12452;&#12488;&#12503;&#12521;&#12531;&#20840;&#20869;&#23481;</li>
+            <li>SNS&#36939;&#29992;&#20195;&#34892;&#65288;&#36913;3&#25237;&#31295;&#65289;</li>
+            <li>&#25774;&#24433;&#25351;&#31034;&#65288;LINE&#65289;</li>
+            <li>&#12495;&#12483;&#12471;&#12517;&#12479;&#12464;&#25126;&#30053;</li>
+            <li>&#26376;&#27425;&#12524;&#12509;&#12540;&#12488;</li>
+          </ul>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="plan-card">
+          <div class="tag tag-accent" style="margin-bottom: 1rem;">&#12503;&#12524;&#12511;&#12450;&#12512;</div>
+          <div class="price">10,000</div>
+          <div class="price-unit">THB / &#26376;</div>
+          <div class="divider center" style="margin: 1rem auto;"></div>
+          <ul>
+            <li>&#12473;&#12479;&#12531;&#12480;&#12540;&#12489;&#20840;&#20869;&#23481;</li>
+            <li>API&#12450;&#12490;&#12522;&#12486;&#12451;&#12463;&#12473;</li>
+            <li>&#31478;&#21512;&#20998;&#26512;&#12524;&#12509;&#12540;&#12488;</li>
+            <li>&#26376;1&#22238;&#12467;&#12531;&#12469;&#12523;&#65288;30&#20998;&#65289;</li>
+            <li>&#24195;&#21578;&#36939;&#29992;&#12450;&#12489;&#12496;&#12452;&#12473;</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="background: var(--navy); color: white;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.8rem; color: var(--accent-light);">&#21021;&#26399;&#36027;&#29992;&#12394;&#12375;&#12503;&#12521;&#12531;</h3>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.8;">
+            &#21021;&#26399;&#36027;&#29992;0&#12496;&#12540;&#12484;&#12391;&#38283;&#22987;&#21487;&#33021;&#12290;<br>
+            Web&#12469;&#12452;&#12488;&#12398;&#12450;&#12459;&#12454;&#12531;&#12488;&#27177;&#21033;&#12399;JEEB&#12364;&#20445;&#25345;&#12375;&#12289;&#26376;&#38989;&#26009;&#37329;&#12395;&#21547;&#12414;&#12428;&#12414;&#12377;&#12290;<br>
+            <span style="color: var(--accent-light); font-weight: 500;">&#35299;&#32004;&#26178;&#12395;&#12487;&#12540;&#12479;&#31227;&#31649;&#12418;&#23550;&#24540;&#12290;</span>
+          </p>
+        </div>
+        <div class="card" style="background: var(--navy); color: white;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.8rem; color: var(--accent-light);">&#24180;&#25173;&#12356;&#21106;&#24341;</h3>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.8;">
+            12&#12534;&#26376;&#20998;&#12434;<strong style="color: var(--accent-light); font-size: 1.1rem;">10&#12534;&#26376;&#20998;</strong>&#12398;&#26009;&#37329;&#12391;&#12290;<br>
+            &#23455;&#36074;2&#12534;&#26376;&#28961;&#26009;&#12290;&#38263;&#26399;&#12398;&#12362;&#20184;&#12365;&#21512;&#12356;&#12434;&#12362;&#24471;&#12395;&#12290;
+          </p>
+          <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(200,149,108,0.15); border-radius: 8px; text-align: center;">
+            <span style="font-size: 0.8rem; color: var(--accent-light);">&#20363;&#65306;&#12473;&#12479;&#12531;&#12480;&#12540;&#12489;&#24180;&#25173;&#12356;</span><br>
+            <span style="font-family: 'Inter'; font-size: 1.3rem; font-weight: 700;">50,000 <span style="font-size: 0.8rem; font-weight: 400;">THB/&#24180;</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-num">06 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 7 : GETTING STARTED
+     ═══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="section-header-band">
+    <div class="container">
+      <div class="section-label">Getting Started</div>
+      <h2>&#12372;&#21033;&#29992;&#38283;&#22987;&#12414;&#12391;&#12398;&#27969;&#12428;</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="container" style="width: 100%;">
+
+      <div style="max-width: 700px; margin: 0 auto;">
+
+        <div class="step-row">
+          <span class="num-marker" style="margin-top: 0.2rem;">1</span>
+          <div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">&#28961;&#26009;&#30456;&#35527;</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">30&#20998;&#12398;&#12498;&#12450;&#12522;&#12531;&#12464;&#12391;&#24481;&#31038;&#12398;&#35506;&#38988;&#12392;&#30446;&#27161;&#12434;&#20849;&#26377;&#12290;&#12458;&#12531;&#12521;&#12452;&#12531;&#12414;&#12383;&#12399;&#24215;&#33303;&#35370;&#21839;&#12395;&#12390;&#12290;</p>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <span class="num-marker" style="margin-top: 0.2rem;">2</span>
+          <div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">&#24481;&#31038;&#23554;&#29992;&#12469;&#12531;&#12503;&#12523;&#20316;&#25104;</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);"><strong>3&#26085;&#20197;&#20869;</strong>&#12395;&#24481;&#31038;&#12398;&#26989;&#31278;&#12539;&#38640;&#22258;&#27671;&#12395;&#21512;&#12431;&#12379;&#12383;Web&#12469;&#12452;&#12488;&#12469;&#12531;&#12503;&#12523;&#12434;&#12362;&#23626;&#12369;&#12290;&#36027;&#29992;&#12399;&#19968;&#20999;&#12363;&#12363;&#12426;&#12414;&#12379;&#12435;&#12290;</p>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <span class="num-marker" style="margin-top: 0.2rem;">3</span>
+          <div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">2&#36913;&#38291;&#28961;&#26009;&#12488;&#12521;&#12452;&#12450;&#12523;</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">&#23455;&#38555;&#12395;&#36939;&#29992;&#12434;&#20307;&#39443;&#12290;SNS&#25237;&#31295;&#12398;&#27969;&#12428;&#12289;&#25774;&#24433;&#25351;&#31034;&#12398;&#20415;&#21033;&#12373;&#12434;&#23455;&#24863;&#12375;&#12390;&#12356;&#12383;&#12384;&#12365;&#12414;&#12377;&#12290;</p>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <span class="num-marker" style="margin-top: 0.2rem;">4</span>
+          <div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">&#26412;&#22865;&#32004;&#12539;&#36939;&#29992;&#38283;&#22987;</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">&#12503;&#12521;&#12531;&#12434;&#36984;&#25246;&#12375;&#12390;&#26412;&#26684;&#36939;&#29992;&#12473;&#12479;&#12540;&#12488;&#12290;&#25285;&#24403;&#32773;&#12364;&#23554;&#23646;&#12391;&#12469;&#12509;&#12540;&#12488;&#12375;&#12414;&#12377;&#12290;</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align: center; margin-top: 2.5rem; padding: 2.5rem; background: var(--white); border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+        <p style="font-size: 1.3rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">&#12414;&#12378;&#12399;&#28961;&#26009;&#12391;&#12469;&#12531;&#12503;&#12523;&#12434;&#20316;&#12426;&#12414;&#12377;</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">&#36027;&#29992;&#12399;&#19968;&#20999;&#12363;&#12363;&#12426;&#12414;&#12379;&#12435;&#12290;&#12362;&#27671;&#36605;&#12395;&#12372;&#30456;&#35527;&#12367;&#12384;&#12373;&#12356;&#12290;</p>
+        <a href="#contact" class="cta-btn">&#28961;&#26009;&#30456;&#35527;&#12434;&#20104;&#32004;&#12377;&#12427;</a>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-num">07 / 08</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 8 : ABOUT US / CONTACT
+     ═══════════════════════════════════════════════════════════ -->
+<section id="contact" class="dark-header" style="justify-content: center;">
+  <div class="container" style="text-align: center;">
+    <div class="section-label" style="color: var(--accent-light);">About / Contact</div>
+    <div style="margin-bottom: 0.5rem;">
+      <span style="font-family: 'Inter'; font-size: 2rem; font-weight: 700; letter-spacing: 0.1em;">JEEB</span>
+    </div>
+    <div class="divider center" style="margin: 1rem auto 1.5rem;"></div>
+    <p style="font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto 3rem; line-height: 1.8;">
+      AI&#25216;&#34899;&#12434;&#27963;&#29992;&#12375;&#12383;&#27425;&#19990;&#20195;&#12398;&#39154;&#39135;&#24215;&#12487;&#12472;&#12479;&#12523;&#25903;&#25588;&#12290;<br>
+      &#12496;&#12531;&#12467;&#12463;&#12398;&#26085;&#31995;&#39154;&#39135;&#24215;&#12364;&#12289;&#12418;&#12387;&#12392;&#35211;&#12388;&#12369;&#12390;&#12418;&#12425;&#12360;&#12427;&#12424;&#12358;&#12395;&#12290;<br>
+      &#12418;&#12387;&#12392;&#36984;&#12400;&#12428;&#12427;&#12424;&#12358;&#12395;&#12290;
+    </p>
+
+    <div class="contact-grid" style="max-width: 700px; margin: 0 auto;">
+
+      <div class="contact-item">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3 style="font-size: 0.9rem; color: var(--white); margin-bottom: 0.3rem;">LINE</h3>
+        <div class="placeholder" style="width: 80px; height: 80px; margin: 0.8rem auto 0; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); font-size: 0.7rem;">QR Code</div>
+      </div>
+
+      <div class="contact-item">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <h3 style="font-size: 0.9rem; color: var(--white); margin-bottom: 0.3rem;">Email</h3>
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">info@jeeb.co.th</p>
+        <p style="font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem;">&#65288;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#12540;&#65289;</p>
+      </div>
+
+      <div class="contact-item">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3 style="font-size: 0.9rem; color: var(--white); margin-bottom: 0.3rem;">Phone</h3>
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">+66-XX-XXX-XXXX</p>
+        <p style="font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem;">&#65288;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#12540;&#65289;</p>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+      <p style="font-size: 0.75rem; color: rgba(255,255,255,0.25);">&#25285;&#24403;&#32773;&#21517;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#12540;</p>
+    </div>
+  </div>
+  <div class="page-num light">08 / 08</div>
+</section>
+
+</body>
+</html>
