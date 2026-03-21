@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEEB Menu Translation Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&family=Noto+Sans+Thai:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a2744;
+  --navy-light: #243352;
+  --navy-dark: #111b30;
+  --offwhite: #f5f1eb;
+  --offwhite-warm: #faf7f2;
+  --terracotta: #c4593c;
+  --terracotta-light: #d4705a;
+  --terracotta-dark: #a8432a;
+  --gold: #b8963e;
+  --gold-light: #d4b35a;
+  --text-dark: #1a1a1a;
+  --text-body: #3a3a3a;
+  --text-muted: #6a6a6a;
+  --bad-red: #cc2233;
+  --bad-bg: #fff0f0;
+  --good-bg: #f8faf5;
+  --border-light: #e0dbd3;
+  --shadow-soft: 0 2px 20px rgba(26,39,68,0.06);
+  --shadow-card: 0 4px 32px rgba(26,39,68,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans JP', 'Noto Sans', sans-serif;
+  background: var(--offwhite);
+  color: var(--text-body);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero Section ── */
+.hero {
+  background: linear-gradient(170deg, var(--navy) 0%, var(--navy-dark) 100%);
+  color: var(--offwhite);
+  padding: 100px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(196,89,60,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(184,150,62,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--terracotta-light);
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+
+.hero h1 span {
+  color: var(--terracotta-light);
+}
+
+.hero-stat {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(245,241,235,0.8);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.hero-stat strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.hero-insight {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 28px 36px;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.hero-insight p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(245,241,235,0.75);
+}
+
+.hero-insight .highlight {
+  color: var(--terracotta-light);
+  font-weight: 500;
+}
+
+/* ── Section Layout ── */
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 24px 40px;
+}
+
+.category-header {
+  text-align: center;
+  margin-bottom: 56px;
+  padding-top: 20px;
+}
+
+.category-label {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 12px;
+}
+
+.category-header h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.03em;
+}
+
+.category-header .category-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+/* ── Dish Card ── */
+.dish-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 40px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  transition: box-shadow 0.3s ease;
+}
+
+.dish-card:hover {
+  box-shadow: 0 8px 48px rgba(26,39,68,0.12);
+}
+
+.dish-header {
+  padding: 32px 36px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dish-name-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+
+.dish-name-orig {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── Bad Translation ── */
+.bad-translation {
+  background: var(--bad-bg);
+  padding: 20px 36px;
+  border-bottom: 1px solid #f0dada;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.bad-label {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--bad-red);
+  background: rgba(204,34,51,0.08);
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.bad-text {
+  font-size: 17px;
+  color: var(--bad-red);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+/* ── JEEB Translations ── */
+.jeeb-translations {
+  padding: 28px 36px 32px;
+}
+
+.jeeb-intro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.jeeb-badge {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: linear-gradient(135deg, rgba(184,150,62,0.15), rgba(184,150,62,0.08));
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(184,150,62,0.2);
+}
+
+.translation-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.translation-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: var(--offwhite-warm);
+  border: 1px solid rgba(224,219,211,0.5);
+}
+
+.lang-tag {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  background: rgba(26,39,68,0.06);
+  padding: 4px 0;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.lang-tag.en { color: #2d5a3d; background: rgba(45,90,61,0.08); }
+.lang-tag.th { color: #5a3d8a; background: rgba(90,61,138,0.08); }
+.lang-tag.zh { color: #8a3d3d; background: rgba(138,61,61,0.08); }
+.lang-tag.jp { color: var(--terracotta); background: rgba(196,89,60,0.08); }
+
+.translation-text {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-dark);
+  font-weight: 400;
+}
+
+.translation-text.th {
+  font-family: 'Noto Sans Thai', 'Noto Sans', sans-serif;
+}
+
+.translation-text.zh {
+  font-family: 'Noto Sans SC', 'Noto Sans', sans-serif;
+}
+
+.translation-text.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ── Divider ── */
+.section-divider {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-divider hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-light), transparent);
+}
+
+/* ── CTA Section ── */
+.cta-section {
+  background: linear-gradient(170deg, var(--navy) 0%, var(--navy-dark) 100%);
+  color: var(--offwhite);
+  padding: 80px 24px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-section h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.cta-section p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(245,241,235,0.75);
+  margin-bottom: 36px;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--terracotta);
+  padding: 16px 48px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  letter-spacing: 0.05em;
+}
+
+.cta-button:hover {
+  background: var(--terracotta-dark);
+  transform: translateY(-1px);
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero { padding: 72px 20px 60px; }
+  .hero-insight { padding: 20px 24px; }
+  .dish-header { padding: 24px 20px 18px; gap: 12px; }
+  .bad-translation { padding: 16px 20px; }
+  .jeeb-translations { padding: 20px 20px 24px; }
+  .translation-item { grid-template-columns: 40px 1fr; padding: 12px 14px; }
+  .section { padding: 60px 16px 30px; }
+  .dish-header { flex-direction: column; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">JEEB Menu Translation</div>
+    <h1>あなたのメニュー、<br><span>外国人にはこう見えています</span></h1>
+    <p class="hero-stat">
+      <strong>15品 &times; 4言語 = 60の説明文</strong><br>
+      これが、JEEBの翻訳です。
+    </p>
+    <div class="hero-insight">
+      <p>
+        Google翻訳で「揚げ出し豆腐」は <span class="highlight">"Fried Tofu"</span> になります。<br>
+        「もつ鍋」は <span class="highlight">"Internal Organs Hot Pot"</span>。<br><br>
+        お客様は、理解できない料理を注文しません。<br>
+        JEEBは、料理の魅力が伝わる翻訳を生成します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 居酒屋メニュー ═══════════════ -->
+<section class="section">
+  <div class="category-header">
+    <div class="category-label">Category 01</div>
+    <h2>居酒屋メニュー</h2>
+    <p class="category-sub">Izakaya Classics &mdash; 5 dishes</p>
+  </div>
+
+  <!-- 1. 揚げ出し豆腐 -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">揚げ出し豆腐</span>
+      <span class="dish-name-orig">Agedashi Tofu</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Fried Tofu</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Silken tofu, lightly fried to a golden crisp, served in a warm savory dashi broth with grated daikon. A comforting Japanese classic.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">เต้าหู้ไหมทอดกรอบเบาๆ ราดด้วยน้ำซุปดาชิร้อนๆ รสอูมามิ เสิร์ฟพร้อมหัวไชเท้าขูด อาหารญี่ปุ่นคลาสสิกที่อบอุ่นหัวใจ</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">嫩滑丝绸豆腐轻炸至金黄酥脆，淋上温热的日式高汤，配以萝卜泥。一道温暖的日本经典料理。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 土瓶蒸し -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">土瓶蒸し</span>
+      <span class="dish-name-orig">Dobin Mushi</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Earthen Pot Steam</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">A fragrant clear broth steamed in a traditional clay pot with seasonal mushrooms, shrimp, and ginkgo nuts. Sip the broth first &mdash; that's the Japanese way.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">น้ำซุปใสหอมกรุ่นนึ่งในหม้อดินญี่ปุ่นดั้งเดิม พร้อมเห็ดตามฤดูกาล กุ้ง และแปะก๊วย จิบน้ำซุปก่อน — นั่นคือวิถีญี่ปุ่น</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">用传统陶壶蒸制的清香高汤，搭配时令菌菇、虾仁和银杏。先品尝汤汁——这是日本人的吃法。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 菜の花のおひたし -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">菜の花のおひたし</span>
+      <span class="dish-name-orig">Nanohana no Ohitashi</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Boiled Flower Vegetables</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Tender rapeseed blossoms, briefly blanched and dressed in a light soy-dashi sauce. A taste of Japanese spring on your plate.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">ดอกผักกาดอ่อนลวกพอสุก ราดซอสโชยุดาชิเบาๆ รสชาติแห่งฤดูใบไม้ผลิของญี่ปุ่น</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">嫩油菜花轻焯后，淋上清淡的酱油高汤汁。盘中的一抹日本春天。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. もつ鍋 -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">もつ鍋</span>
+      <span class="dish-name-orig">Motsu Nabe</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Internal Organs Hot Pot</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">A hearty Hakata-style hot pot with tender beef offal, cabbage, and garlic chives in a rich miso or soy broth. Shared at the table &mdash; the soul of Fukuoka dining.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">หม้อไฟสไตล์ฮากาตะกับเครื่องในวัวนุ่ม กะหล่ำปลี และกุยช่ายในน้ำซุปมิโสะหรือโชยุเข้มข้น แบ่งปันกันบนโต๊ะ — จิตวิญญาณของอาหารฟุกุโอกะ</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">博多风味火锅，配以软嫩牛杂、卷心菜和韭菜，在浓郁的味噌或酱油汤底中炖煮。围桌共享——福冈美食的灵魂。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 生姜焼き -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">生姜焼き</span>
+      <span class="dish-name-orig">Shogayaki</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Ginger Grilled</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Thinly sliced pork, marinated in a sweet ginger-soy glaze and pan-seared until caramelized. Served with shredded cabbage and rice. Japan's favorite home-cooked comfort meal.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">หมูสไลซ์บางหมักในซอสขิงโชยุหวาน ทอดจนคาราเมลไลซ์ เสิร์ฟพร้อมกะหล่ำปลีซอยและข้าว อาหารบ้านที่คนญี่ปุ่นรักที่สุด</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">薄切猪肉，用甜姜酱油腌制后煎至焦糖化。配以切丝卷心菜和米饭。日本人最爱的家常料理。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- ═══════════════ ラーメン ═══════════════ -->
+<section class="section">
+  <div class="category-header">
+    <div class="category-label">Category 02</div>
+    <h2>ラーメン</h2>
+    <p class="category-sub">Ramen &mdash; 3 dishes</p>
+  </div>
+
+  <!-- 6. 濃厚豚骨ラーメン -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">濃厚豚骨ラーメン</span>
+      <span class="dish-name-orig">Tonkotsu Ramen</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Thick Pig Bone Ramen</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">18-hour simmered pork bone broth, creamy and rich. Topped with tender chashu pork, a soft-boiled seasoned egg, and fragrant black garlic oil. The king of Kyushu ramen.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">น้ำซุปกระดูกหมูเคี่ยว 18 ชั่วโมง เข้มข้นครีมมี่ ท็อปด้วยหมูชาชูนุ่ม ไข่ต้มยางมะตูมหมักซอส และน้ำมันกระเทียมดำหอมๆ ราชาแห่งราเมนคิวชู</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">猪骨熬制18小时的浓郁奶白汤底。配以软嫩叉烧、溏心酱油蛋和香气扑鼻的黑蒜油。九州拉面之王。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 柚子塩ラーメン -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">柚子塩ラーメン</span>
+      <span class="dish-name-orig">Yuzu Shio Ramen</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Citrus Salt Ramen</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">A crystal-clear salt broth infused with fresh yuzu citrus. Light, aromatic, and refreshing &mdash; the opposite of heavy ramen. Thin straight noodles and a perfect soft-boiled egg.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">น้ำซุปเกลือใสกระจ่างอบอวลด้วยกลิ่นยูซุสด เบา หอม สดชื่น — ตรงข้ามกับราเมนหนักๆ เส้นตรงบางและไข่ต้มยางมะตูมสมบูรณ์แบบ</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">清澈的盐味汤底注入新鲜柚子柑橘香气。清爽、芬芳、沁人心脾——与浓厚拉面截然不同。细直面条搭配完美的溏心蛋。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. つけ麺 -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">つけ麺</span>
+      <span class="dish-name-orig">Tsukemen</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Dipping Noodles</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Thick, chewy noodles served cold alongside a rich, concentrated dipping broth. Dip, slurp, repeat. A completely different ramen experience &mdash; and totally addictive.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">เส้นหนาเหนียวนุ่มเสิร์ฟเย็นคู่กับน้ำซุปจิ้มเข้มข้น จุ่ม ซู้ด ทำซ้ำ ประสบการณ์ราเมนที่แตกต่างโดยสิ้นเชิง — และเสพติดสุดๆ</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">粗劲道面条冷食，搭配浓缩蘸汁。蘸、吸、重复。完全不同的拉面体验——让人欲罢不能。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- ═══════════════ タイ料理 ═══════════════ -->
+<section class="section">
+  <div class="category-header">
+    <div class="category-label">Category 03</div>
+    <h2>タイ料理</h2>
+    <p class="category-sub">Thai Cuisine &mdash; 4 dishes</p>
+  </div>
+
+  <!-- 9. ソムタム -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">ส้มตำ（ソムタム）</span>
+      <span class="dish-name-orig">Som Tam</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Papaya Salad</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Green papaya shredded and pounded with lime, chili, fish sauce, and peanuts. Fresh, spicy, tangy &mdash; the taste that defines Thai street food. Spice level adjustable.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag jp">JP</span>
+          <p class="translation-text jp">青パパイヤを叩いて和えたタイの代表的なサラダ。ライム・唐辛子・ナンプラー・ピーナッツの組み合わせが絶妙。辛さ調整可能。タイの屋台を象徴する一皿。</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">青木瓜切丝后与青柠、辣椒、鱼露和花生一起捣制。清新、辛辣、酸爽——定义泰国街头美食的味道。可调辣度。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. グリーンカレー -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">แกงเขียวหวาน（グリーンカレー）</span>
+      <span class="dish-name-orig">Green Curry</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Sweet Green Curry</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Creamy coconut curry simmered with Thai basil, eggplant, and your choice of chicken or shrimp. Aromatic, mildly spicy, and deeply satisfying. Best enjoyed with jasmine rice.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag jp">JP</span>
+          <p class="translation-text jp">ココナッツミルクで煮込んだ香り高いグリーンカレー。バジル・茄子入り、鶏肉またはエビを選べます。ジャスミンライスとの相性が抜群。マイルドな辛さ。</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">用椰浆炖制的泰式绿咖喱，配以泰国罗勒、茄子和您选择的鸡肉或虾仁。芳香、微辣、令人满足。搭配茉莉香米最佳。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. トムヤムクン -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">ต้มยำกุ้ง（トムヤムクン）</span>
+      <span class="dish-name-orig">Tom Yum Goong</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Sour Spicy Shrimp Soup</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Thailand's most famous soup &mdash; a hot and sour broth with river prawns, lemongrass, galangal, and kaffir lime leaves. Complex, bold, and unforgettable.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag jp">JP</span>
+          <p class="translation-text jp">タイで最も有名なスープ。川エビ・レモングラス・ガランガル・こぶみかんの葉が織りなす酸味と辛味のハーモニー。複雑で大胆、忘れられない味。</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">泰国最著名的汤——酸辣汤底配河虾、香茅、南姜和柠檬叶。层次丰富、大胆奔放、令人难忘。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. ガパオ -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">ผัดกะเพรา（ガパオ）</span>
+      <span class="dish-name-orig">Pad Krapao</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Stir Fried Holy Basil</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Minced pork (or chicken) stir-fried with holy basil, chili, and garlic. Served over rice with a crispy fried egg on top. Thailand's everyday lunch &mdash; fast, bold, perfect.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag jp">JP</span>
+          <p class="translation-text jp">豚ひき肉（または鶏肉）をホーリーバジル・唐辛子・にんにくで炒めた一皿。ご飯の上にカリカリ目玉焼きを乗せて。タイの国民食。</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">猪肉末（或鸡肉）与打抛叶、辣椒和大蒜一起翻炒。配米饭和一颗煎得酥脆的荷包蛋。泰国的日常午餐——快速、浓烈、完美。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><hr></div>
+
+<!-- ═══════════════ 韓国料理 ═══════════════ -->
+<section class="section">
+  <div class="category-header">
+    <div class="category-label">Category 04</div>
+    <h2>韓国料理</h2>
+    <p class="category-sub">Korean Cuisine &mdash; 3 dishes</p>
+  </div>
+
+  <!-- 13. サムギョプサル -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">サムギョプサル</span>
+      <span class="dish-name-orig">Samgyeopsal</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Three Layer Meat</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">Thick-cut pork belly grilled at your table until crispy outside, juicy inside. Wrap in lettuce with garlic, chili paste, and kimchi. Interactive, social, and impossibly satisfying.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">หมูสามชั้นหั่นหนาย่างบนโต๊ะจนกรอบนอกฉ่ำใน ห่อผักกาดหอมกับกระเทียม น้ำพริก และกิมจิ อาหารแบบมีส่วนร่วม สนุก และอิ่มสุดๆ</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">厚切五花肉在桌上烤至外脆内嫩。用生菜包裹蒜片、辣酱和泡菜。互动式用餐，社交感满分，满足感爆棚。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. ビビンバ -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">ビビンバ</span>
+      <span class="dish-name-orig">Bibimbap</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Mixed Rice</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">A stone-hot bowl of rice topped with seasoned vegetables, beef, and a raw egg. Mix it all together &mdash; the sizzling stone bowl creates a crispy rice crust at the bottom. That crunch is everything.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">ข้าวในชามหินร้อนจัด ท็อปด้วยผักปรุงรส เนื้อวัว และไข่ดิบ คลุกเคล้าทุกอย่างเข้าด้วยกัน — ชามหินร้อนจะทำให้ข้าวก้นชามกรอบ ความกรอบนั้นคือทุกสิ่ง</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">滚烫的石锅饭上铺满调味蔬菜、牛肉和一颗生蛋。全部搅拌在一起——石锅的高温会在底部形成脆脆的锅巴。那一口酥脆就是灵魂。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. チヂミ -->
+  <div class="dish-card">
+    <div class="dish-header">
+      <span class="dish-name-jp">チヂミ</span>
+      <span class="dish-name-orig">Jeon / Korean Pancake</span>
+    </div>
+    <div class="bad-translation">
+      <span class="bad-label">Google Translate</span>
+      <span class="bad-text">Korean Pancake</span>
+    </div>
+    <div class="jeeb-translations">
+      <div class="jeeb-intro">
+        <span class="jeeb-badge">JEEB Translation</span>
+      </div>
+      <div class="translation-grid">
+        <div class="translation-item">
+          <span class="lang-tag en">EN</span>
+          <p class="translation-text">A crispy savory pancake loaded with green onions and seafood, served with a tangy soy dipping sauce. Golden, crunchy edges with a soft center. Perfect with cold beer.</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag th">TH</span>
+          <p class="translation-text th">แพนเค้กเกาหลีกรอบสะใจ เต็มไปด้วยต้นหอมและอาหารทะเล เสิร์ฟพร้อมซอสจิ้มโชยุรสเปรี้ยว ขอบกรอบทองกลางนุ่ม คู่กับเบียร์เย็นสุดฟิน</p>
+        </div>
+        <div class="translation-item">
+          <span class="lang-tag zh">ZH</span>
+          <p class="translation-text zh">酥脆的韩式煎饼，满满的葱花和海鲜，配以酸香酱油蘸酱。金黄脆边、柔软中心。冰啤酒的完美搭档。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>あなたのメニューも、<br>こう変わります</h2>
+    <p>
+      メニューを写真で送るだけ。JEEBが最短即日で、<br>
+      お客様が「食べたい」と思う多言語メニューを作成します。
+    </p>
+    <a href="#" class="cta-button">無料サンプルを依頼する</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>JEEB &mdash; AI-Powered Menu Translation for Restaurants</p>
+</footer>
+
+</body>
+</html>
