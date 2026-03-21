@@ -3,705 +3,703 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEEB — バンコク飲食店向け Web・SNS運用サービス</title>
+<title>JEEB — あなたの店を、世界に届ける。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ===== Reset & Base ===== */
+  /* ── Reset ── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --color-bg: #FDFAF6;
-    --color-bg-alt: #F5EFE6;
-    --color-accent: #B8621B;
-    --color-accent-light: #D4944C;
-    --color-accent-dark: #8B4513;
-    --color-text: #2C2C2C;
-    --color-text-light: #5A5A5A;
-    --color-text-muted: #888;
-    --color-white: #FFFFFF;
-    --color-border: #E0D5C5;
-    --color-highlight-bg: #FFF8F0;
-    --color-green: #3A7D44;
-    --color-green-light: #EBF5EC;
-    --color-red-light: #FFF0F0;
-    --color-red: #C0392B;
-  }
-
+  /* ── Print Setup ── */
   @page {
-    size: A4;
+    size: A4 portrait;
     margin: 0;
   }
 
   html, body {
-    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--color-text);
-    background: #CCC;
-    -webkit-font-smoothing: antialiased;
+    width: 210mm;
+    height: 297mm;
+    font-family: 'Noto Sans JP', 'Inter', sans-serif;
+    font-weight: 400;
+    color: #0a0f1a;
+    background: #faf9f7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
   }
 
-  /* ===== Page Container ===== */
+  /* ── Design Tokens ── */
+  :root {
+    --navy: #0a0f1a;
+    --offwhite: #faf9f7;
+    --terracotta: #c4703f;
+    --warm-gray: #8a8578;
+    --light-border: #e8e5e0;
+    --subtle-bg: #f2f0ec;
+  }
+
+  /* ── Page Container ── */
   .page {
     width: 210mm;
     height: 297mm;
-    background: var(--color-bg);
-    margin: 10mm auto;
-    padding: 18mm 20mm;
+    padding: 22mm 20mm 18mm 20mm;
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
+    background: var(--offwhite);
     page-break-after: always;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
   }
 
   .page:last-child {
     page-break-after: auto;
   }
 
-  /* ===== PAGE 1: FRONT ===== */
+  /* ══════════════════════════════════════
+     PAGE 1 — FRONT
+     ══════════════════════════════════════ */
 
-  /* Top accent bar */
-  .page-front::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6mm;
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  /* Logo Area */
+  .p1-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14mm;
+    padding-bottom: 6mm;
+    border-bottom: 1px solid var(--light-border);
   }
 
-  /* Decorative corner element */
-  .page-front::after {
-    content: "";
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 80mm;
-    height: 80mm;
-    background: radial-gradient(ellipse at bottom right, rgba(184,98,27,0.06) 0%, transparent 70%);
-    pointer-events: none;
+  .logo-mark {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 28pt;
+    letter-spacing: 0.18em;
+    color: var(--navy);
   }
 
-  .front-header {
-    text-align: center;
-    margin-top: 8mm;
-    margin-bottom: 10mm;
-  }
-
-  .service-name {
-    font-size: 42px;
-    font-weight: 900;
-    letter-spacing: 0.15em;
-    color: var(--color-accent-dark);
-    margin-bottom: 2mm;
-  }
-
-  .service-name-sub {
-    font-size: 13px;
-    color: var(--color-text-muted);
-    letter-spacing: 0.08em;
-    margin-bottom: 6mm;
-  }
-
-  .tagline {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--color-text);
+  .logo-sub {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 8pt;
+    font-weight: 400;
+    color: var(--warm-gray);
     letter-spacing: 0.06em;
-    margin-bottom: 3mm;
-    line-height: 1.4;
   }
 
-  .subtitle {
-    font-size: 15px;
-    color: var(--color-text-light);
+  /* Hero */
+  .p1-hero {
+    flex: 0 0 auto;
+    margin-bottom: 16mm;
+  }
+
+  .p1-tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 26pt;
+    line-height: 1.5;
+    color: var(--navy);
     letter-spacing: 0.04em;
-    font-weight: 500;
+    margin-bottom: 5mm;
   }
 
-  /* Divider */
-  .divider {
-    width: 60mm;
-    height: 1px;
-    background: var(--color-border);
-    margin: 8mm auto;
+  .p1-subtitle {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11pt;
+    font-weight: 400;
+    color: var(--warm-gray);
+    letter-spacing: 0.06em;
   }
 
-  /* Key Values */
-  .values-section {
-    margin-bottom: 10mm;
+  /* Accent Line */
+  .accent-line {
+    width: 32mm;
+    height: 2px;
+    background: var(--terracotta);
+    margin-bottom: 14mm;
+  }
+
+  /* Three Values */
+  .p1-values {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 7mm;
+    margin-bottom: 14mm;
   }
 
   .value-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 7mm;
-    padding: 5mm 6mm;
-    background: var(--color-white);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0 4px 4px 0;
-  }
-
-  .value-number {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    background: var(--color-accent);
-    color: var(--color-white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    margin-right: 5mm;
-    margin-top: 1px;
-  }
-
-  .value-content {
-    flex: 1;
+    padding-left: 5mm;
+    border-left: 2px solid var(--terracotta);
   }
 
   .value-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-accent-dark);
-    margin-bottom: 1mm;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
+    color: var(--navy);
+    margin-bottom: 1.5mm;
+    letter-spacing: 0.02em;
   }
 
   .value-desc {
-    font-size: 13px;
-    color: var(--color-text-light);
-    line-height: 1.6;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 9.5pt;
+    color: #4a473f;
+    line-height: 1.7;
   }
 
-  /* Price Highlight */
-  .price-section {
-    background: var(--color-highlight-bg);
-    border: 1.5px solid var(--color-accent-light);
-    border-radius: 6px;
-    padding: 6mm 8mm;
-    text-align: center;
+  /* Price Band */
+  .p1-price {
+    background: var(--navy);
+    color: var(--offwhite);
+    padding: 6mm 7mm;
+    border-radius: 3px;
     margin-bottom: 10mm;
+    display: flex;
+    align-items: baseline;
+    gap: 5mm;
+    flex-wrap: wrap;
   }
 
   .price-main {
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--color-accent-dark);
-    margin-bottom: 2mm;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 18pt;
+    letter-spacing: 0.02em;
   }
 
-  .price-details {
-    font-size: 14px;
-    color: var(--color-text-light);
-    font-weight: 500;
+  .price-detail {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 9pt;
+    font-weight: 300;
+    color: rgba(250, 249, 247, 0.7);
+    letter-spacing: 0.04em;
   }
 
-  .price-details span {
-    margin: 0 3mm;
-  }
-
-  .price-sep {
-    color: var(--color-border);
-  }
-
-  /* QR Section */
-  .qr-section {
-    text-align: center;
-    margin-top: 6mm;
+  /* QR / Sample Link */
+  .p1-qr-section {
+    display: flex;
+    align-items: center;
+    gap: 5mm;
+    padding-top: 6mm;
+    border-top: 1px solid var(--light-border);
   }
 
   .qr-placeholder {
-    width: 32mm;
-    height: 32mm;
-    border: 2px dashed var(--color-border);
-    border-radius: 4px;
-    display: inline-flex;
+    width: 22mm;
+    height: 22mm;
+    border: 1.5px solid var(--light-border);
+    border-radius: 2px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-muted);
-    font-size: 11px;
-    margin-bottom: 2mm;
-    background: var(--color-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 6.5pt;
+    color: var(--warm-gray);
+    background: #fff;
+    flex-shrink: 0;
   }
 
-  .qr-label {
-    font-size: 13px;
-    color: var(--color-text-light);
+  .qr-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 9pt;
+    color: #4a473f;
+    line-height: 1.6;
+  }
+
+  .qr-text strong {
     font-weight: 500;
+    color: var(--navy);
   }
 
-  /* ===== PAGE 2: BACK ===== */
-
-  .page-back::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6mm;
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  .qr-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    color: var(--terracotta);
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
-  .section-heading {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--color-accent-dark);
-    margin-bottom: 5mm;
-    padding-bottom: 2mm;
-    border-bottom: 2px solid var(--color-accent);
-    display: inline-block;
+  /* ══════════════════════════════════════
+     PAGE 2 — BACK
+     ══════════════════════════════════════ */
+
+  .p2-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10mm;
+    padding-bottom: 5mm;
+    border-bottom: 1px solid var(--light-border);
+  }
+
+  .p2-header-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 13pt;
+    color: var(--navy);
+    letter-spacing: 0.04em;
   }
 
   /* Before / After */
   .before-after {
     display: flex;
-    gap: 5mm;
-    margin-bottom: 10mm;
-    margin-top: 8mm;
+    gap: 0;
+    margin-bottom: 12mm;
+    border-radius: 3px;
+    overflow: hidden;
   }
 
-  .ba-card {
+  .ba-column {
     flex: 1;
-    padding: 5mm 6mm;
-    border-radius: 6px;
-    position: relative;
+    padding: 7mm 6mm;
   }
 
   .ba-before {
-    background: var(--color-red-light);
-    border: 1px solid #E8C8C8;
+    background: #eae7e2;
+    color: #6b675e;
   }
 
   .ba-after {
-    background: var(--color-green-light);
-    border: 1px solid #B8D8BA;
+    background: var(--navy);
+    color: var(--offwhite);
   }
 
   .ba-label {
-    font-size: 13px;
-    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 8pt;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 3mm;
+    margin-bottom: 4mm;
   }
 
-  .ba-before .ba-label { color: var(--color-red); }
-  .ba-after .ba-label { color: var(--color-green); }
+  .ba-before .ba-label {
+    color: var(--warm-gray);
+  }
+
+  .ba-after .ba-label {
+    color: var(--terracotta);
+  }
 
   .ba-list {
     list-style: none;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
   }
 
   .ba-list li {
-    font-size: 13px;
-    color: var(--color-text);
-    padding: 1mm 0;
-    padding-left: 4mm;
-    position: relative;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 9pt;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  .ba-list li::before {
+    content: "—  ";
+    font-weight: 300;
+    opacity: 0.5;
+  }
+
+  /* Plans Table */
+  .plans-section {
+    margin-bottom: 11mm;
+  }
+
+  .section-label {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    font-size: 12pt;
+    color: var(--navy);
+    margin-bottom: 5mm;
+    letter-spacing: 0.04em;
+  }
+
+  .plans-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .plans-table th {
+    font-size: 7.5pt;
+    font-weight: 500;
+    color: var(--warm-gray);
+    text-align: left;
+    padding: 2.5mm 3mm;
+    border-bottom: 1.5px solid var(--light-border);
+    letter-spacing: 0.06em;
+  }
+
+  .plans-table td {
+    font-size: 9pt;
+    padding: 4mm 3mm;
+    border-bottom: 1px solid var(--light-border);
+    vertical-align: top;
     line-height: 1.5;
   }
 
-  .ba-before .ba-list li::before {
-    content: "\2013";
-    position: absolute;
-    left: 0;
-    color: var(--color-red);
-    font-weight: 700;
-  }
-
-  .ba-after .ba-list li::before {
-    content: "+";
-    position: absolute;
-    left: 0;
-    color: var(--color-green);
-    font-weight: 700;
-  }
-
-  /* Plan Table */
-  .plans-section {
-    margin-bottom: 10mm;
-  }
-
-  .plan-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-
-  .plan-table th {
-    background: var(--color-accent);
-    color: var(--color-white);
-    padding: 3mm 4mm;
-    text-align: left;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.03em;
-  }
-
-  .plan-table th:first-child {
-    border-radius: 4px 0 0 0;
-  }
-
-  .plan-table th:last-child {
-    border-radius: 0 4px 0 0;
-  }
-
-  .plan-table td {
-    padding: 4mm 4mm;
-    border-bottom: 1px solid var(--color-border);
-    vertical-align: top;
-  }
-
-  .plan-table tr:last-child td {
+  .plans-table tr:last-child td {
     border-bottom: none;
   }
 
-  .plan-table tr:nth-child(even) {
-    background: var(--color-highlight-bg);
-  }
-
   .plan-name {
-    font-weight: 700;
-    color: var(--color-accent-dark);
-  }
-
-  .plan-price {
-    font-weight: 700;
-    color: var(--color-accent);
+    font-weight: 600;
+    color: var(--navy);
     white-space: nowrap;
   }
 
-  .plan-recommended {
-    background: var(--color-accent);
-    color: var(--color-white);
-    font-size: 10px;
-    padding: 0.5mm 2mm;
-    border-radius: 2px;
+  .plan-price {
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .plan-features {
+    font-weight: 300;
+    color: #4a473f;
+  }
+
+  .plan-recommended {
+    position: relative;
+  }
+
+  .plan-recommended td {
+    background: rgba(196, 112, 63, 0.06);
+  }
+
+  .badge-recommend {
+    display: inline-block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 6.5pt;
+    font-weight: 500;
+    color: var(--terracotta);
+    border: 1px solid var(--terracotta);
+    border-radius: 2px;
+    padding: 0.5mm 2mm;
     margin-left: 2mm;
     vertical-align: middle;
+    letter-spacing: 0.04em;
   }
 
   /* Flow */
   .flow-section {
-    margin-bottom: 10mm;
+    margin-bottom: 11mm;
   }
 
   .flow-steps {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3mm;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
   }
 
   .flow-step {
-    flex: 1;
-    text-align: center;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2mm;
   }
 
-  .flow-step-num {
-    width: 36px;
-    height: 36px;
-    background: var(--color-accent);
-    color: var(--color-white);
+  .flow-number {
+    width: 8mm;
+    height: 8mm;
     border-radius: 50%;
-    display: inline-flex;
+    background: var(--navy);
+    color: var(--offwhite);
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    font-weight: 600;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 3mm;
   }
 
-  .flow-step-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--color-text);
-    line-height: 1.4;
+  .flow-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: var(--navy);
+    text-align: center;
+    white-space: nowrap;
   }
 
-  .flow-step-sub {
-    font-size: 11px;
-    color: var(--color-text-muted);
-    margin-top: 1mm;
-  }
-
-  /* Arrow between steps */
-  .flow-step + .flow-step::before {
-    content: "";
-    position: absolute;
-    left: -4mm;
-    top: 16px;
-    width: 5mm;
-    height: 2px;
-    background: var(--color-accent-light);
+  .flow-arrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    color: var(--light-border);
+    padding: 0 3mm;
+    align-self: flex-start;
+    margin-top: 2mm;
   }
 
   /* Contact */
   .contact-section {
-    background: var(--color-white);
-    border: 1.5px solid var(--color-border);
-    border-radius: 6px;
-    padding: 5mm 6mm;
+    background: var(--subtle-bg);
+    border-radius: 3px;
+    padding: 6mm 7mm;
     display: flex;
     align-items: center;
     gap: 6mm;
+    margin-bottom: 8mm;
   }
 
   .contact-qr {
-    flex-shrink: 0;
-  }
-
-  .contact-qr-box {
-    width: 26mm;
-    height: 26mm;
-    border: 2px dashed var(--color-border);
-    border-radius: 4px;
+    width: 24mm;
+    height: 24mm;
+    border: 1.5px solid var(--light-border);
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-muted);
-    font-size: 10px;
-    text-align: center;
-    background: var(--color-bg);
-  }
-
-  .contact-info {
-    flex: 1;
-  }
-
-  .contact-heading {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-accent-dark);
-    margin-bottom: 2mm;
-  }
-
-  .contact-row {
-    font-size: 13px;
-    color: var(--color-text);
-    margin-bottom: 1.5mm;
-    display: flex;
-    align-items: baseline;
-    gap: 3mm;
-  }
-
-  .contact-label {
-    font-weight: 600;
-    color: var(--color-text-light);
-    min-width: 16mm;
+    font-family: 'Inter', sans-serif;
+    font-size: 6pt;
+    color: var(--warm-gray);
+    background: #fff;
     flex-shrink: 0;
   }
 
-  /* Footer */
-  .page-footer {
-    position: absolute;
-    bottom: 10mm;
-    left: 20mm;
-    right: 20mm;
-    text-align: center;
-    font-size: 10px;
-    color: var(--color-text-muted);
-    border-top: 1px solid var(--color-border);
-    padding-top: 3mm;
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
   }
 
-  /* ===== Print Styles ===== */
+  .contact-row {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 9pt;
+    color: #4a473f;
+    line-height: 1.5;
+  }
+
+  .contact-row strong {
+    font-weight: 500;
+    color: var(--navy);
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  }
+
+  /* Company Footer */
+  .p2-footer {
+    margin-top: auto;
+    padding-top: 5mm;
+    border-top: 1px solid var(--light-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-company {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    font-size: 7.5pt;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  .footer-company .company-name {
+    font-weight: 600;
+    font-size: 8pt;
+    color: var(--navy);
+  }
+
+  .footer-brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14pt;
+    letter-spacing: 0.18em;
+    color: var(--navy);
+    opacity: 0.15;
+  }
+
+  /* ── Print Overrides ── */
   @media print {
     html, body {
-      background: none;
+      width: 210mm;
+      height: auto;
     }
 
     .page {
       margin: 0;
-      box-shadow: none;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
+      padding: 22mm 20mm 18mm 20mm;
     }
   }
 
-  /* ===== Screen preview helper ===== */
+  /* ── Screen Preview Helpers ── */
   @media screen {
     body {
-      padding: 20px 0;
+      background: #d0cec9;
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12mm;
+      padding: 12mm 0;
+    }
+
+    .page {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.12);
     }
   }
 </style>
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!-- PAGE 1: FRONT                                                 -->
-<!-- ============================================================ -->
+<!-- ════════════════════════════════════════════
+     PAGE 1 — FRONT
+     ════════════════════════════════════════════ -->
 <div class="page page-front">
 
-  <div class="front-header">
-    <div class="service-name">JEEB</div>
-    <div class="service-name-sub">ジーブ — タイ語で「つかむ」</div>
+  <header class="p1-header">
+    <div class="logo-mark">JEEB</div>
+    <div class="logo-sub">ジーブ</div>
+  </header>
 
-    <div class="divider"></div>
-
-    <div class="tagline">あなたの店を、世界に届ける。</div>
-    <div class="subtitle">バンコク飲食店向け Web・SNS運用サービス</div>
+  <div class="p1-hero">
+    <h1 class="p1-tagline">あなたの店を、世界に届ける。</h1>
+    <p class="p1-subtitle">バンコクの飲食店向け Web・SNS運用サービス</p>
   </div>
 
-  <div class="divider"></div>
+  <div class="accent-line"></div>
 
-  <!-- 3 Key Values -->
-  <div class="values-section">
-
+  <div class="p1-values">
     <div class="value-item">
-      <div class="value-number">1</div>
-      <div class="value-content">
-        <div class="value-title">多言語Webサイト &amp; メニュー</div>
-        <div class="value-desc">日本語・英語・タイ語・中国語対応。AIで高速制作、月額サブスクで始められる。</div>
-      </div>
+      <div class="value-title">多言語Webサイト &amp; メニュー</div>
+      <div class="value-desc">日本語・英語・タイ語・中国語。即日サンプル作成</div>
     </div>
-
     <div class="value-item">
-      <div class="value-number">2</div>
-      <div class="value-content">
-        <div class="value-title">SNS運用代行</div>
-        <div class="value-desc">「今日はこれを撮ってください」毎日具体的に指示。あなたは写真を送るだけ。</div>
-      </div>
+      <div class="value-title">SNS運用代行</div>
+      <div class="value-desc">毎日具体的に「これを撮って」と指示。あなたは写真を送るだけ</div>
     </div>
-
     <div class="value-item">
-      <div class="value-number">3</div>
-      <div class="value-content">
-        <div class="value-title">データ分析</div>
-        <div class="value-desc">標準アナリティクスでは見えない深い分析で、何が効いているか分かる。</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Price Highlight -->
-  <div class="price-section">
-    <div class="price-main">月額 2,000バーツ〜</div>
-    <div class="price-details">
-      初期費用 0円<span class="price-sep">|</span>2週間無料トライアル
+      <div class="value-title">データ分析</div>
+      <div class="value-desc">標準では見えない深い分析で、何が効いているか分かる</div>
     </div>
   </div>
 
-  <!-- QR Code -->
-  <div class="qr-section">
+  <div class="p1-price">
+    <span class="price-main">月額 ฿2,000〜</span>
+    <span class="price-detail">初期費用 0 ／ 2週間無料トライアル</span>
+  </div>
+
+  <div class="p1-qr-section">
     <div class="qr-placeholder">QR Code</div>
-    <div class="qr-label">サンプルサイトはこちら</div>
+    <div class="qr-text">
+      <strong>サンプルサイトはこちら</strong><br>
+      <span class="qr-url">vannessasia.github.io/bangkok-samples/</span>
+    </div>
   </div>
 
 </div>
 
-<!-- ============================================================ -->
-<!-- PAGE 2: BACK                                                  -->
-<!-- ============================================================ -->
+<!-- ════════════════════════════════════════════
+     PAGE 2 — BACK
+     ════════════════════════════════════════════ -->
 <div class="page page-back">
 
-  <!-- Before / After -->
-  <div style="margin-top: 8mm;">
-    <div class="section-heading">導入前と導入後</div>
-  </div>
+  <header class="p2-header">
+    <div class="p2-header-title">JEEBで、何が変わるか。</div>
+    <div class="logo-sub">JEEB</div>
+  </header>
 
+  <!-- Before / After -->
   <div class="before-after">
-    <div class="ba-card ba-before">
+    <div class="ba-column ba-before">
       <div class="ba-label">Before</div>
       <ul class="ba-list">
-        <li>タイ語のみのメニュー</li>
+        <li>メニューはタイ語のみ</li>
         <li>Webサイトなし</li>
-        <li>SNS放置</li>
+        <li>SNSは3投稿で放置</li>
       </ul>
     </div>
-    <div class="ba-card ba-after">
+    <div class="ba-column ba-after">
       <div class="ba-label">After</div>
       <ul class="ba-list">
-        <li>多言語メニュー（4言語）</li>
+        <li>4言語対応メニュー</li>
         <li>プロ品質のWebサイト</li>
         <li>週3本のSNS投稿</li>
       </ul>
     </div>
   </div>
 
-  <!-- Plan Comparison -->
+  <!-- Plans -->
   <div class="plans-section">
-    <div class="section-heading">料金プラン</div>
-    <table class="plan-table">
+    <div class="section-label">料金プラン</div>
+    <table class="plans-table">
       <thead>
         <tr>
           <th>プラン</th>
-          <th>月額料金</th>
+          <th>月額</th>
           <th>内容</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="plan-name">ライト</span></td>
-          <td><span class="plan-price">2,000 THB</span></td>
-          <td>Webサイト + 多言語メニュー</td>
+          <td class="plan-name">ライト</td>
+          <td class="plan-price">฿2,000</td>
+          <td class="plan-features">Web + メニュー</td>
+        </tr>
+        <tr class="plan-recommended">
+          <td class="plan-name">スタンダード<span class="badge-recommend">おすすめ</span></td>
+          <td class="plan-price">฿5,000</td>
+          <td class="plan-features">+ SNS運用</td>
         </tr>
         <tr>
-          <td><span class="plan-name">スタンダード</span><span class="plan-recommended">おすすめ</span></td>
-          <td><span class="plan-price">5,000 THB</span></td>
-          <td>Webサイト + 多言語メニュー + SNS運用代行</td>
-        </tr>
-        <tr>
-          <td><span class="plan-name">プレミアム</span></td>
-          <td><span class="plan-price">10,000 THB</span></td>
-          <td>全機能 + データ分析 + コンサルティング</td>
+          <td class="plan-name">プレミアム</td>
+          <td class="plan-price">฿10,000</td>
+          <td class="plan-features">+ 分析 + コンサル</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- 4-Step Flow -->
+  <!-- Flow -->
   <div class="flow-section">
-    <div class="section-heading">ご利用の流れ</div>
+    <div class="section-label">ご利用の流れ</div>
     <div class="flow-steps">
       <div class="flow-step">
-        <div class="flow-step-num">1</div>
-        <div class="flow-step-label">無料相談</div>
-        <div class="flow-step-sub">お悩みをヒアリング</div>
+        <div class="flow-number">1</div>
+        <div class="flow-label">無料相談</div>
       </div>
+      <div class="flow-arrow">→</div>
       <div class="flow-step">
-        <div class="flow-step-num">2</div>
-        <div class="flow-step-label">サンプル作成</div>
-        <div class="flow-step-sub">実際の画面をご確認</div>
+        <div class="flow-number">2</div>
+        <div class="flow-label">サンプル作成</div>
       </div>
+      <div class="flow-arrow">→</div>
       <div class="flow-step">
-        <div class="flow-step-num">3</div>
-        <div class="flow-step-label">2週間トライアル</div>
-        <div class="flow-step-sub">無料でお試し</div>
+        <div class="flow-number">3</div>
+        <div class="flow-label">2週間トライアル</div>
       </div>
+      <div class="flow-arrow">→</div>
       <div class="flow-step">
-        <div class="flow-step-num">4</div>
-        <div class="flow-step-label">本契約</div>
-        <div class="flow-step-sub">ご納得の上で開始</div>
+        <div class="flow-number">4</div>
+        <div class="flow-label">本契約</div>
       </div>
     </div>
   </div>
 
   <!-- Contact -->
   <div class="contact-section">
-    <div class="contact-qr">
-      <div class="contact-qr-box">LINE<br>QR Code</div>
-    </div>
+    <div class="contact-qr">LINE QR</div>
     <div class="contact-info">
-      <div class="contact-heading">お問い合わせ</div>
-      <div class="contact-row">
-        <span class="contact-label">LINE</span>
-        <span>@jeeb-bkk（友だち追加で無料相談）</span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-label">Email</span>
-        <span>info@example.com</span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-label">Tel</span>
-        <span>0XX-XXX-XXXX</span>
-      </div>
+      <div class="contact-row"><strong>Instagram</strong>　@jeeb.bkk</div>
+      <div class="contact-row"><strong>Email</strong>　info@vanness.co.jp</div>
+      <div class="contact-row"><strong>Tel</strong>　+66-XX-XXX-XXXX</div>
     </div>
   </div>
 
-  <div class="page-footer">
-    JEEB — バンコク飲食店向け Web・SNS運用サービス
+  <!-- Footer -->
+  <div class="p2-footer">
+    <div class="footer-company">
+      <span class="company-name">VANNESS ASIA CO., LTD</span><br>
+      64/1 Room No. 210, Soi Pasi 1, Ekamai Road,<br>
+      Klong Tan Nuea, Wattana, Bangkok 10110<br>
+      TAX ID: 0105567229649
+    </div>
+    <div class="footer-brand">JEEB</div>
   </div>
 
 </div>

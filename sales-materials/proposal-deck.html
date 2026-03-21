@@ -3,1149 +3,1679 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEEB - バンコク飲食店向け Web・SNS運用サービスのご提案</title>
+<title>JEEB — バンコクの飲食店向け Web・SNS運用サービスのご提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --navy: #1a2332;
-    --charcoal: #2d3748;
-    --dark-slate: #334155;
-    --warm-accent: #c8956c;
-    --accent-light: #e8c4a8;
-    --accent-deep: #a07050;
-    --white: #ffffff;
-    --off-white: #f8f6f3;
-    --light-gray: #e8e6e3;
-    --text-primary: #1a2332;
-    --text-secondary: #4a5568;
-    --text-light: #94a3b8;
+:root {
+  --navy: #0a0f1a;
+  --navy-light: #131a2e;
+  --navy-mid: #1a2340;
+  --offwhite: #faf9f7;
+  --offwhite-dim: #f0eeeb;
+  --terracotta: #c4703f;
+  --terracotta-light: #d4885a;
+  --terracotta-subtle: rgba(196, 112, 63, 0.12);
+  --text-primary: #faf9f7;
+  --text-secondary: rgba(250, 249, 247, 0.6);
+  --text-tertiary: rgba(250, 249, 247, 0.35);
+  --border: rgba(250, 249, 247, 0.08);
+  --border-light: rgba(250, 249, 247, 0.12);
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Inter', -apple-system, sans-serif;
+  background: var(--navy);
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ========== SECTION BASE ========== */
+.section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 60px;
+  overflow: hidden;
+}
+
+.section-inner {
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== TYPOGRAPHY ========== */
+.heading-xl {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.heading-lg {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.heading-md {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.heading-sm {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.body-lg {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.9;
+  color: var(--text-secondary);
+}
+
+.body-md {
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.label-muted {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate {
+  opacity: 0;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-delay-1 { animation-delay: 0.15s; }
+.animate-delay-2 { animation-delay: 0.3s; }
+.animate-delay-3 { animation-delay: 0.45s; }
+.animate-delay-4 { animation-delay: 0.6s; }
+.animate-delay-5 { animation-delay: 0.75s; }
+.animate-delay-6 { animation-delay: 0.9s; }
+.animate-delay-7 { animation-delay: 1.05s; }
+
+/* ========== DECORATIVE ========== */
+.accent-line {
+  width: 48px;
+  height: 2px;
+  background: var(--terracotta);
+  display: block;
+}
+
+.accent-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  display: inline-block;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 48px 0;
+}
+
+.section-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  position: absolute;
+  top: 40px;
+  right: 60px;
+}
+
+/* ========== PAGE 1: COVER ========== */
+.cover {
+  background: var(--navy);
+  flex-direction: column;
+  text-align: center;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(196, 112, 63, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cover-brand {
+  margin-bottom: 16px;
+}
+
+.cover-brand .brand-name {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--offwhite);
+}
+
+.cover-brand .brand-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.cover-line {
+  width: 64px;
+  height: 2px;
+  background: var(--terracotta);
+  margin: 40px auto;
+  animation: lineGrow 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+  transform-origin: center;
+}
+
+.cover-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin-bottom: 60px;
+}
+
+.cover-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cover-footer .company {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.cover-footer .date {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
+}
+
+/* ========== PAGE 2: THE REALITY ========== */
+.reality {
+  background: var(--navy);
+}
+
+.reality-content {
+  max-width: 780px;
+}
+
+.reality-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--offwhite);
+  margin-bottom: 56px;
+  position: relative;
+  padding-left: 32px;
+  border-left: 2px solid var(--terracotta);
+}
+
+.reality-points {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.reality-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.reality-point .point-indicator {
+  width: 2px;
+  height: 24px;
+  background: var(--border-light);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.reality-point .point-text {
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.reality-point .point-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ========== PAGE 3: OUR SOLUTION ========== */
+.solution {
+  background: var(--navy);
+}
+
+.solution-header {
+  margin-bottom: 72px;
+}
+
+.solution-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.solution-block {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+
+.solution-block .block-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--terracotta);
+  text-transform: uppercase;
+  padding-top: 6px;
+}
+
+.solution-block .block-content h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--offwhite);
+}
+
+.solution-block .block-content p {
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+/* ========== PAGE 4: PRODUCTION SAMPLES ========== */
+.samples {
+  background: var(--navy);
+}
+
+.samples-header {
+  margin-bottom: 56px;
+}
+
+.samples-category {
+  margin-bottom: 48px;
+}
+
+.samples-category-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 24px;
+}
+
+.samples-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.sample-card {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.sample-card:hover {
+  border-color: var(--border-light);
+}
+
+.sample-preview {
+  aspect-ratio: 9 / 16;
+  background: var(--navy-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sample-preview::after {
+  content: 'SAMPLE';
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+}
+
+.sample-qr {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: var(--offwhite);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sample-qr::after {
+  content: 'QR';
+  font-family: 'Inter', sans-serif;
+  font-size: 0.45rem;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.05em;
+}
+
+.sample-info {
+  padding: 12px 14px;
+}
+
+.sample-info .sample-type {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.samples-footer {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.samples-cta {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.samples-coming {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+/* ========== PAGE 5: SNS OPERATION ========== */
+.sns-op {
+  background: var(--navy);
+}
+
+.sns-op-header {
+  margin-bottom: 64px;
+}
+
+.sns-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.sns-timeline::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--border-light);
+}
+
+.timeline-month {
+  text-align: center;
+  position: relative;
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--terracotta);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.timeline-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--offwhite);
+}
+
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.sns-message-example {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 48px;
+  max-width: 480px;
+}
+
+.sns-message-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.sns-message-bubble {
+  background: #1e6b3a;
+  color: #fff;
+  border-radius: 16px 16px 16px 4px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  display: inline-block;
+  max-width: 90%;
+}
+
+.sns-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.sns-comp-card {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+}
+
+.sns-comp-card.highlighted {
+  border-color: var(--terracotta);
+  background: linear-gradient(135deg, var(--navy-light), rgba(196, 112, 63, 0.05));
+}
+
+.sns-comp-card h4 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--offwhite);
+}
+
+.sns-comp-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.sns-comp-item:last-child { border-bottom: none; }
+
+.sns-comp-item .comp-label {
+  color: var(--text-secondary);
+}
+
+.sns-comp-item .comp-value {
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.comp-value.yes { color: var(--terracotta); }
+
+/* ========== PAGE 6: WHY JEEB ========== */
+.comparison {
+  background: var(--navy);
+}
+
+.comparison-header {
+  margin-bottom: 56px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table thead th {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 0 20px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-table thead th:first-child {
+  text-align: left;
+  padding-left: 0;
+}
+
+.comparison-table thead th.highlight {
+  color: var(--terracotta);
+}
+
+.comparison-table tbody td {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.comparison-table tbody td:first-child {
+  text-align: left;
+  padding-left: 0;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.comparison-table tbody td.highlight-col {
+  color: var(--text-primary);
+  background: rgba(196, 112, 63, 0.04);
+  font-weight: 400;
+}
+
+.check-mark {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+.dash-mark {
+  color: var(--text-tertiary);
+}
+
+/* ========== PAGE 7: PRICING ========== */
+.pricing {
+  background: var(--navy);
+}
+
+.pricing-header {
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.pricing-card {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px 32px;
+  position: relative;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+}
+
+.pricing-card.recommended {
+  border-color: var(--terracotta);
+  background: linear-gradient(180deg, rgba(196, 112, 63, 0.06) 0%, var(--navy-light) 100%);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--terracotta);
+  color: var(--offwhite);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 4px 16px;
+  border-radius: 20px;
+}
+
+.pricing-plan-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--offwhite);
+  margin-bottom: 8px;
+}
+
+.pricing-plan-name-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.pricing-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.pricing-currency {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.pricing-number {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--offwhite);
+  letter-spacing: -0.02em;
+}
+
+.pricing-period {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.pricing-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pricing-features li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+
+.pricing-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+
+.pricing-notes {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pricing-note {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.pricing-note strong {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+/* ========== PAGE 8: GETTING STARTED + CONTACT ========== */
+.contact {
+  background: var(--navy);
+}
+
+.contact-header {
+  margin-bottom: 64px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 72px;
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: var(--border-light);
+}
+
+.step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--terracotta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--terracotta);
+  background: var(--navy);
+  position: relative;
+  z-index: 2;
+}
+
+.step-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--offwhite);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.contact-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.contact-info h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: var(--offwhite);
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-channel .channel-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.contact-channel .channel-value {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.contact-qr-placeholder {
+  width: 120px;
+  height: 120px;
+  background: var(--offwhite);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.contact-qr-placeholder span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.1em;
+}
+
+.company-info h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: var(--offwhite);
+}
+
+.company-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.company-detail {
+  display: flex;
+  gap: 16px;
+}
+
+.company-detail .detail-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  width: 80px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.company-detail .detail-value {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ========== SCROLL INDICATOR ========== */
+.scroll-indicator {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.scroll-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.scroll-dot.active {
+  background: var(--terracotta);
+  transform: scale(1.4);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .section { padding: 60px 32px; }
+  .section-number { right: 32px; top: 28px; }
+
+  .solution-block {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  .samples-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    font-size: 16px;
+  .sns-timeline {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
-  body {
-    font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
-    background: var(--off-white);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.8;
+  .sns-timeline::before { display: none; }
+
+  .timeline-month { text-align: left; padding-left: 24px; border-left: 1px solid var(--border-light); }
+  .timeline-dot { margin: 0 0 12px; }
+
+  .sns-comparison {
+    grid-template-columns: 1fr;
   }
 
-  /* ─── Section Base ─── */
-  section {
-    min-height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
+  .comparison-table { font-size: 0.8rem; }
+  .comparison-table thead th,
+  .comparison-table tbody td {
+    padding: 14px 12px;
   }
 
-  /* ─── Page Number ─── */
-  .page-num {
-    position: absolute;
-    bottom: 2rem;
-    right: 3rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-light);
-    letter-spacing: 0.15em;
-  }
-
-  .page-num.light {
-    color: rgba(255,255,255,0.35);
-  }
-
-  /* ─── Dark Header Sections ─── */
-  .dark-header {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--charcoal) 100%);
-    color: var(--white);
-  }
-
-  /* ─── Typography ─── */
-  .section-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--warm-accent);
-    margin-bottom: 1rem;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-
-  h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-  }
-
-  h3 {
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .subtitle {
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    font-weight: 300;
-    line-height: 1.6;
-    color: var(--text-secondary);
-  }
-
-  .subtitle.light {
-    color: rgba(255,255,255,0.7);
-  }
-
-  /* ─── Layout Helpers ─── */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 3rem;
-    width: 100%;
-  }
-
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-  }
-
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-  }
-
-  .grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .grid-4 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  /* ─── Cards ─── */
-  .card {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .card-dark {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 2rem;
-  }
-
-  .card-accent {
-    border-left: 3px solid var(--warm-accent);
-  }
-
-  /* ─── Number Marker ─── */
-  .num-marker {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: 50%;
-    background: var(--warm-accent);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    margin-right: 1rem;
-  }
-
-  .num-marker.outline {
-    background: transparent;
-    border: 2px solid var(--warm-accent);
-    color: var(--warm-accent);
-  }
-
-  .num-marker.dark {
-    background: rgba(200,149,108,0.15);
-    color: var(--warm-accent);
-  }
-
-  /* ─── Divider ─── */
-  .divider {
-    width: 60px;
-    height: 3px;
-    background: var(--warm-accent);
-    margin: 1.5rem 0;
-    border-radius: 2px;
-  }
-
-  .divider.center {
+  .pricing-cards {
+    grid-template-columns: 1fr;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  /* ─── Tags / Badges ─── */
-  .tag {
-    display: inline-block;
-    padding: 0.3rem 0.9rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-radius: 100px;
-    letter-spacing: 0.03em;
+  .steps {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
 
-  .tag-accent {
-    background: rgba(200,149,108,0.12);
-    color: var(--accent-deep);
+  .steps::before { display: none; }
+
+  .contact-bottom {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .tag-navy {
-    background: var(--navy);
-    color: var(--white);
+  .scroll-indicator { display: none; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 48px 24px; }
+
+  .samples-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
-  /* ─── Placeholder Boxes ─── */
-  .placeholder {
-    background: var(--light-gray);
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-light);
-    font-size: 0.8rem;
-    font-weight: 500;
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+  html { scroll-snap-type: none; }
+
+  .section {
+    min-height: auto;
+    height: auto;
+    page-break-after: always;
+    page-break-inside: avoid;
+    padding: 40px;
+    scroll-snap-align: none;
   }
 
-  /* ─── Pricing Table ─── */
-  .plan-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.06);
-    position: relative;
-    transition: transform 0.2s;
+  .section:last-child { page-break-after: auto; }
+
+  .scroll-indicator { display: none; }
+  .section-number { position: static; text-align: right; margin-bottom: 16px; }
+
+  body { color: #1a1a1a; background: #fff; }
+  .heading-xl, .heading-lg, .heading-md, .heading-sm,
+  .reality-quote, .solution-block .block-content h3,
+  .timeline-title, .pricing-plan-name, .step-title,
+  .contact-info h3, .company-info h3, .sns-comp-card h4 {
+    color: #1a1a1a;
   }
 
-  .plan-card.featured {
-    border: 2px solid var(--warm-accent);
-    transform: scale(1.03);
-    box-shadow: 0 8px 30px rgba(200,149,108,0.15);
+  .body-lg, .body-md, .reality-point .point-text,
+  .solution-block .block-content p, .timeline-desc,
+  .pricing-features li, .step-desc,
+  .contact-channel .channel-value, .company-detail .detail-value,
+  .pricing-note, .sns-comp-item .comp-label, .sns-comp-item .comp-value,
+  .comparison-table tbody td {
+    color: #444;
   }
 
-  .plan-card .price {
-    font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
+  .label, .terracotta, .check-mark,
+  .label, .cover-brand .brand-sub, .accent-line,
+  .timeline-dot, .step-number,
+  .pricing-badge, .sns-comp-item .comp-value.yes,
+  .comparison-table thead th.highlight {
+    color: #c4703f !important;
+    border-color: #c4703f !important;
+    background-color: transparent !important;
   }
 
-  .plan-card .price-unit {
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--text-secondary);
+  .pricing-badge { background: #c4703f !important; color: #fff !important; }
+
+  .sample-card, .sns-message-example, .sns-comp-card,
+  .pricing-card, .pricing-card.recommended {
+    background: #f8f8f8;
+    border-color: #ddd;
   }
 
-  .plan-card ul {
-    list-style: none;
-    text-align: left;
-    margin-top: 1.5rem;
+  .comparison-table thead th,
+  .comparison-table tbody td {
+    border-color: #ddd;
   }
 
-  .plan-card ul li {
-    padding: 0.4rem 0;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--light-gray);
+  .comparison-table tbody td.highlight-col {
+    background: #fdf5ef;
   }
 
-  .plan-card ul li:last-child {
-    border-bottom: none;
-  }
+  .animate { animation: none !important; opacity: 1 !important; transform: none !important; }
 
-  .plan-card ul li::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--warm-accent);
-    margin-right: 0.6rem;
-    vertical-align: middle;
+  @page {
+    size: A4;
+    margin: 20mm;
   }
-
-  /* ─── Timeline ─── */
-  .timeline {
-    position: relative;
-    padding-left: 3rem;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--warm-accent), var(--accent-light));
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 2.5rem;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2.35rem;
-    top: 0.3rem;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--warm-accent);
-    border: 3px solid var(--off-white);
-  }
-
-  /* ─── Section-specific header band ─── */
-  .section-header-band {
-    background: linear-gradient(160deg, var(--navy) 0%, var(--charcoal) 100%);
-    color: var(--white);
-    padding: 3.5rem 0 2.5rem;
-    flex-shrink: 0;
-  }
-
-  .section-body {
-    flex: 1;
-    padding: 2.5rem 0 3rem;
-    display: flex;
-    align-items: flex-start;
-  }
-
-  /* ─── Comparison Table ─── */
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-  }
-
-  .compare-table th {
-    background: var(--navy);
-    color: var(--white);
-    padding: 0.7rem 1rem;
-    font-weight: 600;
-    text-align: left;
-  }
-
-  .compare-table td {
-    padding: 0.6rem 1rem;
-    border-bottom: 1px solid var(--light-gray);
-  }
-
-  .compare-table tr:nth-child(even) td {
-    background: rgba(0,0,0,0.015);
-  }
-
-  /* ─── CTA Button ─── */
-  .cta-btn {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: var(--warm-accent);
-    color: var(--white);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    transition: background 0.2s;
-  }
-
-  .cta-btn:hover {
-    background: var(--accent-deep);
-  }
-
-  /* ─── Responsive ─── */
-  @media (max-width: 900px) {
-    .grid-2 { grid-template-columns: 1fr; }
-    .grid-3 { grid-template-columns: 1fr; }
-    .grid-4 { grid-template-columns: 1fr 1fr; }
-    .container { padding: 0 1.5rem; }
-    .plan-card.featured { transform: none; }
-  }
-
-  @media (max-width: 600px) {
-    .grid-4 { grid-template-columns: 1fr; }
-  }
-
-  /* ─── Print ─── */
-  @media print {
-    html { scroll-snap-type: none; }
-    section {
-      min-height: auto;
-      height: auto;
-      page-break-after: always;
-      page-break-inside: avoid;
-      padding: 2rem 0;
-    }
-    section:last-child { page-break-after: auto; }
-    .page-num { display: none; }
-    body { font-size: 11pt; }
-    .section-header-band { padding: 1.5rem 0; }
-    @page { margin: 1.5cm; size: A4; }
-  }
-
-  /* ─── Scroll indicator (cover only) ─── */
-  .scroll-hint {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: pulse-down 2s ease-in-out infinite;
-  }
-
-  .scroll-hint span {
-    display: block;
-    width: 20px;
-    height: 20px;
-    border-right: 2px solid rgba(255,255,255,0.4);
-    border-bottom: 2px solid rgba(255,255,255,0.4);
-    transform: rotate(45deg);
-  }
-
-  @keyframes pulse-down {
-    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
-    50% { opacity: 0.8; transform: translateX(-50%) translateY(8px); }
-  }
-
-  /* ─── Subtle decoration lines ─── */
-  .deco-line {
-    position: absolute;
-    background: var(--warm-accent);
-    opacity: 0.15;
-  }
-
-  .month-card {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 1.8rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    border-top: 3px solid var(--warm-accent);
-  }
-
-  .month-card h4 {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--warm-accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .step-row {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1.8rem;
-  }
-
-  .step-row:last-child {
-    margin-bottom: 0;
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  .contact-item {
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .contact-item .icon-circle {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(200,149,108,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-  }
-
-  .icon-circle svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--warm-accent);
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  @media (max-width: 900px) {
-    .contact-grid { grid-template-columns: 1fr; }
-  }
-
-  /* Additional helper for sample grid */
-  .sample-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-
-  .sample-cell {
-    aspect-ratio: 9/16;
-    background: var(--light-gray);
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-light);
-    font-size: 0.75rem;
-    text-align: center;
-    padding: 0.5rem;
-  }
-
-  .sample-cell .qr-box {
-    width: 40px;
-    height: 40px;
-    border: 1px dashed #bbb;
-    border-radius: 4px;
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.6rem;
-  }
-
-  @media (max-width: 900px) {
-    .sample-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  /* ─── Highlight stat ─── */
-  .stat-highlight {
-    font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--warm-accent);
-    line-height: 1;
-  }
-
-  .note-box {
-    background: rgba(200,149,108,0.08);
-    border-left: 3px solid var(--warm-accent);
-    border-radius: 0 8px 8px 0;
-    padding: 1rem 1.5rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-top: 1.5rem;
-  }
-
-  .feature-list {
-    list-style: none;
-  }
-
-  .feature-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    line-height: 1.6;
-  }
-
-  .feature-list li .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--warm-accent);
-    flex-shrink: 0;
-    margin-top: 0.5rem;
-    margin-right: 0.8rem;
-  }
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 1 : COVER
-     ═══════════════════════════════════════════════════════════ -->
-<section class="dark-header" style="justify-content: center; text-align: center;">
-  <div class="deco-line" style="width: 200px; height: 1px; top: 30%; left: -40px; transform: rotate(-30deg);"></div>
-  <div class="deco-line" style="width: 300px; height: 1px; bottom: 25%; right: -60px; transform: rotate(20deg);"></div>
+<!-- Scroll Navigation -->
+<nav class="scroll-indicator" id="scrollNav">
+  <div class="scroll-dot active" data-section="0"></div>
+  <div class="scroll-dot" data-section="1"></div>
+  <div class="scroll-dot" data-section="2"></div>
+  <div class="scroll-dot" data-section="3"></div>
+  <div class="scroll-dot" data-section="4"></div>
+  <div class="scroll-dot" data-section="5"></div>
+  <div class="scroll-dot" data-section="6"></div>
+  <div class="scroll-dot" data-section="7"></div>
+</nav>
 
-  <div class="container" style="position: relative; z-index: 1;">
-    <div style="margin-bottom: 2rem;">
-      <div style="display: inline-block; border: 2px solid var(--warm-accent); border-radius: 16px; padding: 1.2rem 3rem;">
-        <div style="font-family: 'Inter', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: 0.15em; line-height: 1;">JEEB</div>
-        <div style="font-size: 1.1rem; font-weight: 300; letter-spacing: 0.3em; margin-top: 0.3rem; color: rgba(255,255,255,0.7);">&#12472;&#12540;&#12502;</div>
-      </div>
+<!-- ===== PAGE 1: COVER ===== -->
+<section class="section cover" id="sec-0">
+  <div class="section-inner" style="display:flex; flex-direction:column; align-items:center;">
+    <div class="cover-brand animate">
+      <div class="brand-name">JEEB</div>
+      <div class="brand-sub">ジーブ</div>
     </div>
-    <div class="divider center" style="margin: 2rem auto;"></div>
-    <h1 style="font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 500; line-height: 1.6; letter-spacing: 0.02em;">
-      &#12496;&#12531;&#12467;&#12463;&#39154;&#39135;&#24215;&#21521;&#12369;<br>
-      Web&#12539;SNS&#36939;&#29992;&#12469;&#12540;&#12499;&#12473;&#12398;&#12372;&#25552;&#26696;
-    </h1>
-    <div style="margin-top: 3rem; font-size: 0.85rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em;">2026&#24180;3&#26376;</div>
+    <div class="cover-line"></div>
+    <div class="cover-title animate animate-delay-2">
+      バンコクの飲食店向け<br>Web・SNS運用サービスのご提案
+    </div>
+    <div class="cover-footer animate animate-delay-3">
+      <div class="company">VANNESS ASIA CO., LTD</div>
+      <div class="date">March 2026</div>
+    </div>
   </div>
-
-  <div class="scroll-hint"><span></span></div>
-  <div class="page-num light">01 / 08</div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 2 : THE PROBLEM
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <div class="section-header-band">
-    <div class="container">
-      <div class="section-label">Problem</div>
-      <h2>&#12496;&#12531;&#12467;&#12463;&#12398;&#26085;&#31995;&#39154;&#39135;&#24215;&#12364;&#25265;&#12360;&#12427;<br>3&#12388;&#12398;&#35506;&#38988;</h2>
-    </div>
-  </div>
-  <div class="section-body">
-    <div class="container" style="width: 100%;">
-      <div class="grid-3" style="margin-bottom: 2rem;">
-
-        <div class="card card-accent">
-          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-            <span class="num-marker">1</span>
-            <h3 style="font-size: 1.1rem;">Web&#12469;&#12452;&#12488;&#12364;&#12394;&#12356;</h3>
+<!-- ===== PAGE 2: THE REALITY ===== -->
+<section class="section reality" id="sec-1">
+  <span class="section-number">02 / 08</span>
+  <div class="section-inner">
+    <div class="reality-content">
+      <p class="label animate" style="margin-bottom: 24px;">The Reality</p>
+      <blockquote class="reality-quote animate animate-delay-1">
+        バンコクには数千の飲食店がある。<br>そのほとんどが、まだ世界に届いていない。
+      </blockquote>
+      <div class="reality-points">
+        <div class="reality-point animate animate-delay-2">
+          <div class="point-indicator"></div>
+          <div class="point-text">
+            <strong>Webサイトが未整備</strong>のまま営業している店舗が大半。メニューの魅力は、店の外に出ていかない。
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            &#12450;&#12525;&#12540;&#12452;&#12539;&#12510;&#12540;&#12395;&#25522;&#36617;&#12398;&#32004;<span class="stat-highlight" style="font-size: 1.5rem; margin: 0 0.2rem;">170</span>&#24215;&#33303;&#12398;&#12411;&#12412;&#20840;&#12390;&#12364;HP&#26410;&#25972;&#20633;&#12290;
-          </p>
-          <p style="font-size: 0.8rem; color: var(--text-light);">
-            Google&#26908;&#32034;&#12391;&#35211;&#12388;&#12363;&#12425;&#12394;&#12356;&#12289;<br>&#22320;&#22259;&#12450;&#12503;&#12522;&#38972;&#12415;&#12398;&#38598;&#23458;&#12395;&#20381;&#23384;
-          </p>
         </div>
-
-        <div class="card card-accent">
-          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-            <span class="num-marker">2</span>
-            <h3 style="font-size: 1.1rem;">&#12513;&#12491;&#12517;&#12540;&#12364;&#20253;&#12431;&#12425;&#12394;&#12356;</h3>
+        <div class="reality-point animate animate-delay-3">
+          <div class="point-indicator"></div>
+          <div class="point-text">
+            <strong>SNSを始めても、続かない。</strong>忙しい現場で、毎日の投稿を維持できるオーナーは少ない。
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            &#12479;&#12452;&#35486;&#12398;&#12415;&#12398;&#12513;&#12491;&#12517;&#12540;&#34920;&#12290;&#12300;&#25562;&#12370;&#20986;&#12375;&#35910;&#33104;&#12301;&#12300;&#22303;&#29942;&#33976;&#12375;&#12301;&#12398;&#21619;&#12364;&#24819;&#20687;&#12391;&#12365;&#12394;&#12356;&#12290;
-          </p>
-          <p style="font-size: 0.8rem; color: var(--text-light);">
-            &#22806;&#22269;&#20154;&#23458;&#12398;&#21462;&#12426;&#12371;&#12412;&#12375;&#12289;<br>&#27880;&#25991;&#21336;&#20385;&#12364;&#19978;&#12364;&#12425;&#12394;&#12356;
-          </p>
         </div>
-
-        <div class="card card-accent">
-          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-            <span class="num-marker">3</span>
-            <h3 style="font-size: 1.1rem;">SNS&#12364;&#32154;&#12363;&#12394;&#12356;</h3>
+        <div class="reality-point animate animate-delay-4">
+          <div class="point-indicator"></div>
+          <div class="point-text">
+            既存のWeb制作会社に依頼すると<strong>20〜30万バーツ</strong>。小規模店舗には現実的ではない。
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            &#22987;&#12417;&#12390;&#12418;1&#65374;2&#12534;&#26376;&#12391;&#25237;&#31295;&#12364;&#27490;&#12414;&#12427;&#12290;&#20309;&#12434;&#25237;&#31295;&#12377;&#12428;&#12400;&#12356;&#12356;&#12363;&#20998;&#12363;&#12425;&#12394;&#12356;&#12290;
-          </p>
-          <p style="font-size: 0.8rem; color: var(--text-light);">
-            &#26009;&#29702;&#12392;&#25509;&#23458;&#12391;&#25163;&#19968;&#26479;&#12289;<br>SNS&#12414;&#12391;&#25163;&#12364;&#22238;&#12425;&#12394;&#12356;
-          </p>
         </div>
-
-      </div>
-
-      <div class="note-box">
-        <strong>&#24467;&#26469;&#12398;&#36984;&#25246;&#32930;&#65306;</strong>Web&#21046;&#20316;&#20250;&#31038;&#12395;&#20381;&#38972;&#12377;&#12427;&#12392; <strong>20&#65374;30&#19975;&#12496;&#12540;&#12484;</strong>&#12290;&#12381;&#12428;&#12391;&#12418;&#26356;&#26032;&#12364;&#32154;&#12363;&#12378;&#12289;&#25918;&#32622;&#12373;&#12428;&#12427;&#12465;&#12540;&#12473;&#12364;&#22823;&#21322;&#12290;
       </div>
     </div>
   </div>
-  <div class="page-num">02 / 08</div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 3 : OUR SOLUTION
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <div class="section-header-band">
-    <div class="container">
-      <div class="section-label">Solution</div>
-      <h2>JEEB&#12398;3&#12388;&#12398;&#26609;</h2>
+<!-- ===== PAGE 3: OUR SOLUTION ===== -->
+<section class="section solution" id="sec-2">
+  <span class="section-number">03 / 08</span>
+  <div class="section-inner">
+    <div class="solution-header">
+      <p class="label animate" style="margin-bottom: 24px;">Our Solution</p>
+      <h2 class="heading-lg animate animate-delay-1">3つの柱で、飲食店の<br>デジタルプレゼンスを変える</h2>
     </div>
-  </div>
-  <div class="section-body">
-    <div class="container" style="width: 100%;">
-      <div class="grid-3">
-
-        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
-          <div class="num-marker dark" style="margin: 0 auto 1.2rem; width: 3rem; height: 3rem; font-size: 1.1rem;">1</div>
-          <h3 style="margin-bottom: 0.5rem;">AI&#39640;&#36895;Web&#21046;&#20316;</h3>
-          <div class="divider center"></div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            &#26989;&#31278;&#21029;&#12486;&#12531;&#12503;&#12524;&#12540;&#12488;&#12391;<br><strong>&#21363;&#26085;&#12469;&#12531;&#12503;&#12523;&#20316;&#25104;</strong>
-          </p>
-          <ul class="feature-list" style="text-align: left;">
-            <li><span class="dot"></span>&#12521;&#12540;&#12513;&#12531;&#12539;&#23621;&#37202;&#23627;&#12539;&#23551;&#21496;&#31561;&#23550;&#24540;</li>
-            <li><span class="dot"></span>&#12473;&#12510;&#12507;&#26368;&#36969;&#21270;&#28168;&#12415;</li>
-            <li><span class="dot"></span>Google Maps&#36899;&#25658;</li>
-          </ul>
+    <div class="solution-blocks">
+      <div class="solution-block animate animate-delay-2">
+        <div class="block-number">Pillar 01</div>
+        <div class="block-content">
+          <h3>AI高速Web制作</h3>
+          <p>業種別に最適化されたテンプレートをベースに、AIが即日でサンプルサイトを生成。従来数週間かかっていた制作を、圧倒的なスピードで実現します。</p>
         </div>
-
-        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
-          <div class="num-marker dark" style="margin: 0 auto 1.2rem; width: 3rem; height: 3rem; font-size: 1.1rem;">2</div>
-          <h3 style="margin-bottom: 0.5rem;">&#12513;&#12491;&#12517;&#12540;&#22810;&#35328;&#35486;&#21270;</h3>
-          <div class="divider center"></div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            &#12479;&#12452;&#26009;&#29702;<strong>200&#31278;</strong>&#12398;&#12487;&#12540;&#12479;&#12505;&#12540;&#12473;<br>&#26085;&#26412;&#26009;&#29702;&#12418;AI&#35299;&#35500;&#21205;&#30011;&#20184;&#12365;
-          </p>
-          <ul class="feature-list" style="text-align: left;">
-            <li><span class="dot"></span>&#26085;&#26412;&#35486;&#12539;&#33521;&#35486;&#12539;&#12479;&#12452;&#35486;&#12539;&#20013;&#22269;&#35486;</li>
-            <li><span class="dot"></span>&#26009;&#29702;&#12398;&#39749;&#21147;&#12364;&#20253;&#12431;&#12427;&#35299;&#35500;</li>
-            <li><span class="dot"></span>&#27880;&#25991;&#21336;&#20385;&#21521;&#19978;&#12395;&#30452;&#32080;</li>
-          </ul>
+      </div>
+      <div class="solution-block animate animate-delay-3">
+        <div class="block-number">Pillar 02</div>
+        <div class="block-content">
+          <h3>メニュー多言語化</h3>
+          <p>日本語・英語・タイ語・中国語に対応。単なる直訳ではなく、料理の魅力が正しく伝わる翻訳で、外国人ゲストの来店を後押しします。</p>
         </div>
-
-        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
-          <div class="num-marker dark" style="margin: 0 auto 1.2rem; width: 3rem; height: 3rem; font-size: 1.1rem;">3</div>
-          <h3 style="margin-bottom: 0.5rem;">SNS&#36939;&#29992;&#20195;&#34892;</h3>
-          <div class="divider center"></div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            &#27598;&#26085;&#12300;&#20170;&#26085;&#12399;&#12371;&#12428;&#12434;&#25774;&#12387;&#12390;&#12301;&#12392;<br><strong>&#20855;&#20307;&#30340;&#12395;&#25351;&#31034;</strong>&#12289;&#36913;3&#26412;&#25237;&#31295;
-          </p>
-          <ul class="feature-list" style="text-align: left;">
-            <li><span class="dot"></span>&#25774;&#24433;&#25351;&#31034;&#12434;LINE&#12391;&#36865;&#20449;</li>
-            <li><span class="dot"></span>&#32232;&#38598;&#12539;&#25237;&#31295;&#12399;&#20840;&#12390;&#12362;&#12414;&#12363;&#12379;</li>
-            <li><span class="dot"></span>&#12495;&#12483;&#12471;&#12517;&#12479;&#12464;&#25126;&#30053;&#21547;&#12416;</li>
-          </ul>
+      </div>
+      <div class="solution-block animate animate-delay-4">
+        <div class="block-number">Pillar 03</div>
+        <div class="block-content">
+          <h3>SNS運用代行</h3>
+          <p>「今日はこの料理を、この角度で撮ってください」——毎日、具体的な撮影指示をLINEでお届け。現場の負担を最小限に、継続できるSNS運用を実現します。</p>
         </div>
-
       </div>
     </div>
   </div>
-  <div class="page-num">03 / 08</div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 4 : PRODUCTION SAMPLES
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <div class="section-header-band">
-    <div class="container">
-      <div class="section-label">Samples</div>
-      <h2>&#21046;&#20316;&#12469;&#12531;&#12503;&#12523;</h2>
-      <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">&#26989;&#31278; &times; &#12479;&#12452;&#12503;&#12391;&#24481;&#31038;&#12395;&#26368;&#36969;&#12394;&#12418;&#12398;&#12434;&#36984;&#12409;&#12414;&#12377;</p>
+<!-- ===== PAGE 4: PRODUCTION SAMPLES ===== -->
+<section class="section samples" id="sec-3">
+  <span class="section-number">04 / 08</span>
+  <div class="section-inner">
+    <div class="samples-header">
+      <p class="label animate" style="margin-bottom: 24px;">Production Samples</p>
+      <h2 class="heading-lg animate animate-delay-1">業種 × タイプで、<br>御社に最適なサイトを選べます</h2>
     </div>
-  </div>
-  <div class="section-body">
-    <div class="container" style="width: 100%;">
 
-      <div style="margin-bottom: 2rem;">
-        <h3 style="margin-bottom: 1rem; font-size: 1rem;"><span class="tag tag-navy">&#12521;&#12540;&#12513;&#12531;</span><span style="margin-left: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">4&#12479;&#12452;&#12503;</span></h3>
-        <div class="sample-grid">
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type A</div>
-            <div>&#12480;&#12452;&#12490;&#12511;&#12483;&#12463;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type B</div>
-            <div>&#12511;&#12491;&#12510;&#12523;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type C</div>
-            <div>&#12501;&#12457;&#12488;&#37325;&#35222;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type D</div>
-            <div>&#21644;&#39080;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
+    <div class="samples-category animate animate-delay-2">
+      <div class="samples-category-title">Ramen — ラーメン</div>
+      <div class="samples-grid">
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type A — モダン</span></div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type B — クラシック</span></div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type C — ミニマル</span></div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type D — ビジュアル</span></div>
         </div>
       </div>
+    </div>
 
-      <div>
-        <h3 style="margin-bottom: 1rem; font-size: 1rem;"><span class="tag tag-navy">&#23621;&#37202;&#23627;</span><span style="margin-left: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">4&#12479;&#12452;&#12503;</span></h3>
-        <div class="sample-grid">
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type A</div>
-            <div>&#12514;&#12480;&#12531;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type B</div>
-            <div>&#12463;&#12521;&#12471;&#12483;&#12463;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type C</div>
-            <div>&#12459;&#12472;&#12517;&#12450;&#12523;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
-          <div class="sample-cell">
-            <div style="font-weight: 600; margin-bottom: 0.3rem;">Type D</div>
-            <div>&#39640;&#32026;&#36335;&#32218;</div>
-            <div style="font-size: 0.65rem; margin-top: 0.3rem; color: #bbb;">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;</div>
-            <div class="qr-box">QR</div>
-          </div>
+    <div class="samples-category animate animate-delay-3">
+      <div class="samples-category-title">Izakaya — 居酒屋</div>
+      <div class="samples-grid">
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type A — 和モダン</span></div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type B — カジュアル</span></div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type C — プレミアム</span></div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-preview"><div class="sample-qr"></div></div>
+          <div class="sample-info"><span class="sample-type">Type D — ナイト</span></div>
         </div>
       </div>
+    </div>
 
+    <div class="samples-footer animate animate-delay-4">
+      <div class="samples-cta">サンプルは無料でお作りします。まずはお気軽にご相談ください。</div>
+      <div class="samples-coming">Coming soon: 焼肉 / タイ料理 / カフェ / 夜系</div>
     </div>
   </div>
-  <div class="page-num">04 / 08</div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 5 : SNS OPERATION SYSTEM
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <div class="section-header-band">
-    <div class="container">
-      <div class="section-label">Operation</div>
-      <h2>SNS&#36939;&#29992;&#12471;&#12473;&#12486;&#12512;</h2>
-      <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">&#20837;&#20250;&#24460;3&#12534;&#26376;&#12398;&#12471;&#12490;&#12522;&#12458;</p>
+<!-- ===== PAGE 5: SNS OPERATION SYSTEM ===== -->
+<section class="section sns-op" id="sec-4">
+  <span class="section-number">05 / 08</span>
+  <div class="section-inner">
+    <div class="sns-op-header">
+      <p class="label animate" style="margin-bottom: 24px;">SNS Operation System</p>
+      <h2 class="heading-lg animate animate-delay-1">3ヶ月で、SNSが<br>お店の「集客装置」になる</h2>
     </div>
-  </div>
-  <div class="section-body">
-    <div class="container" style="width: 100%;">
 
-      <div class="grid-3" style="margin-bottom: 2.5rem;">
-        <div class="month-card">
-          <h4>Month 1</h4>
-          <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">&#22522;&#30990;&#12467;&#12531;&#12486;&#12531;&#12484;</h3>
-          <ul class="feature-list">
-            <li><span class="dot"></span>&#22806;&#35251;&#12539;&#20869;&#35251;&#12398;&#25774;&#24433;</li>
-            <li><span class="dot"></span>&#12513;&#12491;&#12517;&#12540;&#20840;&#21697;&#25774;&#24433;</li>
-            <li><span class="dot"></span>&#20154;&#27671;&#26009;&#29702;&#12398;&#35519;&#29702;&#39080;&#26223;</li>
-            <li><span class="dot"></span>&#12503;&#12525;&#12501;&#12451;&#12540;&#12523;&#25972;&#20633;</li>
-          </ul>
+    <div class="sns-timeline animate animate-delay-2">
+      <div class="timeline-month">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Month 1</div>
+        <div class="timeline-title">基盤構築</div>
+        <div class="timeline-desc">アカウント最適化、ブランドトーン設定、投稿テンプレート作成。最初の30日で土台を固めます。</div>
+      </div>
+      <div class="timeline-month">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Month 2</div>
+        <div class="timeline-title">運用定着</div>
+        <div class="timeline-desc">日々の投稿リズムを確立。反応データを見ながらコンテンツを最適化していきます。</div>
+      </div>
+      <div class="timeline-month">
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Month 3</div>
+        <div class="timeline-title">成果分析</div>
+        <div class="timeline-desc">フォロワー推移、エンゲージメント、来店動機の分析。次の3ヶ月の戦略を策定します。</div>
+      </div>
+    </div>
+
+    <div class="sns-message-example animate animate-delay-3">
+      <div class="sns-message-label">Daily LINE Message — 撮影指示の例</div>
+      <div class="sns-message-bubble">
+        おはようございます。<br>
+        今日の撮影：看板メニューの味噌ラーメン<br>
+        ・湯気が見えるタイミングで<br>
+        ・斜め45度、自然光で<br>
+        ・トッピングが見える角度で1枚お願いします
+      </div>
+    </div>
+
+    <div class="sns-comparison animate animate-delay-4">
+      <div class="sns-comp-card">
+        <h4>Standard SNS</h4>
+        <div class="sns-comp-item">
+          <span class="comp-label">投稿頻度</span>
+          <span class="comp-value">週2〜3回</span>
         </div>
-
-        <div class="month-card">
-          <h4>Month 2</h4>
-          <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">&#21453;&#24540;&#12434;&#35211;&#12390;&#24375;&#21270;</h3>
-          <ul class="feature-list">
-            <li><span class="dot"></span>&#20154;&#27671;&#12513;&#12491;&#12517;&#12540;&#12398;&#28145;&#25496;&#12426;</li>
-            <li><span class="dot"></span>&#12473;&#12479;&#12483;&#12501;&#32057;&#20171;</li>
-            <li><span class="dot"></span>&#23395;&#31680;&#12539;&#12452;&#12505;&#12531;&#12488;&#36899;&#21205;</li>
-            <li><span class="dot"></span>&#12501;&#12457;&#12525;&#12527;&#12540;&#22679;&#21152;&#26045;</span></li>
-          </ul>
+        <div class="sns-comp-item">
+          <span class="comp-label">撮影指示</span>
+          <span class="comp-value">一般的なガイド</span>
         </div>
-
-        <div class="month-card">
-          <h4>Month 3</h4>
-          <h3 style="font-size: 1rem; margin-bottom: 0.8rem;">&#20998;&#26512;&#12505;&#12540;&#12473;&#12398;&#26368;&#36969;&#21270;</h3>
-          <ul class="feature-list">
-            <li><span class="dot"></span>&#25237;&#31295;&#26178;&#38291;&#12539;&#26332;&#26085;&#26368;&#36969;&#21270;</li>
-            <li><span class="dot"></span>&#12456;&#12531;&#12466;&#12540;&#12472;&#12513;&#12531;&#12488;&#20998;&#26512;</li>
-            <li><span class="dot"></span>&#12495;&#12483;&#12471;&#12517;&#12479;&#12464;&#25126;&#30053;&#35211;&#30452;&#12375;</li>
-            <li><span class="dot"></span>&#26376;&#27425;&#12524;&#12509;&#12540;&#12488;&#38283;&#22987;</li>
-          </ul>
+        <div class="sns-comp-item">
+          <span class="comp-label">分析レポート</span>
+          <span class="comp-value">月1回</span>
+        </div>
+        <div class="sns-comp-item">
+          <span class="comp-label">戦略調整</span>
+          <span class="comp-value">四半期ごと</span>
         </div>
       </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3 style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--warm-accent);">&#12300;&#20170;&#26085;&#12399;&#12371;&#12428;&#12434;&#25774;&#12387;&#12390;&#12301;&#12398;&#23455;&#20363;</h3>
-          <div style="background: #f1f0ed; border-radius: 8px; padding: 1.2rem; font-size: 0.85rem; line-height: 1.8;">
-            <div style="color: var(--text-light); font-size: 0.75rem; margin-bottom: 0.5rem;">LINE&#12513;&#12483;&#12475;&#12540;&#12472;&#12452;&#12513;&#12540;&#12472;</div>
-            <p><strong>&#9632; &#26412;&#26085;&#12398;&#25237;&#31295;&#32032;&#26448;&#12522;&#12463;&#12456;&#12473;&#12488;</strong></p>
-            <p style="margin-top: 0.5rem;">&#12539; &#20170;&#26085;&#12398;&#12362;&#12377;&#12377;&#12417;&#12521;&#12531;&#12481;&#12434;&#30495;&#19978;&#12363;&#12425;&#25774;&#24433;</p>
-            <p>&#12539; &#12473;&#12540;&#12503;&#12399;&#28271;&#27671;&#12364;&#31435;&#12387;&#12390;&#12427;&#29366;&#24907;&#12391;</p>
-            <p>&#12539; &#33258;&#28982;&#20809;&#12364;&#20837;&#12427;&#24109;&#12391;&#25774;&#12427;&#12392;&#12505;&#12473;&#12488;</p>
-          </div>
+      <div class="sns-comp-card highlighted">
+        <h4>JEEB Analytics</h4>
+        <div class="sns-comp-item">
+          <span class="comp-label">投稿頻度</span>
+          <span class="comp-value yes">毎日</span>
         </div>
-
-        <div class="card">
-          <h3 style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--warm-accent);">API&#12450;&#12490;&#12522;&#12486;&#12451;&#12463;&#12473;&#12398;&#20385;&#20516;</h3>
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>&#27161;&#28310;&#65288;&#12450;&#12503;&#12522;&#65289;</th>
-                <th>JEEB</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>&#12501;&#12457;&#12525;&#12527;&#12540;&#25512;&#31227;</td>
-                <td style="text-align: center;">&#9675;</td>
-                <td style="text-align: center;">&#9675;</td>
-              </tr>
-              <tr>
-                <td>&#25237;&#31295;&#21029;&#12522;&#12540;&#12481;</td>
-                <td style="text-align: center;">&#9651;</td>
-                <td style="text-align: center;">&#9675;</td>
-              </tr>
-              <tr>
-                <td>&#12501;&#12457;&#12525;&#12527;&#12540;&#23646;&#24615;</td>
-                <td style="text-align: center;">&mdash;</td>
-                <td style="text-align: center;">&#9675;</td>
-              </tr>
-              <tr>
-                <td>&#26368;&#36969;&#25237;&#31295;&#26178;&#38291;</td>
-                <td style="text-align: center;">&mdash;</td>
-                <td style="text-align: center;">&#9675;</td>
-              </tr>
-              <tr>
-                <td>&#31478;&#21512;&#27604;&#36611;</td>
-                <td style="text-align: center;">&mdash;</td>
-                <td style="text-align: center;">&#9675;</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="sns-comp-item">
+          <span class="comp-label">撮影指示</span>
+          <span class="comp-value yes">毎日・具体的に</span>
+        </div>
+        <div class="sns-comp-item">
+          <span class="comp-label">分析レポート</span>
+          <span class="comp-value yes">リアルタイム</span>
+        </div>
+        <div class="sns-comp-item">
+          <span class="comp-label">戦略調整</span>
+          <span class="comp-value yes">随時・データ駆動</span>
         </div>
       </div>
-
     </div>
   </div>
-  <div class="page-num">05 / 08</div>
 </section>
 
+<!-- ===== PAGE 6: WHY JEEB ===== -->
+<section class="section comparison" id="sec-5">
+  <span class="section-number">06 / 08</span>
+  <div class="section-inner">
+    <div class="comparison-header">
+      <p class="label animate" style="margin-bottom: 24px;">Why JEEB</p>
+      <h2 class="heading-lg animate animate-delay-1">比較すれば、違いは明確です</h2>
+    </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 6 : PRICING
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <div class="section-header-band">
-    <div class="container">
-      <div class="section-label">Pricing</div>
-      <h2>&#26009;&#37329;&#12503;&#12521;&#12531;</h2>
+    <div class="animate animate-delay-2" style="overflow-x: auto;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="highlight">JEEB</th>
+            <th>既存Web制作会社</th>
+            <th>大手SNS代行</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>初期費用</td>
+            <td class="highlight-col"><span class="check-mark">0 バーツ</span></td>
+            <td>20〜30万バーツ</td>
+            <td>5〜10万バーツ</td>
+          </tr>
+          <tr>
+            <td>月額費用</td>
+            <td class="highlight-col"><span class="check-mark">2,000〜10,000 バーツ</span></td>
+            <td>保守費 5,000〜</td>
+            <td>30,000〜50,000 バーツ</td>
+          </tr>
+          <tr>
+            <td>納期</td>
+            <td class="highlight-col"><span class="check-mark">即日サンプル</span></td>
+            <td>1〜3ヶ月</td>
+            <td>2〜4週間</td>
+          </tr>
+          <tr>
+            <td>無料サンプル提供</td>
+            <td class="highlight-col"><span class="check-mark">対応</span></td>
+            <td><span class="dash-mark">——</span></td>
+            <td><span class="dash-mark">——</span></td>
+          </tr>
+          <tr>
+            <td>SNS運用</td>
+            <td class="highlight-col"><span class="check-mark">毎日の撮影指示付き</span></td>
+            <td><span class="dash-mark">——</span></td>
+            <td>投稿代行のみ</td>
+          </tr>
+          <tr>
+            <td>データ分析</td>
+            <td class="highlight-col"><span class="check-mark">リアルタイム分析</span></td>
+            <td><span class="dash-mark">——</span></td>
+            <td>月次レポート</td>
+          </tr>
+          <tr>
+            <td>多言語対応</td>
+            <td class="highlight-col"><span class="check-mark">日/英/タイ/中</span></td>
+            <td>追加費用</td>
+            <td>一部対応</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="section-body">
-    <div class="container" style="width: 100%;">
-
-      <div class="grid-3" style="margin-bottom: 2.5rem; align-items: start;">
-
-        <!-- Light Plan -->
-        <div class="plan-card">
-          <div class="tag tag-accent" style="margin-bottom: 1rem;">&#12521;&#12452;&#12488;</div>
-          <div class="price">2,000</div>
-          <div class="price-unit">THB / &#26376;</div>
-          <div class="divider center" style="margin: 1rem auto;"></div>
-          <ul>
-            <li>Web&#12469;&#12452;&#12488;&#21046;&#20316;&#12539;&#20445;&#23432;</li>
-            <li>&#12513;&#12491;&#12517;&#12540;&#22810;&#35328;&#35486;&#21270;</li>
-            <li>Google Maps &#26368;&#36969;&#21270;</li>
-            <li>&#26376;1&#22238;&#26356;&#26032;</li>
-          </ul>
-        </div>
-
-        <!-- Standard Plan -->
-        <div class="plan-card featured">
-          <div style="position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--warm-accent); color: white; font-size: 0.7rem; font-weight: 600; padding: 0.3rem 1.2rem; border-radius: 0 0 8px 8px; letter-spacing: 0.05em;">&#12362;&#12377;&#12377;&#12417;</div>
-          <div class="tag tag-accent" style="margin-bottom: 1rem;">&#12473;&#12479;&#12531;&#12480;&#12540;&#12489;</div>
-          <div class="price">5,000</div>
-          <div class="price-unit">THB / &#26376;</div>
-          <div class="divider center" style="margin: 1rem auto;"></div>
-          <ul>
-            <li>&#12521;&#12452;&#12488;&#12503;&#12521;&#12531;&#20840;&#20869;&#23481;</li>
-            <li>SNS&#36939;&#29992;&#20195;&#34892;&#65288;&#36913;3&#25237;&#31295;&#65289;</li>
-            <li>&#25774;&#24433;&#25351;&#31034;&#65288;LINE&#65289;</li>
-            <li>&#12495;&#12483;&#12471;&#12517;&#12479;&#12464;&#25126;&#30053;</li>
-            <li>&#26376;&#27425;&#12524;&#12509;&#12540;&#12488;</li>
-          </ul>
-        </div>
-
-        <!-- Premium Plan -->
-        <div class="plan-card">
-          <div class="tag tag-accent" style="margin-bottom: 1rem;">&#12503;&#12524;&#12511;&#12450;&#12512;</div>
-          <div class="price">10,000</div>
-          <div class="price-unit">THB / &#26376;</div>
-          <div class="divider center" style="margin: 1rem auto;"></div>
-          <ul>
-            <li>&#12473;&#12479;&#12531;&#12480;&#12540;&#12489;&#20840;&#20869;&#23481;</li>
-            <li>API&#12450;&#12490;&#12522;&#12486;&#12451;&#12463;&#12473;</li>
-            <li>&#31478;&#21512;&#20998;&#26512;&#12524;&#12509;&#12540;&#12488;</li>
-            <li>&#26376;1&#22238;&#12467;&#12531;&#12469;&#12523;&#65288;30&#20998;&#65289;</li>
-            <li>&#24195;&#21578;&#36939;&#29992;&#12450;&#12489;&#12496;&#12452;&#12473;</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="grid-2">
-        <div class="card" style="background: var(--navy); color: white;">
-          <h3 style="font-size: 1rem; margin-bottom: 0.8rem; color: var(--accent-light);">&#21021;&#26399;&#36027;&#29992;&#12394;&#12375;&#12503;&#12521;&#12531;</h3>
-          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.8;">
-            &#21021;&#26399;&#36027;&#29992;0&#12496;&#12540;&#12484;&#12391;&#38283;&#22987;&#21487;&#33021;&#12290;<br>
-            Web&#12469;&#12452;&#12488;&#12398;&#12450;&#12459;&#12454;&#12531;&#12488;&#27177;&#21033;&#12399;JEEB&#12364;&#20445;&#25345;&#12375;&#12289;&#26376;&#38989;&#26009;&#37329;&#12395;&#21547;&#12414;&#12428;&#12414;&#12377;&#12290;<br>
-            <span style="color: var(--accent-light); font-weight: 500;">&#35299;&#32004;&#26178;&#12395;&#12487;&#12540;&#12479;&#31227;&#31649;&#12418;&#23550;&#24540;&#12290;</span>
-          </p>
-        </div>
-        <div class="card" style="background: var(--navy); color: white;">
-          <h3 style="font-size: 1rem; margin-bottom: 0.8rem; color: var(--accent-light);">&#24180;&#25173;&#12356;&#21106;&#24341;</h3>
-          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.8;">
-            12&#12534;&#26376;&#20998;&#12434;<strong style="color: var(--accent-light); font-size: 1.1rem;">10&#12534;&#26376;&#20998;</strong>&#12398;&#26009;&#37329;&#12391;&#12290;<br>
-            &#23455;&#36074;2&#12534;&#26376;&#28961;&#26009;&#12290;&#38263;&#26399;&#12398;&#12362;&#20184;&#12365;&#21512;&#12356;&#12434;&#12362;&#24471;&#12395;&#12290;
-          </p>
-          <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(200,149,108,0.15); border-radius: 8px; text-align: center;">
-            <span style="font-size: 0.8rem; color: var(--accent-light);">&#20363;&#65306;&#12473;&#12479;&#12531;&#12480;&#12540;&#12489;&#24180;&#25173;&#12356;</span><br>
-            <span style="font-family: 'Inter'; font-size: 1.3rem; font-weight: 700;">50,000 <span style="font-size: 0.8rem; font-weight: 400;">THB/&#24180;</span></span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="page-num">06 / 08</div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 7 : GETTING STARTED
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <div class="section-header-band">
-    <div class="container">
-      <div class="section-label">Getting Started</div>
-      <h2>&#12372;&#21033;&#29992;&#38283;&#22987;&#12414;&#12391;&#12398;&#27969;&#12428;</h2>
+<!-- ===== PAGE 7: PRICING ===== -->
+<section class="section pricing" id="sec-6">
+  <span class="section-number">07 / 08</span>
+  <div class="section-inner">
+    <div class="pricing-header">
+      <p class="label animate" style="margin-bottom: 24px;">Pricing</p>
+      <h2 class="heading-lg animate animate-delay-1">シンプルな料金体系</h2>
     </div>
-  </div>
-  <div class="section-body">
-    <div class="container" style="width: 100%;">
 
-      <div style="max-width: 700px; margin: 0 auto;">
-
-        <div class="step-row">
-          <span class="num-marker" style="margin-top: 0.2rem;">1</span>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">&#28961;&#26009;&#30456;&#35527;</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">30&#20998;&#12398;&#12498;&#12450;&#12522;&#12531;&#12464;&#12391;&#24481;&#31038;&#12398;&#35506;&#38988;&#12392;&#30446;&#27161;&#12434;&#20849;&#26377;&#12290;&#12458;&#12531;&#12521;&#12452;&#12531;&#12414;&#12383;&#12399;&#24215;&#33303;&#35370;&#21839;&#12395;&#12390;&#12290;</p>
-          </div>
+    <div class="pricing-cards">
+      <div class="pricing-card animate animate-delay-2">
+        <div class="pricing-plan-name">ライト</div>
+        <div class="pricing-plan-name-en">Light</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency">฿</span>
+          <span class="pricing-number">2,000</span>
+          <span class="pricing-period">/月</span>
         </div>
-
-        <div class="step-row">
-          <span class="num-marker" style="margin-top: 0.2rem;">2</span>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">&#24481;&#31038;&#23554;&#29992;&#12469;&#12531;&#12503;&#12523;&#20316;&#25104;</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);"><strong>3&#26085;&#20197;&#20869;</strong>&#12395;&#24481;&#31038;&#12398;&#26989;&#31278;&#12539;&#38640;&#22258;&#27671;&#12395;&#21512;&#12431;&#12379;&#12383;Web&#12469;&#12452;&#12488;&#12469;&#12531;&#12503;&#12523;&#12434;&#12362;&#23626;&#12369;&#12290;&#36027;&#29992;&#12399;&#19968;&#20999;&#12363;&#12363;&#12426;&#12414;&#12379;&#12435;&#12290;</p>
-          </div>
-        </div>
-
-        <div class="step-row">
-          <span class="num-marker" style="margin-top: 0.2rem;">3</span>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">2&#36913;&#38291;&#28961;&#26009;&#12488;&#12521;&#12452;&#12450;&#12523;</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">&#23455;&#38555;&#12395;&#36939;&#29992;&#12434;&#20307;&#39443;&#12290;SNS&#25237;&#31295;&#12398;&#27969;&#12428;&#12289;&#25774;&#24433;&#25351;&#31034;&#12398;&#20415;&#21033;&#12373;&#12434;&#23455;&#24863;&#12375;&#12390;&#12356;&#12383;&#12384;&#12365;&#12414;&#12377;&#12290;</p>
-          </div>
-        </div>
-
-        <div class="step-row">
-          <span class="num-marker" style="margin-top: 0.2rem;">4</span>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">&#26412;&#22865;&#32004;&#12539;&#36939;&#29992;&#38283;&#22987;</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">&#12503;&#12521;&#12531;&#12434;&#36984;&#25246;&#12375;&#12390;&#26412;&#26684;&#36939;&#29992;&#12473;&#12479;&#12540;&#12488;&#12290;&#25285;&#24403;&#32773;&#12364;&#23554;&#23646;&#12391;&#12469;&#12509;&#12540;&#12488;&#12375;&#12414;&#12377;&#12290;</p>
-          </div>
-        </div>
-
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>AI Webサイト制作・運用</li>
+          <li>基本テンプレート選択</li>
+          <li>メニュー多言語化（2言語）</li>
+          <li>月次レポート</li>
+        </ul>
       </div>
 
-      <div style="text-align: center; margin-top: 2.5rem; padding: 2.5rem; background: var(--white); border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
-        <p style="font-size: 1.3rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">&#12414;&#12378;&#12399;&#28961;&#26009;&#12391;&#12469;&#12531;&#12503;&#12523;&#12434;&#20316;&#12426;&#12414;&#12377;</p>
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">&#36027;&#29992;&#12399;&#19968;&#20999;&#12363;&#12363;&#12426;&#12414;&#12379;&#12435;&#12290;&#12362;&#27671;&#36605;&#12395;&#12372;&#30456;&#35527;&#12367;&#12384;&#12373;&#12356;&#12290;</p>
-        <a href="#contact" class="cta-btn">&#28961;&#26009;&#30456;&#35527;&#12434;&#20104;&#32004;&#12377;&#12427;</a>
+      <div class="pricing-card recommended animate animate-delay-3">
+        <div class="pricing-badge">おすすめ</div>
+        <div class="pricing-plan-name">スタンダード</div>
+        <div class="pricing-plan-name-en">Standard</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency">฿</span>
+          <span class="pricing-number">5,000</span>
+          <span class="pricing-period">/月</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>AI Webサイト制作・運用</li>
+          <li>全テンプレートから選択</li>
+          <li>メニュー多言語化（4言語）</li>
+          <li>SNS運用サポート</li>
+          <li>毎日の撮影指示</li>
+          <li>JEEB Analytics</li>
+        </ul>
       </div>
 
+      <div class="pricing-card animate animate-delay-4">
+        <div class="pricing-plan-name">プレミアム</div>
+        <div class="pricing-plan-name-en">Premium</div>
+        <div class="pricing-amount">
+          <span class="pricing-currency">฿</span>
+          <span class="pricing-number">10,000</span>
+          <span class="pricing-period">/月</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>スタンダードの全機能</li>
+          <li>カスタムデザイン対応</li>
+          <li>SNS完全運用代行</li>
+          <li>広告運用サポート</li>
+          <li>専任担当者</li>
+          <li>優先サポート</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pricing-notes animate animate-delay-5">
+      <div class="pricing-note"><strong>初期費用 0 バーツ</strong> — 導入コストは一切かかりません</div>
+      <div class="pricing-note"><strong>2週間の無料トライアル</strong> — まずは効果をお確かめください</div>
+      <div class="pricing-note"><strong>年払い割引</strong> — 12ヶ月分を10ヶ月分の料金で</div>
     </div>
   </div>
-  <div class="page-num">07 / 08</div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     PAGE 8 : ABOUT US / CONTACT
-     ═══════════════════════════════════════════════════════════ -->
-<section id="contact" class="dark-header" style="justify-content: center;">
-  <div class="container" style="text-align: center;">
-    <div class="section-label" style="color: var(--accent-light);">About / Contact</div>
-    <div style="margin-bottom: 0.5rem;">
-      <span style="font-family: 'Inter'; font-size: 2rem; font-weight: 700; letter-spacing: 0.1em;">JEEB</span>
-    </div>
-    <div class="divider center" style="margin: 1rem auto 1.5rem;"></div>
-    <p style="font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto 3rem; line-height: 1.8;">
-      AI&#25216;&#34899;&#12434;&#27963;&#29992;&#12375;&#12383;&#27425;&#19990;&#20195;&#12398;&#39154;&#39135;&#24215;&#12487;&#12472;&#12479;&#12523;&#25903;&#25588;&#12290;<br>
-      &#12496;&#12531;&#12467;&#12463;&#12398;&#26085;&#31995;&#39154;&#39135;&#24215;&#12364;&#12289;&#12418;&#12387;&#12392;&#35211;&#12388;&#12369;&#12390;&#12418;&#12425;&#12360;&#12427;&#12424;&#12358;&#12395;&#12290;<br>
-      &#12418;&#12387;&#12392;&#36984;&#12400;&#12428;&#12427;&#12424;&#12358;&#12395;&#12290;
-    </p>
-
-    <div class="contact-grid" style="max-width: 700px; margin: 0 auto;">
-
-      <div class="contact-item">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <h3 style="font-size: 0.9rem; color: var(--white); margin-bottom: 0.3rem;">LINE</h3>
-        <div class="placeholder" style="width: 80px; height: 80px; margin: 0.8rem auto 0; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); font-size: 0.7rem;">QR Code</div>
-      </div>
-
-      <div class="contact-item">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        </div>
-        <h3 style="font-size: 0.9rem; color: var(--white); margin-bottom: 0.3rem;">Email</h3>
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">info@jeeb.co.th</p>
-        <p style="font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem;">&#65288;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#12540;&#65289;</p>
-      </div>
-
-      <div class="contact-item">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <h3 style="font-size: 0.9rem; color: var(--white); margin-bottom: 0.3rem;">Phone</h3>
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">+66-XX-XXX-XXXX</p>
-        <p style="font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem;">&#65288;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#12540;&#65289;</p>
-      </div>
-
+<!-- ===== PAGE 8: GETTING STARTED + CONTACT ===== -->
+<section class="section contact" id="sec-7">
+  <span class="section-number">08 / 08</span>
+  <div class="section-inner">
+    <div class="contact-header">
+      <p class="label animate" style="margin-bottom: 24px;">Getting Started</p>
+      <h2 class="heading-lg animate animate-delay-1">まずは、無料相談から</h2>
     </div>
 
-    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-      <p style="font-size: 0.75rem; color: rgba(255,255,255,0.25);">&#25285;&#24403;&#32773;&#21517;&#12503;&#12524;&#12540;&#12473;&#12507;&#12523;&#12480;&#12540;</p>
+    <div class="steps animate animate-delay-2">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-title">無料相談</div>
+        <div class="step-desc">LINEまたはInstagramからお気軽にご連絡ください</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">サンプル作成</div>
+        <div class="step-desc">3日以内に御社専用のサンプルサイトをお届けします</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">2週間トライアル</div>
+        <div class="step-desc">無料でサービスをお試しいただけます</div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-title">本契約</div>
+        <div class="step-desc">ご納得いただけたら、プランを選んでスタート</div>
+      </div>
+    </div>
+
+    <div class="contact-bottom">
+      <div class="contact-info animate animate-delay-3">
+        <h3>Contact</h3>
+        <div class="contact-channels">
+          <div class="contact-channel">
+            <span class="channel-label">Instagram</span>
+            <span class="channel-value">@jeeb.bkk</span>
+          </div>
+          <div class="contact-channel">
+            <span class="channel-label">LINE</span>
+            <span class="channel-value">@jeeb.bkk</span>
+          </div>
+          <div class="contact-channel">
+            <span class="channel-label">Email</span>
+            <span class="channel-value">info@jeeb.bkk</span>
+          </div>
+        </div>
+        <div class="contact-qr-placeholder">
+          <span>LINE QR</span>
+        </div>
+      </div>
+
+      <div class="company-info animate animate-delay-4">
+        <h3>Company</h3>
+        <div class="company-details">
+          <div class="company-detail">
+            <span class="detail-label">Company</span>
+            <span class="detail-value">VANNESS ASIA CO., LTD</span>
+          </div>
+          <div class="company-detail">
+            <span class="detail-label">Address</span>
+            <span class="detail-value">64/1 Room No. 210, Soi Pasi 1,<br>Ekamai Road, Klong Tan Nuea,<br>Wattana, Bangkok 10110</span>
+          </div>
+          <div class="company-detail">
+            <span class="detail-label">TAX ID</span>
+            <span class="detail-value">0105567229649</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="page-num light">08 / 08</div>
 </section>
+
+<script>
+// Intersection Observer for scroll animations
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.animate').forEach(el => {
+        el.style.animationPlayState = 'running';
+      });
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.section').forEach(section => {
+  section.querySelectorAll('.animate').forEach(el => {
+    el.style.animationPlayState = 'paused';
+  });
+  observer.observe(section);
+});
+
+// Cover animations play immediately
+document.querySelector('.cover').querySelectorAll('.animate').forEach(el => {
+  el.style.animationPlayState = 'running';
+});
+
+// Scroll navigation dots
+const sections = document.querySelectorAll('.section');
+const dots = document.querySelectorAll('.scroll-dot');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = Array.from(sections).indexOf(entry.target);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+  });
+}, { threshold: 0.5 });
+
+sections.forEach(section => navObserver.observe(section));
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const index = parseInt(dot.dataset.section);
+    sections[index].scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
 
 </body>
 </html>
