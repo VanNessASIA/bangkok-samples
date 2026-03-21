@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEEB（ジーブ）| バンコク飲食店向け Web・SNS運用サービス</title>
+<meta name="description" content="バンコクの飲食店に特化したWebサイト制作・多言語メニュー・SNS運用代行サービス。月額2,000バーツから。初期費用0円。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  line-height: 1.7;
+  background: #fff;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ===== COLORS ===== */
+:root {
+  --navy: #0f1b2d;
+  --navy-light: #162340;
+  --navy-mid: #1e3050;
+  --cream: #faf8f5;
+  --cream-dark: #f0ece6;
+  --accent: #c8622d;
+  --accent-light: #d4793f;
+  --accent-hover: #b5551f;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5a;
+  --text-muted: #7a7a8a;
+  --white: #ffffff;
+  --border: #e5e2dc;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,0.16);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section {
+  padding: 96px 0;
+}
+@media (max-width: 768px) {
+  .section { padding: 64px 0; }
+  .container { padding: 0 20px; }
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: all 0.3s ease;
+}
+.nav.scrolled {
+  background: rgba(15, 27, 45, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 12px 0;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 3px;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.75);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--accent) !important;
+  color: var(--white) !important;
+  padding: 8px 20px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--accent-hover) !important; }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  margin: 5px 0;
+  transition: all 0.3s;
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: rgba(15, 27, 45, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 24px;
+    gap: 20px;
+  }
+  .nav-links.open a { font-size: 15px; }
+  .nav-toggle { display: block; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(170deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+  overflow: hidden;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(200,98,45,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(200,98,45,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+  max-width: 720px;
+}
+.hero-brand {
+  font-family: 'Inter', sans-serif;
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 16px;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.hero-brand-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 4px;
+  font-weight: 500;
+  margin-bottom: 48px;
+}
+.hero-tagline {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  padding: 16px 40px;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,98,45,0.3);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  margin: 0 auto;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+@media (max-width: 768px) {
+  .hero-brand { font-size: 48px; letter-spacing: 10px; }
+  .hero-tagline { font-size: 24px; }
+  .hero-sub { font-size: 15px; }
+  .btn-primary { padding: 14px 32px; font-size: 15px; }
+}
+
+/* ===== SECTION HEADERS ===== */
+.section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.section-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.8;
+}
+.section-header {
+  margin-bottom: 56px;
+}
+.section-header.center {
+  text-align: center;
+}
+.section-header.center .section-desc {
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .section-title { font-size: 26px; }
+  .section-header { margin-bottom: 40px; }
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problem { background: var(--cream); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 40px;
+}
+.problem-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.problem-card-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.problem-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.problem-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.problem-note {
+  background: var(--white);
+  border-left: 3px solid var(--accent);
+  padding: 20px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.problem-note strong {
+  color: var(--text-primary);
+}
+@media (max-width: 768px) {
+  .problem-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ===== SOLUTION SECTION ===== */
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.solution-card {
+  padding: 40px 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: all 0.3s ease;
+}
+.solution-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.solution-card-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.solution-card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--white);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.solution-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.solution-card .solution-sub {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.solution-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+@media (max-width: 768px) {
+  .solution-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== SAMPLES SECTION ===== */
+.samples {
+  background: var(--navy);
+  padding: 96px 0 112px;
+}
+.samples .section-label { color: var(--accent-light); }
+.samples .section-title { color: var(--white); }
+.samples .section-desc { color: rgba(255,255,255,0.6); }
+
+.samples-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 40px;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 4px;
+  width: fit-content;
+}
+.samples .section-header.center .samples-tabs {
+  margin-left: auto;
+  margin-right: auto;
+}
+.samples-tab {
+  padding: 10px 28px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.25s;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+.samples-tab:hover { color: rgba(255,255,255,0.8); }
+.samples-tab.active {
+  background: var(--accent);
+  color: var(--white);
+}
+.samples-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.sample-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: block;
+}
+.sample-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(200,98,45,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.sample-card-visual {
+  height: 160px;
+  background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
+  position: relative;
+  overflow: hidden;
+}
+.sample-card-visual::after {
+  content: 'SAMPLE';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.12);
+}
+.sample-card-body {
+  padding: 20px;
+}
+.sample-card-type {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-light);
+  margin-bottom: 8px;
+}
+.sample-card-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.sample-card-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.sample-card-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.sample-card:hover .sample-card-link { color: var(--white); }
+.sample-card-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  transition: transform 0.2s;
+}
+.sample-card:hover .sample-card-link svg { transform: translateX(3px); }
+
+.samples-coming {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+.samples-coming-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 500;
+  margin-right: 8px;
+}
+.samples-coming-tag {
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  font-weight: 500;
+}
+.samples-message {
+  text-align: center;
+  margin-top: 48px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+
+.category-panel { display: none; }
+.category-panel.active { display: block; }
+
+@media (max-width: 900px) {
+  .samples-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .samples-grid { grid-template-columns: 1fr; gap: 16px; }
+  .samples-tab { padding: 8px 20px; font-size: 14px; }
+}
+
+/* ===== SNS OPERATION ===== */
+.sns-op { background: var(--cream); }
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  position: relative;
+  margin-bottom: 56px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 16.67%;
+  right: 16.67%;
+  height: 2px;
+  background: var(--border);
+}
+.timeline-item {
+  text-align: center;
+  position: relative;
+  padding: 0 16px;
+}
+.timeline-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--accent);
+  margin: 28px auto 24px;
+  position: relative;
+  z-index: 2;
+}
+.timeline-month {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+.timeline-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.timeline-list {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 2;
+}
+
+.sns-example {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+.sns-example-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+.sns-example-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.sns-day-card {
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.sns-day-card-day {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.sns-day-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.sns-day-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.analytics-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.analytics-box {
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--border);
+}
+.analytics-box.standard { background: var(--cream-dark); }
+.analytics-box.jeeb {
+  background: var(--white);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.analytics-box-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.analytics-box.standard .analytics-box-label { color: var(--text-muted); }
+.analytics-box.jeeb .analytics-box-label { color: var(--accent); }
+.analytics-box ul li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.analytics-box ul li:last-child { border: none; }
+
+@media (max-width: 768px) {
+  .timeline { grid-template-columns: 1fr; gap: 32px; }
+  .timeline::before { display: none; }
+  .sns-example-cards { grid-template-columns: 1fr; }
+  .analytics-compare { grid-template-columns: 1fr; }
+}
+
+/* ===== PRICING ===== */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.price-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px 28px;
+  position: relative;
+  transition: all 0.3s;
+}
+.price-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.price-card.recommended {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), var(--shadow-lg);
+}
+.price-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--white);
+  padding: 4px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.price-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.price-card-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-card-price span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.price-card-unit {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.price-card-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 24px;
+}
+.price-card-features li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+}
+.price-card-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+.pricing-notes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.pricing-note {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.pricing-note-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+}
+
+/* ===== GETTING STARTED ===== */
+.getting-started { background: var(--cream); }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.step {
+  text-align: center;
+  position: relative;
+}
+.step-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--cream-dark);
+  line-height: 1;
+  margin-bottom: 16px;
+  position: relative;
+}
+.step-num::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.step h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.step p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.cta-block {
+  text-align: center;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 56px 40px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.cta-block h3 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.cta-block p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+@media (max-width: 768px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .steps { grid-template-columns: 1fr; }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--navy);
+  padding: 64px 0 32px;
+  color: rgba(255,255,255,0.6);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+}
+.footer-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 320px;
+}
+.footer-col-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.footer-col a, .footer-col p {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+}
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">JEEB</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problem">課題</a>
+      <a href="#solution">解決策</a>
+      <a href="#samples">制作サンプル</a>
+      <a href="#sns">SNS運用</a>
+      <a href="#pricing">料金</a>
+      <a href="#start" class="nav-cta">無料相談</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-brand">JEEB</div>
+    <div class="hero-brand-sub">ジーブ — タイ語で「つかむ」</div>
+    <h1 class="hero-tagline">あなたの店を、世界に届ける。</h1>
+    <p class="hero-sub">バンコク飲食店向け Web・SNS運用サービス</p>
+    <a href="#start" class="btn-primary">無料でサンプルを作ります</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section class="section problem" id="problem">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <div class="section-label">Problem</div>
+      <h2 class="section-title">バンコクの飲食店が直面する課題</h2>
+      <p class="section-desc">170店舗以上の日本食レストランが集まるバンコク。<br>しかし、多くのお店がデジタル面で課題を抱えています。</p>
+    </div>
+    <div class="problem-grid fade-up">
+      <div class="problem-card">
+        <div class="problem-card-num">ISSUE 01</div>
+        <h3>Webサイトがない</h3>
+        <p>バンコクの日本食レストラン170店舗中、ほぼ全てがホームページ未整備。Googleで検索しても、お店の情報が出てこない。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">ISSUE 02</div>
+        <h3>メニューが伝わらない</h3>
+        <p>タイ語のみのメニュー、写真のない料理名。タイ人のお客様には味の想像すらできず、注文のハードルが高い。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">ISSUE 03</div>
+        <h3>SNSが続かない</h3>
+        <p>開業時にInstagramを始めたものの、1〜2ヶ月で投稿が止まる。何を撮ればいいか分からず、効果も見えない。</p>
+      </div>
+    </div>
+    <div class="problem-note fade-up">
+      <strong>既存のWeb制作は20〜30万バーツと高額。</strong> 飲食店の規模では、なかなか手が出せません。
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="section" id="solution">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <div class="section-label">Solution</div>
+      <h2 class="section-title">JEEBの3つの解決策</h2>
+      <p class="section-desc">AIとテンプレートを活用し、高品質なサービスを圧倒的な低コストで提供します。</p>
+    </div>
+    <div class="solution-grid fade-up">
+      <div class="solution-card">
+        <div class="solution-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <h3>AI高速Web制作</h3>
+        <div class="solution-sub">即日サンプル提供</div>
+        <p>業種別テンプレートをベースに、AIが御社専用のWebサイトを高速で構築。初期費用なし、月額サブスクリプションで始められます。</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>メニュー多言語化</h3>
+        <div class="solution-sub">日・英・タイ・中の4言語対応</div>
+        <p>AIが料理の魅力をタイ語で自然に伝えるメニューを作成。写真と組み合わせ、タイ人のお客様にも「食べたい」と思わせます。</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7.5v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        </div>
+        <h3>SNS運用代行</h3>
+        <div class="solution-sub">週3本投稿・撮影指示つき</div>
+        <p>毎日「今日はこれを撮って」と具体的に指示。写真を送るだけで、投稿文の作成からハッシュタグ選定まで全てお任せ。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAMPLES ===== -->
+<section class="samples section" id="samples">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <div class="section-label">Production Samples</div>
+      <h2 class="section-title">制作サンプル</h2>
+      <p class="section-desc">業種×タイプで、御社に最適なサイトを選べます。<br>すべて実際に動くサンプルサイトです。</p>
+      <div class="samples-tabs" style="margin-top:32px;">
+        <button class="samples-tab active" data-category="ramen">ラーメン</button>
+        <button class="samples-tab" data-category="izakaya">居酒屋</button>
+      </div>
+    </div>
+
+    <!-- Ramen -->
+    <div class="category-panel active" id="panel-ramen">
+      <div class="samples-grid fade-up">
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#1a3a4a,#0f2530);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE A — AFURI系</div>
+            <div class="sample-card-name">麺匠 SORA</div>
+            <p class="sample-card-desc">透明感のあるデザイン。柚子塩系やこだわりスープを前面に押し出す上品なスタイル。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#2a1a0a,#4a2a10);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE B — IVAN系</div>
+            <div class="sample-card-name">麺道 KENJI</div>
+            <p class="sample-card-desc">力強く大胆なビジュアル。濃厚系・背脂系ラーメンの迫力を伝えるデザイン。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#1a1a1a,#333);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE C — NAGI系</div>
+            <div class="sample-card-name">剛麺 THUNDER</div>
+            <p class="sample-card-desc">インパクト重視のストリート感。二郎系・まぜそば系の圧倒的ボリュームを表現。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#f5f0e8,#e8e0d0);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE D — はやし田系</div>
+            <div class="sample-card-name">麺処 清水</div>
+            <p class="sample-card-desc">和の趣を大切にした端正なデザイン。醤油・煮干し系の繊細な味わいを表現。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Izakaya -->
+    <div class="category-panel" id="panel-izakaya">
+      <div class="samples-grid fade-up visible">
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#3a2010,#5a3520);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE A — 焼鳥横丁系</div>
+            <div class="sample-card-name">炭火横丁 たけし</div>
+            <p class="sample-card-desc">炭火の温もりと活気。路地裏の焼鳥屋の雰囲気を再現する親しみやすいデザイン。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#0a0a2a,#1a1a4a);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE B — ネオ居酒屋系</div>
+            <div class="sample-card-name">炎とソーダ</div>
+            <p class="sample-card-desc">モダンでスタイリッシュ。若い世代に響くネオン感のあるトレンドデザイン。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#1a1510,#2a2520);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE C — 炉端・日本酒系</div>
+            <div class="sample-card-name">炉端 蔵人</div>
+            <p class="sample-card-desc">和の高級感と落ち着き。日本酒と炉端焼きの本格的な世界観を伝えるデザイン。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" target="_blank" rel="noopener">
+          <div class="sample-card-visual" style="background:linear-gradient(135deg,#f0e8d8,#e5dcc8);"></div>
+          <div class="sample-card-body">
+            <div class="sample-card-type">TYPE D — ファミリー系</div>
+            <div class="sample-card-name">居酒屋 みのり</div>
+            <p class="sample-card-desc">温かく親しみやすい。家族連れやグループで楽しめるカジュアルなデザイン。</p>
+            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="samples-coming fade-up">
+      <span class="samples-coming-label">Coming Soon</span>
+      <span class="samples-coming-tag">焼肉</span>
+      <span class="samples-coming-tag">タイ料理</span>
+      <span class="samples-coming-tag">カフェ</span>
+      <span class="samples-coming-tag">夜系</span>
+    </div>
+    <p class="samples-message fade-up">業種×タイプで、御社に最適なサイトを選べます</p>
+  </div>
+</section>
+
+<!-- ===== SNS OPERATION ===== -->
+<section class="section sns-op" id="sns">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <div class="section-label">SNS Operation</div>
+      <h2 class="section-title">SNS運用の仕組み</h2>
+      <p class="section-desc">3ヶ月のシナリオで、着実にフォロワーとファンを増やします。</p>
+    </div>
+
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="timeline-month">MONTH 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">基礎づくり</div>
+        <div class="timeline-list">
+          外観・内観の撮影<br>
+          メニュー写真の整備<br>
+          看板料理のフィーチャー<br>
+          プロフィール最適化
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">MONTH 2</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">コンテンツ強化</div>
+        <div class="timeline-list">
+          人気メニューの深掘り<br>
+          スタッフ紹介<br>
+          お客様の声・イベント<br>
+          ストーリーズ活用
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-month">MONTH 3</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">最適化</div>
+        <div class="timeline-list">
+          データ分析ベースの改善<br>
+          反応の良い投稿の横展開<br>
+          投稿時間の最適化<br>
+          ハッシュタグ戦略の精査
+        </div>
+      </div>
+    </div>
+
+    <div class="sns-example fade-up">
+      <div class="sns-example-title">「今日はこれを撮って」— 毎日届く撮影指示の実例</div>
+      <div class="sns-example-cards">
+        <div class="sns-day-card">
+          <div class="sns-day-card-day">月曜日</div>
+          <h4>ランチセットの全体写真</h4>
+          <p>自然光で、テーブル全体が入る角度で撮影してください</p>
+        </div>
+        <div class="sns-day-card">
+          <div class="sns-day-card-day">水曜日</div>
+          <h4>麺のリフトアップ写真</h4>
+          <p>箸で麺を持ち上げた瞬間を。湯気が出ていると最高です</p>
+        </div>
+        <div class="sns-day-card">
+          <div class="sns-day-card-day">金曜日</div>
+          <h4>仕込み風景の動画15秒</h4>
+          <p>スープを煮込む鍋やチャーシューを切る手元など</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="analytics-compare fade-up">
+      <div class="analytics-box standard">
+        <div class="analytics-box-label">一般的なSNS運用</div>
+        <ul>
+          <li>フォロワー数だけを報告</li>
+          <li>月1回のレポート</li>
+          <li>「いいね」の数で評価</li>
+          <li>投稿内容はおまかせ</li>
+          <li>改善提案なし</li>
+        </ul>
+      </div>
+      <div class="analytics-box jeeb">
+        <div class="analytics-box-label">JEEBのSNS運用</div>
+        <ul>
+          <li>来店導線（プロフィールクリック率）を計測</li>
+          <li>週次で数値をLINEで共有</li>
+          <li>保存数・シェア数で真の関心を評価</li>
+          <li>毎日の撮影指示で店主の負担を最小化</li>
+          <li>データに基づく具体的な改善提案</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">料金プラン</h2>
+      <p class="section-desc">初期費用0円。すべてのプランに2週間の無料トライアル付き。</p>
+    </div>
+    <div class="pricing-grid fade-up">
+      <div class="price-card">
+        <div class="price-card-name">ライト</div>
+        <div class="price-card-price">2,000 <span>THB</span></div>
+        <div class="price-card-unit">/ 月</div>
+        <div class="price-card-divider"></div>
+        <ul class="price-card-features">
+          <li>Webサイト制作・運用</li>
+          <li>多言語メニュー（4言語）</li>
+          <li>月1回の更新対応</li>
+          <li>独自ドメイン対応</li>
+        </ul>
+      </div>
+      <div class="price-card recommended">
+        <div class="price-badge">おすすめ</div>
+        <div class="price-card-name">スタンダード</div>
+        <div class="price-card-price">5,000 <span>THB</span></div>
+        <div class="price-card-unit">/ 月</div>
+        <div class="price-card-divider"></div>
+        <ul class="price-card-features">
+          <li>ライトの全機能</li>
+          <li>SNS運用代行（週3本投稿）</li>
+          <li>毎日の撮影指示</li>
+          <li>週次レポート</li>
+          <li>投稿文の作成・ハッシュタグ選定</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-card-name">プレミアム</div>
+        <div class="price-card-price">10,000 <span>THB</span></div>
+        <div class="price-card-unit">/ 月</div>
+        <div class="price-card-divider"></div>
+        <ul class="price-card-features">
+          <li>スタンダードの全機能</li>
+          <li>データ分析・改善レポート</li>
+          <li>月1回のコンサルティング</li>
+          <li>広告運用アドバイス</li>
+          <li>競合分析レポート</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pricing-notes fade-up">
+      <div class="pricing-note">初期費用 0円<br><span class="pricing-note-sub">サブスクリプションのみ</span></div>
+      <div class="pricing-note">2週間 無料トライアル<br><span class="pricing-note-sub">全プラン対象</span></div>
+      <div class="pricing-note">年払い割引<br><span class="pricing-note-sub">12ヶ月分を10ヶ月分の料金で</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GETTING STARTED ===== -->
+<section class="section getting-started" id="start">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <div class="section-label">Getting Started</div>
+      <h2 class="section-title">導入ステップ</h2>
+      <p class="section-desc">お問い合わせから最短1週間で運用を開始できます。</p>
+    </div>
+    <div class="steps fade-up">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>無料相談</h3>
+        <p>30分のオンライン相談で、お店の課題とゴールをヒアリング。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>サンプル作成</h3>
+        <p>3日以内に御社専用のサンプルサイトを作成してお見せします。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>無料トライアル</h3>
+        <p>2週間の無料トライアルで、実際のサービスを体験。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>本契約・運用開始</h3>
+        <p>ご満足いただけたら本契約。いつでも解約可能です。</p>
+      </div>
+    </div>
+    <div class="cta-block fade-up">
+      <h3>まずは無料でサンプルを作ります</h3>
+      <p>お店の情報をお聞かせいただければ、3日以内に専用サンプルをお届けします。<br>もちろん費用は一切かかりません。</p>
+      <a href="#contact" class="btn-primary">無料相談を予約する</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">JEEB</div>
+        <p class="footer-desc">バンコク飲食店に特化した<br>Web制作・多言語メニュー・SNS運用代行サービス。<br>あなたの店を、世界に届けます。</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">お問い合わせ</div>
+        <p>LINE: @jeeb-bkk（準備中）</p>
+        <p>Instagram: @jeeb.bkk</p>
+        <p>Email: info@jeeb.co.th</p>
+        <p>Tel: 準備中</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">サービス</div>
+        <a href="#solution">Web制作</a>
+        <a href="#solution">多言語メニュー</a>
+        <a href="#sns">SNS運用代行</a>
+        <a href="#samples">制作サンプル</a>
+        <a href="#pricing">料金プラン</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 JEEB. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile menu toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+// Close mobile menu on link click
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Samples tab switching
+const tabs = document.querySelectorAll('.samples-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.category-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab.dataset.category).classList.add('active');
+  });
+});
+
+// Intersection Observer for fade-up animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
