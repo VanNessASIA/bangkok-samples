@@ -3,805 +3,311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEEB / ジーブ — あなたの店を、世界に届ける。</title>
-<meta name="description" content="バンコク日本食レストラン向け Web制作・多言語メニュー・SNS運用代行。AIで即日サンプル納品、月額฿2,000から。">
+<title>JEEB — あなたの店を、世界に届ける</title>
+<meta name="description" content="バンコク日系飲食店向け Web制作・多言語メニュー・SNS運用代行。即日サンプル無料。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & BASE ===== */
+/* ─── Reset & Base ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --navy:#0f1729;
-  --navy-light:#1a2744;
-  --navy-mid:#243352;
-  --charcoal:#1c1c1e;
-  --white:#ffffff;
-  --off-white:#f8f7f4;
-  --warm-gray:#e8e6e1;
-  --terra:#c4703f;
-  --terra-light:#d4884f;
-  --terra-dark:#a85a2f;
-  --amber:#e8a84c;
-  --green-win:#2ecc71;
-  --red-lose:#e74c3c;
-  --text-primary:#1a1a1a;
-  --text-secondary:#6b7280;
-  --text-on-dark:#e2e8f0;
-  --text-muted-dark:#94a3b8;
-  --font-sans:'Inter','Noto Sans JP',system-ui,sans-serif;
-  --font-jp:'Noto Sans JP','Inter',system-ui,sans-serif;
-  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
-  --ease-out-quint:cubic-bezier(0.22,1,0.36,1);
-}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-size:16px}
-body{font-family:var(--font-jp);color:var(--text-primary);background:var(--white);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-button{border:none;background:none;cursor:pointer;font-family:inherit}
+body{font-family:'Noto Sans JP','Inter',sans-serif;color:#e8e4df;background:#0a0f1a;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.8}
 
-/* ===== UTILITIES ===== */
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-@media(min-width:768px){.container{padding:0 40px}}
-@media(min-width:1024px){.container{padding:0 60px}}
+/* ─── Typography ─── */
+h1,h2,h3,h4{font-family:'Noto Serif JP',serif;font-weight:600;line-height:1.3;letter-spacing:.04em}
+p{font-size:clamp(1rem,1.5vw,1.175rem);line-height:1.9}
 
-/* Scroll animations */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
-.reveal-scale.visible{opacity:1;transform:scale(1)}
-.stagger-1{transition-delay:.1s}
-.stagger-2{transition-delay:.2s}
-.stagger-3{transition-delay:.3s}
-.stagger-4{transition-delay:.4s}
+/* ─── Layout Primitives ─── */
+.inner{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,60px)}
+section{position:relative}
 
-/* ===== NAVIGATION ===== */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .4s var(--ease-out-expo)}
-.nav.scrolled{background:rgba(15,23,41,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:12px 0;box-shadow:0 1px 0 rgba(255,255,255,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:var(--font-sans);font-weight:800;font-size:1.5rem;color:var(--white);letter-spacing:-.02em}
-.nav-logo span{color:var(--terra)}
-.nav-links{display:none;gap:32px;align-items:center}
-@media(min-width:768px){.nav-links{display:flex}}
-.nav-links a{color:var(--text-muted-dark);font-size:.875rem;font-weight:500;transition:color .3s;letter-spacing:.01em}
-.nav-links a:hover{color:var(--white)}
-.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:var(--white);padding:10px 24px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .3s var(--ease-out-expo)}
-.nav-cta:hover{background:var(--terra-light);transform:translateY(-1px);box-shadow:0 4px 16px rgba(196,112,63,.3)}
+/* ─── Reveal Animation ─── */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.visible{opacity:1;transform:translateY(0)}
+.rv-delay-1{transition-delay:.15s}
+.rv-delay-2{transition-delay:.3s}
+.rv-delay-3{transition-delay:.45s}
 
-/* Mobile menu */
-.nav-hamburger{display:flex;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
-@media(min-width:768px){.nav-hamburger{display:none}}
-.nav-hamburger span{display:block;width:22px;height:2px;background:var(--white);transition:all .3s var(--ease-out-expo);border-radius:2px}
-.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-hamburger.open span:nth-child(2){opacity:0}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,41,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px;opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out-expo);z-index:999}
-.mobile-menu.open{opacity:1;pointer-events:auto}
-.mobile-menu a{color:var(--white);font-size:1.5rem;font-weight:600;transition:color .3s}
-.mobile-menu a:hover{color:var(--terra)}
+/* ─── Navigation ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:background .5s,padding .4s,backdrop-filter .5s}
+.nav.scrolled{background:rgba(10,15,26,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:14px 0;border-bottom:1px solid rgba(232,228,223,.06)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Noto Serif JP',serif;font-size:1.35rem;font-weight:700;color:#e8e4df;text-decoration:none;letter-spacing:.08em}
+.nav-logo span{color:#c4703f}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:rgba(232,228,223,.6);text-decoration:none;font-size:.85rem;letter-spacing:.06em;transition:color .3s;font-weight:400}
+.nav-links a:hover{color:#e8e4df}
+.nav-cta{display:inline-block;padding:10px 28px;background:#c4703f;color:#faf9f7;text-decoration:none;font-size:.82rem;letter-spacing:.06em;border-radius:6px;transition:background .3s,transform .2s;font-weight:500}
+.nav-cta:hover{background:#d4804f;transform:translateY(-1px)}
 
-/* ===== SECTION 1: HERO ===== */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--navy);overflow:hidden}
-.hero-bg{position:absolute;inset:0;overflow:hidden}
-.hero-gradient{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(196,112,63,.08),transparent),radial-gradient(ellipse 60% 50% at 80% 20%,rgba(232,168,76,.05),transparent),linear-gradient(180deg,var(--navy) 0%,var(--navy-light) 100%)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 20s linear infinite}
-@keyframes gridDrift{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:110}
+.hamburger span{display:block;width:22px;height:1.5px;background:#e8e4df;transition:transform .3s,opacity .3s}
+.hamburger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,15,26,.97);backdrop-filter:blur(30px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;transition:opacity .4s}
+.mobile-menu.open{display:flex;opacity:1}
+.mobile-menu a{color:#e8e4df;text-decoration:none;font-family:'Noto Serif JP',serif;font-size:1.4rem;letter-spacing:.08em;opacity:.7;transition:opacity .3s}
+.mobile-menu a:hover{opacity:1}
 
-/* Floating device mockups */
-.hero-devices{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:55%;max-width:700px;pointer-events:none}
-@media(max-width:1023px){.hero-devices{opacity:.15;right:-10%;width:70%}}
-.device-phone{position:absolute;width:220px;height:440px;background:var(--navy-mid);border:2px solid rgba(255,255,255,.1);border-radius:28px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);animation:floatPhone 6s ease-in-out infinite}
-.device-phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:rgba(255,255,255,.15);border-radius:4px;z-index:2}
-.device-phone-inner{margin:12px 8px;height:calc(100% - 24px);border-radius:20px;overflow:hidden;background:var(--charcoal)}
-.device-phone-scroll{animation:scrollSite 12s ease-in-out infinite}
-@keyframes scrollSite{0%,100%{transform:translateY(0)}40%,60%{transform:translateY(-40%)}}
-.device-phone.d1{top:5%;right:30%;z-index:3}
-.device-phone.d2{top:25%;right:5%;z-index:2;animation-delay:-2s;opacity:.7;transform:scale(.85)}
-.device-phone.d3{top:45%;right:45%;z-index:1;animation-delay:-4s;opacity:.5;transform:scale(.7)}
-@keyframes floatPhone{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+/* ─── Hero ─── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(196,112,63,.06) 0%,transparent 70%)}
+.hero-content{text-align:center;position:relative;z-index:2}
+.hero-label{font-size:clamp(.7rem,1vw,.85rem);letter-spacing:.25em;text-transform:uppercase;color:rgba(232,228,223,.35);margin-bottom:40px;font-weight:400}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4.8rem);font-weight:700;margin-bottom:32px;color:#e8e4df}
+.hero h1 em{font-style:normal;color:#c4703f}
+.hero-sub{font-size:clamp(.95rem,1.4vw,1.15rem);color:rgba(232,228,223,.45);max-width:480px;margin:0 auto;font-weight:300;line-height:2}
+.hero-scroll{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero-scroll span{font-size:.7rem;letter-spacing:.15em;color:rgba(232,228,223,.25)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(196,112,63,.4),transparent);animation:scrollPulse 2.4s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
 
-.device-laptop{position:absolute;width:480px;height:300px;top:10%;right:0;z-index:2}
-.device-laptop-screen{width:100%;height:260px;background:var(--navy-mid);border:2px solid rgba(255,255,255,.1);border-radius:12px 12px 0 0;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.3)}
-.device-laptop-base{width:110%;height:16px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border-radius:0 0 8px 8px;margin:0 auto;position:relative;left:-5%}
-.device-laptop-inner{padding:8px;height:calc(100% - 16px);overflow:hidden}
-.device-laptop-bar{height:24px;background:rgba(255,255,255,.05);border-radius:6px 6px 0 0;display:flex;align-items:center;padding:0 10px;gap:6px;margin-bottom:4px}
-.device-laptop-bar span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15)}
-.device-laptop-bar span:first-child{background:rgba(255,100,100,.4)}
-.device-laptop-bar span:nth-child(2){background:rgba(255,200,50,.4)}
-.device-laptop-bar span:nth-child(3){background:rgba(100,255,100,.4)}
-.device-laptop-content{height:calc(100% - 28px);border-radius:0 0 4px 4px;overflow:hidden;background:var(--charcoal)}
+/* Subtle floating particles on hero */
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.particle{position:absolute;width:2px;height:2px;background:rgba(196,112,63,.15);border-radius:50%;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
 
-/* Simulated site content in devices */
-.sim-site{padding:16px;color:var(--text-on-dark)}
-.sim-site-hero{height:80px;background:linear-gradient(135deg,var(--terra-dark),var(--terra));border-radius:8px;margin-bottom:12px;display:flex;align-items:flex-end;padding:12px}
-.sim-site-hero span{font-size:10px;font-weight:700;color:var(--white);letter-spacing:.05em}
-.sim-site-row{display:flex;gap:8px;margin-bottom:8px}
-.sim-site-card{flex:1;height:48px;background:rgba(255,255,255,.06);border-radius:6px}
-.sim-site-text{height:6px;background:rgba(255,255,255,.08);border-radius:3px;margin-bottom:6px;width:80%}
-.sim-site-text.short{width:50%}
+/* ─── Reality Section ─── */
+.reality{padding:clamp(100px,15vw,200px) 0;background:#0a0f1a;position:relative}
+.reality::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,228,223,.06),transparent)}
+.reality-statement{max-width:800px;margin:0 auto;text-align:center}
+.reality-number{font-family:'Noto Serif JP',serif;font-size:clamp(4rem,10vw,9rem);font-weight:700;color:rgba(196,112,63,.18);line-height:1;margin-bottom:20px;display:block}
+.reality-statement h2{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:500;line-height:1.7;margin-bottom:40px;color:#e8e4df}
+.reality-statement h2 em{font-style:normal;color:#c4703f}
+.reality-quiet{font-size:clamp(.9rem,1.2vw,1.05rem);color:rgba(232,228,223,.35);max-width:520px;margin:0 auto;font-weight:300;line-height:2}
 
-.hero-content{position:relative;z-index:10;max-width:600px;padding:120px 0 80px}
-@media(min-width:768px){.hero-content{padding:140px 0 100px}}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(196,112,63,.12);border:1px solid rgba(196,112,63,.25);border-radius:100px;padding:8px 20px;margin-bottom:32px;font-size:.8rem;font-weight:600;color:var(--terra-light);letter-spacing:.04em}
-.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--terra);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero-title{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:900;color:var(--white);line-height:1.15;letter-spacing:-.03em;margin-bottom:24px}
-.hero-title .accent{color:var(--terra)}
-.hero-title .line{display:block;overflow:hidden}
-.hero-title .line-inner{display:block;transform:translateY(110%);animation:slideUp .8s var(--ease-out-expo) forwards}
-.hero-title .line:nth-child(2) .line-inner{animation-delay:.12s}
-.hero-title .line:nth-child(3) .line-inner{animation-delay:.24s}
-@keyframes slideUp{to{transform:translateY(0)}}
-.hero-sub{font-size:1.125rem;color:var(--text-muted-dark);line-height:1.8;margin-bottom:40px;max-width:480px;opacity:0;animation:fadeIn .8s var(--ease-out-expo) .5s forwards}
-@keyframes fadeIn{to{opacity:1}}
-.hero-actions{display:flex;flex-wrap:wrap;gap:16px;opacity:0;animation:fadeIn .8s var(--ease-out-expo) .7s forwards}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--terra);color:var(--white);padding:16px 36px;border-radius:10px;font-size:1rem;font-weight:700;transition:all .3s var(--ease-out-expo);letter-spacing:.01em}
-.btn-primary:hover{background:var(--terra-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,112,63,.35)}
-.btn-primary svg{width:18px;height:18px;transition:transform .3s}
-.btn-primary:hover svg{transform:translateX(4px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--text-muted-dark);padding:16px 24px;border-radius:10px;font-size:1rem;font-weight:600;border:1px solid rgba(255,255,255,.12);transition:all .3s var(--ease-out-expo)}
-.btn-ghost:hover{color:var(--white);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}
-.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-muted-dark);font-size:.75rem;letter-spacing:.1em;opacity:0;animation:fadeIn 1s var(--ease-out-expo) 1.2s forwards}
-.hero-scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--terra),transparent);animation:scrollLine 2s ease-in-out infinite}
-@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* ─── Services (Story Sections) ─── */
+.service-scene{padding:clamp(100px,14vw,180px) 0;position:relative;overflow:hidden}
+.service-scene:nth-child(even){background:#0d1220}
+.service-scene:nth-child(odd){background:#0a0f1a}
+.service-scene::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,228,223,.04),transparent)}
+.service-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
+.service-layout.reverse{direction:rtl}
+.service-layout.reverse > *{direction:ltr}
+.service-text{max-width:480px}
+.service-index{font-family:'Noto Serif JP',serif;font-size:clamp(.7rem,.9vw,.8rem);color:rgba(196,112,63,.5);letter-spacing:.2em;margin-bottom:20px;display:block}
+.service-text h2{font-size:clamp(1.6rem,2.8vw,2.6rem);margin-bottom:28px;line-height:1.4}
+.service-text p{color:rgba(232,228,223,.55);font-weight:300;margin-bottom:16px}
+.service-visual{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#141a2a}
+.service-visual-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+/* Abstract geometric visuals instead of photos */
+.visual-web{background:linear-gradient(135deg,#0f1628 0%,#1a2240 50%,#0f1628 100%)}
+.visual-web::after{content:'';position:absolute;inset:20%;border:1px solid rgba(196,112,63,.15);border-radius:8px;animation:breathe 4s ease-in-out infinite}
+.visual-web::before{content:'';position:absolute;inset:30%;border:1px solid rgba(196,112,63,.08);border-radius:6px;animation:breathe 4s ease-in-out infinite .5s}
+.visual-menu{background:linear-gradient(135deg,#0f1628 0%,#1a2240 50%,#0f1628 100%)}
+.visual-sns{background:linear-gradient(135deg,#0f1628 0%,#1a2240 50%,#0f1628 100%)}
+@keyframes breathe{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(1.02)}}
+/* Visual decorative elements */
+.vis-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:8px;padding:15%;opacity:.4}
+.vis-grid span{border-radius:4px;background:rgba(196,112,63,.08);transition:background .6s}
+.vis-grid span:nth-child(odd){background:rgba(232,228,223,.04)}
+.vis-lines{position:absolute;inset:0;padding:20%}
+.vis-lines span{display:block;height:1px;background:linear-gradient(90deg,transparent,rgba(196,112,63,.12),transparent);margin-bottom:clamp(12px,2vw,20px)}
+.vis-dots{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:20%}
+.vis-dots span{width:6px;height:6px;border-radius:50%;background:rgba(196,112,63,.15)}
+.vis-dots span:nth-child(3n){background:rgba(232,228,223,.08);width:8px;height:8px}
 
-/* ===== SECTION 2: IMPACT NUMBERS ===== */
-.impact{background:var(--navy-light);padding:60px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
-.impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 16px}
-@media(min-width:768px){.impact-grid{grid-template-columns:repeat(4,1fr);gap:40px}}
-.impact-item{text-align:center}
-.impact-number{font-family:var(--font-sans);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;color:var(--white);letter-spacing:-.03em;line-height:1}
-.impact-number .suffix{font-size:.5em;color:var(--terra);margin-left:2px}
-.impact-label{font-size:.85rem;color:var(--text-muted-dark);margin-top:8px;font-weight:500}
+/* ─── Showcase ─── */
+.showcase{padding:clamp(100px,14vw,180px) 0;background:#faf9f7;color:#2c2825}
+.showcase h2{font-size:clamp(1.8rem,3.5vw,3rem);text-align:center;margin-bottom:16px;color:#2c2825}
+.showcase-lead{text-align:center;color:rgba(44,40,37,.5);max-width:500px;margin:0 auto 60px;font-size:clamp(.9rem,1.1vw,1rem);font-weight:300}
+/* Featured showcase */
+.showcase-featured{position:relative;max-width:960px;margin:0 auto 60px;border-radius:16px;overflow:hidden;background:#1a1f2e;box-shadow:0 40px 100px rgba(0,0,0,.15)}
+.showcase-featured-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
+.showcase-featured-frame iframe{width:100%;height:100%;border:none;transform:scale(1.002)}
+.showcase-featured-info{padding:28px 36px;background:#1a1f2e;display:flex;align-items:center;justify-content:space-between}
+.showcase-featured-info h3{font-family:'Noto Serif JP',serif;font-size:1.15rem;color:#e8e4df;font-weight:500}
+.showcase-featured-info span{font-size:.8rem;color:rgba(232,228,223,.4);letter-spacing:.06em}
+.showcase-featured-link{color:#c4703f;text-decoration:none;font-size:.85rem;letter-spacing:.04em;transition:opacity .3s;display:flex;align-items:center;gap:8px}
+.showcase-featured-link:hover{opacity:.7}
+.showcase-featured-link svg{width:14px;height:14px}
+/* Category tabs */
+.showcase-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:40px}
+.showcase-tab{padding:10px 28px;border:1px solid rgba(44,40,37,.12);border-radius:100px;background:transparent;color:#2c2825;font-size:.85rem;cursor:pointer;transition:all .3s;font-family:'Noto Sans JP',sans-serif;letter-spacing:.04em}
+.showcase-tab.active{background:#2c2825;color:#faf9f7;border-color:#2c2825}
+.showcase-tab:hover:not(.active){border-color:rgba(44,40,37,.3)}
+/* Thumbnail grid */
+.showcase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:960px;margin:0 auto}
+.showcase-thumb{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:#1a1f2e;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;aspect-ratio:16/10}
+.showcase-thumb:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+.showcase-thumb.active{outline:2px solid #c4703f;outline-offset:2px}
+.showcase-thumb-inner{width:100%;height:100%;position:relative;overflow:hidden}
+.showcase-thumb-inner iframe{width:400%;height:400%;border:none;transform:scale(.25);transform-origin:top left;pointer-events:none}
+.showcase-thumb-label{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(transparent,rgba(10,15,26,.9));color:#e8e4df;font-size:.72rem;letter-spacing:.04em;font-weight:400}
 
-/* ===== SECTION 3: WHY JEEB ===== */
-.why{padding:120px 0;background:var(--off-white);position:relative}
-.why::before{content:'';position:absolute;top:0;left:0;right:0;height:200px;background:linear-gradient(180deg,var(--navy-light),var(--off-white));pointer-events:none}
-.section-label{font-size:.8rem;font-weight:700;color:var(--terra);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
-.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:var(--text-primary);line-height:1.25;letter-spacing:-.02em;margin-bottom:20px;position:relative;z-index:1}
-.section-subtitle{font-size:1.1rem;color:var(--text-secondary);max-width:600px;line-height:1.8;margin-bottom:64px;position:relative;z-index:1}
-.why-grid{display:grid;gap:32px;position:relative;z-index:1}
-@media(min-width:768px){.why-grid{grid-template-columns:repeat(3,1fr);gap:40px}}
-.why-card{background:var(--white);border-radius:16px;padding:40px 32px;border:1px solid rgba(0,0,0,.06);transition:all .4s var(--ease-out-expo);position:relative;overflow:hidden}
-.why-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08);border-color:rgba(196,112,63,.2)}
-.why-card-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:1.5rem;font-weight:800;font-family:var(--font-sans)}
-.why-card:nth-child(1) .why-card-icon{background:linear-gradient(135deg,rgba(196,112,63,.12),rgba(232,168,76,.12));color:var(--terra)}
-.why-card:nth-child(2) .why-card-icon{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(99,102,241,.1));color:#3b82f6}
-.why-card:nth-child(3) .why-card-icon{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(52,211,153,.1));color:#10b981}
-.why-card-title{font-size:1.25rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
-.why-card-en{font-family:var(--font-sans);font-size:.75rem;font-weight:600;color:var(--terra);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
-.why-card-text{font-size:.95rem;color:var(--text-secondary);line-height:1.8}
-.why-card-highlight{display:inline-block;margin-top:16px;padding:8px 16px;background:rgba(196,112,63,.06);border-radius:8px;font-size:.85rem;font-weight:600;color:var(--terra-dark);letter-spacing:.01em}
-.why-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--terra),var(--amber));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out-expo)}
-.why-card:hover::after{transform:scaleX(1)}
+/* ─── Difference ─── */
+.difference{padding:clamp(100px,14vw,180px) 0;background:#0a0f1a}
+.difference h2{font-size:clamp(1.8rem,3.5vw,3rem);text-align:center;margin-bottom:16px}
+.difference-lead{text-align:center;color:rgba(232,228,223,.4);max-width:480px;margin:0 auto 80px;font-weight:300;font-size:clamp(.9rem,1.1vw,1rem)}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;max-width:900px;margin:0 auto;border:1px solid rgba(232,228,223,.06);border-radius:12px;overflow:hidden}
+.diff-col{padding:40px 36px}
+.diff-col:not(:last-child){border-right:1px solid rgba(232,228,223,.06)}
+.diff-col-header{font-family:'Noto Serif JP',serif;font-size:1rem;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid rgba(232,228,223,.06);letter-spacing:.04em;color:rgba(232,228,223,.5)}
+.diff-col:last-child .diff-col-header{color:#c4703f}
+.diff-item{margin-bottom:24px;display:flex;align-items:flex-start;gap:12px}
+.diff-check{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.diff-check.yes{background:rgba(196,112,63,.15)}
+.diff-check.yes svg{color:#c4703f}
+.diff-check.no{background:rgba(232,228,223,.05)}
+.diff-check.no svg{color:rgba(232,228,223,.2)}
+.diff-check.partial{background:rgba(232,228,223,.05)}
+.diff-check.partial svg{color:rgba(232,228,223,.3)}
+.diff-check svg{width:10px;height:10px}
+.diff-label{font-size:.85rem;color:rgba(232,228,223,.6);line-height:1.5}
+.diff-col:last-child .diff-label{color:rgba(232,228,223,.8)}
 
-/* ===== SECTION 4: BEFORE/AFTER ===== */
-.before-after{padding:120px 0;background:var(--navy);position:relative;overflow:hidden}
-.before-after .section-label,.before-after .section-title,.before-after .section-subtitle{color:var(--white)}
-.before-after .section-label{color:var(--terra-light)}
-.before-after .section-subtitle{color:var(--text-muted-dark)}
-.ba-wrapper{display:grid;gap:24px;position:relative}
-@media(min-width:768px){.ba-wrapper{grid-template-columns:1fr auto 1fr;gap:40px;align-items:stretch}}
-.ba-card{border-radius:20px;padding:40px 32px;position:relative;overflow:hidden}
-.ba-before{background:linear-gradient(135deg,#1a1215,#2a1a1a);border:1px solid rgba(255,80,80,.15)}
-.ba-after{background:linear-gradient(135deg,#121a15,#1a2a1a);border:1px solid rgba(80,255,120,.15)}
-.ba-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.08em;margin-bottom:28px}
-.ba-before .ba-tag{background:rgba(239,68,68,.15);color:#f87171}
-.ba-after .ba-tag{background:rgba(34,197,94,.15);color:#4ade80}
-.ba-items{display:flex;flex-direction:column;gap:20px}
-.ba-item{display:flex;gap:16px;align-items:flex-start}
-.ba-item-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
-.ba-before .ba-item-icon{background:rgba(239,68,68,.1);color:#f87171}
-.ba-after .ba-item-icon{background:rgba(34,197,94,.1);color:#4ade80}
-.ba-item-text h4{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:4px}
-.ba-item-text p{font-size:.85rem;color:var(--text-muted-dark);line-height:1.6}
-.ba-arrow{display:none;align-items:center;justify-content:center;font-size:2rem;color:var(--terra)}
-@media(min-width:768px){.ba-arrow{display:flex}}
-.ba-arrow svg{width:48px;height:48px;animation:arrowPulse 2s ease-in-out infinite}
-@keyframes arrowPulse{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(8px);opacity:1}}
+/* ─── Steps ─── */
+.steps{padding:clamp(100px,14vw,180px) 0;background:#faf9f7;color:#2c2825}
+.steps h2{font-size:clamp(1.8rem,3.5vw,3rem);text-align:center;margin-bottom:16px;color:#2c2825}
+.steps-lead{text-align:center;color:rgba(44,40,37,.45);max-width:480px;margin:0 auto 80px;font-weight:300}
+.steps-flow{max-width:720px;margin:0 auto;position:relative}
+.steps-flow::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(44,40,37,.1),transparent)}
+.step-item{display:flex;gap:40px;align-items:flex-start;margin-bottom:64px;position:relative}
+.step-item:last-child{margin-bottom:0}
+.step-num{width:56px;height:56px;border-radius:50%;border:1px solid rgba(44,40,37,.1);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif JP',serif;font-size:1.1rem;color:rgba(44,40,37,.35);flex-shrink:0;background:#faf9f7;position:relative;z-index:2}
+.step-content h3{font-size:clamp(1.1rem,1.6vw,1.35rem);margin-bottom:10px;font-weight:600;color:#2c2825}
+.step-content p{color:rgba(44,40,37,.5);font-weight:300;font-size:.95rem}
 
-/* Mock visuals in before/after */
-.ba-visual{margin-top:24px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
-.ba-visual-before{background:var(--charcoal);padding:16px}
-.ba-visual-before .mock-menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ba-visual-before .mock-menu-item{height:24px;background:rgba(255,255,255,.04);border-radius:4px}
-.ba-visual-before .mock-menu-title{height:10px;background:rgba(255,255,255,.08);border-radius:3px;width:60%;margin-bottom:12px}
-.ba-visual-after{background:linear-gradient(135deg,#0d1117,#1a1f2e);padding:16px}
-.ba-visual-after .mock-dash{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.ba-visual-after .mock-dash-item{height:48px;background:rgba(255,255,255,.04);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.ba-visual-after .mock-dash-bar{width:60%;height:4px;background:linear-gradient(90deg,var(--terra),var(--amber));border-radius:4px}
-.ba-visual-after .mock-chart{display:flex;align-items:flex-end;gap:4px;height:60px}
-.ba-visual-after .mock-chart span{flex:1;background:linear-gradient(180deg,var(--terra),rgba(196,112,63,.3));border-radius:3px 3px 0 0;animation:chartGrow 1.5s var(--ease-out-expo) forwards}
-.ba-visual-after .mock-chart span:nth-child(1){height:40%}
-.ba-visual-after .mock-chart span:nth-child(2){height:55%;animation-delay:.1s}
-.ba-visual-after .mock-chart span:nth-child(3){height:35%;animation-delay:.2s}
-.ba-visual-after .mock-chart span:nth-child(4){height:70%;animation-delay:.3s}
-.ba-visual-after .mock-chart span:nth-child(5){height:85%;animation-delay:.4s}
-.ba-visual-after .mock-chart span:nth-child(6){height:60%;animation-delay:.5s}
-.ba-visual-after .mock-chart span:nth-child(7){height:95%;animation-delay:.6s}
-@keyframes chartGrow{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+/* ─── Pricing ─── */
+.pricing{padding:clamp(100px,14vw,180px) 0;background:#0d1220}
+.pricing h2{font-size:clamp(1.8rem,3.5vw,3rem);text-align:center;margin-bottom:16px}
+.pricing-lead{text-align:center;color:rgba(232,228,223,.4);max-width:480px;margin:0 auto 80px;font-weight:300}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:960px;margin:0 auto}
+.pricing-card{border:1px solid rgba(232,228,223,.06);border-radius:16px;padding:44px 36px;transition:border-color .4s,transform .4s;position:relative}
+.pricing-card:hover{border-color:rgba(232,228,223,.12);transform:translateY(-4px)}
+.pricing-card.featured{border-color:rgba(196,112,63,.25);background:rgba(196,112,63,.03)}
+.pricing-card.featured::before{content:'おすすめ';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#c4703f;color:#faf9f7;font-size:.7rem;padding:4px 16px;border-radius:100px;letter-spacing:.08em}
+.pricing-name{font-family:'Noto Serif JP',serif;font-size:1.05rem;margin-bottom:8px;color:rgba(232,228,223,.7);letter-spacing:.06em}
+.pricing-price{font-family:'Noto Serif JP',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:700;margin-bottom:6px;color:#e8e4df}
+.pricing-price span{font-size:.9rem;font-weight:400;color:rgba(232,228,223,.4)}
+.pricing-period{font-size:.8rem;color:rgba(232,228,223,.3);margin-bottom:32px}
+.pricing-features{list-style:none;margin-bottom:36px}
+.pricing-features li{padding:10px 0;border-bottom:1px solid rgba(232,228,223,.04);font-size:.88rem;color:rgba(232,228,223,.5);display:flex;align-items:center;gap:10px}
+.pricing-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:rgba(196,112,63,.4);flex-shrink:0}
+.pricing-btn{display:block;text-align:center;padding:14px;border:1px solid rgba(232,228,223,.12);border-radius:8px;color:#e8e4df;text-decoration:none;font-size:.85rem;letter-spacing:.04em;transition:all .3s}
+.pricing-btn:hover{border-color:rgba(232,228,223,.25);background:rgba(232,228,223,.03)}
+.pricing-card.featured .pricing-btn{background:#c4703f;border-color:#c4703f;color:#faf9f7}
+.pricing-card.featured .pricing-btn:hover{background:#d4804f}
 
-/* ===== SECTION 5: SAMPLE GALLERY ===== */
-.gallery{padding:120px 0;background:var(--off-white)}
-.gallery-tabs{display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap}
-.gallery-tab{padding:12px 28px;border-radius:100px;font-size:.9rem;font-weight:600;color:var(--text-secondary);background:var(--white);border:1px solid rgba(0,0,0,.08);transition:all .3s var(--ease-out-expo);cursor:pointer}
-.gallery-tab:hover{border-color:var(--terra);color:var(--terra)}
-.gallery-tab.active{background:var(--terra);color:var(--white);border-color:var(--terra)}
-.gallery-tab.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
-.gallery-tab.disabled::after{content:' (準備中)';font-size:.7rem;font-weight:400}
-.gallery-grid{display:grid;gap:24px;grid-template-columns:1fr}
-@media(min-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:20px}}
-.gallery-panel{display:none}
-.gallery-panel.active{display:block}
-.gallery-item{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:all .4s var(--ease-out-expo);position:relative}
-.gallery-item:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,.1);border-color:rgba(196,112,63,.2)}
-.gallery-device{position:relative;background:var(--charcoal);padding:16px 16px 0;overflow:hidden;height:280px}
-.gallery-device-frame{position:relative;width:160px;height:320px;margin:0 auto;background:var(--navy);border:2px solid rgba(255,255,255,.15);border-radius:24px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.3);transform:translateY(40px)}
-.gallery-device-frame::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:40px;height:4px;background:rgba(255,255,255,.12);border-radius:4px;z-index:3}
-.gallery-device-inner{position:absolute;top:12px;left:4px;right:4px;bottom:4px;border-radius:18px;overflow:hidden;background:#1a1a2e}
-.gallery-device-inner iframe{width:375px;height:812px;border:none;transform:scale(0.395);transform-origin:0 0;pointer-events:none}
-.gallery-info{padding:24px}
-.gallery-name{font-size:1.05rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
-.gallery-type{font-size:.8rem;color:var(--text-secondary);margin-bottom:16px}
-.gallery-link{display:inline-flex;align-items:center;gap:6px;color:var(--terra);font-size:.875rem;font-weight:600;transition:all .3s}
-.gallery-link:hover{gap:10px}
-.gallery-link svg{width:16px;height:16px}
+/* ─── CTA / Start ─── */
+.start{padding:clamp(120px,16vw,220px) 0;background:#0a0f1a;text-align:center;position:relative}
+.start::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(196,112,63,.04) 0%,transparent 70%)}
+.start h2{font-size:clamp(2rem,4vw,3.6rem);margin-bottom:24px;position:relative;z-index:2}
+.start-sub{color:rgba(232,228,223,.4);max-width:440px;margin:0 auto 56px;font-weight:300;position:relative;z-index:2}
+.start-cta{display:inline-flex;align-items:center;gap:12px;padding:18px 48px;background:#c4703f;color:#faf9f7;text-decoration:none;font-size:1.05rem;border-radius:8px;letter-spacing:.06em;transition:background .3s,transform .2s;font-weight:500;position:relative;z-index:2}
+.start-cta:hover{background:#d4804f;transform:translateY(-2px)}
+.start-channels{display:flex;justify-content:center;gap:32px;margin-top:48px;position:relative;z-index:2}
+.start-channel{color:rgba(232,228,223,.3);text-decoration:none;font-size:.82rem;letter-spacing:.06em;transition:color .3s;display:flex;align-items:center;gap:8px}
+.start-channel:hover{color:rgba(232,228,223,.6)}
+.start-channel svg{width:16px;height:16px;opacity:.5}
 
-/* ===== SECTION 6: COMPARISON TABLE ===== */
-.comparison{padding:120px 0;background:var(--white)}
-.comparison-table-wrap{overflow-x:auto;margin:0 -24px;padding:0 24px;-webkit-overflow-scrolling:touch}
-.comparison-table{width:100%;min-width:640px;border-collapse:separate;border-spacing:0}
-.comparison-table thead th{padding:20px 16px;font-size:.8rem;font-weight:700;letter-spacing:.06em;color:var(--text-secondary);text-align:center;border-bottom:2px solid var(--warm-gray);white-space:nowrap}
-.comparison-table thead th:first-child{text-align:left}
-.comparison-table thead th.col-jeeb{color:var(--terra);font-size:.9rem;position:relative}
-.comparison-table thead th.col-jeeb::after{content:'おすすめ';position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--terra);color:var(--white);font-size:.6rem;padding:2px 10px;border-radius:100px;white-space:nowrap}
-.comparison-table tbody td{padding:16px;text-align:center;border-bottom:1px solid rgba(0,0,0,.05);font-size:.9rem;color:var(--text-secondary)}
-.comparison-table tbody td:first-child{text-align:left;font-weight:600;color:var(--text-primary);font-size:.85rem}
-.comparison-table tbody td.col-jeeb{background:rgba(196,112,63,.03);font-weight:600;color:var(--text-primary)}
-.comparison-table .check{color:var(--green-win);font-weight:700;font-size:1.1rem}
-.comparison-table .cross{color:var(--red-lose);font-weight:700;font-size:1.1rem}
-.comparison-table .highlight-cell{background:rgba(196,112,63,.08);color:var(--terra-dark);font-weight:700;border-radius:6px}
-.comparison-table tbody tr:last-child td{border-bottom:none}
+/* ─── Footer ─── */
+.footer{padding:60px 0;background:#070b14;border-top:1px solid rgba(232,228,223,.04)}
+.footer .inner{display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Noto Serif JP',serif;font-size:1rem;color:rgba(232,228,223,.3);letter-spacing:.08em}
+.footer-copy{font-size:.75rem;color:rgba(232,228,223,.2)}
 
-/* col highlight */
-.comparison-table .col-jeeb{border-left:2px solid rgba(196,112,63,.15);border-right:2px solid rgba(196,112,63,.15)}
-.comparison-table thead .col-jeeb{border-top:2px solid rgba(196,112,63,.15);border-radius:12px 12px 0 0}
-.comparison-table tbody tr:last-child .col-jeeb{border-bottom:2px solid rgba(196,112,63,.15);border-radius:0 0 12px 12px}
-
-/* ===== SECTION 7: SNS SYSTEM ===== */
-.sns-system{padding:120px 0;background:var(--navy);color:var(--white)}
-.sns-system .section-label{color:var(--terra-light)}
-.sns-system .section-title{color:var(--white)}
-.sns-system .section-subtitle{color:var(--text-muted-dark)}
-
-.sns-roadmap{display:grid;gap:24px;margin-bottom:80px}
-@media(min-width:768px){.sns-roadmap{grid-template-columns:repeat(3,1fr);gap:32px}}
-.sns-month{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:all .4s var(--ease-out-expo)}
-.sns-month:hover{border-color:rgba(196,112,63,.3);background:rgba(255,255,255,.06)}
-.sns-month-num{font-family:var(--font-sans);font-size:3rem;font-weight:900;color:rgba(196,112,63,.15);position:absolute;top:16px;right:20px;line-height:1}
-.sns-month-title{font-size:1.1rem;font-weight:700;margin-bottom:4px}
-.sns-month-label{font-size:.75rem;color:var(--terra-light);font-weight:600;letter-spacing:.08em;margin-bottom:16px}
-.sns-month-items{list-style:none;display:flex;flex-direction:column;gap:10px}
-.sns-month-items li{font-size:.85rem;color:var(--text-muted-dark);padding-left:16px;position:relative}
-.sns-month-items li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--terra)}
-.sns-connector{display:none;align-items:center;justify-content:center;color:var(--terra)}
-@media(min-width:768px){.sns-roadmap{position:relative}}
-
-/* LINE mockup */
-.sns-line-demo{margin-bottom:80px}
-.sns-line-demo-title{font-size:1.2rem;font-weight:700;margin-bottom:24px;text-align:center}
-.line-mockup{max-width:380px;margin:0 auto;background:#7494c0;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.1)}
-.line-header{background:#5b7fa5;padding:16px 20px;display:flex;align-items:center;gap:12px}
-.line-avatar{width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:var(--white)}
-.line-name{font-size:.9rem;font-weight:600;color:var(--white)}
-.line-body{padding:20px;display:flex;flex-direction:column;gap:12px;min-height:200px}
-.line-msg{max-width:85%;padding:12px 16px;border-radius:16px;font-size:.82rem;line-height:1.6}
-.line-msg-bot{background:var(--white);color:var(--text-primary);align-self:flex-start;border-bottom-left-radius:4px}
-.line-msg-bot strong{color:var(--terra-dark);font-weight:700}
-.line-time{font-size:.65rem;color:rgba(255,255,255,.6);margin-top:2px}
-
-/* Analytics comparison */
-.sns-analytics{display:grid;gap:24px}
-@media(min-width:768px){.sns-analytics{grid-template-columns:1fr 1fr;gap:32px}}
-.analytics-card{border-radius:16px;padding:32px 28px;border:1px solid rgba(255,255,255,.08)}
-.analytics-card.standard{background:rgba(255,255,255,.03)}
-.analytics-card.jeeb{background:linear-gradient(135deg,rgba(196,112,63,.08),rgba(232,168,76,.05));border-color:rgba(196,112,63,.2)}
-.analytics-card-title{font-size:.85rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.analytics-card.standard .analytics-card-title{color:var(--text-muted-dark)}
-.analytics-card.jeeb .analytics-card-title{color:var(--terra-light)}
-.analytics-items{display:flex;flex-direction:column;gap:12px}
-.analytics-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.analytics-item span:first-child{font-size:.82rem;color:var(--text-muted-dark)}
-.analytics-item span:last-child{font-size:.82rem;font-weight:600}
-.analytics-card.standard .analytics-item span:last-child{color:rgba(255,255,255,.5)}
-.analytics-card.jeeb .analytics-item span:last-child{color:var(--terra-light)}
-
-/* ===== SECTION 8: PRICING ===== */
-.pricing{padding:120px 0;background:var(--off-white)}
-.pricing-grid{display:grid;gap:24px;margin-bottom:48px}
-@media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}}
-.pricing-card{background:var(--white);border-radius:20px;padding:40px 32px;border:1px solid rgba(0,0,0,.06);position:relative;transition:all .4s var(--ease-out-expo)}
-.pricing-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08)}
-.pricing-card.recommended{border:2px solid var(--terra);box-shadow:0 20px 60px rgba(196,112,63,.12)}
-.pricing-card.recommended:hover{box-shadow:0 24px 64px rgba(196,112,63,.2)}
-.pricing-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--terra);color:var(--white);padding:6px 24px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.04em;white-space:nowrap}
-.pricing-name{font-size:1rem;font-weight:700;color:var(--text-secondary);margin-bottom:8px}
-.pricing-price{font-family:var(--font-sans);font-size:2.8rem;font-weight:800;color:var(--text-primary);letter-spacing:-.03em;line-height:1.1}
-.pricing-price .currency{font-size:1.2rem;font-weight:600;color:var(--text-secondary);vertical-align:super}
-.pricing-price .period{font-size:.9rem;font-weight:500;color:var(--text-secondary)}
-.pricing-desc{font-size:.85rem;color:var(--text-secondary);margin:16px 0 24px;line-height:1.6}
-.pricing-divider{height:1px;background:rgba(0,0,0,.06);margin-bottom:24px}
-.pricing-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
-.pricing-features li{font-size:.875rem;color:var(--text-secondary);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
-.pricing-features li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px}
-.pricing-features li svg.included{color:var(--terra)}
-.pricing-features li svg.excluded{color:rgba(0,0,0,.15)}
-.pricing-features li.excluded-feature{opacity:.4}
-.pricing-btn{display:block;width:100%;text-align:center;padding:14px;border-radius:10px;font-weight:700;font-size:.9rem;transition:all .3s var(--ease-out-expo)}
-.pricing-card.recommended .pricing-btn{background:var(--terra);color:var(--white)}
-.pricing-card.recommended .pricing-btn:hover{background:var(--terra-light);transform:translateY(-1px)}
-.pricing-card:not(.recommended) .pricing-btn{background:rgba(0,0,0,.04);color:var(--text-primary);border:1px solid rgba(0,0,0,.1)}
-.pricing-card:not(.recommended) .pricing-btn:hover{background:rgba(196,112,63,.08);border-color:var(--terra);color:var(--terra)}
-.pricing-notes{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
-.pricing-note{display:flex;align-items:center;gap:8px;padding:12px 24px;background:var(--white);border-radius:12px;border:1px solid rgba(0,0,0,.06);font-size:.85rem;color:var(--text-secondary);font-weight:500}
-.pricing-note strong{color:var(--terra-dark);font-weight:700}
-
-/* ===== SECTION 9: GETTING STARTED ===== */
-.getting-started{padding:120px 0;background:var(--white)}
-.steps{display:grid;gap:32px;margin-bottom:60px}
-@media(min-width:768px){.steps{grid-template-columns:repeat(4,1fr);gap:24px}}
-.step{text-align:center;position:relative}
-.step-num{font-family:var(--font-sans);font-size:3.5rem;font-weight:900;color:rgba(196,112,63,.1);line-height:1;margin-bottom:16px}
-.step-title{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--text-primary)}
-.step-text{font-size:.875rem;color:var(--text-secondary);line-height:1.7}
-.step-connector{display:none;position:absolute;top:30px;right:-12px;width:24px;height:2px;background:rgba(196,112,63,.2)}
-@media(min-width:768px){.step-connector{display:block}.step:last-child .step-connector{display:none}}
-.gs-cta{text-align:center}
-.gs-cta-text{font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:8px}
-.gs-cta-sub{font-size:1rem;color:var(--text-secondary);margin-bottom:32px}
-.gs-cta .btn-primary{font-size:1.1rem;padding:20px 48px}
-
-/* ===== SECTION 10: FOOTER ===== */
-.footer{background:var(--navy);padding:80px 0 40px;color:var(--text-muted-dark)}
-.footer-grid{display:grid;gap:48px;margin-bottom:60px}
-@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr;gap:40px}}
-.footer-brand{max-width:360px}
-.footer-logo{font-family:var(--font-sans);font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:16px}
-.footer-logo span{color:var(--terra)}
-.footer-desc{font-size:.9rem;line-height:1.8;margin-bottom:24px}
-.footer-social{display:flex;gap:12px}
-.footer-social a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .3s;color:var(--text-muted-dark)}
-.footer-social a:hover{background:var(--terra);color:var(--white)}
-.footer-col-title{font-size:.8rem;font-weight:700;color:var(--white);letter-spacing:.08em;margin-bottom:20px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px}
-.footer-links a{font-size:.875rem;transition:color .3s}
-.footer-links a:hover{color:var(--white)}
-.footer-contact-item{display:flex;align-items:center;gap:10px;font-size:.875rem;margin-bottom:12px}
-.footer-line-qr{width:120px;height:120px;background:rgba(255,255,255,.06);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--text-muted-dark);margin-top:16px;border:1px solid rgba(255,255,255,.08)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
-.footer-copy{font-size:.8rem}
-.footer-legal{display:flex;gap:24px}
-.footer-legal a{font-size:.8rem;transition:color .3s}
-.footer-legal a:hover{color:var(--white)}
+/* ─── Responsive ─── */
+@media(max-width:768px){
+  .nav-links,.nav-cta-wrap{display:none}
+  .hamburger{display:flex}
+  .hero{min-height:90vh}
+  .hero-label{margin-bottom:28px}
+  .service-layout{grid-template-columns:1fr;gap:40px}
+  .service-layout.reverse{direction:ltr}
+  .service-visual{max-width:400px;margin:0 auto}
+  .showcase-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .diff-grid{grid-template-columns:1fr;border:none;gap:16px}
+  .diff-col{border:1px solid rgba(232,228,223,.06);border-radius:12px}
+  .diff-col:not(:last-child){border-right:1px solid rgba(232,228,223,.06)}
+  .pricing-grid{grid-template-columns:1fr;max-width:400px}
+  .footer .inner{flex-direction:column;gap:16px;text-align:center}
+  .showcase-featured-info{flex-direction:column;gap:12px;align-items:flex-start;padding:20px 24px}
+  .steps-flow::before{left:20px}
+  .step-item{gap:24px}
+  .step-num{width:40px;height:40px;font-size:.9rem}
+}
+@media(max-width:480px){
+  .showcase-grid{grid-template-columns:1fr 1fr}
+  .showcase-tabs{flex-wrap:wrap}
+  .reality-number{font-size:clamp(3rem,15vw,5rem)}
+}
 </style>
 </head>
 <body>
 
-<!-- ===== NAVIGATION ===== -->
+<!-- ─── Navigation ─── -->
 <nav class="nav" id="nav">
-  <div class="container nav-inner">
+  <div class="inner">
     <a href="#" class="nav-logo">JEEB<span>.</span></a>
-    <div class="nav-links">
-      <a href="#why">JEEBの強み</a>
-      <a href="#gallery">サンプル</a>
-      <a href="#pricing">料金</a>
-      <a href="#sns-system">SNS運用</a>
-      <a href="#contact" class="nav-cta">無料相談
-        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L11.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 11-1.04-1.08l3.158-2.96H3.75A.75.75 0 013 10z"/></svg>
-      </a>
+    <ul class="nav-links">
+      <li><a href="#services">サービス</a></li>
+      <li><a href="#showcase">制作実績</a></li>
+      <li><a href="#pricing">料金</a></li>
+    </ul>
+    <div class="nav-cta-wrap">
+      <a href="#start" class="nav-cta">無料相談</a>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
+
+<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#why" class="mobile-link">JEEBの強み</a>
-  <a href="#gallery" class="mobile-link">サンプル</a>
-  <a href="#pricing" class="mobile-link">料金</a>
-  <a href="#sns-system" class="mobile-link">SNS運用</a>
-  <a href="#contact" class="mobile-link">無料相談</a>
+  <a href="#services" onclick="closeMobile()">サービス</a>
+  <a href="#showcase" onclick="closeMobile()">制作実績</a>
+  <a href="#pricing" onclick="closeMobile()">料金</a>
+  <a href="#start" onclick="closeMobile()">無料相談</a>
 </div>
 
-<!-- ===== SECTION 1: HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-bg">
-    <div class="hero-gradient"></div>
-    <div class="hero-grid"></div>
-  </div>
-  <div class="hero-devices">
-    <div class="device-laptop">
-      <div class="device-laptop-screen">
-        <div class="device-laptop-inner">
-          <div class="device-laptop-bar"><span></span><span></span><span></span></div>
-          <div class="device-laptop-content">
-            <div class="sim-site">
-              <div class="sim-site-hero"><span>RAMEN SORA</span></div>
-              <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
-              <div class="sim-site-text"></div><div class="sim-site-text short"></div>
-              <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="device-laptop-base"></div>
-    </div>
-    <div class="device-phone d1">
-      <div class="device-phone-inner">
-        <div class="device-phone-scroll">
-          <div class="sim-site">
-            <div class="sim-site-hero" style="height:60px"><span>IZAKAYA</span></div>
-            <div class="sim-site-text"></div><div class="sim-site-text short"></div>
-            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
-            <div class="sim-site-text"></div>
-            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
-            <div class="sim-site-text"></div><div class="sim-site-text short"></div>
-            <div class="sim-site-hero" style="height:50px;background:linear-gradient(135deg,#1a365d,#2a4a7f)"><span>MENU</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="device-phone d2">
-      <div class="device-phone-inner">
-        <div class="device-phone-scroll" style="animation-delay:-3s">
-          <div class="sim-site">
-            <div class="sim-site-hero" style="height:50px;background:linear-gradient(135deg,#3d1c02,#7c3f14)"><span>焼鳥</span></div>
-            <div class="sim-site-text"></div>
-            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
-            <div class="sim-site-text short"></div>
-            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container hero-content">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      バンコク日本食レストラン特化
-    </div>
-    <h1 class="hero-title">
-      <span class="line"><span class="line-inner">あなたの店を、</span></span>
-      <span class="line"><span class="line-inner"><span class="accent">世界に届ける。</span></span></span>
-    </h1>
-    <p class="hero-sub">Web制作・多言語メニュー・SNS運用。<br>AIの力で即日サンプル納品。月額฿2,000から、<br>バンコクの日本食レストランのデジタル戦略を変える。</p>
-    <div class="hero-actions">
-      <a href="#gallery" class="btn-primary">
-        サンプルサイトを見る
-        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L11.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 11-1.04-1.08l3.158-2.96H3.75A.75.75 0 013 10z"/></svg>
-      </a>
-      <a href="#contact" class="btn-ghost">無料相談する</a>
-    </div>
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <p class="hero-label rv">JEEB / ジーブ</p>
+    <h1 class="rv rv-delay-1">あなたの店を、<br><em>世界に届ける。</em></h1>
+    <p class="hero-sub rv rv-delay-2">バンコク日系飲食店のための<br>Web制作・多言語メニュー・SNS運用</p>
   </div>
   <div class="hero-scroll">
-    SCROLL
-    <div class="hero-scroll-line"></div>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- ===== SECTION 2: IMPACT NUMBERS ===== -->
-<section class="impact">
-  <div class="container">
-    <div class="impact-grid">
-      <div class="impact-item reveal">
-        <div class="impact-number"><span class="count-up" data-target="8">0</span><span class="suffix">+</span></div>
-        <div class="impact-label">制作サンプルサイト</div>
-      </div>
-      <div class="impact-item reveal stagger-1">
-        <div class="impact-number"><span class="count-up" data-target="2">0</span><span class="suffix">カテゴリ</span></div>
-        <div class="impact-label">対応業態（拡大中）</div>
-      </div>
-      <div class="impact-item reveal stagger-2">
-        <div class="impact-number">即日<span class="suffix">納品</span></div>
-        <div class="impact-label">サンプルサイト提供</div>
-      </div>
-      <div class="impact-item reveal stagger-3">
-        <div class="impact-number"><span class="suffix">฿</span><span class="count-up" data-target="2000" data-separator="true">0</span><span class="suffix">〜</span></div>
-        <div class="impact-label">月額料金から</div>
-      </div>
+<!-- ─── The Reality ─── -->
+<section class="reality">
+  <div class="inner">
+    <div class="reality-statement rv">
+      <span class="reality-number" data-count="170">0</span>
+      <h2>バンコクには170以上の日系飲食店がある。<br>そのほとんどが、まだ<em>世界に届いていない。</em></h2>
+      <p class="reality-quiet">英語メニューがない。Googleで見つからない。<br>SNSが止まっている。——それだけで、届くはずの客を逃している。</p>
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 3: WHY JEEB ===== -->
-<section class="why" id="why">
-  <div class="container">
-    <div class="section-label reveal">WHY JEEB</div>
-    <h2 class="section-title reveal">他社にはできない、<br>3つの理由。</h2>
-    <p class="section-subtitle reveal">「ホームページ作ります」は誰でも言える。<br>JEEBが選ばれるのには、明確な理由がある。</p>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-card-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-        <h3 class="why-card-title">AI駆動の圧倒的スピード</h3>
-        <div class="why-card-en">AI-POWERED SPEED</div>
-        <p class="why-card-text">競合他社は制作に1〜4週間。JEEBはAIを活用し、ご相談当日にサンプルサイトをお見せします。「こんなサイトになります」ではなく、「もう動いてます」。</p>
-        <span class="why-card-highlight">他社: 1〜4週間 → JEEB: 即日</span>
-      </div>
-      <div class="why-card reveal stagger-1">
-        <div class="why-card-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3 class="why-card-title">動くデモサイト</h3>
-        <div class="why-card-en">LIVE DEMO PORTFOLIO</div>
-        <p class="why-card-text">他社はスクリーンショットやモックアップ止まり。JEEBは全サンプルがURLで今すぐ閲覧できる実動サイト。スマホで開いて、触って、確認できます。</p>
-        <span class="why-card-highlight">スクショ → 実動サイト</span>
-      </div>
-      <div class="why-card reveal stagger-2">
-        <div class="why-card-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-        </div>
-        <h3 class="why-card-title">競合分析データ</h3>
-        <div class="why-card-en">DEEP ANALYTICS</div>
-        <p class="why-card-text">Instagramのフォロワー数だけでは勝てない。JEEBはAPI連携で100倍のデータを取得。「トンロー居酒屋の中で3位」のようなポジション分析まで可能です。</p>
-        <span class="why-card-highlight">標準の100倍のデータ量</span>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ─── Services (3 Scenes) ─── -->
+<div id="services">
 
-<!-- ===== SECTION 4: BEFORE / AFTER ===== -->
-<section class="before-after" id="before-after">
-  <div class="container">
-    <div class="section-label reveal">TRANSFORMATION</div>
-    <h2 class="section-title reveal">導入前と導入後。</h2>
-    <p class="section-subtitle reveal">多くのバンコク日本食レストランが抱える課題。<br>JEEBはそのすべてを解決します。</p>
-    <div class="ba-wrapper">
-      <div class="ba-card ba-before reveal-left">
-        <div class="ba-tag">BEFORE</div>
-        <div class="ba-items">
-          <div class="ba-item">
-            <div class="ba-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div class="ba-item-text">
-              <h4>ウェブサイトなし</h4>
-              <p>Googleで検索しても出てこない。存在を知られない。</p>
-            </div>
-          </div>
-          <div class="ba-item">
-            <div class="ba-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div class="ba-item-text">
-              <h4>タイ語メニューだけ</h4>
-              <p>外国人観光客が来ても注文できない。客単価が下がる。</p>
-            </div>
-          </div>
-          <div class="ba-item">
-            <div class="ba-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div class="ba-item-text">
-              <h4>放置されたSNS</h4>
-              <p>Instagramの投稿は3件。最終更新は半年前。</p>
-            </div>
-          </div>
-        </div>
-        <div class="ba-visual ba-visual-before">
-          <div class="mock-menu-title"></div>
-          <div class="mock-menu"><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div></div>
-        </div>
+<!-- Service 1: Web -->
+<section class="service-scene">
+  <div class="inner">
+    <div class="service-layout">
+      <div class="service-text rv">
+        <span class="service-index">Service 01</span>
+        <h2>即日、あなたの店の<br>Webサイトを作る。</h2>
+        <p>店名とジャンルを教えてください。その日のうちに、プロ品質のサンプルサイトをお見せします。気に入ったら、そのまま公開。</p>
+        <p>テンプレートではありません。あなたの店のためだけに作ります。</p>
       </div>
-
-      <div class="ba-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
-
-      <div class="ba-card ba-after reveal-right">
-        <div class="ba-tag">AFTER</div>
-        <div class="ba-items">
-          <div class="ba-item">
-            <div class="ba-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="ba-item-text">
-              <h4>多言語ウェブサイト完備</h4>
-              <p>日本語・英語・タイ語。Google検索でも上位表示。</p>
-            </div>
-          </div>
-          <div class="ba-item">
-            <div class="ba-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="ba-item-text">
-              <h4>アクティブなSNS運用</h4>
-              <p>週3回の投稿。フォロワー増加。集客チャネルとして機能。</p>
-            </div>
-          </div>
-          <div class="ba-item">
-            <div class="ba-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="ba-item-text">
-              <h4>データで見える競合状況</h4>
-              <p>エリア内ランキング、トレンド分析、改善ポイントが一目瞭然。</p>
-            </div>
-          </div>
-        </div>
-        <div class="ba-visual ba-visual-after">
-          <div class="mock-dash"><div class="mock-dash-item"><div class="mock-dash-bar"></div></div><div class="mock-dash-item"><div class="mock-dash-bar" style="width:40%"></div></div><div class="mock-dash-item"><div class="mock-dash-bar" style="width:80%"></div></div></div>
-          <div class="mock-chart"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SECTION 5: SAMPLE GALLERY ===== -->
-<section class="gallery" id="gallery">
-  <div class="container">
-    <div class="section-label reveal">LIVE DEMOS</div>
-    <h2 class="section-title reveal">今すぐ触れる、<br>実動サンプルサイト。</h2>
-    <p class="section-subtitle reveal">スクリーンショットではありません。<br>すべて実際にブラウザで閲覧できるサイトです。</p>
-    <div class="gallery-tabs reveal">
-      <button class="gallery-tab active" data-tab="ramen">ラーメン</button>
-      <button class="gallery-tab" data-tab="izakaya">居酒屋</button>
-      <button class="gallery-tab disabled">焼肉</button>
-      <button class="gallery-tab disabled">タイ料理</button>
-      <button class="gallery-tab disabled">カフェ</button>
-      <button class="gallery-tab disabled">夜系</button>
-    </div>
-
-    <!-- Ramen Panel -->
-    <div class="gallery-panel active" id="panel-ramen">
-      <div class="gallery-grid">
-        <div class="gallery-item reveal">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" loading="lazy" title="麺匠 SORA"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">麺匠 SORA</div>
-            <div class="gallery-type">Type A — 洗練・モダン系</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="gallery-item reveal stagger-1">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" loading="lazy" title="麺道 KENJI"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">麺道 KENJI</div>
-            <div class="gallery-type">Type B — 力強い・職人系</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="gallery-item reveal stagger-2">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" loading="lazy" title="剛麺 THUNDER"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">剛麺 THUNDER</div>
-            <div class="gallery-type">Type C — ストリート・エネルギー系</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="gallery-item reveal stagger-3">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" loading="lazy" title="麺処 清水"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">麺処 清水</div>
-            <div class="gallery-type">Type D — 温かみ・家庭的系</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Izakaya Panel -->
-    <div class="gallery-panel" id="panel-izakaya">
-      <div class="gallery-grid">
-        <div class="gallery-item reveal">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" loading="lazy" title="炭火横丁 たけし"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">炭火横丁 たけし</div>
-            <div class="gallery-type">Type A — 本格炭火焼鳥</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="gallery-item reveal stagger-1">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" loading="lazy" title="炎とソーダ"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">炎とソーダ</div>
-            <div class="gallery-type">Type B — ネオ居酒屋</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="gallery-item reveal stagger-2">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" loading="lazy" title="炉端 蔵人"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">炉端 蔵人</div>
-            <div class="gallery-type">Type C — 炉端焼き・和モダン</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="gallery-item reveal stagger-3">
-          <div class="gallery-device">
-            <div class="gallery-device-frame">
-              <div class="gallery-device-inner">
-                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" loading="lazy" title="居酒屋 みのり"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-info">
-            <div class="gallery-name">居酒屋 みのり</div>
-            <div class="gallery-type">Type D — 大衆・アットホーム系</div>
-            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" target="_blank" rel="noopener" class="gallery-link">
-              Live Demo を見る
-              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
-            </a>
+      <div class="service-visual rv rv-delay-1">
+        <div class="service-visual-inner visual-web">
+          <div class="vis-grid">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
           </div>
         </div>
       </div>
@@ -809,170 +315,22 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
   </div>
 </section>
 
-<!-- ===== SECTION 6: COMPARISON TABLE ===== -->
-<section class="comparison" id="comparison">
-  <div class="container">
-    <div class="section-label reveal">COMPARISON</div>
-    <h2 class="section-title reveal">比較すれば、一目瞭然。</h2>
-    <p class="section-subtitle reveal">バンコクで日本食レストラン向けWeb制作・SNS運用を<br>提供する3つの選択肢を比較。</p>
-    <div class="comparison-table-wrap reveal">
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="col-jeeb">JEEB</th>
-            <th>既存Web制作会社</th>
-            <th>大手SNS代行</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>初期費用</td>
-            <td class="col-jeeb highlight-cell">0円</td>
-            <td>50,000〜200,000円</td>
-            <td>100,000〜300,000円</td>
-          </tr>
-          <tr>
-            <td>月額費用</td>
-            <td class="col-jeeb highlight-cell">฿2,000〜10,000<br><small style="color:var(--text-secondary);font-weight:400">（約8,000〜40,000円）</small></td>
-            <td>80,000〜150,000円</td>
-            <td>100,000〜200,000円</td>
-          </tr>
-          <tr>
-            <td>納期</td>
-            <td class="col-jeeb highlight-cell">即日サンプル</td>
-            <td>1〜4週間</td>
-            <td>2〜4週間</td>
-          </tr>
-          <tr>
-            <td>サンプル提供</td>
-            <td class="col-jeeb"><span class="check">&#10003;</span> 実動サイト</td>
-            <td>モックアップ / PDF</td>
-            <td>企画書のみ</td>
-          </tr>
-          <tr>
-            <td>SNS運用</td>
-            <td class="col-jeeb"><span class="check">&#10003;</span> 戦略＋実行</td>
-            <td><span class="cross">&#10005;</span> 別料金</td>
-            <td><span class="check">&#10003;</span> 実行のみ</td>
-          </tr>
-          <tr>
-            <td>データ分析</td>
-            <td class="col-jeeb"><span class="check">&#10003;</span> API深層分析</td>
-            <td><span class="cross">&#10005;</span> なし</td>
-            <td>基本レポートのみ</td>
-          </tr>
-          <tr>
-            <td>多言語対応</td>
-            <td class="col-jeeb"><span class="check">&#10003;</span> 日英タイ</td>
-            <td>別途見積もり</td>
-            <td><span class="cross">&#10005;</span> 非対応</td>
-          </tr>
-          <tr>
-            <td>AI活用</td>
-            <td class="col-jeeb"><span class="check">&#10003;</span> 全工程</td>
-            <td><span class="cross">&#10005;</span></td>
-            <td>一部のみ</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SECTION 7: SNS OPERATION SYSTEM ===== -->
-<section class="sns-system" id="sns-system">
-  <div class="container">
-    <div class="section-label reveal">SNS OPERATION</div>
-    <h2 class="section-title reveal">SNS運用、<br>丸ごとお任せください。</h2>
-    <p class="section-subtitle reveal">撮影指示から投稿、分析まで。<br>オーナーがやることは「写真を1枚撮る」だけ。</p>
-
-    <!-- 3-month roadmap -->
-    <div class="sns-roadmap">
-      <div class="sns-month reveal">
-        <div class="sns-month-num">01</div>
-        <div class="sns-month-label">MONTH 1</div>
-        <h3 class="sns-month-title">土台構築</h3>
-        <ul class="sns-month-items">
-          <li>アカウント最適化（プロフィール・ハイライト）</li>
-          <li>ブランドビジュアル統一</li>
-          <li>初期コンテンツ12投稿作成</li>
-          <li>競合分析レポート初版</li>
-        </ul>
+<!-- Service 2: Menu -->
+<section class="service-scene">
+  <div class="inner">
+    <div class="service-layout reverse">
+      <div class="service-text rv">
+        <span class="service-index">Service 02</span>
+        <h2>メニューを、<br>世界の言葉に。</h2>
+        <p>日本語メニューを、英語・タイ語・中国語に翻訳。ただの機械翻訳ではなく、料理の魅力が伝わる言葉で。</p>
+        <p>「炙りチャーシュー」を "grilled pork" で終わらせない。</p>
       </div>
-      <div class="sns-month reveal stagger-1">
-        <div class="sns-month-num">02</div>
-        <div class="sns-month-label">MONTH 2</div>
-        <h3 class="sns-month-title">成長加速</h3>
-        <ul class="sns-month-items">
-          <li>エンゲージメント施策開始</li>
-          <li>リール動画制作（週1本）</li>
-          <li>ハッシュタグ戦略の最適化</li>
-          <li>データに基づく投稿時間調整</li>
-        </ul>
-      </div>
-      <div class="sns-month reveal stagger-2">
-        <div class="sns-month-num">03</div>
-        <div class="sns-month-label">MONTH 3</div>
-        <h3 class="sns-month-title">収益化</h3>
-        <ul class="sns-month-items">
-          <li>来店導線の確立</li>
-          <li>UGCキャンペーン実施</li>
-          <li>月次ROIレポート</li>
-          <li>次四半期戦略の策定</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- LINE shooting instruction demo -->
-    <div class="sns-line-demo reveal">
-      <h3 class="sns-line-demo-title">毎日の撮影指示もLINEでお届け</h3>
-      <div class="line-mockup">
-        <div class="line-header">
-          <div class="line-avatar">J</div>
-          <div class="line-name">JEEB 撮影アシスタント</div>
-        </div>
-        <div class="line-body">
-          <div class="line-msg line-msg-bot">
-            <strong>本日の撮影リクエスト</strong><br><br>
-            1. ラーメンの湯気が立つ瞬間（斜め45度から）<br>
-            2. 仕込み中の厨房の様子<br>
-            3. 本日のおすすめ食材のアップ<br><br>
-            撮影のコツ: 自然光を使い、お皿の左斜め上から撮ると立体感が出ます。
-          </div>
-          <div class="line-time">10:30</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Analytics comparison -->
-    <div class="reveal">
-      <h3 class="sns-line-demo-title" style="margin-bottom:32px">データ分析: 標準 vs JEEB</h3>
-      <div class="sns-analytics">
-        <div class="analytics-card standard">
-          <div class="analytics-card-title">標準ダッシュボード</div>
-          <div class="analytics-items">
-            <div class="analytics-item"><span>フォロワー数</span><span>1,234</span></div>
-            <div class="analytics-item"><span>いいね合計</span><span>5,678</span></div>
-            <div class="analytics-item"><span>リーチ</span><span>12,000</span></div>
-            <div class="analytics-item"><span>インプレッション</span><span>—</span></div>
-            <div class="analytics-item"><span>エリア内順位</span><span>—</span></div>
-            <div class="analytics-item"><span>競合比較</span><span>—</span></div>
-            <div class="analytics-item"><span>来店予測</span><span>—</span></div>
-            <div class="analytics-item"><span>最適投稿時間</span><span>—</span></div>
-          </div>
-        </div>
-        <div class="analytics-card jeeb">
-          <div class="analytics-card-title">JEEB Analytics</div>
-          <div class="analytics-items">
-            <div class="analytics-item"><span>フォロワー数</span><span>1,234（+12% MoM）</span></div>
-            <div class="analytics-item"><span>エンゲージメント率</span><span>4.8%（業界平均2.1%）</span></div>
-            <div class="analytics-item"><span>リーチ効率</span><span>投稿あたり ¥3.2</span></div>
-            <div class="analytics-item"><span>トップ投稿分析</span><span>リール &gt; カルーセル</span></div>
-            <div class="analytics-item"><span>エリア内順位</span><span>トンロー居酒屋 3位/47店</span></div>
-            <div class="analytics-item"><span>競合ベンチマーク</span><span>上位20%（成長率1位）</span></div>
-            <div class="analytics-item"><span>来店予測（今週）</span><span>+15〜22名</span></div>
-            <div class="analytics-item"><span>最適投稿時間</span><span>火 18:30 / 金 20:00</span></div>
+      <div class="service-visual rv rv-delay-1">
+        <div class="service-visual-inner visual-menu">
+          <div class="vis-lines">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span>
           </div>
         </div>
       </div>
@@ -980,268 +338,422 @@ button{border:none;background:none;cursor:pointer;font-family:inherit}
   </div>
 </section>
 
-<!-- ===== SECTION 8: PRICING ===== -->
+<!-- Service 3: SNS -->
+<section class="service-scene">
+  <div class="inner">
+    <div class="service-layout">
+      <div class="service-text rv">
+        <span class="service-index">Service 03</span>
+        <h2>SNSを、<br>毎日動かし続ける。</h2>
+        <p>「何を投稿すればいいかわからない」——その悩みを解決します。毎日、具体的な投稿指示をお届け。写真の撮り方、キャプション、ハッシュタグまで。</p>
+        <p>あなたは料理に集中してください。</p>
+      </div>
+      <div class="service-visual rv rv-delay-1">
+        <div class="service-visual-inner visual-sns">
+          <div class="vis-dots">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ─── Showcase ─── -->
+<section class="showcase" id="showcase">
+  <div class="inner">
+    <h2 class="rv">実際に、見てください。</h2>
+    <p class="showcase-lead rv rv-delay-1">すべてJEEBが制作したサンプルサイトです。<br>あなたの店でも、同じクオリティで作れます。</p>
+
+    <div class="showcase-tabs rv rv-delay-1">
+      <button class="showcase-tab active" data-category="ramen">ラーメン</button>
+      <button class="showcase-tab" data-category="izakaya">居酒屋</button>
+    </div>
+
+    <!-- Featured Display -->
+    <div class="showcase-featured rv rv-delay-2" id="showcaseFeatured">
+      <div class="showcase-featured-frame">
+        <iframe id="featuredIframe" src="" loading="lazy" title="Featured sample site"></iframe>
+      </div>
+      <div class="showcase-featured-info">
+        <div>
+          <h3 id="featuredName">麺匠 SORA</h3>
+          <span id="featuredType">Type A — 洗練・ミニマル</span>
+        </div>
+        <a id="featuredLink" href="#" target="_blank" rel="noopener" class="showcase-featured-link">
+          サイトを見る
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 13L13 1M13 1H4M13 1v9"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Thumbnails -->
+    <div class="showcase-grid rv" id="showcaseGrid"></div>
+  </div>
+</section>
+
+<!-- ─── The Difference ─── -->
+<section class="difference" id="difference">
+  <div class="inner">
+    <h2 class="rv">なぜ、JEEBなのか。</h2>
+    <p class="difference-lead rv rv-delay-1">他にも選択肢はあります。<br>でも、同じではありません。</p>
+
+    <div class="diff-grid rv rv-delay-2">
+      <!-- Column 1: Freelancer -->
+      <div class="diff-col">
+        <div class="diff-col-header">フリーランス</div>
+        <div class="diff-item">
+          <div class="diff-check partial"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h6"/></svg></div>
+          <span class="diff-label">Web制作</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check no"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+          <span class="diff-label">即日サンプル</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check no"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+          <span class="diff-label">多言語メニュー</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check no"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+          <span class="diff-label">SNS運用サポート</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check no"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+          <span class="diff-label">飲食店特化</span>
+        </div>
+      </div>
+      <!-- Column 2: Agency -->
+      <div class="diff-col">
+        <div class="diff-col-header">制作会社</div>
+        <div class="diff-item">
+          <div class="diff-check yes"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5l2.5 2.5 5-5"/></svg></div>
+          <span class="diff-label">Web制作</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check no"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+          <span class="diff-label">即日サンプル</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check partial"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h6"/></svg></div>
+          <span class="diff-label">多言語メニュー</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check partial"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h6"/></svg></div>
+          <span class="diff-label">SNS運用サポート</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check no"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+          <span class="diff-label">飲食店特化</span>
+        </div>
+      </div>
+      <!-- Column 3: JEEB -->
+      <div class="diff-col">
+        <div class="diff-col-header">JEEB</div>
+        <div class="diff-item">
+          <div class="diff-check yes"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5l2.5 2.5 5-5"/></svg></div>
+          <span class="diff-label">Web制作</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check yes"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5l2.5 2.5 5-5"/></svg></div>
+          <span class="diff-label">即日サンプル</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check yes"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5l2.5 2.5 5-5"/></svg></div>
+          <span class="diff-label">多言語メニュー</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check yes"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5l2.5 2.5 5-5"/></svg></div>
+          <span class="diff-label">SNS運用サポート</span>
+        </div>
+        <div class="diff-item">
+          <div class="diff-check yes"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 5.5l2.5 2.5 5-5"/></svg></div>
+          <span class="diff-label">飲食店特化</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Steps ─── -->
+<section class="steps">
+  <div class="inner">
+    <h2 class="rv">はじめ方は、シンプルです。</h2>
+    <p class="steps-lead rv rv-delay-1">まずは無料でサンプルを作ります。<br>納得してから、はじめてください。</p>
+
+    <div class="steps-flow">
+      <div class="step-item rv">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>ご連絡ください</h3>
+          <p>LINE・Instagram・メール、どれでも。店名とジャンルだけ教えてください。</p>
+        </div>
+      </div>
+      <div class="step-item rv rv-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>即日サンプル制作</h3>
+          <p>あなたの店のサンプルサイトを、その日のうちにお見せします。完全無料です。</p>
+        </div>
+      </div>
+      <div class="step-item rv rv-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>フィードバック・調整</h3>
+          <p>気になる点があれば修正します。満足いくまで調整。納得できなければ、費用はかかりません。</p>
+        </div>
+      </div>
+      <div class="step-item rv rv-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>公開・運用開始</h3>
+          <p>サイトを公開し、必要に応じてSNS運用や多言語メニューも開始します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pricing ─── -->
 <section class="pricing" id="pricing">
-  <div class="container">
-    <div class="section-label reveal">PRICING</div>
-    <h2 class="section-title reveal">シンプルな料金体系。</h2>
-    <p class="section-subtitle reveal">初期費用ゼロ。2週間の無料トライアル付き。<br>年間契約なら2ヶ月分お得。</p>
+  <div class="inner">
+    <h2 class="rv">料金</h2>
+    <p class="pricing-lead rv rv-delay-1">シンプルで、わかりやすく。<br>隠れた費用はありません。</p>
+
     <div class="pricing-grid">
-      <!-- Light -->
-      <div class="pricing-card reveal">
+      <div class="pricing-card rv">
         <div class="pricing-name">ライト</div>
-        <div class="pricing-price"><span class="currency">฿</span>2,000<span class="period">/月</span></div>
-        <p class="pricing-desc">まずはウェブサイトから。<br>個人経営の小規模店舗に最適。</p>
-        <div class="pricing-divider"></div>
+        <div class="pricing-price">฿2,000<span>/月</span></div>
+        <div class="pricing-period">Webサイト運用</div>
         <ul class="pricing-features">
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>レスポンシブWebサイト制作</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>多言語メニュー（日英タイ）</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>月1回の更新対応</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>基本アクセス解析</li>
-          <li class="excluded-feature"><svg class="excluded" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>SNS運用代行</li>
-          <li class="excluded-feature"><svg class="excluded" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>競合分析レポート</li>
+          <li>レスポンシブWebサイト</li>
+          <li>基本的なSEO対策</li>
+          <li>月1回の更新</li>
+          <li>ホスティング込み</li>
         </ul>
-        <a href="#contact" class="pricing-btn">無料で始める</a>
+        <a href="#start" class="pricing-btn">相談する</a>
       </div>
-      <!-- Standard -->
-      <div class="pricing-card recommended reveal stagger-1">
-        <div class="pricing-badge">おすすめ</div>
+      <div class="pricing-card featured rv rv-delay-1">
         <div class="pricing-name">スタンダード</div>
-        <div class="pricing-price"><span class="currency">฿</span>5,000<span class="period">/月</span></div>
-        <p class="pricing-desc">Web + SNS運用のフルパッケージ。<br>成長を本気で目指す店舗に。</p>
-        <div class="pricing-divider"></div>
+        <div class="pricing-price">฿5,000<span>/月</span></div>
+        <div class="pricing-period">Web + 多言語メニュー</div>
         <ul class="pricing-features">
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>ライトの全機能</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Instagram運用代行（週3投稿）</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>毎日の撮影指示（LINE配信）</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>月次レポート（競合比較付き）</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>無制限の更新対応</li>
-          <li class="excluded-feature"><svg class="excluded" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>リール動画制作</li>
+          <li>ライトの全機能</li>
+          <li>多言語メニュー（3言語）</li>
+          <li>月4回の更新</li>
+          <li>Googleビジネス最適化</li>
         </ul>
-        <a href="#contact" class="pricing-btn">無料で始める</a>
+        <a href="#start" class="pricing-btn">相談する</a>
       </div>
-      <!-- Premium -->
-      <div class="pricing-card reveal stagger-2">
+      <div class="pricing-card rv rv-delay-2">
         <div class="pricing-name">プレミアム</div>
-        <div class="pricing-price"><span class="currency">฿</span>10,000<span class="period">/月</span></div>
-        <p class="pricing-desc">データ駆動の成長戦略。<br>複数店舗展開やフランチャイズに。</p>
-        <div class="pricing-divider"></div>
+        <div class="pricing-price">฿10,000<span>/月</span></div>
+        <div class="pricing-period">フルサポート</div>
         <ul class="pricing-features">
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>スタンダードの全機能</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>リール動画制作（週1本）</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>JEEB Deep Analytics</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>エリア内競合ランキング</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Google Maps最適化</li>
-          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>専任担当者</li>
+          <li>スタンダードの全機能</li>
+          <li>SNS運用代行（毎日）</li>
+          <li>写真撮影アドバイス</li>
+          <li>月次レポート</li>
         </ul>
-        <a href="#contact" class="pricing-btn">無料で始める</a>
+        <a href="#start" class="pricing-btn">相談する</a>
       </div>
-    </div>
-    <div class="pricing-notes reveal">
-      <div class="pricing-note"><strong>初期費用 0円</strong></div>
-      <div class="pricing-note"><strong>2週間無料</strong>トライアル</div>
-      <div class="pricing-note">年間契約で<strong>2ヶ月分無料</strong>（12→10ヶ月分）</div>
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 9: GETTING STARTED ===== -->
-<section class="getting-started" id="start">
-  <div class="container">
-    <div class="section-label reveal" style="text-align:center">GET STARTED</div>
-    <h2 class="section-title reveal" style="text-align:center">始め方は、驚くほど簡単。</h2>
-    <p class="section-subtitle reveal" style="text-align:center;margin-left:auto;margin-right:auto">まずは無料でサンプルを作ります。リスクゼロ。</p>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-num">01</div>
-        <h3 class="step-title">無料相談</h3>
-        <p class="step-text">LINEまたはフォームからお気軽にご連絡ください。お店のジャンルとご要望をお聞きします。</p>
-        <div class="step-connector"></div>
-      </div>
-      <div class="step reveal stagger-1">
-        <div class="step-num">02</div>
-        <h3 class="step-title">即日サンプル</h3>
-        <p class="step-text">ご相談当日に、お店に合わせたサンプルサイトをお見せします。モックアップではなく実動サイトです。</p>
-        <div class="step-connector"></div>
-      </div>
-      <div class="step reveal stagger-2">
-        <div class="step-num">03</div>
-        <h3 class="step-title">2週間お試し</h3>
-        <p class="step-text">気に入ったら2週間の無料トライアル。実際に使って、効果を確認してから決められます。</p>
-        <div class="step-connector"></div>
-      </div>
-      <div class="step reveal stagger-3">
-        <div class="step-num">04</div>
-        <h3 class="step-title">運用開始</h3>
-        <p class="step-text">本契約後、SNS運用・データ分析を本格始動。あなたはお店に集中してください。</p>
-      </div>
-    </div>
-    <div class="gs-cta reveal">
-      <div class="gs-cta-text">まずは無料でサンプルを見てみませんか？</div>
-      <div class="gs-cta-sub">最短30分でお店専用のデモサイトをお見せします。</div>
-      <a href="#contact" class="btn-primary" style="font-size:1.1rem;padding:20px 48px">
-        無料相談する
-        <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L11.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 11-1.04-1.08l3.158-2.96H3.75A.75.75 0 013 10z"/></svg>
+<!-- ─── Start / CTA ─── -->
+<section class="start" id="start">
+  <div class="inner">
+    <h2 class="rv">まずは、話しましょう。</h2>
+    <p class="start-sub rv rv-delay-1">無料でサンプルサイトを制作します。<br>お気軽にご連絡ください。</p>
+    <a href="#" class="start-cta rv rv-delay-2">無料相談する</a>
+    <div class="start-channels rv rv-delay-3">
+      <a href="#" class="start-channel">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINE
+      </a>
+      <a href="#" class="start-channel">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="mailto:hello@jeeb.co" class="start-channel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+        メール
       </a>
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 10: FOOTER ===== -->
-<footer class="footer" id="contact">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">JEEB<span>.</span></div>
-        <p class="footer-desc">バンコクの日本食レストランに特化した<br>Web制作・多言語メニュー・SNS運用代行サービス。<br>AIの力で、あなたの店を世界に届けます。</p>
-        <div class="footer-social">
-          <a href="https://instagram.com/jeeb.bkk" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" aria-label="LINE">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.83 2 10.5c0 3.78 3.4 6.96 8 8.27V22l3.6-2.66C18.73 18.33 22 15.14 22 10.5 22 5.83 17.52 2 12 2zm5.5 7.5h-2v4h-1.5v-4h-2V8H17.5v1.5zM9 13.5H5.5V8H7v4h2v1.5z"/></svg>
-          </a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">サービス</div>
-        <ul class="footer-links">
-          <li><a href="#why">JEEBの強み</a></li>
-          <li><a href="#gallery">サンプルサイト</a></li>
-          <li><a href="#pricing">料金プラン</a></li>
-          <li><a href="#sns-system">SNS運用</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">お問い合わせ</div>
-        <div class="footer-contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          hello@jeeb.bkk
-        </div>
-        <div class="footer-contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          @jeeb.bkk
-        </div>
-        <div class="footer-line-qr">LINE QR</div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">&copy; 2026 JEEB. All rights reserved.</div>
-      <div class="footer-legal">
-        <a href="#">プライバシーポリシー</a>
-        <a href="#">利用規約</a>
-      </div>
-    </div>
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <div class="inner">
+    <div class="footer-logo">JEEB</div>
+    <div class="footer-copy">&copy; 2026 JEEB. All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-(function(){
-  'use strict';
+/* ─── Showcase Data ─── */
+const sites = {
+  ramen: [
+    { name: '麺匠 SORA', type: 'Type A — 洗練・ミニマル', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/' },
+    { name: '麺道 KENJI', type: 'Type B — 力強い・情熱系', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/' },
+    { name: '剛麺 THUNDER', type: 'Type C — インパクト・大胆', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/' },
+    { name: '麺処 清水', type: 'Type D — 和・伝統的', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/' }
+  ],
+  izakaya: [
+    { name: '炭火横丁 たけし', type: 'Type A — 炭火焼き・本格派', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/' },
+    { name: '炎とソーダ', type: 'Type B — ネオ居酒屋', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/' },
+    { name: '炉端 蔵人', type: 'Type C — 炉端焼き・落ち着き', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/' },
+    { name: '居酒屋 みのり', type: 'Type D — 家庭的・温かみ', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/' }
+  ]
+};
 
-  // === NAV: Scroll-aware background ===
-  const nav = document.getElementById('nav');
-  let lastScroll = 0;
-  function onScroll() {
-    const y = window.scrollY;
-    nav.classList.toggle('scrolled', y > 60);
-    lastScroll = y;
+let currentCategory = 'ramen';
+let currentIndex = 0;
+
+function updateFeatured(cat, idx) {
+  const site = sites[cat][idx];
+  const iframe = document.getElementById('featuredIframe');
+  const name = document.getElementById('featuredName');
+  const type = document.getElementById('featuredType');
+  const link = document.getElementById('featuredLink');
+
+  // Only change iframe src if different
+  if (iframe.src !== site.url) iframe.src = site.url;
+  name.textContent = site.name;
+  type.textContent = site.type;
+  link.href = site.url;
+
+  // Update active thumb
+  document.querySelectorAll('.showcase-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+
+function renderThumbs(cat) {
+  const grid = document.getElementById('showcaseGrid');
+  grid.innerHTML = '';
+  sites[cat].forEach((site, i) => {
+    const thumb = document.createElement('div');
+    thumb.className = 'showcase-thumb' + (i === 0 ? ' active' : '');
+    thumb.innerHTML = `
+      <div class="showcase-thumb-inner">
+        <iframe src="${site.url}" loading="lazy" tabindex="-1" title="${site.name}"></iframe>
+      </div>
+      <div class="showcase-thumb-label">${site.name}</div>
+    `;
+    thumb.addEventListener('click', () => {
+      currentIndex = i;
+      updateFeatured(cat, i);
+    });
+    grid.appendChild(thumb);
+  });
+}
+
+// Tab switching
+document.querySelectorAll('.showcase-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentCategory = tab.dataset.category;
+    currentIndex = 0;
+    renderThumbs(currentCategory);
+    updateFeatured(currentCategory, 0);
+  });
+});
+
+// Init showcase
+renderThumbs('ramen');
+updateFeatured('ramen', 0);
+
+/* ─── Scroll Reveal (Intersection Observer) ─── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
+
+/* ─── Sticky Nav ─── */
+const nav = document.getElementById('nav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 100);
+}, { passive: true });
+
+/* ─── Mobile Menu ─── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobile() {
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ─── Count-up Animation ─── */
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      let current = 0;
+      const duration = 1800;
+      const step = target / (duration / 16);
+      const counter = () => {
+        current += step;
+        if (current >= target) {
+          el.textContent = target + '+';
+          return;
+        }
+        el.textContent = Math.floor(current);
+        requestAnimationFrame(counter);
+      };
+      counter();
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+/* ─── Hero Particles ─── */
+(function initParticles() {
+  const container = document.getElementById('particles');
+  const count = window.innerWidth < 768 ? 8 : 15;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+    container.appendChild(p);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // === Mobile Menu ===
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-  });
-  mobileMenu.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
-  // === Intersection Observer: Scroll Reveal ===
-  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-  const revealObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(function(el) { revealObs.observe(el); });
-
-  // === Count-Up Animation ===
-  const countEls = document.querySelectorAll('.count-up');
-  const countObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-target'), 10);
-        const useSep = el.getAttribute('data-separator') === 'true';
-        const duration = 1600;
-        const start = performance.now();
-        function step(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          // ease out quint
-          const eased = 1 - Math.pow(1 - progress, 5);
-          const current = Math.round(eased * target);
-          el.textContent = useSep ? current.toLocaleString() : current;
-          if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-        countObs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-  countEls.forEach(function(el) { countObs.observe(el); });
-
-  // === Gallery Tab Switching ===
-  const tabs = document.querySelectorAll('.gallery-tab:not(.disabled)');
-  const panels = document.querySelectorAll('.gallery-panel');
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      const target = tab.getAttribute('data-tab');
-      tabs.forEach(function(t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      panels.forEach(function(p) {
-        p.classList.remove('active');
-        if (p.id === 'panel-' + target) {
-          p.classList.add('active');
-          // Re-trigger reveal animations for new panel items
-          p.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
-            el.classList.remove('visible');
-            void el.offsetWidth; // force reflow
-            revealObs.observe(el);
-          });
-        }
-      });
-    });
-  });
-
-  // === Smooth scroll for anchor links ===
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      const id = a.getAttribute('href');
-      if (id.length <= 1) return;
-      const target = document.querySelector(id);
-      if (target) {
-        e.preventDefault();
-        const offset = nav.offsetHeight + 16;
-        const y = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    });
-  });
-
 })();
+
+/* ─── Smooth Scroll for Anchor Links ─── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 </script>
 </body>
 </html>
