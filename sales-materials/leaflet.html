@@ -3,631 +3,606 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEEB — あなたの店を、世界に届ける。</title>
+<title>JEEB - バンコク飲食店向けWeb・SNS支援</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ── Reset ── */
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-  /* ── Print Setup ── */
-  @page {
-    size: A4 portrait;
-    margin: 0;
+  :root{
+    --navy:#0a0f1a;
+    --off-white:#faf9f7;
+    --terra:#c4703f;
+    --terra-light:#d4885a;
+    --grey-text:#3a3a3a;
+    --light-grey:#e8e6e2;
   }
 
-  html, body {
-    width: 210mm;
-    height: 297mm;
-    font-family: 'Noto Sans JP', 'Inter', sans-serif;
-    font-weight: 400;
-    color: #0a0f1a;
-    background: #faf9f7;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    color-adjust: exact;
+  @page{
+    size:A4;
+    margin:0;
   }
 
-  /* ── Design Tokens ── */
-  :root {
-    --navy: #0a0f1a;
-    --offwhite: #faf9f7;
-    --terracotta: #c4703f;
-    --warm-gray: #8a8578;
-    --light-border: #e8e5e0;
-    --subtle-bg: #f2f0ec;
+  html{
+    font-size:14px;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
   }
 
-  /* ── Page Container ── */
-  .page {
-    width: 210mm;
-    height: 297mm;
-    padding: 22mm 20mm 18mm 20mm;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    background: var(--offwhite);
-    page-break-after: always;
+  body{
+    font-family:'Noto Sans JP','Inter',sans-serif;
+    color:var(--navy);
+    background:#fff;
+    line-height:1.7;
   }
 
-  .page:last-child {
-    page-break-after: auto;
+  /* ===== PAGE 1: FRONT ===== */
+  .page{
+    width:210mm;
+    height:297mm;
+    margin:0 auto;
+    position:relative;
+    overflow:hidden;
+    page-break-after:always;
+    background:var(--off-white);
   }
 
-  /* ══════════════════════════════════════
-     PAGE 1 — FRONT
-     ══════════════════════════════════════ */
-
-  /* Logo Area */
-  .p1-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 14mm;
-    padding-bottom: 6mm;
-    border-bottom: 1px solid var(--light-border);
+  .page-front{
+    display:flex;
+    flex-direction:column;
+    padding:18mm 16mm 14mm;
   }
 
-  .logo-mark {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 28pt;
-    letter-spacing: 0.18em;
-    color: var(--navy);
+  /* Top brand bar */
+  .brand-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10mm;
+    padding-bottom:4mm;
+    border-bottom:1px solid var(--light-grey);
+  }
+  .brand-name{
+    font-family:'Noto Serif JP',serif;
+    font-weight:900;
+    font-size:1.6rem;
+    color:var(--navy);
+    letter-spacing:0.15em;
+  }
+  .brand-tagline{
+    font-size:0.75rem;
+    color:var(--terra);
+    font-weight:500;
+    letter-spacing:0.05em;
   }
 
-  .logo-sub {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 8pt;
-    font-weight: 400;
-    color: var(--warm-gray);
-    letter-spacing: 0.06em;
+  /* Headline */
+  .headline-block{
+    margin-bottom:8mm;
+  }
+  .headline{
+    font-family:'Noto Serif JP',serif;
+    font-weight:900;
+    font-size:2.4rem;
+    line-height:1.4;
+    color:var(--navy);
+    margin-bottom:5mm;
+  }
+  .headline .accent{
+    color:var(--terra);
   }
 
-  /* Hero */
-  .p1-hero {
-    flex: 0 0 auto;
-    margin-bottom: 16mm;
+  .sub-headline{
+    font-size:1.05rem;
+    color:var(--grey-text);
+    line-height:1.8;
+    font-weight:400;
+  }
+  .sub-headline strong{
+    color:var(--terra);
+    font-weight:700;
   }
 
-  .p1-tagline {
-    font-family: 'Noto Serif JP', serif;
-    font-weight: 700;
-    font-size: 26pt;
-    line-height: 1.5;
-    color: var(--navy);
-    letter-spacing: 0.04em;
-    margin-bottom: 5mm;
+  /* Divider */
+  .divider{
+    width:60px;
+    height:3px;
+    background:var(--terra);
+    margin:6mm 0;
   }
 
-  .p1-subtitle {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 11pt;
-    font-weight: 400;
-    color: var(--warm-gray);
-    letter-spacing: 0.06em;
+  /* Pain points */
+  .pain-section-title{
+    font-family:'Noto Serif JP',serif;
+    font-weight:700;
+    font-size:1.15rem;
+    color:var(--navy);
+    margin-bottom:5mm;
   }
 
-  /* Accent Line */
-  .accent-line {
-    width: 32mm;
-    height: 2px;
-    background: var(--terracotta);
-    margin-bottom: 14mm;
+  .pain-list{
+    list-style:none;
+    margin-bottom:8mm;
+  }
+  .pain-list li{
+    position:relative;
+    padding:4mm 0 4mm 8mm;
+    border-bottom:1px solid var(--light-grey);
+    font-size:0.95rem;
+  }
+  .pain-list li:last-child{
+    border-bottom:none;
+  }
+  .pain-list li::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    width:4px;
+    height:4px;
+    background:var(--terra);
+    border-radius:50%;
+  }
+  .pain-number{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    color:var(--terra);
+    margin-right:2mm;
+    font-size:0.85rem;
+  }
+  .pain-quote{
+    font-weight:700;
+    color:var(--navy);
+  }
+  .pain-detail{
+    color:var(--grey-text);
+    font-weight:400;
+    display:block;
+    margin-top:1mm;
+    font-size:0.85rem;
+    padding-left:2mm;
   }
 
-  /* Three Values */
-  .p1-values {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 7mm;
-    margin-bottom: 14mm;
+  /* Bridge */
+  .bridge{
+    background:var(--navy);
+    color:var(--off-white);
+    padding:6mm 7mm;
+    border-radius:4px;
+    margin-bottom:8mm;
+    text-align:center;
+  }
+  .bridge p{
+    font-family:'Noto Serif JP',serif;
+    font-size:1.2rem;
+    font-weight:700;
+    line-height:1.6;
+  }
+  .bridge .price-highlight{
+    color:var(--terra-light);
+    font-size:1.5rem;
   }
 
-  .value-item {
-    padding-left: 5mm;
-    border-left: 2px solid var(--terracotta);
+  /* QR section */
+  .qr-section{
+    display:flex;
+    align-items:center;
+    gap:5mm;
+    background:#fff;
+    border:1px solid var(--light-grey);
+    border-radius:4px;
+    padding:4mm 5mm;
+    margin-top:auto;
+  }
+  .qr-placeholder{
+    width:22mm;
+    height:22mm;
+    border:2px solid var(--navy);
+    border-radius:3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.6rem;
+    color:var(--grey-text);
+    text-align:center;
+    flex-shrink:0;
+  }
+  .qr-text{
+    font-size:0.85rem;
+  }
+  .qr-text .qr-label{
+    font-weight:700;
+    color:var(--navy);
+    display:block;
+    margin-bottom:1mm;
+  }
+  .qr-text .qr-url{
+    color:var(--terra);
+    font-family:'Inter',sans-serif;
+    font-size:0.75rem;
+    word-break:break-all;
   }
 
-  .value-title {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 600;
-    font-size: 11pt;
-    color: var(--navy);
-    margin-bottom: 1.5mm;
-    letter-spacing: 0.02em;
+
+  /* ===== PAGE 2: BACK ===== */
+  .page-back{
+    display:flex;
+    flex-direction:column;
+    padding:14mm 16mm 12mm;
   }
 
-  .value-desc {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
-    font-size: 9.5pt;
-    color: #4a473f;
-    line-height: 1.7;
+  .back-header{
+    font-family:'Noto Serif JP',serif;
+    font-weight:900;
+    font-size:1.6rem;
+    color:var(--navy);
+    margin-bottom:2mm;
+    line-height:1.4;
+  }
+  .back-subtitle{
+    font-size:0.85rem;
+    color:var(--grey-text);
+    margin-bottom:6mm;
   }
 
-  /* Price Band */
-  .p1-price {
-    background: var(--navy);
-    color: var(--offwhite);
-    padding: 6mm 7mm;
-    border-radius: 3px;
-    margin-bottom: 10mm;
-    display: flex;
-    align-items: baseline;
-    gap: 5mm;
-    flex-wrap: wrap;
+  /* Solution cards */
+  .solution-grid{
+    display:flex;
+    flex-direction:column;
+    gap:3.5mm;
+    margin-bottom:6mm;
+  }
+  .solution-card{
+    display:flex;
+    gap:4mm;
+    padding:3.5mm 4mm;
+    background:#fff;
+    border-radius:4px;
+    border-left:4px solid var(--terra);
+  }
+  .solution-num{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:1.8rem;
+    color:var(--terra);
+    line-height:1;
+    flex-shrink:0;
+    width:10mm;
+    display:flex;
+    align-items:flex-start;
+    padding-top:1mm;
+  }
+  .solution-content h3{
+    font-family:'Noto Serif JP',serif;
+    font-weight:700;
+    font-size:1rem;
+    color:var(--navy);
+    margin-bottom:1mm;
+  }
+  .solution-content p{
+    font-size:0.8rem;
+    color:var(--grey-text);
+    line-height:1.6;
   }
 
-  .price-main {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 18pt;
-    letter-spacing: 0.02em;
+  /* Before After */
+  .ba-section{
+    margin-bottom:5mm;
+  }
+  .ba-title{
+    font-family:'Noto Serif JP',serif;
+    font-weight:700;
+    font-size:1rem;
+    color:var(--navy);
+    margin-bottom:3mm;
+  }
+  .ba-grid{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:2mm 3mm;
+    align-items:center;
+    font-size:0.82rem;
+  }
+  .ba-before{
+    text-align:right;
+    color:var(--grey-text);
+    padding:2mm 0;
+  }
+  .ba-arrow{
+    color:var(--terra);
+    font-weight:700;
+    font-size:1.1rem;
+  }
+  .ba-after{
+    font-weight:700;
+    color:var(--navy);
+    padding:2mm 0;
+  }
+  .ba-row{
+    display:contents;
+  }
+  .ba-row:not(:last-child) .ba-before,
+  .ba-row:not(:last-child) .ba-arrow,
+  .ba-row:not(:last-child) .ba-after{
+    border-bottom:1px solid var(--light-grey);
   }
 
-  .price-detail {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 9pt;
-    font-weight: 300;
-    color: rgba(250, 249, 247, 0.7);
-    letter-spacing: 0.04em;
+  /* Pricing table */
+  .pricing-section{
+    margin-bottom:5mm;
+  }
+  .pricing-title{
+    font-family:'Noto Serif JP',serif;
+    font-weight:700;
+    font-size:1rem;
+    color:var(--navy);
+    margin-bottom:3mm;
+  }
+  .pricing-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.85rem;
+    margin-bottom:2mm;
+  }
+  .pricing-table th{
+    background:var(--navy);
+    color:var(--off-white);
+    padding:2.5mm 3mm;
+    text-align:left;
+    font-weight:600;
+    font-size:0.8rem;
+  }
+  .pricing-table td{
+    padding:2.5mm 3mm;
+    border-bottom:1px solid var(--light-grey);
+    background:#fff;
+  }
+  .pricing-table tr:last-child td{
+    border-bottom:none;
+  }
+  .pricing-table .plan-name{
+    font-weight:700;
+    color:var(--navy);
+  }
+  .pricing-table .plan-price{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    color:var(--terra);
+    white-space:nowrap;
+  }
+  .pricing-table .recommended{
+    background:var(--navy);
+    color:var(--off-white);
+  }
+  .pricing-table .recommended .plan-price{
+    color:var(--terra-light);
+  }
+  .pricing-notes{
+    display:flex;
+    gap:4mm;
+    font-size:0.75rem;
+    color:var(--grey-text);
+    justify-content:center;
+    margin-top:2mm;
+  }
+  .pricing-notes span{
+    display:inline-flex;
+    align-items:center;
+    gap:1mm;
+  }
+  .pricing-notes span::before{
+    content:'';
+    display:inline-block;
+    width:5px;
+    height:5px;
+    background:var(--terra);
+    border-radius:50%;
   }
 
-  /* QR / Sample Link */
-  .p1-qr-section {
-    display: flex;
-    align-items: center;
-    gap: 5mm;
-    padding-top: 6mm;
-    border-top: 1px solid var(--light-border);
+  /* CTA */
+  .cta-block{
+    background:var(--terra);
+    color:#fff;
+    padding:5mm 6mm;
+    border-radius:4px;
+    text-align:center;
+    margin-bottom:5mm;
+  }
+  .cta-block p{
+    font-family:'Noto Serif JP',serif;
+    font-weight:700;
+    font-size:1.15rem;
+    line-height:1.6;
+  }
+  .cta-block .cta-sub{
+    font-family:'Noto Sans JP',sans-serif;
+    font-size:0.82rem;
+    font-weight:400;
+    margin-top:2mm;
+    opacity:0.9;
   }
 
-  .qr-placeholder {
-    width: 22mm;
-    height: 22mm;
-    border: 1.5px solid var(--light-border);
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 6.5pt;
-    color: var(--warm-gray);
-    background: #fff;
-    flex-shrink: 0;
+  /* Contact footer */
+  .contact-footer{
+    display:flex;
+    align-items:center;
+    gap:5mm;
+    padding:4mm 0 0;
+    border-top:1px solid var(--light-grey);
+    margin-top:auto;
+  }
+  .contact-qr{
+    width:18mm;
+    height:18mm;
+    border:2px solid var(--navy);
+    border-radius:3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.55rem;
+    color:var(--grey-text);
+    text-align:center;
+    flex-shrink:0;
+  }
+  .contact-info{
+    font-size:0.72rem;
+    color:var(--grey-text);
+    line-height:1.8;
+  }
+  .contact-info strong{
+    color:var(--navy);
+    font-weight:600;
+  }
+  .contact-info .company{
+    font-size:0.65rem;
+    margin-top:1mm;
+    display:block;
   }
 
-  .qr-text {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 9pt;
-    color: #4a473f;
-    line-height: 1.6;
-  }
-
-  .qr-text strong {
-    font-weight: 500;
-    color: var(--navy);
-  }
-
-  .qr-url {
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
-    color: var(--terracotta);
-    font-weight: 500;
-    letter-spacing: 0.01em;
-  }
-
-  /* ══════════════════════════════════════
-     PAGE 2 — BACK
-     ══════════════════════════════════════ */
-
-  .p2-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 10mm;
-    padding-bottom: 5mm;
-    border-bottom: 1px solid var(--light-border);
-  }
-
-  .p2-header-title {
-    font-family: 'Noto Serif JP', serif;
-    font-weight: 600;
-    font-size: 13pt;
-    color: var(--navy);
-    letter-spacing: 0.04em;
-  }
-
-  /* Before / After */
-  .before-after {
-    display: flex;
-    gap: 0;
-    margin-bottom: 12mm;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .ba-column {
-    flex: 1;
-    padding: 7mm 6mm;
-  }
-
-  .ba-before {
-    background: #eae7e2;
-    color: #6b675e;
-  }
-
-  .ba-after {
-    background: var(--navy);
-    color: var(--offwhite);
-  }
-
-  .ba-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 8pt;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 4mm;
-  }
-
-  .ba-before .ba-label {
-    color: var(--warm-gray);
-  }
-
-  .ba-after .ba-label {
-    color: var(--terracotta);
-  }
-
-  .ba-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5mm;
-  }
-
-  .ba-list li {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 9pt;
-    font-weight: 400;
-    line-height: 1.65;
-  }
-
-  .ba-list li::before {
-    content: "—  ";
-    font-weight: 300;
-    opacity: 0.5;
-  }
-
-  /* Plans Table */
-  .plans-section {
-    margin-bottom: 11mm;
-  }
-
-  .section-label {
-    font-family: 'Noto Serif JP', serif;
-    font-weight: 600;
-    font-size: 12pt;
-    color: var(--navy);
-    margin-bottom: 5mm;
-    letter-spacing: 0.04em;
-  }
-
-  .plans-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Noto Sans JP', sans-serif;
-  }
-
-  .plans-table th {
-    font-size: 7.5pt;
-    font-weight: 500;
-    color: var(--warm-gray);
-    text-align: left;
-    padding: 2.5mm 3mm;
-    border-bottom: 1.5px solid var(--light-border);
-    letter-spacing: 0.06em;
-  }
-
-  .plans-table td {
-    font-size: 9pt;
-    padding: 4mm 3mm;
-    border-bottom: 1px solid var(--light-border);
-    vertical-align: top;
-    line-height: 1.5;
-  }
-
-  .plans-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .plan-name {
-    font-weight: 600;
-    color: var(--navy);
-    white-space: nowrap;
-  }
-
-  .plan-price {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    color: var(--navy);
-    white-space: nowrap;
-  }
-
-  .plan-features {
-    font-weight: 300;
-    color: #4a473f;
-  }
-
-  .plan-recommended {
-    position: relative;
-  }
-
-  .plan-recommended td {
-    background: rgba(196, 112, 63, 0.06);
-  }
-
-  .badge-recommend {
-    display: inline-block;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 6.5pt;
-    font-weight: 500;
-    color: var(--terracotta);
-    border: 1px solid var(--terracotta);
-    border-radius: 2px;
-    padding: 0.5mm 2mm;
-    margin-left: 2mm;
-    vertical-align: middle;
-    letter-spacing: 0.04em;
-  }
-
-  /* Flow */
-  .flow-section {
-    margin-bottom: 11mm;
-  }
-
-  .flow-steps {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    justify-content: center;
-  }
-
-  .flow-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2mm;
-  }
-
-  .flow-number {
-    width: 8mm;
-    height: 8mm;
-    border-radius: 50%;
-    background: var(--navy);
-    color: var(--offwhite);
-    font-family: 'Inter', sans-serif;
-    font-size: 8pt;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .flow-label {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 8.5pt;
-    font-weight: 500;
-    color: var(--navy);
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .flow-arrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 10pt;
-    color: var(--light-border);
-    padding: 0 3mm;
-    align-self: flex-start;
-    margin-top: 2mm;
-  }
-
-  /* Contact */
-  .contact-section {
-    background: var(--subtle-bg);
-    border-radius: 3px;
-    padding: 6mm 7mm;
-    display: flex;
-    align-items: center;
-    gap: 6mm;
-    margin-bottom: 8mm;
-  }
-
-  .contact-qr {
-    width: 24mm;
-    height: 24mm;
-    border: 1.5px solid var(--light-border);
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 6pt;
-    color: var(--warm-gray);
-    background: #fff;
-    flex-shrink: 0;
-  }
-
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2mm;
-  }
-
-  .contact-row {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 9pt;
-    color: #4a473f;
-    line-height: 1.5;
-  }
-
-  .contact-row strong {
-    font-weight: 500;
-    color: var(--navy);
-    font-family: 'Inter', 'Noto Sans JP', sans-serif;
-  }
-
-  /* Company Footer */
-  .p2-footer {
-    margin-top: auto;
-    padding-top: 5mm;
-    border-top: 1px solid var(--light-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .footer-company {
-    font-family: 'Inter', 'Noto Sans JP', sans-serif;
-    font-size: 7.5pt;
-    color: var(--warm-gray);
-    line-height: 1.7;
-  }
-
-  .footer-company .company-name {
-    font-weight: 600;
-    font-size: 8pt;
-    color: var(--navy);
-  }
-
-  .footer-brand {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 14pt;
-    letter-spacing: 0.18em;
-    color: var(--navy);
-    opacity: 0.15;
-  }
-
-  /* ── Print Overrides ── */
-  @media print {
-    html, body {
-      width: 210mm;
-      height: auto;
+  /* Screen responsiveness */
+  @media screen and (max-width:800px){
+    .page{
+      width:100%;
+      height:auto;
+      min-height:auto;
+      padding:6vw;
     }
-
-    .page {
-      margin: 0;
-      padding: 22mm 20mm 18mm 20mm;
+    .page-front,.page-back{
+      padding:6vw;
+    }
+    .headline{
+      font-size:1.8rem;
     }
   }
 
-  /* ── Screen Preview Helpers ── */
-  @media screen {
-    body {
-      background: #d0cec9;
-      width: auto;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12mm;
-      padding: 12mm 0;
-    }
-
-    .page {
-      box-shadow: 0 2px 20px rgba(0,0,0,0.12);
-    }
+  @media print{
+    body{background:none}
+    .page{box-shadow:none;margin:0}
   }
 </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════
-     PAGE 1 — FRONT
-     ════════════════════════════════════════════ -->
+<!-- ==================== FRONT SIDE ==================== -->
 <div class="page page-front">
 
-  <header class="p1-header">
-    <div class="logo-mark">JEEB</div>
-    <div class="logo-sub">ジーブ</div>
-  </header>
-
-  <div class="p1-hero">
-    <h1 class="p1-tagline">あなたの店を、世界に届ける。</h1>
-    <p class="p1-subtitle">バンコクの飲食店向け Web・SNS運用サービス</p>
+  <div class="brand-bar">
+    <div class="brand-name">JEEB</div>
+    <div class="brand-tagline">飲食店のWeb・SNSを、まるごと。</div>
   </div>
 
-  <div class="accent-line"></div>
-
-  <div class="p1-values">
-    <div class="value-item">
-      <div class="value-title">多言語Webサイト &amp; メニュー</div>
-      <div class="value-desc">日本語・英語・タイ語・中国語。即日サンプル作成</div>
-    </div>
-    <div class="value-item">
-      <div class="value-title">SNS運用代行</div>
-      <div class="value-desc">毎日具体的に「これを撮って」と指示。あなたは写真を送るだけ</div>
-    </div>
-    <div class="value-item">
-      <div class="value-title">データ分析</div>
-      <div class="value-desc">標準では見えない深い分析で、何が効いているか分かる</div>
-    </div>
+  <div class="headline-block">
+    <h1 class="headline">
+      お客さんは来ている。<br>
+      でも、あなたの店を<br>
+      <span class="accent">見つけられない。</span>
+    </h1>
+    <p class="sub-headline">
+      バンコクの飲食店の<strong>83%</strong>がWebサイトを持っていない。<br>
+      メニューが読めない外国人客は、隣の店に行っている。
+    </p>
   </div>
 
-  <div class="p1-price">
-    <span class="price-main">月額 ฿2,000〜</span>
-    <span class="price-detail">初期費用 0 ／ 2週間無料トライアル</span>
+  <div class="divider"></div>
+
+  <p class="pain-section-title">こんな経験、ありませんか？</p>
+
+  <ul class="pain-list">
+    <li>
+      <span class="pain-number">01</span>
+      <span class="pain-quote">「Google で検索しても出てこない」</span>
+      <span class="pain-detail">Webサイトがないと、存在しないのと同じ。お客さんはスマホで探して、見つからなければ隣の店に入る。</span>
+    </li>
+    <li>
+      <span class="pain-number">02</span>
+      <span class="pain-quote">「タイ語メニューしかなくて外国人が帰る」</span>
+      <span class="pain-detail">毎日、注文できずに帰る客がいる。料理がどんなに美味しくても、読めなければ頼めない。</span>
+    </li>
+    <li>
+      <span class="pain-number">03</span>
+      <span class="pain-quote">「インスタ始めたけど3ヶ月で止まった」</span>
+      <span class="pain-detail">何を投稿すればいいか分からない。忙しくて続かない。でも放置したアカウントは逆効果。</span>
+    </li>
+  </ul>
+
+  <div class="bridge">
+    <p>
+      もし、これが全部解決して、<br>
+      月額 <span class="price-highlight">฿2,000</span> で始められるとしたら？
+    </p>
   </div>
 
-  <div class="p1-qr-section">
-    <div class="qr-placeholder">QR Code</div>
+  <div class="qr-section">
+    <div class="qr-placeholder">QR<br>CODE</div>
     <div class="qr-text">
-      <strong>サンプルサイトはこちら</strong><br>
+      <span class="qr-label">サンプルサイトを今すぐ見る</span>
       <span class="qr-url">vannessasia.github.io/bangkok-samples/</span>
     </div>
   </div>
 
 </div>
 
-<!-- ════════════════════════════════════════════
-     PAGE 2 — BACK
-     ════════════════════════════════════════════ -->
+
+<!-- ==================== BACK SIDE ==================== -->
 <div class="page page-back">
 
-  <header class="p2-header">
-    <div class="p2-header-title">JEEBで、何が変わるか。</div>
-    <div class="logo-sub">JEEB</div>
-  </header>
+  <h2 class="back-header">JEEBがやること。</h2>
+  <p class="back-subtitle">あなたは料理に集中してください。Web・メニュー・SNSは全部やります。</p>
 
-  <!-- Before / After -->
-  <div class="before-after">
-    <div class="ba-column ba-before">
-      <div class="ba-label">Before</div>
-      <ul class="ba-list">
-        <li>メニューはタイ語のみ</li>
-        <li>Webサイトなし</li>
-        <li>SNSは3投稿で放置</li>
-      </ul>
+  <div class="solution-grid">
+    <div class="solution-card">
+      <div class="solution-num">1</div>
+      <div class="solution-content">
+        <h3>御社専用のWebサイトを即日で作成</h3>
+        <p>メニュー・写真・地図・予約導線、全部入り。日本語・英語・タイ語・中国語の4言語対応。QRコードでお客さんのスマホに直接表示。</p>
+      </div>
     </div>
-    <div class="ba-column ba-after">
-      <div class="ba-label">After</div>
-      <ul class="ba-list">
-        <li>4言語対応メニュー</li>
-        <li>プロ品質のWebサイト</li>
-        <li>週3本のSNS投稿</li>
-      </ul>
+    <div class="solution-card">
+      <div class="solution-num">2</div>
+      <div class="solution-content">
+        <h3>メニューを"伝わる言葉"で4言語に翻訳</h3>
+        <p>機械翻訳ではなく、料理の魅力が伝わる説明文。「揚げ出し豆腐」→「サクッと揚げた絹豆腐に、温かい出汁をかけた一品」。タイ人・欧米人が「これ食べたい」と思える文章。</p>
+      </div>
+    </div>
+    <div class="solution-card">
+      <div class="solution-num">3</div>
+      <div class="solution-content">
+        <h3>SNSを代わりに運用（毎日、具体的に指示）</h3>
+        <p>「今日は出来立ての料理を湯気が出てる状態で撮ってください」「この角度で3枚」── あなたは写真を送るだけ。投稿は全部JEEBがやる。</p>
+      </div>
     </div>
   </div>
 
-  <!-- Plans -->
-  <div class="plans-section">
-    <div class="section-label">料金プラン</div>
-    <table class="plans-table">
+  <div class="ba-section">
+    <p class="ba-title">導入前 → 導入後</p>
+    <div class="ba-grid">
+      <div class="ba-row">
+        <div class="ba-before">Webサイトなし</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">4言語対応サイト完成</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">メニュー 1言語</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">4言語メニュー（日/英/タイ/中）</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">SNS 月0投稿</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">月12投稿（週3本）</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-before">Google検索 圏外</div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-after">検索結果に表示</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing-section">
+    <p class="pricing-title">料金プラン</p>
+    <table class="pricing-table">
       <thead>
         <tr>
           <th>プラン</th>
@@ -639,67 +614,39 @@
         <tr>
           <td class="plan-name">ライト</td>
           <td class="plan-price">฿2,000</td>
-          <td class="plan-features">Web + メニュー</td>
+          <td>Webサイト + 多言語メニュー</td>
         </tr>
-        <tr class="plan-recommended">
-          <td class="plan-name">スタンダード<span class="badge-recommend">おすすめ</span></td>
+        <tr class="recommended">
+          <td class="plan-name">スタンダード</td>
           <td class="plan-price">฿5,000</td>
-          <td class="plan-features">+ SNS運用</td>
+          <td>+ SNS運用代行（おすすめ）</td>
         </tr>
         <tr>
           <td class="plan-name">プレミアム</td>
           <td class="plan-price">฿10,000</td>
-          <td class="plan-features">+ 分析 + コンサル</td>
+          <td>+ データ分析 + コンサルティング</td>
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <!-- Flow -->
-  <div class="flow-section">
-    <div class="section-label">ご利用の流れ</div>
-    <div class="flow-steps">
-      <div class="flow-step">
-        <div class="flow-number">1</div>
-        <div class="flow-label">無料相談</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-number">2</div>
-        <div class="flow-label">サンプル作成</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-number">3</div>
-        <div class="flow-label">2週間トライアル</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-number">4</div>
-        <div class="flow-label">本契約</div>
-      </div>
+    <div class="pricing-notes">
+      <span>初期費用 ฿0</span>
+      <span>2週間無料トライアル</span>
+      <span>いつでも解約可能</span>
     </div>
   </div>
 
-  <!-- Contact -->
-  <div class="contact-section">
-    <div class="contact-qr">LINE QR</div>
+  <div class="cta-block">
+    <p>まずは無料でサンプルを作ります。<br>メニューの写真を送ってください。</p>
+    <p class="cta-sub">3日以内に、御社専用のサンプルサイトをお見せします。</p>
+  </div>
+
+  <div class="contact-footer">
+    <div class="contact-qr">LINE<br>QR</div>
     <div class="contact-info">
-      <div class="contact-row"><strong>Instagram</strong>　@jeeb.bkk</div>
-      <div class="contact-row"><strong>Email</strong>　info@vanness.co.jp</div>
-      <div class="contact-row"><strong>Tel</strong>　+66-XX-XXX-XXXX</div>
+      <strong>Instagram:</strong> @jeeb.bkk<br>
+      <strong>VANNESS ASIA CO., LTD</strong><br>
+      <span class="company">64/1 Room No. 210, Soi Pasi 1, Ekamai Road, Bangkok 10110</span>
     </div>
-  </div>
-
-  <!-- Footer -->
-  <div class="p2-footer">
-    <div class="footer-company">
-      <span class="company-name">VANNESS ASIA CO., LTD</span><br>
-      64/1 Room No. 210, Soi Pasi 1, Ekamai Road,<br>
-      Klong Tan Nuea, Wattana, Bangkok 10110<br>
-      TAX ID: 0105567229649
-    </div>
-    <div class="footer-brand">JEEB</div>
   </div>
 
 </div>
