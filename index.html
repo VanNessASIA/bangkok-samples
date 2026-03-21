@@ -3,1389 +3,1245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEEB（ジーブ）| バンコク飲食店向け Web・SNS運用サービス</title>
-<meta name="description" content="バンコクの飲食店に特化したWebサイト制作・多言語メニュー・SNS運用代行サービス。月額2,000バーツから。初期費用0円。">
+<title>JEEB / ジーブ — あなたの店を、世界に届ける。</title>
+<meta name="description" content="バンコク日本食レストラン向け Web制作・多言語メニュー・SNS運用代行。AIで即日サンプル納品、月額฿2,000から。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
-body {
-  font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #1a1a2e;
-  line-height: 1.7;
-  background: #fff;
-  overflow-x: hidden;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0f1729;
+  --navy-light:#1a2744;
+  --navy-mid:#243352;
+  --charcoal:#1c1c1e;
+  --white:#ffffff;
+  --off-white:#f8f7f4;
+  --warm-gray:#e8e6e1;
+  --terra:#c4703f;
+  --terra-light:#d4884f;
+  --terra-dark:#a85a2f;
+  --amber:#e8a84c;
+  --green-win:#2ecc71;
+  --red-lose:#e74c3c;
+  --text-primary:#1a1a1a;
+  --text-secondary:#6b7280;
+  --text-on-dark:#e2e8f0;
+  --text-muted-dark:#94a3b8;
+  --font-sans:'Inter','Noto Sans JP',system-ui,sans-serif;
+  --font-jp:'Noto Sans JP','Inter',system-ui,sans-serif;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+  --ease-out-quint:cubic-bezier(0.22,1,0.36,1);
 }
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-size:16px}
+body{font-family:var(--font-jp);color:var(--text-primary);background:var(--white);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:inherit}
 
-/* ===== COLORS ===== */
-:root {
-  --navy: #0f1b2d;
-  --navy-light: #162340;
-  --navy-mid: #1e3050;
-  --cream: #faf8f5;
-  --cream-dark: #f0ece6;
-  --accent: #c8622d;
-  --accent-light: #d4793f;
-  --accent-hover: #b5551f;
-  --text-primary: #1a1a2e;
-  --text-secondary: #4a4a5a;
-  --text-muted: #7a7a8a;
-  --white: #ffffff;
-  --border: #e5e2dc;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-  --shadow-xl: 0 16px 48px rgba(0,0,0,0.16);
-  --radius: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-}
+/* ===== UTILITIES ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.container{padding:0 40px}}
+@media(min-width:1024px){.container{padding:0 60px}}
 
-/* ===== LAYOUT ===== */
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.section {
-  padding: 96px 0;
-}
-@media (max-width: 768px) {
-  .section { padding: 64px 0; }
-  .container { padding: 0 20px; }
-}
+/* Scroll animations */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .8s var(--ease-out-expo),transform .8s var(--ease-out-expo)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+.stagger-1{transition-delay:.1s}
+.stagger-2{transition-delay:.2s}
+.stagger-3{transition-delay:.3s}
+.stagger-4{transition-delay:.4s}
 
 /* ===== NAVIGATION ===== */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  padding: 16px 0;
-  transition: all 0.3s ease;
-}
-.nav.scrolled {
-  background: rgba(15, 27, 45, 0.97);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 12px 0;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.2);
-}
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.nav-logo {
-  font-family: 'Inter', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: 3px;
-}
-.nav-links {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-.nav-links a {
-  color: rgba(255,255,255,0.75);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--white); }
-.nav-cta {
-  background: var(--accent) !important;
-  color: var(--white) !important;
-  padding: 8px 20px !important;
-  border-radius: 6px !important;
-  font-weight: 600 !important;
-  transition: background 0.2s !important;
-}
-.nav-cta:hover { background: var(--accent-hover) !important; }
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-}
-.nav-toggle span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--white);
-  margin: 5px 0;
-  transition: all 0.3s;
-}
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-links.open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0; right: 0;
-    background: rgba(15, 27, 45, 0.98);
-    backdrop-filter: blur(12px);
-    padding: 24px;
-    gap: 20px;
-  }
-  .nav-links.open a { font-size: 15px; }
-  .nav-toggle { display: block; }
-}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .4s var(--ease-out-expo)}
+.nav.scrolled{background:rgba(15,23,41,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:12px 0;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-sans);font-weight:800;font-size:1.5rem;color:var(--white);letter-spacing:-.02em}
+.nav-logo span{color:var(--terra)}
+.nav-links{display:none;gap:32px;align-items:center}
+@media(min-width:768px){.nav-links{display:flex}}
+.nav-links a{color:var(--text-muted-dark);font-size:.875rem;font-weight:500;transition:color .3s;letter-spacing:.01em}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:var(--white);padding:10px 24px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .3s var(--ease-out-expo)}
+.nav-cta:hover{background:var(--terra-light);transform:translateY(-1px);box-shadow:0 4px 16px rgba(196,112,63,.3)}
 
-/* ===== HERO ===== */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(170deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
-  overflow: hidden;
-  text-align: center;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -30%;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(200,98,45,0.08) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -40%;
-  left: -20%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(200,98,45,0.05) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 0 24px;
-  max-width: 720px;
-}
-.hero-brand {
-  font-family: 'Inter', sans-serif;
-  font-size: 72px;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: 16px;
-  margin-bottom: 8px;
-  line-height: 1;
-}
-.hero-brand-sub {
-  font-size: 14px;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 4px;
-  font-weight: 500;
-  margin-bottom: 48px;
-}
-.hero-tagline {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-.hero-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 48px;
-  font-weight: 400;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--white);
-  padding: 16px 40px;
-  border-radius: var(--radius);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  transition: all 0.25s ease;
-  border: none;
-  cursor: pointer;
-}
-.btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(200,98,45,0.3);
-}
-.hero-scroll {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-.hero-scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
-  margin: 0 auto;
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
-}
-@media (max-width: 768px) {
-  .hero-brand { font-size: 48px; letter-spacing: 10px; }
-  .hero-tagline { font-size: 24px; }
-  .hero-sub { font-size: 15px; }
-  .btn-primary { padding: 14px 32px; font-size: 15px; }
-}
+/* Mobile menu */
+.nav-hamburger{display:flex;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
+@media(min-width:768px){.nav-hamburger{display:none}}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--white);transition:all .3s var(--ease-out-expo);border-radius:2px}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,41,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px;opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out-expo);z-index:999}
+.mobile-menu.open{opacity:1;pointer-events:auto}
+.mobile-menu a{color:var(--white);font-size:1.5rem;font-weight:600;transition:color .3s}
+.mobile-menu a:hover{color:var(--terra)}
 
-/* ===== SECTION HEADERS ===== */
-.section-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.section-title {
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-  line-height: 1.3;
-}
-.section-desc {
-  font-size: 16px;
-  color: var(--text-secondary);
-  max-width: 600px;
-  line-height: 1.8;
-}
-.section-header {
-  margin-bottom: 56px;
-}
-.section-header.center {
-  text-align: center;
-}
-.section-header.center .section-desc {
-  margin: 0 auto;
-}
-@media (max-width: 768px) {
-  .section-title { font-size: 26px; }
-  .section-header { margin-bottom: 40px; }
-}
+/* ===== SECTION 1: HERO ===== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--navy);overflow:hidden}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-gradient{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(196,112,63,.08),transparent),radial-gradient(ellipse 60% 50% at 80% 20%,rgba(232,168,76,.05),transparent),linear-gradient(180deg,var(--navy) 0%,var(--navy-light) 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 20s linear infinite}
+@keyframes gridDrift{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
 
-/* ===== PROBLEM SECTION ===== */
-.problem { background: var(--cream); }
-.problem-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-bottom: 40px;
-}
-.problem-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 36px 28px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
-}
-.problem-card-num {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 2px;
-  margin-bottom: 16px;
-}
-.problem-card h3 {
-  font-size: 19px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-.problem-card p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-.problem-note {
-  background: var(--white);
-  border-left: 3px solid var(--accent);
-  padding: 20px 24px;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  font-size: 15px;
-  color: var(--text-secondary);
-}
-.problem-note strong {
-  color: var(--text-primary);
-}
-@media (max-width: 768px) {
-  .problem-grid { grid-template-columns: 1fr; gap: 20px; }
-}
+/* Floating device mockups */
+.hero-devices{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:55%;max-width:700px;pointer-events:none}
+@media(max-width:1023px){.hero-devices{opacity:.15;right:-10%;width:70%}}
+.device-phone{position:absolute;width:220px;height:440px;background:var(--navy-mid);border:2px solid rgba(255,255,255,.1);border-radius:28px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);animation:floatPhone 6s ease-in-out infinite}
+.device-phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:rgba(255,255,255,.15);border-radius:4px;z-index:2}
+.device-phone-inner{margin:12px 8px;height:calc(100% - 24px);border-radius:20px;overflow:hidden;background:var(--charcoal)}
+.device-phone-scroll{animation:scrollSite 12s ease-in-out infinite}
+@keyframes scrollSite{0%,100%{transform:translateY(0)}40%,60%{transform:translateY(-40%)}}
+.device-phone.d1{top:5%;right:30%;z-index:3}
+.device-phone.d2{top:25%;right:5%;z-index:2;animation-delay:-2s;opacity:.7;transform:scale(.85)}
+.device-phone.d3{top:45%;right:45%;z-index:1;animation-delay:-4s;opacity:.5;transform:scale(.7)}
+@keyframes floatPhone{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
 
-/* ===== SOLUTION SECTION ===== */
-.solution-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-.solution-card {
-  padding: 40px 28px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--white);
-  transition: all 0.3s ease;
-}
-.solution-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
-}
-.solution-card-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  border-radius: var(--radius);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.solution-card-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--white);
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.solution-card h3 {
-  font-size: 19px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.solution-card .solution-sub {
-  font-size: 13px;
-  color: var(--accent);
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-.solution-card p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-@media (max-width: 768px) {
-  .solution-grid { grid-template-columns: 1fr; }
-}
+.device-laptop{position:absolute;width:480px;height:300px;top:10%;right:0;z-index:2}
+.device-laptop-screen{width:100%;height:260px;background:var(--navy-mid);border:2px solid rgba(255,255,255,.1);border-radius:12px 12px 0 0;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+.device-laptop-base{width:110%;height:16px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border-radius:0 0 8px 8px;margin:0 auto;position:relative;left:-5%}
+.device-laptop-inner{padding:8px;height:calc(100% - 16px);overflow:hidden}
+.device-laptop-bar{height:24px;background:rgba(255,255,255,.05);border-radius:6px 6px 0 0;display:flex;align-items:center;padding:0 10px;gap:6px;margin-bottom:4px}
+.device-laptop-bar span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15)}
+.device-laptop-bar span:first-child{background:rgba(255,100,100,.4)}
+.device-laptop-bar span:nth-child(2){background:rgba(255,200,50,.4)}
+.device-laptop-bar span:nth-child(3){background:rgba(100,255,100,.4)}
+.device-laptop-content{height:calc(100% - 28px);border-radius:0 0 4px 4px;overflow:hidden;background:var(--charcoal)}
 
-/* ===== SAMPLES SECTION ===== */
-.samples {
-  background: var(--navy);
-  padding: 96px 0 112px;
-}
-.samples .section-label { color: var(--accent-light); }
-.samples .section-title { color: var(--white); }
-.samples .section-desc { color: rgba(255,255,255,0.6); }
+/* Simulated site content in devices */
+.sim-site{padding:16px;color:var(--text-on-dark)}
+.sim-site-hero{height:80px;background:linear-gradient(135deg,var(--terra-dark),var(--terra));border-radius:8px;margin-bottom:12px;display:flex;align-items:flex-end;padding:12px}
+.sim-site-hero span{font-size:10px;font-weight:700;color:var(--white);letter-spacing:.05em}
+.sim-site-row{display:flex;gap:8px;margin-bottom:8px}
+.sim-site-card{flex:1;height:48px;background:rgba(255,255,255,.06);border-radius:6px}
+.sim-site-text{height:6px;background:rgba(255,255,255,.08);border-radius:3px;margin-bottom:6px;width:80%}
+.sim-site-text.short{width:50%}
 
-.samples-tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 40px;
-  background: rgba(255,255,255,0.06);
-  border-radius: var(--radius);
-  padding: 4px;
-  width: fit-content;
-}
-.samples .section-header.center .samples-tabs {
-  margin-left: auto;
-  margin-right: auto;
-}
-.samples-tab {
-  padding: 10px 28px;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.5);
-  cursor: pointer;
-  transition: all 0.25s;
-  border: none;
-  background: none;
-  font-family: inherit;
-}
-.samples-tab:hover { color: rgba(255,255,255,0.8); }
-.samples-tab.active {
-  background: var(--accent);
-  color: var(--white);
-}
-.samples-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.sample-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all 0.3s ease;
-  display: block;
-}
-.sample-card:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(200,98,45,0.4);
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-}
-.sample-card-visual {
-  height: 160px;
-  background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
-  position: relative;
-  overflow: hidden;
-}
-.sample-card-visual::after {
-  content: 'SAMPLE';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: rgba(255,255,255,0.12);
-}
-.sample-card-body {
-  padding: 20px;
-}
-.sample-card-type {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--accent-light);
-  margin-bottom: 8px;
-}
-.sample-card-name {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-.sample-card-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-.sample-card-link {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent-light);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.2s;
-}
-.sample-card:hover .sample-card-link { color: var(--white); }
-.sample-card-link svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-  transition: transform 0.2s;
-}
-.sample-card:hover .sample-card-link svg { transform: translateX(3px); }
+.hero-content{position:relative;z-index:10;max-width:600px;padding:120px 0 80px}
+@media(min-width:768px){.hero-content{padding:140px 0 100px}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(196,112,63,.12);border:1px solid rgba(196,112,63,.25);border-radius:100px;padding:8px 20px;margin-bottom:32px;font-size:.8rem;font-weight:600;color:var(--terra-light);letter-spacing:.04em}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--terra);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-title{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:900;color:var(--white);line-height:1.15;letter-spacing:-.03em;margin-bottom:24px}
+.hero-title .accent{color:var(--terra)}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line-inner{display:block;transform:translateY(110%);animation:slideUp .8s var(--ease-out-expo) forwards}
+.hero-title .line:nth-child(2) .line-inner{animation-delay:.12s}
+.hero-title .line:nth-child(3) .line-inner{animation-delay:.24s}
+@keyframes slideUp{to{transform:translateY(0)}}
+.hero-sub{font-size:1.125rem;color:var(--text-muted-dark);line-height:1.8;margin-bottom:40px;max-width:480px;opacity:0;animation:fadeIn .8s var(--ease-out-expo) .5s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.hero-actions{display:flex;flex-wrap:wrap;gap:16px;opacity:0;animation:fadeIn .8s var(--ease-out-expo) .7s forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--terra);color:var(--white);padding:16px 36px;border-radius:10px;font-size:1rem;font-weight:700;transition:all .3s var(--ease-out-expo);letter-spacing:.01em}
+.btn-primary:hover{background:var(--terra-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,112,63,.35)}
+.btn-primary svg{width:18px;height:18px;transition:transform .3s}
+.btn-primary:hover svg{transform:translateX(4px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;color:var(--text-muted-dark);padding:16px 24px;border-radius:10px;font-size:1rem;font-weight:600;border:1px solid rgba(255,255,255,.12);transition:all .3s var(--ease-out-expo)}
+.btn-ghost:hover{color:var(--white);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-muted-dark);font-size:.75rem;letter-spacing:.1em;opacity:0;animation:fadeIn 1s var(--ease-out-expo) 1.2s forwards}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--terra),transparent);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-.samples-coming {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-}
-.samples-coming-label {
-  font-size: 13px;
-  color: rgba(255,255,255,0.35);
-  font-weight: 500;
-  margin-right: 8px;
-}
-.samples-coming-tag {
-  padding: 6px 16px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 13px;
-  color: rgba(255,255,255,0.3);
-  font-weight: 500;
-}
-.samples-message {
-  text-align: center;
-  margin-top: 48px;
-  font-size: 18px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7);
-}
+/* ===== SECTION 2: IMPACT NUMBERS ===== */
+.impact{background:var(--navy-light);padding:60px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 16px}
+@media(min-width:768px){.impact-grid{grid-template-columns:repeat(4,1fr);gap:40px}}
+.impact-item{text-align:center}
+.impact-number{font-family:var(--font-sans);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;color:var(--white);letter-spacing:-.03em;line-height:1}
+.impact-number .suffix{font-size:.5em;color:var(--terra);margin-left:2px}
+.impact-label{font-size:.85rem;color:var(--text-muted-dark);margin-top:8px;font-weight:500}
 
-.category-panel { display: none; }
-.category-panel.active { display: block; }
+/* ===== SECTION 3: WHY JEEB ===== */
+.why{padding:120px 0;background:var(--off-white);position:relative}
+.why::before{content:'';position:absolute;top:0;left:0;right:0;height:200px;background:linear-gradient(180deg,var(--navy-light),var(--off-white));pointer-events:none}
+.section-label{font-size:.8rem;font-weight:700;color:var(--terra);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:var(--text-primary);line-height:1.25;letter-spacing:-.02em;margin-bottom:20px;position:relative;z-index:1}
+.section-subtitle{font-size:1.1rem;color:var(--text-secondary);max-width:600px;line-height:1.8;margin-bottom:64px;position:relative;z-index:1}
+.why-grid{display:grid;gap:32px;position:relative;z-index:1}
+@media(min-width:768px){.why-grid{grid-template-columns:repeat(3,1fr);gap:40px}}
+.why-card{background:var(--white);border-radius:16px;padding:40px 32px;border:1px solid rgba(0,0,0,.06);transition:all .4s var(--ease-out-expo);position:relative;overflow:hidden}
+.why-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08);border-color:rgba(196,112,63,.2)}
+.why-card-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:1.5rem;font-weight:800;font-family:var(--font-sans)}
+.why-card:nth-child(1) .why-card-icon{background:linear-gradient(135deg,rgba(196,112,63,.12),rgba(232,168,76,.12));color:var(--terra)}
+.why-card:nth-child(2) .why-card-icon{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(99,102,241,.1));color:#3b82f6}
+.why-card:nth-child(3) .why-card-icon{background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(52,211,153,.1));color:#10b981}
+.why-card-title{font-size:1.25rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.why-card-en{font-family:var(--font-sans);font-size:.75rem;font-weight:600;color:var(--terra);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.why-card-text{font-size:.95rem;color:var(--text-secondary);line-height:1.8}
+.why-card-highlight{display:inline-block;margin-top:16px;padding:8px 16px;background:rgba(196,112,63,.06);border-radius:8px;font-size:.85rem;font-weight:600;color:var(--terra-dark);letter-spacing:.01em}
+.why-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--terra),var(--amber));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out-expo)}
+.why-card:hover::after{transform:scaleX(1)}
 
-@media (max-width: 900px) {
-  .samples-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .samples-grid { grid-template-columns: 1fr; gap: 16px; }
-  .samples-tab { padding: 8px 20px; font-size: 14px; }
-}
+/* ===== SECTION 4: BEFORE/AFTER ===== */
+.before-after{padding:120px 0;background:var(--navy);position:relative;overflow:hidden}
+.before-after .section-label,.before-after .section-title,.before-after .section-subtitle{color:var(--white)}
+.before-after .section-label{color:var(--terra-light)}
+.before-after .section-subtitle{color:var(--text-muted-dark)}
+.ba-wrapper{display:grid;gap:24px;position:relative}
+@media(min-width:768px){.ba-wrapper{grid-template-columns:1fr auto 1fr;gap:40px;align-items:stretch}}
+.ba-card{border-radius:20px;padding:40px 32px;position:relative;overflow:hidden}
+.ba-before{background:linear-gradient(135deg,#1a1215,#2a1a1a);border:1px solid rgba(255,80,80,.15)}
+.ba-after{background:linear-gradient(135deg,#121a15,#1a2a1a);border:1px solid rgba(80,255,120,.15)}
+.ba-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.08em;margin-bottom:28px}
+.ba-before .ba-tag{background:rgba(239,68,68,.15);color:#f87171}
+.ba-after .ba-tag{background:rgba(34,197,94,.15);color:#4ade80}
+.ba-items{display:flex;flex-direction:column;gap:20px}
+.ba-item{display:flex;gap:16px;align-items:flex-start}
+.ba-item-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.ba-before .ba-item-icon{background:rgba(239,68,68,.1);color:#f87171}
+.ba-after .ba-item-icon{background:rgba(34,197,94,.1);color:#4ade80}
+.ba-item-text h4{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:4px}
+.ba-item-text p{font-size:.85rem;color:var(--text-muted-dark);line-height:1.6}
+.ba-arrow{display:none;align-items:center;justify-content:center;font-size:2rem;color:var(--terra)}
+@media(min-width:768px){.ba-arrow{display:flex}}
+.ba-arrow svg{width:48px;height:48px;animation:arrowPulse 2s ease-in-out infinite}
+@keyframes arrowPulse{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(8px);opacity:1}}
 
-/* ===== SNS OPERATION ===== */
-.sns-op { background: var(--cream); }
-.timeline {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  position: relative;
-  margin-bottom: 56px;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 16.67%;
-  right: 16.67%;
-  height: 2px;
-  background: var(--border);
-}
-.timeline-item {
-  text-align: center;
-  position: relative;
-  padding: 0 16px;
-}
-.timeline-dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--white);
-  border: 3px solid var(--accent);
-  margin: 28px auto 24px;
-  position: relative;
-  z-index: 2;
-}
-.timeline-month {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--accent);
-}
-.timeline-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.timeline-list {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 2;
-}
+/* Mock visuals in before/after */
+.ba-visual{margin-top:24px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.ba-visual-before{background:var(--charcoal);padding:16px}
+.ba-visual-before .mock-menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ba-visual-before .mock-menu-item{height:24px;background:rgba(255,255,255,.04);border-radius:4px}
+.ba-visual-before .mock-menu-title{height:10px;background:rgba(255,255,255,.08);border-radius:3px;width:60%;margin-bottom:12px}
+.ba-visual-after{background:linear-gradient(135deg,#0d1117,#1a1f2e);padding:16px}
+.ba-visual-after .mock-dash{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.ba-visual-after .mock-dash-item{height:48px;background:rgba(255,255,255,.04);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.ba-visual-after .mock-dash-bar{width:60%;height:4px;background:linear-gradient(90deg,var(--terra),var(--amber));border-radius:4px}
+.ba-visual-after .mock-chart{display:flex;align-items:flex-end;gap:4px;height:60px}
+.ba-visual-after .mock-chart span{flex:1;background:linear-gradient(180deg,var(--terra),rgba(196,112,63,.3));border-radius:3px 3px 0 0;animation:chartGrow 1.5s var(--ease-out-expo) forwards}
+.ba-visual-after .mock-chart span:nth-child(1){height:40%}
+.ba-visual-after .mock-chart span:nth-child(2){height:55%;animation-delay:.1s}
+.ba-visual-after .mock-chart span:nth-child(3){height:35%;animation-delay:.2s}
+.ba-visual-after .mock-chart span:nth-child(4){height:70%;animation-delay:.3s}
+.ba-visual-after .mock-chart span:nth-child(5){height:85%;animation-delay:.4s}
+.ba-visual-after .mock-chart span:nth-child(6){height:60%;animation-delay:.5s}
+.ba-visual-after .mock-chart span:nth-child(7){height:95%;animation-delay:.6s}
+@keyframes chartGrow{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
 
-.sns-example {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  border: 1px solid var(--border);
-  margin-bottom: 40px;
-}
-.sns-example-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: var(--text-primary);
-}
-.sns-example-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.sns-day-card {
-  background: var(--cream);
-  border-radius: var(--radius);
-  padding: 16px;
-}
-.sns-day-card-day {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-.sns-day-card h4 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.sns-day-card p {
-  font-size: 13px;
-  color: var(--text-muted);
-}
+/* ===== SECTION 5: SAMPLE GALLERY ===== */
+.gallery{padding:120px 0;background:var(--off-white)}
+.gallery-tabs{display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap}
+.gallery-tab{padding:12px 28px;border-radius:100px;font-size:.9rem;font-weight:600;color:var(--text-secondary);background:var(--white);border:1px solid rgba(0,0,0,.08);transition:all .3s var(--ease-out-expo);cursor:pointer}
+.gallery-tab:hover{border-color:var(--terra);color:var(--terra)}
+.gallery-tab.active{background:var(--terra);color:var(--white);border-color:var(--terra)}
+.gallery-tab.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.gallery-tab.disabled::after{content:' (準備中)';font-size:.7rem;font-weight:400}
+.gallery-grid{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:20px}}
+.gallery-panel{display:none}
+.gallery-panel.active{display:block}
+.gallery-item{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:all .4s var(--ease-out-expo);position:relative}
+.gallery-item:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,.1);border-color:rgba(196,112,63,.2)}
+.gallery-device{position:relative;background:var(--charcoal);padding:16px 16px 0;overflow:hidden;height:280px}
+.gallery-device-frame{position:relative;width:160px;height:320px;margin:0 auto;background:var(--navy);border:2px solid rgba(255,255,255,.15);border-radius:24px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.3);transform:translateY(40px)}
+.gallery-device-frame::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:40px;height:4px;background:rgba(255,255,255,.12);border-radius:4px;z-index:3}
+.gallery-device-inner{position:absolute;top:12px;left:4px;right:4px;bottom:4px;border-radius:18px;overflow:hidden;background:#1a1a2e}
+.gallery-device-inner iframe{width:375px;height:812px;border:none;transform:scale(0.395);transform-origin:0 0;pointer-events:none}
+.gallery-info{padding:24px}
+.gallery-name{font-size:1.05rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.gallery-type{font-size:.8rem;color:var(--text-secondary);margin-bottom:16px}
+.gallery-link{display:inline-flex;align-items:center;gap:6px;color:var(--terra);font-size:.875rem;font-weight:600;transition:all .3s}
+.gallery-link:hover{gap:10px}
+.gallery-link svg{width:16px;height:16px}
 
-.analytics-compare {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-.analytics-box {
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  border: 1px solid var(--border);
-}
-.analytics-box.standard { background: var(--cream-dark); }
-.analytics-box.jeeb {
-  background: var(--white);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent);
-}
-.analytics-box-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.analytics-box.standard .analytics-box-label { color: var(--text-muted); }
-.analytics-box.jeeb .analytics-box-label { color: var(--accent); }
-.analytics-box ul li {
-  font-size: 14px;
-  color: var(--text-secondary);
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.04);
-}
-.analytics-box ul li:last-child { border: none; }
+/* ===== SECTION 6: COMPARISON TABLE ===== */
+.comparison{padding:120px 0;background:var(--white)}
+.comparison-table-wrap{overflow-x:auto;margin:0 -24px;padding:0 24px;-webkit-overflow-scrolling:touch}
+.comparison-table{width:100%;min-width:640px;border-collapse:separate;border-spacing:0}
+.comparison-table thead th{padding:20px 16px;font-size:.8rem;font-weight:700;letter-spacing:.06em;color:var(--text-secondary);text-align:center;border-bottom:2px solid var(--warm-gray);white-space:nowrap}
+.comparison-table thead th:first-child{text-align:left}
+.comparison-table thead th.col-jeeb{color:var(--terra);font-size:.9rem;position:relative}
+.comparison-table thead th.col-jeeb::after{content:'おすすめ';position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--terra);color:var(--white);font-size:.6rem;padding:2px 10px;border-radius:100px;white-space:nowrap}
+.comparison-table tbody td{padding:16px;text-align:center;border-bottom:1px solid rgba(0,0,0,.05);font-size:.9rem;color:var(--text-secondary)}
+.comparison-table tbody td:first-child{text-align:left;font-weight:600;color:var(--text-primary);font-size:.85rem}
+.comparison-table tbody td.col-jeeb{background:rgba(196,112,63,.03);font-weight:600;color:var(--text-primary)}
+.comparison-table .check{color:var(--green-win);font-weight:700;font-size:1.1rem}
+.comparison-table .cross{color:var(--red-lose);font-weight:700;font-size:1.1rem}
+.comparison-table .highlight-cell{background:rgba(196,112,63,.08);color:var(--terra-dark);font-weight:700;border-radius:6px}
+.comparison-table tbody tr:last-child td{border-bottom:none}
 
-@media (max-width: 768px) {
-  .timeline { grid-template-columns: 1fr; gap: 32px; }
-  .timeline::before { display: none; }
-  .sns-example-cards { grid-template-columns: 1fr; }
-  .analytics-compare { grid-template-columns: 1fr; }
-}
+/* col highlight */
+.comparison-table .col-jeeb{border-left:2px solid rgba(196,112,63,.15);border-right:2px solid rgba(196,112,63,.15)}
+.comparison-table thead .col-jeeb{border-top:2px solid rgba(196,112,63,.15);border-radius:12px 12px 0 0}
+.comparison-table tbody tr:last-child .col-jeeb{border-bottom:2px solid rgba(196,112,63,.15);border-radius:0 0 12px 12px}
 
-/* ===== PRICING ===== */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 40px;
-}
-.price-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 40px 28px;
-  position: relative;
-  transition: all 0.3s;
-}
-.price-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
-}
-.price-card.recommended {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), var(--shadow-lg);
-}
-.price-badge {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--accent);
-  color: var(--white);
-  padding: 4px 20px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  white-space: nowrap;
-}
-.price-card-name {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.price-card-price {
-  font-family: 'Inter', sans-serif;
-  font-size: 40px;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.price-card-price span {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-.price-card-unit {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 28px;
-}
-.price-card-divider {
-  height: 1px;
-  background: var(--border);
-  margin-bottom: 24px;
-}
-.price-card-features li {
-  font-size: 14px;
-  color: var(--text-secondary);
-  padding: 8px 0;
-  padding-left: 24px;
-  position: relative;
-}
-.price-card-features li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 14px;
-  width: 8px;
-  height: 4px;
-  border-left: 2px solid var(--accent);
-  border-bottom: 2px solid var(--accent);
-  transform: rotate(-45deg);
-}
-.pricing-notes {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.pricing-note {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-.pricing-note-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 400;
-}
-@media (max-width: 768px) {
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
-}
+/* ===== SECTION 7: SNS SYSTEM ===== */
+.sns-system{padding:120px 0;background:var(--navy);color:var(--white)}
+.sns-system .section-label{color:var(--terra-light)}
+.sns-system .section-title{color:var(--white)}
+.sns-system .section-subtitle{color:var(--text-muted-dark)}
 
-/* ===== GETTING STARTED ===== */
-.getting-started { background: var(--cream); }
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 56px;
-}
-.step {
-  text-align: center;
-  position: relative;
-}
-.step-num {
-  font-family: 'Inter', sans-serif;
-  font-size: 48px;
-  font-weight: 800;
-  color: var(--cream-dark);
-  line-height: 1;
-  margin-bottom: 16px;
-  position: relative;
-}
-.step-num::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 3px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-.step h3 {
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.step p {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-.cta-block {
-  text-align: center;
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 56px 40px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-}
-.cta-block h3 {
-  font-size: 28px;
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-.cta-block p {
-  font-size: 16px;
-  color: var(--text-secondary);
-  margin-bottom: 32px;
-}
-@media (max-width: 768px) {
-  .steps { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .steps { grid-template-columns: 1fr; }
-}
+.sns-roadmap{display:grid;gap:24px;margin-bottom:80px}
+@media(min-width:768px){.sns-roadmap{grid-template-columns:repeat(3,1fr);gap:32px}}
+.sns-month{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:all .4s var(--ease-out-expo)}
+.sns-month:hover{border-color:rgba(196,112,63,.3);background:rgba(255,255,255,.06)}
+.sns-month-num{font-family:var(--font-sans);font-size:3rem;font-weight:900;color:rgba(196,112,63,.15);position:absolute;top:16px;right:20px;line-height:1}
+.sns-month-title{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.sns-month-label{font-size:.75rem;color:var(--terra-light);font-weight:600;letter-spacing:.08em;margin-bottom:16px}
+.sns-month-items{list-style:none;display:flex;flex-direction:column;gap:10px}
+.sns-month-items li{font-size:.85rem;color:var(--text-muted-dark);padding-left:16px;position:relative}
+.sns-month-items li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--terra)}
+.sns-connector{display:none;align-items:center;justify-content:center;color:var(--terra)}
+@media(min-width:768px){.sns-roadmap{position:relative}}
 
-/* ===== FOOTER ===== */
-.footer {
-  background: var(--navy);
-  padding: 64px 0 32px;
-  color: rgba(255,255,255,0.6);
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
-}
-.footer-brand {
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: 4px;
-  margin-bottom: 12px;
-}
-.footer-desc {
-  font-size: 14px;
-  line-height: 1.8;
-  max-width: 320px;
-}
-.footer-col-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-}
-.footer-col a, .footer-col p {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 10px;
-  transition: color 0.2s;
-}
-.footer-col a:hover { color: var(--white); }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 24px;
-  text-align: center;
-  font-size: 13px;
-  color: rgba(255,255,255,0.3);
-}
-@media (max-width: 768px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-}
+/* LINE mockup */
+.sns-line-demo{margin-bottom:80px}
+.sns-line-demo-title{font-size:1.2rem;font-weight:700;margin-bottom:24px;text-align:center}
+.line-mockup{max-width:380px;margin:0 auto;background:#7494c0;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.1)}
+.line-header{background:#5b7fa5;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.line-avatar{width:36px;height:36px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:var(--white)}
+.line-name{font-size:.9rem;font-weight:600;color:var(--white)}
+.line-body{padding:20px;display:flex;flex-direction:column;gap:12px;min-height:200px}
+.line-msg{max-width:85%;padding:12px 16px;border-radius:16px;font-size:.82rem;line-height:1.6}
+.line-msg-bot{background:var(--white);color:var(--text-primary);align-self:flex-start;border-bottom-left-radius:4px}
+.line-msg-bot strong{color:var(--terra-dark);font-weight:700}
+.line-time{font-size:.65rem;color:rgba(255,255,255,.6);margin-top:2px}
 
-/* ===== ANIMATIONS ===== */
-.fade-up {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Analytics comparison */
+.sns-analytics{display:grid;gap:24px}
+@media(min-width:768px){.sns-analytics{grid-template-columns:1fr 1fr;gap:32px}}
+.analytics-card{border-radius:16px;padding:32px 28px;border:1px solid rgba(255,255,255,.08)}
+.analytics-card.standard{background:rgba(255,255,255,.03)}
+.analytics-card.jeeb{background:linear-gradient(135deg,rgba(196,112,63,.08),rgba(232,168,76,.05));border-color:rgba(196,112,63,.2)}
+.analytics-card-title{font-size:.85rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.analytics-card.standard .analytics-card-title{color:var(--text-muted-dark)}
+.analytics-card.jeeb .analytics-card-title{color:var(--terra-light)}
+.analytics-items{display:flex;flex-direction:column;gap:12px}
+.analytics-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.analytics-item span:first-child{font-size:.82rem;color:var(--text-muted-dark)}
+.analytics-item span:last-child{font-size:.82rem;font-weight:600}
+.analytics-card.standard .analytics-item span:last-child{color:rgba(255,255,255,.5)}
+.analytics-card.jeeb .analytics-item span:last-child{color:var(--terra-light)}
+
+/* ===== SECTION 8: PRICING ===== */
+.pricing{padding:120px 0;background:var(--off-white)}
+.pricing-grid{display:grid;gap:24px;margin-bottom:48px}
+@media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}}
+.pricing-card{background:var(--white);border-radius:20px;padding:40px 32px;border:1px solid rgba(0,0,0,.06);position:relative;transition:all .4s var(--ease-out-expo)}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08)}
+.pricing-card.recommended{border:2px solid var(--terra);box-shadow:0 20px 60px rgba(196,112,63,.12)}
+.pricing-card.recommended:hover{box-shadow:0 24px 64px rgba(196,112,63,.2)}
+.pricing-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--terra);color:var(--white);padding:6px 24px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.pricing-name{font-size:1rem;font-weight:700;color:var(--text-secondary);margin-bottom:8px}
+.pricing-price{font-family:var(--font-sans);font-size:2.8rem;font-weight:800;color:var(--text-primary);letter-spacing:-.03em;line-height:1.1}
+.pricing-price .currency{font-size:1.2rem;font-weight:600;color:var(--text-secondary);vertical-align:super}
+.pricing-price .period{font-size:.9rem;font-weight:500;color:var(--text-secondary)}
+.pricing-desc{font-size:.85rem;color:var(--text-secondary);margin:16px 0 24px;line-height:1.6}
+.pricing-divider{height:1px;background:rgba(0,0,0,.06);margin-bottom:24px}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.pricing-features li{font-size:.875rem;color:var(--text-secondary);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.pricing-features li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px}
+.pricing-features li svg.included{color:var(--terra)}
+.pricing-features li svg.excluded{color:rgba(0,0,0,.15)}
+.pricing-features li.excluded-feature{opacity:.4}
+.pricing-btn{display:block;width:100%;text-align:center;padding:14px;border-radius:10px;font-weight:700;font-size:.9rem;transition:all .3s var(--ease-out-expo)}
+.pricing-card.recommended .pricing-btn{background:var(--terra);color:var(--white)}
+.pricing-card.recommended .pricing-btn:hover{background:var(--terra-light);transform:translateY(-1px)}
+.pricing-card:not(.recommended) .pricing-btn{background:rgba(0,0,0,.04);color:var(--text-primary);border:1px solid rgba(0,0,0,.1)}
+.pricing-card:not(.recommended) .pricing-btn:hover{background:rgba(196,112,63,.08);border-color:var(--terra);color:var(--terra)}
+.pricing-notes{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.pricing-note{display:flex;align-items:center;gap:8px;padding:12px 24px;background:var(--white);border-radius:12px;border:1px solid rgba(0,0,0,.06);font-size:.85rem;color:var(--text-secondary);font-weight:500}
+.pricing-note strong{color:var(--terra-dark);font-weight:700}
+
+/* ===== SECTION 9: GETTING STARTED ===== */
+.getting-started{padding:120px 0;background:var(--white)}
+.steps{display:grid;gap:32px;margin-bottom:60px}
+@media(min-width:768px){.steps{grid-template-columns:repeat(4,1fr);gap:24px}}
+.step{text-align:center;position:relative}
+.step-num{font-family:var(--font-sans);font-size:3.5rem;font-weight:900;color:rgba(196,112,63,.1);line-height:1;margin-bottom:16px}
+.step-title{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--text-primary)}
+.step-text{font-size:.875rem;color:var(--text-secondary);line-height:1.7}
+.step-connector{display:none;position:absolute;top:30px;right:-12px;width:24px;height:2px;background:rgba(196,112,63,.2)}
+@media(min-width:768px){.step-connector{display:block}.step:last-child .step-connector{display:none}}
+.gs-cta{text-align:center}
+.gs-cta-text{font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.gs-cta-sub{font-size:1rem;color:var(--text-secondary);margin-bottom:32px}
+.gs-cta .btn-primary{font-size:1.1rem;padding:20px 48px}
+
+/* ===== SECTION 10: FOOTER ===== */
+.footer{background:var(--navy);padding:80px 0 40px;color:var(--text-muted-dark)}
+.footer-grid{display:grid;gap:48px;margin-bottom:60px}
+@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr;gap:40px}}
+.footer-brand{max-width:360px}
+.footer-logo{font-family:var(--font-sans);font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:16px}
+.footer-logo span{color:var(--terra)}
+.footer-desc{font-size:.9rem;line-height:1.8;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .3s;color:var(--text-muted-dark)}
+.footer-social a:hover{background:var(--terra);color:var(--white)}
+.footer-col-title{font-size:.8rem;font-weight:700;color:var(--white);letter-spacing:.08em;margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-links a{font-size:.875rem;transition:color .3s}
+.footer-links a:hover{color:var(--white)}
+.footer-contact-item{display:flex;align-items:center;gap:10px;font-size:.875rem;margin-bottom:12px}
+.footer-line-qr{width:120px;height:120px;background:rgba(255,255,255,.06);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--text-muted-dark);margin-top:16px;border:1px solid rgba(255,255,255,.08)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.footer-copy{font-size:.8rem}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-size:.8rem;transition:color .3s}
+.footer-legal a:hover{color:var(--white)}
 </style>
 </head>
 <body>
 
 <!-- ===== NAVIGATION ===== -->
 <nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">JEEB</a>
-    <div class="nav-links" id="navLinks">
-      <a href="#problem">課題</a>
-      <a href="#solution">解決策</a>
-      <a href="#samples">制作サンプル</a>
-      <a href="#sns">SNS運用</a>
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">JEEB<span>.</span></a>
+    <div class="nav-links">
+      <a href="#why">JEEBの強み</a>
+      <a href="#gallery">サンプル</a>
       <a href="#pricing">料金</a>
-      <a href="#start" class="nav-cta">無料相談</a>
+      <a href="#sns-system">SNS運用</a>
+      <a href="#contact" class="nav-cta">無料相談
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L11.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 11-1.04-1.08l3.158-2.96H3.75A.75.75 0 013 10z"/></svg>
+      </a>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#why" class="mobile-link">JEEBの強み</a>
+  <a href="#gallery" class="mobile-link">サンプル</a>
+  <a href="#pricing" class="mobile-link">料金</a>
+  <a href="#sns-system" class="mobile-link">SNS運用</a>
+  <a href="#contact" class="mobile-link">無料相談</a>
+</div>
 
-<!-- ===== HERO ===== -->
+<!-- ===== SECTION 1: HERO ===== -->
 <section class="hero" id="hero">
-  <div class="hero-content">
-    <div class="hero-brand">JEEB</div>
-    <div class="hero-brand-sub">ジーブ — タイ語で「つかむ」</div>
-    <h1 class="hero-tagline">あなたの店を、世界に届ける。</h1>
-    <p class="hero-sub">バンコク飲食店向け Web・SNS運用サービス</p>
-    <a href="#start" class="btn-primary">無料でサンプルを作ります</a>
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-devices">
+    <div class="device-laptop">
+      <div class="device-laptop-screen">
+        <div class="device-laptop-inner">
+          <div class="device-laptop-bar"><span></span><span></span><span></span></div>
+          <div class="device-laptop-content">
+            <div class="sim-site">
+              <div class="sim-site-hero"><span>RAMEN SORA</span></div>
+              <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
+              <div class="sim-site-text"></div><div class="sim-site-text short"></div>
+              <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-laptop-base"></div>
+    </div>
+    <div class="device-phone d1">
+      <div class="device-phone-inner">
+        <div class="device-phone-scroll">
+          <div class="sim-site">
+            <div class="sim-site-hero" style="height:60px"><span>IZAKAYA</span></div>
+            <div class="sim-site-text"></div><div class="sim-site-text short"></div>
+            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
+            <div class="sim-site-text"></div>
+            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
+            <div class="sim-site-text"></div><div class="sim-site-text short"></div>
+            <div class="sim-site-hero" style="height:50px;background:linear-gradient(135deg,#1a365d,#2a4a7f)"><span>MENU</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="device-phone d2">
+      <div class="device-phone-inner">
+        <div class="device-phone-scroll" style="animation-delay:-3s">
+          <div class="sim-site">
+            <div class="sim-site-hero" style="height:50px;background:linear-gradient(135deg,#3d1c02,#7c3f14)"><span>焼鳥</span></div>
+            <div class="sim-site-text"></div>
+            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
+            <div class="sim-site-text short"></div>
+            <div class="sim-site-row"><div class="sim-site-card"></div><div class="sim-site-card"></div><div class="sim-site-card"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      バンコク日本食レストラン特化
+    </div>
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner">あなたの店を、</span></span>
+      <span class="line"><span class="line-inner"><span class="accent">世界に届ける。</span></span></span>
+    </h1>
+    <p class="hero-sub">Web制作・多言語メニュー・SNS運用。<br>AIの力で即日サンプル納品。月額฿2,000から、<br>バンコクの日本食レストランのデジタル戦略を変える。</p>
+    <div class="hero-actions">
+      <a href="#gallery" class="btn-primary">
+        サンプルサイトを見る
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L11.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 11-1.04-1.08l3.158-2.96H3.75A.75.75 0 013 10z"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">無料相談する</a>
+    </div>
   </div>
   <div class="hero-scroll">
+    SCROLL
     <div class="hero-scroll-line"></div>
   </div>
 </section>
 
-<!-- ===== PROBLEM ===== -->
-<section class="section problem" id="problem">
+<!-- ===== SECTION 2: IMPACT NUMBERS ===== -->
+<section class="impact">
   <div class="container">
-    <div class="section-header center fade-up">
-      <div class="section-label">Problem</div>
-      <h2 class="section-title">バンコクの飲食店が直面する課題</h2>
-      <p class="section-desc">170店舗以上の日本食レストランが集まるバンコク。<br>しかし、多くのお店がデジタル面で課題を抱えています。</p>
-    </div>
-    <div class="problem-grid fade-up">
-      <div class="problem-card">
-        <div class="problem-card-num">ISSUE 01</div>
-        <h3>Webサイトがない</h3>
-        <p>バンコクの日本食レストラン170店舗中、ほぼ全てがホームページ未整備。Googleで検索しても、お店の情報が出てこない。</p>
+    <div class="impact-grid">
+      <div class="impact-item reveal">
+        <div class="impact-number"><span class="count-up" data-target="8">0</span><span class="suffix">+</span></div>
+        <div class="impact-label">制作サンプルサイト</div>
       </div>
-      <div class="problem-card">
-        <div class="problem-card-num">ISSUE 02</div>
-        <h3>メニューが伝わらない</h3>
-        <p>タイ語のみのメニュー、写真のない料理名。タイ人のお客様には味の想像すらできず、注文のハードルが高い。</p>
+      <div class="impact-item reveal stagger-1">
+        <div class="impact-number"><span class="count-up" data-target="2">0</span><span class="suffix">カテゴリ</span></div>
+        <div class="impact-label">対応業態（拡大中）</div>
       </div>
-      <div class="problem-card">
-        <div class="problem-card-num">ISSUE 03</div>
-        <h3>SNSが続かない</h3>
-        <p>開業時にInstagramを始めたものの、1〜2ヶ月で投稿が止まる。何を撮ればいいか分からず、効果も見えない。</p>
+      <div class="impact-item reveal stagger-2">
+        <div class="impact-number">即日<span class="suffix">納品</span></div>
+        <div class="impact-label">サンプルサイト提供</div>
       </div>
-    </div>
-    <div class="problem-note fade-up">
-      <strong>既存のWeb制作は20〜30万バーツと高額。</strong> 飲食店の規模では、なかなか手が出せません。
-    </div>
-  </div>
-</section>
-
-<!-- ===== SOLUTION ===== -->
-<section class="section" id="solution">
-  <div class="container">
-    <div class="section-header center fade-up">
-      <div class="section-label">Solution</div>
-      <h2 class="section-title">JEEBの3つの解決策</h2>
-      <p class="section-desc">AIとテンプレートを活用し、高品質なサービスを圧倒的な低コストで提供します。</p>
-    </div>
-    <div class="solution-grid fade-up">
-      <div class="solution-card">
-        <div class="solution-card-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-        </div>
-        <h3>AI高速Web制作</h3>
-        <div class="solution-sub">即日サンプル提供</div>
-        <p>業種別テンプレートをベースに、AIが御社専用のWebサイトを高速で構築。初期費用なし、月額サブスクリプションで始められます。</p>
-      </div>
-      <div class="solution-card">
-        <div class="solution-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <h3>メニュー多言語化</h3>
-        <div class="solution-sub">日・英・タイ・中の4言語対応</div>
-        <p>AIが料理の魅力をタイ語で自然に伝えるメニューを作成。写真と組み合わせ、タイ人のお客様にも「食べたい」と思わせます。</p>
-      </div>
-      <div class="solution-card">
-        <div class="solution-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7.5v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
-        </div>
-        <h3>SNS運用代行</h3>
-        <div class="solution-sub">週3本投稿・撮影指示つき</div>
-        <p>毎日「今日はこれを撮って」と具体的に指示。写真を送るだけで、投稿文の作成からハッシュタグ選定まで全てお任せ。</p>
+      <div class="impact-item reveal stagger-3">
+        <div class="impact-number"><span class="suffix">฿</span><span class="count-up" data-target="2000" data-separator="true">0</span><span class="suffix">〜</span></div>
+        <div class="impact-label">月額料金から</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== SAMPLES ===== -->
-<section class="samples section" id="samples">
+<!-- ===== SECTION 3: WHY JEEB ===== -->
+<section class="why" id="why">
   <div class="container">
-    <div class="section-header center fade-up">
-      <div class="section-label">Production Samples</div>
-      <h2 class="section-title">制作サンプル</h2>
-      <p class="section-desc">業種×タイプで、御社に最適なサイトを選べます。<br>すべて実際に動くサンプルサイトです。</p>
-      <div class="samples-tabs" style="margin-top:32px;">
-        <button class="samples-tab active" data-category="ramen">ラーメン</button>
-        <button class="samples-tab" data-category="izakaya">居酒屋</button>
-      </div>
-    </div>
-
-    <!-- Ramen -->
-    <div class="category-panel active" id="panel-ramen">
-      <div class="samples-grid fade-up">
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#1a3a4a,#0f2530);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE A — AFURI系</div>
-            <div class="sample-card-name">麺匠 SORA</div>
-            <p class="sample-card-desc">透明感のあるデザイン。柚子塩系やこだわりスープを前面に押し出す上品なスタイル。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#2a1a0a,#4a2a10);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE B — IVAN系</div>
-            <div class="sample-card-name">麺道 KENJI</div>
-            <p class="sample-card-desc">力強く大胆なビジュアル。濃厚系・背脂系ラーメンの迫力を伝えるデザイン。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#1a1a1a,#333);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE C — NAGI系</div>
-            <div class="sample-card-name">剛麺 THUNDER</div>
-            <p class="sample-card-desc">インパクト重視のストリート感。二郎系・まぜそば系の圧倒的ボリュームを表現。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#f5f0e8,#e8e0d0);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE D — はやし田系</div>
-            <div class="sample-card-name">麺処 清水</div>
-            <p class="sample-card-desc">和の趣を大切にした端正なデザイン。醤油・煮干し系の繊細な味わいを表現。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- Izakaya -->
-    <div class="category-panel" id="panel-izakaya">
-      <div class="samples-grid fade-up visible">
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#3a2010,#5a3520);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE A — 焼鳥横丁系</div>
-            <div class="sample-card-name">炭火横丁 たけし</div>
-            <p class="sample-card-desc">炭火の温もりと活気。路地裏の焼鳥屋の雰囲気を再現する親しみやすいデザイン。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#0a0a2a,#1a1a4a);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE B — ネオ居酒屋系</div>
-            <div class="sample-card-name">炎とソーダ</div>
-            <p class="sample-card-desc">モダンでスタイリッシュ。若い世代に響くネオン感のあるトレンドデザイン。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#1a1510,#2a2520);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE C — 炉端・日本酒系</div>
-            <div class="sample-card-name">炉端 蔵人</div>
-            <p class="sample-card-desc">和の高級感と落ち着き。日本酒と炉端焼きの本格的な世界観を伝えるデザイン。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-        <a class="sample-card" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" target="_blank" rel="noopener">
-          <div class="sample-card-visual" style="background:linear-gradient(135deg,#f0e8d8,#e5dcc8);"></div>
-          <div class="sample-card-body">
-            <div class="sample-card-type">TYPE D — ファミリー系</div>
-            <div class="sample-card-name">居酒屋 みのり</div>
-            <p class="sample-card-desc">温かく親しみやすい。家族連れやグループで楽しめるカジュアルなデザイン。</p>
-            <span class="sample-card-link">サンプルを見る <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="samples-coming fade-up">
-      <span class="samples-coming-label">Coming Soon</span>
-      <span class="samples-coming-tag">焼肉</span>
-      <span class="samples-coming-tag">タイ料理</span>
-      <span class="samples-coming-tag">カフェ</span>
-      <span class="samples-coming-tag">夜系</span>
-    </div>
-    <p class="samples-message fade-up">業種×タイプで、御社に最適なサイトを選べます</p>
-  </div>
-</section>
-
-<!-- ===== SNS OPERATION ===== -->
-<section class="section sns-op" id="sns">
-  <div class="container">
-    <div class="section-header center fade-up">
-      <div class="section-label">SNS Operation</div>
-      <h2 class="section-title">SNS運用の仕組み</h2>
-      <p class="section-desc">3ヶ月のシナリオで、着実にフォロワーとファンを増やします。</p>
-    </div>
-
-    <div class="timeline fade-up">
-      <div class="timeline-item">
-        <div class="timeline-month">MONTH 1</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-title">基礎づくり</div>
-        <div class="timeline-list">
-          外観・内観の撮影<br>
-          メニュー写真の整備<br>
-          看板料理のフィーチャー<br>
-          プロフィール最適化
+    <div class="section-label reveal">WHY JEEB</div>
+    <h2 class="section-title reveal">他社にはできない、<br>3つの理由。</h2>
+    <p class="section-subtitle reveal">「ホームページ作ります」は誰でも言える。<br>JEEBが選ばれるのには、明確な理由がある。</p>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
+        <h3 class="why-card-title">AI駆動の圧倒的スピード</h3>
+        <div class="why-card-en">AI-POWERED SPEED</div>
+        <p class="why-card-text">競合他社は制作に1〜4週間。JEEBはAIを活用し、ご相談当日にサンプルサイトをお見せします。「こんなサイトになります」ではなく、「もう動いてます」。</p>
+        <span class="why-card-highlight">他社: 1〜4週間 → JEEB: 即日</span>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-month">MONTH 2</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-title">コンテンツ強化</div>
-        <div class="timeline-list">
-          人気メニューの深掘り<br>
-          スタッフ紹介<br>
-          お客様の声・イベント<br>
-          ストーリーズ活用
+      <div class="why-card reveal stagger-1">
+        <div class="why-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
+        <h3 class="why-card-title">動くデモサイト</h3>
+        <div class="why-card-en">LIVE DEMO PORTFOLIO</div>
+        <p class="why-card-text">他社はスクリーンショットやモックアップ止まり。JEEBは全サンプルがURLで今すぐ閲覧できる実動サイト。スマホで開いて、触って、確認できます。</p>
+        <span class="why-card-highlight">スクショ → 実動サイト</span>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-month">MONTH 3</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-title">最適化</div>
-        <div class="timeline-list">
-          データ分析ベースの改善<br>
-          反応の良い投稿の横展開<br>
-          投稿時間の最適化<br>
-          ハッシュタグ戦略の精査
+      <div class="why-card reveal stagger-2">
+        <div class="why-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
         </div>
-      </div>
-    </div>
-
-    <div class="sns-example fade-up">
-      <div class="sns-example-title">「今日はこれを撮って」— 毎日届く撮影指示の実例</div>
-      <div class="sns-example-cards">
-        <div class="sns-day-card">
-          <div class="sns-day-card-day">月曜日</div>
-          <h4>ランチセットの全体写真</h4>
-          <p>自然光で、テーブル全体が入る角度で撮影してください</p>
-        </div>
-        <div class="sns-day-card">
-          <div class="sns-day-card-day">水曜日</div>
-          <h4>麺のリフトアップ写真</h4>
-          <p>箸で麺を持ち上げた瞬間を。湯気が出ていると最高です</p>
-        </div>
-        <div class="sns-day-card">
-          <div class="sns-day-card-day">金曜日</div>
-          <h4>仕込み風景の動画15秒</h4>
-          <p>スープを煮込む鍋やチャーシューを切る手元など</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="analytics-compare fade-up">
-      <div class="analytics-box standard">
-        <div class="analytics-box-label">一般的なSNS運用</div>
-        <ul>
-          <li>フォロワー数だけを報告</li>
-          <li>月1回のレポート</li>
-          <li>「いいね」の数で評価</li>
-          <li>投稿内容はおまかせ</li>
-          <li>改善提案なし</li>
-        </ul>
-      </div>
-      <div class="analytics-box jeeb">
-        <div class="analytics-box-label">JEEBのSNS運用</div>
-        <ul>
-          <li>来店導線（プロフィールクリック率）を計測</li>
-          <li>週次で数値をLINEで共有</li>
-          <li>保存数・シェア数で真の関心を評価</li>
-          <li>毎日の撮影指示で店主の負担を最小化</li>
-          <li>データに基づく具体的な改善提案</li>
-        </ul>
+        <h3 class="why-card-title">競合分析データ</h3>
+        <div class="why-card-en">DEEP ANALYTICS</div>
+        <p class="why-card-text">Instagramのフォロワー数だけでは勝てない。JEEBはAPI連携で100倍のデータを取得。「トンロー居酒屋の中で3位」のようなポジション分析まで可能です。</p>
+        <span class="why-card-highlight">標準の100倍のデータ量</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PRICING ===== -->
-<section class="section" id="pricing">
+<!-- ===== SECTION 4: BEFORE / AFTER ===== -->
+<section class="before-after" id="before-after">
   <div class="container">
-    <div class="section-header center fade-up">
-      <div class="section-label">Pricing</div>
-      <h2 class="section-title">料金プラン</h2>
-      <p class="section-desc">初期費用0円。すべてのプランに2週間の無料トライアル付き。</p>
-    </div>
-    <div class="pricing-grid fade-up">
-      <div class="price-card">
-        <div class="price-card-name">ライト</div>
-        <div class="price-card-price">2,000 <span>THB</span></div>
-        <div class="price-card-unit">/ 月</div>
-        <div class="price-card-divider"></div>
-        <ul class="price-card-features">
-          <li>Webサイト制作・運用</li>
-          <li>多言語メニュー（4言語）</li>
-          <li>月1回の更新対応</li>
-          <li>独自ドメイン対応</li>
-        </ul>
+    <div class="section-label reveal">TRANSFORMATION</div>
+    <h2 class="section-title reveal">導入前と導入後。</h2>
+    <p class="section-subtitle reveal">多くのバンコク日本食レストランが抱える課題。<br>JEEBはそのすべてを解決します。</p>
+    <div class="ba-wrapper">
+      <div class="ba-card ba-before reveal-left">
+        <div class="ba-tag">BEFORE</div>
+        <div class="ba-items">
+          <div class="ba-item">
+            <div class="ba-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div class="ba-item-text">
+              <h4>ウェブサイトなし</h4>
+              <p>Googleで検索しても出てこない。存在を知られない。</p>
+            </div>
+          </div>
+          <div class="ba-item">
+            <div class="ba-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div class="ba-item-text">
+              <h4>タイ語メニューだけ</h4>
+              <p>外国人観光客が来ても注文できない。客単価が下がる。</p>
+            </div>
+          </div>
+          <div class="ba-item">
+            <div class="ba-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div class="ba-item-text">
+              <h4>放置されたSNS</h4>
+              <p>Instagramの投稿は3件。最終更新は半年前。</p>
+            </div>
+          </div>
+        </div>
+        <div class="ba-visual ba-visual-before">
+          <div class="mock-menu-title"></div>
+          <div class="mock-menu"><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div><div class="mock-menu-item"></div></div>
+        </div>
       </div>
-      <div class="price-card recommended">
-        <div class="price-badge">おすすめ</div>
-        <div class="price-card-name">スタンダード</div>
-        <div class="price-card-price">5,000 <span>THB</span></div>
-        <div class="price-card-unit">/ 月</div>
-        <div class="price-card-divider"></div>
-        <ul class="price-card-features">
-          <li>ライトの全機能</li>
-          <li>SNS運用代行（週3本投稿）</li>
-          <li>毎日の撮影指示</li>
-          <li>週次レポート</li>
-          <li>投稿文の作成・ハッシュタグ選定</li>
-        </ul>
+
+      <div class="ba-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
-      <div class="price-card">
-        <div class="price-card-name">プレミアム</div>
-        <div class="price-card-price">10,000 <span>THB</span></div>
-        <div class="price-card-unit">/ 月</div>
-        <div class="price-card-divider"></div>
-        <ul class="price-card-features">
-          <li>スタンダードの全機能</li>
-          <li>データ分析・改善レポート</li>
-          <li>月1回のコンサルティング</li>
-          <li>広告運用アドバイス</li>
-          <li>競合分析レポート</li>
-        </ul>
+
+      <div class="ba-card ba-after reveal-right">
+        <div class="ba-tag">AFTER</div>
+        <div class="ba-items">
+          <div class="ba-item">
+            <div class="ba-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="ba-item-text">
+              <h4>多言語ウェブサイト完備</h4>
+              <p>日本語・英語・タイ語。Google検索でも上位表示。</p>
+            </div>
+          </div>
+          <div class="ba-item">
+            <div class="ba-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="ba-item-text">
+              <h4>アクティブなSNS運用</h4>
+              <p>週3回の投稿。フォロワー増加。集客チャネルとして機能。</p>
+            </div>
+          </div>
+          <div class="ba-item">
+            <div class="ba-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="ba-item-text">
+              <h4>データで見える競合状況</h4>
+              <p>エリア内ランキング、トレンド分析、改善ポイントが一目瞭然。</p>
+            </div>
+          </div>
+        </div>
+        <div class="ba-visual ba-visual-after">
+          <div class="mock-dash"><div class="mock-dash-item"><div class="mock-dash-bar"></div></div><div class="mock-dash-item"><div class="mock-dash-bar" style="width:40%"></div></div><div class="mock-dash-item"><div class="mock-dash-bar" style="width:80%"></div></div></div>
+          <div class="mock-chart"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
       </div>
-    </div>
-    <div class="pricing-notes fade-up">
-      <div class="pricing-note">初期費用 0円<br><span class="pricing-note-sub">サブスクリプションのみ</span></div>
-      <div class="pricing-note">2週間 無料トライアル<br><span class="pricing-note-sub">全プラン対象</span></div>
-      <div class="pricing-note">年払い割引<br><span class="pricing-note-sub">12ヶ月分を10ヶ月分の料金で</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== GETTING STARTED ===== -->
-<section class="section getting-started" id="start">
+<!-- ===== SECTION 5: SAMPLE GALLERY ===== -->
+<section class="gallery" id="gallery">
   <div class="container">
-    <div class="section-header center fade-up">
-      <div class="section-label">Getting Started</div>
-      <h2 class="section-title">導入ステップ</h2>
-      <p class="section-desc">お問い合わせから最短1週間で運用を開始できます。</p>
+    <div class="section-label reveal">LIVE DEMOS</div>
+    <h2 class="section-title reveal">今すぐ触れる、<br>実動サンプルサイト。</h2>
+    <p class="section-subtitle reveal">スクリーンショットではありません。<br>すべて実際にブラウザで閲覧できるサイトです。</p>
+    <div class="gallery-tabs reveal">
+      <button class="gallery-tab active" data-tab="ramen">ラーメン</button>
+      <button class="gallery-tab" data-tab="izakaya">居酒屋</button>
+      <button class="gallery-tab disabled">焼肉</button>
+      <button class="gallery-tab disabled">タイ料理</button>
+      <button class="gallery-tab disabled">カフェ</button>
+      <button class="gallery-tab disabled">夜系</button>
     </div>
-    <div class="steps fade-up">
-      <div class="step">
+
+    <!-- Ramen Panel -->
+    <div class="gallery-panel active" id="panel-ramen">
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" loading="lazy" title="麺匠 SORA"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">麺匠 SORA</div>
+            <div class="gallery-type">Type A — 洗練・モダン系</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="gallery-item reveal stagger-1">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" loading="lazy" title="麺道 KENJI"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">麺道 KENJI</div>
+            <div class="gallery-type">Type B — 力強い・職人系</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="gallery-item reveal stagger-2">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" loading="lazy" title="剛麺 THUNDER"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">剛麺 THUNDER</div>
+            <div class="gallery-type">Type C — ストリート・エネルギー系</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="gallery-item reveal stagger-3">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" loading="lazy" title="麺処 清水"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">麺処 清水</div>
+            <div class="gallery-type">Type D — 温かみ・家庭的系</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Izakaya Panel -->
+    <div class="gallery-panel" id="panel-izakaya">
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" loading="lazy" title="炭火横丁 たけし"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">炭火横丁 たけし</div>
+            <div class="gallery-type">Type A — 本格炭火焼鳥</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="gallery-item reveal stagger-1">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" loading="lazy" title="炎とソーダ"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">炎とソーダ</div>
+            <div class="gallery-type">Type B — ネオ居酒屋</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="gallery-item reveal stagger-2">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" loading="lazy" title="炉端 蔵人"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">炉端 蔵人</div>
+            <div class="gallery-type">Type C — 炉端焼き・和モダン</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="gallery-item reveal stagger-3">
+          <div class="gallery-device">
+            <div class="gallery-device-frame">
+              <div class="gallery-device-inner">
+                <iframe src="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" loading="lazy" title="居酒屋 みのり"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-name">居酒屋 みのり</div>
+            <div class="gallery-type">Type D — 大衆・アットホーム系</div>
+            <a href="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" target="_blank" rel="noopener" class="gallery-link">
+              Live Demo を見る
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: COMPARISON TABLE ===== -->
+<section class="comparison" id="comparison">
+  <div class="container">
+    <div class="section-label reveal">COMPARISON</div>
+    <h2 class="section-title reveal">比較すれば、一目瞭然。</h2>
+    <p class="section-subtitle reveal">バンコクで日本食レストラン向けWeb制作・SNS運用を<br>提供する3つの選択肢を比較。</p>
+    <div class="comparison-table-wrap reveal">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-jeeb">JEEB</th>
+            <th>既存Web制作会社</th>
+            <th>大手SNS代行</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>初期費用</td>
+            <td class="col-jeeb highlight-cell">0円</td>
+            <td>50,000〜200,000円</td>
+            <td>100,000〜300,000円</td>
+          </tr>
+          <tr>
+            <td>月額費用</td>
+            <td class="col-jeeb highlight-cell">฿2,000〜10,000<br><small style="color:var(--text-secondary);font-weight:400">（約8,000〜40,000円）</small></td>
+            <td>80,000〜150,000円</td>
+            <td>100,000〜200,000円</td>
+          </tr>
+          <tr>
+            <td>納期</td>
+            <td class="col-jeeb highlight-cell">即日サンプル</td>
+            <td>1〜4週間</td>
+            <td>2〜4週間</td>
+          </tr>
+          <tr>
+            <td>サンプル提供</td>
+            <td class="col-jeeb"><span class="check">&#10003;</span> 実動サイト</td>
+            <td>モックアップ / PDF</td>
+            <td>企画書のみ</td>
+          </tr>
+          <tr>
+            <td>SNS運用</td>
+            <td class="col-jeeb"><span class="check">&#10003;</span> 戦略＋実行</td>
+            <td><span class="cross">&#10005;</span> 別料金</td>
+            <td><span class="check">&#10003;</span> 実行のみ</td>
+          </tr>
+          <tr>
+            <td>データ分析</td>
+            <td class="col-jeeb"><span class="check">&#10003;</span> API深層分析</td>
+            <td><span class="cross">&#10005;</span> なし</td>
+            <td>基本レポートのみ</td>
+          </tr>
+          <tr>
+            <td>多言語対応</td>
+            <td class="col-jeeb"><span class="check">&#10003;</span> 日英タイ</td>
+            <td>別途見積もり</td>
+            <td><span class="cross">&#10005;</span> 非対応</td>
+          </tr>
+          <tr>
+            <td>AI活用</td>
+            <td class="col-jeeb"><span class="check">&#10003;</span> 全工程</td>
+            <td><span class="cross">&#10005;</span></td>
+            <td>一部のみ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: SNS OPERATION SYSTEM ===== -->
+<section class="sns-system" id="sns-system">
+  <div class="container">
+    <div class="section-label reveal">SNS OPERATION</div>
+    <h2 class="section-title reveal">SNS運用、<br>丸ごとお任せください。</h2>
+    <p class="section-subtitle reveal">撮影指示から投稿、分析まで。<br>オーナーがやることは「写真を1枚撮る」だけ。</p>
+
+    <!-- 3-month roadmap -->
+    <div class="sns-roadmap">
+      <div class="sns-month reveal">
+        <div class="sns-month-num">01</div>
+        <div class="sns-month-label">MONTH 1</div>
+        <h3 class="sns-month-title">土台構築</h3>
+        <ul class="sns-month-items">
+          <li>アカウント最適化（プロフィール・ハイライト）</li>
+          <li>ブランドビジュアル統一</li>
+          <li>初期コンテンツ12投稿作成</li>
+          <li>競合分析レポート初版</li>
+        </ul>
+      </div>
+      <div class="sns-month reveal stagger-1">
+        <div class="sns-month-num">02</div>
+        <div class="sns-month-label">MONTH 2</div>
+        <h3 class="sns-month-title">成長加速</h3>
+        <ul class="sns-month-items">
+          <li>エンゲージメント施策開始</li>
+          <li>リール動画制作（週1本）</li>
+          <li>ハッシュタグ戦略の最適化</li>
+          <li>データに基づく投稿時間調整</li>
+        </ul>
+      </div>
+      <div class="sns-month reveal stagger-2">
+        <div class="sns-month-num">03</div>
+        <div class="sns-month-label">MONTH 3</div>
+        <h3 class="sns-month-title">収益化</h3>
+        <ul class="sns-month-items">
+          <li>来店導線の確立</li>
+          <li>UGCキャンペーン実施</li>
+          <li>月次ROIレポート</li>
+          <li>次四半期戦略の策定</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- LINE shooting instruction demo -->
+    <div class="sns-line-demo reveal">
+      <h3 class="sns-line-demo-title">毎日の撮影指示もLINEでお届け</h3>
+      <div class="line-mockup">
+        <div class="line-header">
+          <div class="line-avatar">J</div>
+          <div class="line-name">JEEB 撮影アシスタント</div>
+        </div>
+        <div class="line-body">
+          <div class="line-msg line-msg-bot">
+            <strong>本日の撮影リクエスト</strong><br><br>
+            1. ラーメンの湯気が立つ瞬間（斜め45度から）<br>
+            2. 仕込み中の厨房の様子<br>
+            3. 本日のおすすめ食材のアップ<br><br>
+            撮影のコツ: 自然光を使い、お皿の左斜め上から撮ると立体感が出ます。
+          </div>
+          <div class="line-time">10:30</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics comparison -->
+    <div class="reveal">
+      <h3 class="sns-line-demo-title" style="margin-bottom:32px">データ分析: 標準 vs JEEB</h3>
+      <div class="sns-analytics">
+        <div class="analytics-card standard">
+          <div class="analytics-card-title">標準ダッシュボード</div>
+          <div class="analytics-items">
+            <div class="analytics-item"><span>フォロワー数</span><span>1,234</span></div>
+            <div class="analytics-item"><span>いいね合計</span><span>5,678</span></div>
+            <div class="analytics-item"><span>リーチ</span><span>12,000</span></div>
+            <div class="analytics-item"><span>インプレッション</span><span>—</span></div>
+            <div class="analytics-item"><span>エリア内順位</span><span>—</span></div>
+            <div class="analytics-item"><span>競合比較</span><span>—</span></div>
+            <div class="analytics-item"><span>来店予測</span><span>—</span></div>
+            <div class="analytics-item"><span>最適投稿時間</span><span>—</span></div>
+          </div>
+        </div>
+        <div class="analytics-card jeeb">
+          <div class="analytics-card-title">JEEB Analytics</div>
+          <div class="analytics-items">
+            <div class="analytics-item"><span>フォロワー数</span><span>1,234（+12% MoM）</span></div>
+            <div class="analytics-item"><span>エンゲージメント率</span><span>4.8%（業界平均2.1%）</span></div>
+            <div class="analytics-item"><span>リーチ効率</span><span>投稿あたり ¥3.2</span></div>
+            <div class="analytics-item"><span>トップ投稿分析</span><span>リール &gt; カルーセル</span></div>
+            <div class="analytics-item"><span>エリア内順位</span><span>トンロー居酒屋 3位/47店</span></div>
+            <div class="analytics-item"><span>競合ベンチマーク</span><span>上位20%（成長率1位）</span></div>
+            <div class="analytics-item"><span>来店予測（今週）</span><span>+15〜22名</span></div>
+            <div class="analytics-item"><span>最適投稿時間</span><span>火 18:30 / 金 20:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 8: PRICING ===== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-label reveal">PRICING</div>
+    <h2 class="section-title reveal">シンプルな料金体系。</h2>
+    <p class="section-subtitle reveal">初期費用ゼロ。2週間の無料トライアル付き。<br>年間契約なら2ヶ月分お得。</p>
+    <div class="pricing-grid">
+      <!-- Light -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">ライト</div>
+        <div class="pricing-price"><span class="currency">฿</span>2,000<span class="period">/月</span></div>
+        <p class="pricing-desc">まずはウェブサイトから。<br>個人経営の小規模店舗に最適。</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>レスポンシブWebサイト制作</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>多言語メニュー（日英タイ）</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>月1回の更新対応</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>基本アクセス解析</li>
+          <li class="excluded-feature"><svg class="excluded" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>SNS運用代行</li>
+          <li class="excluded-feature"><svg class="excluded" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>競合分析レポート</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">無料で始める</a>
+      </div>
+      <!-- Standard -->
+      <div class="pricing-card recommended reveal stagger-1">
+        <div class="pricing-badge">おすすめ</div>
+        <div class="pricing-name">スタンダード</div>
+        <div class="pricing-price"><span class="currency">฿</span>5,000<span class="period">/月</span></div>
+        <p class="pricing-desc">Web + SNS運用のフルパッケージ。<br>成長を本気で目指す店舗に。</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>ライトの全機能</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Instagram運用代行（週3投稿）</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>毎日の撮影指示（LINE配信）</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>月次レポート（競合比較付き）</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>無制限の更新対応</li>
+          <li class="excluded-feature"><svg class="excluded" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>リール動画制作</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">無料で始める</a>
+      </div>
+      <!-- Premium -->
+      <div class="pricing-card reveal stagger-2">
+        <div class="pricing-name">プレミアム</div>
+        <div class="pricing-price"><span class="currency">฿</span>10,000<span class="period">/月</span></div>
+        <p class="pricing-desc">データ駆動の成長戦略。<br>複数店舗展開やフランチャイズに。</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>スタンダードの全機能</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>リール動画制作（週1本）</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>JEEB Deep Analytics</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>エリア内競合ランキング</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Google Maps最適化</li>
+          <li><svg class="included" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>専任担当者</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">無料で始める</a>
+      </div>
+    </div>
+    <div class="pricing-notes reveal">
+      <div class="pricing-note"><strong>初期費用 0円</strong></div>
+      <div class="pricing-note"><strong>2週間無料</strong>トライアル</div>
+      <div class="pricing-note">年間契約で<strong>2ヶ月分無料</strong>（12→10ヶ月分）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 9: GETTING STARTED ===== -->
+<section class="getting-started" id="start">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center">GET STARTED</div>
+    <h2 class="section-title reveal" style="text-align:center">始め方は、驚くほど簡単。</h2>
+    <p class="section-subtitle reveal" style="text-align:center;margin-left:auto;margin-right:auto">まずは無料でサンプルを作ります。リスクゼロ。</p>
+    <div class="steps">
+      <div class="step reveal">
         <div class="step-num">01</div>
-        <h3>無料相談</h3>
-        <p>30分のオンライン相談で、お店の課題とゴールをヒアリング。</p>
+        <h3 class="step-title">無料相談</h3>
+        <p class="step-text">LINEまたはフォームからお気軽にご連絡ください。お店のジャンルとご要望をお聞きします。</p>
+        <div class="step-connector"></div>
       </div>
-      <div class="step">
+      <div class="step reveal stagger-1">
         <div class="step-num">02</div>
-        <h3>サンプル作成</h3>
-        <p>3日以内に御社専用のサンプルサイトを作成してお見せします。</p>
+        <h3 class="step-title">即日サンプル</h3>
+        <p class="step-text">ご相談当日に、お店に合わせたサンプルサイトをお見せします。モックアップではなく実動サイトです。</p>
+        <div class="step-connector"></div>
       </div>
-      <div class="step">
+      <div class="step reveal stagger-2">
         <div class="step-num">03</div>
-        <h3>無料トライアル</h3>
-        <p>2週間の無料トライアルで、実際のサービスを体験。</p>
+        <h3 class="step-title">2週間お試し</h3>
+        <p class="step-text">気に入ったら2週間の無料トライアル。実際に使って、効果を確認してから決められます。</p>
+        <div class="step-connector"></div>
       </div>
-      <div class="step">
+      <div class="step reveal stagger-3">
         <div class="step-num">04</div>
-        <h3>本契約・運用開始</h3>
-        <p>ご満足いただけたら本契約。いつでも解約可能です。</p>
+        <h3 class="step-title">運用開始</h3>
+        <p class="step-text">本契約後、SNS運用・データ分析を本格始動。あなたはお店に集中してください。</p>
       </div>
     </div>
-    <div class="cta-block fade-up">
-      <h3>まずは無料でサンプルを作ります</h3>
-      <p>お店の情報をお聞かせいただければ、3日以内に専用サンプルをお届けします。<br>もちろん費用は一切かかりません。</p>
-      <a href="#contact" class="btn-primary">無料相談を予約する</a>
+    <div class="gs-cta reveal">
+      <div class="gs-cta-text">まずは無料でサンプルを見てみませんか？</div>
+      <div class="gs-cta-sub">最短30分でお店専用のデモサイトをお見せします。</div>
+      <a href="#contact" class="btn-primary" style="font-size:1.1rem;padding:20px 48px">
+        無料相談する
+        <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L11.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 11-1.04-1.08l3.158-2.96H3.75A.75.75 0 013 10z"/></svg>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- ===== SECTION 10: FOOTER ===== -->
 <footer class="footer" id="contact">
   <div class="container">
     <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">JEEB<span>.</span></div>
+        <p class="footer-desc">バンコクの日本食レストランに特化した<br>Web制作・多言語メニュー・SNS運用代行サービス。<br>AIの力で、あなたの店を世界に届けます。</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/jeeb.bkk" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="LINE">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.83 2 10.5c0 3.78 3.4 6.96 8 8.27V22l3.6-2.66C18.73 18.33 22 15.14 22 10.5 22 5.83 17.52 2 12 2zm5.5 7.5h-2v4h-1.5v-4h-2V8H17.5v1.5zM9 13.5H5.5V8H7v4h2v1.5z"/></svg>
+          </a>
+        </div>
+      </div>
       <div>
-        <div class="footer-brand">JEEB</div>
-        <p class="footer-desc">バンコク飲食店に特化した<br>Web制作・多言語メニュー・SNS運用代行サービス。<br>あなたの店を、世界に届けます。</p>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">お問い合わせ</div>
-        <p>LINE: @jeeb-bkk（準備中）</p>
-        <p>Instagram: @jeeb.bkk</p>
-        <p>Email: info@jeeb.co.th</p>
-        <p>Tel: 準備中</p>
-      </div>
-      <div class="footer-col">
         <div class="footer-col-title">サービス</div>
-        <a href="#solution">Web制作</a>
-        <a href="#solution">多言語メニュー</a>
-        <a href="#sns">SNS運用代行</a>
-        <a href="#samples">制作サンプル</a>
-        <a href="#pricing">料金プラン</a>
+        <ul class="footer-links">
+          <li><a href="#why">JEEBの強み</a></li>
+          <li><a href="#gallery">サンプルサイト</a></li>
+          <li><a href="#pricing">料金プラン</a></li>
+          <li><a href="#sns-system">SNS運用</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">お問い合わせ</div>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@jeeb.bkk
+        </div>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @jeeb.bkk
+        </div>
+        <div class="footer-line-qr">LINE QR</div>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 JEEB. All rights reserved.
+      <div class="footer-copy">&copy; 2026 JEEB. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">利用規約</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
+(function(){
+  'use strict';
 
-// Mobile menu toggle
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-// Close mobile menu on link click
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+  // === NAV: Scroll-aware background ===
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+  function onScroll() {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 60);
+    lastScroll = y;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-// Samples tab switching
-const tabs = document.querySelectorAll('.samples-tab');
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelectorAll('.category-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-' + tab.dataset.category).classList.add('active');
+  // === Mobile Menu ===
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
   });
-});
-
-// Intersection Observer for fade-up animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+  mobileMenu.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  // === Intersection Observer: Scroll Reveal ===
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  const revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(function(el) { revealObs.observe(el); });
+
+  // === Count-Up Animation ===
+  const countEls = document.querySelectorAll('.count-up');
+  const countObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        const useSep = el.getAttribute('data-separator') === 'true';
+        const duration = 1600;
+        const start = performance.now();
+        function step(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // ease out quint
+          const eased = 1 - Math.pow(1 - progress, 5);
+          const current = Math.round(eased * target);
+          el.textContent = useSep ? current.toLocaleString() : current;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        countObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach(function(el) { countObs.observe(el); });
+
+  // === Gallery Tab Switching ===
+  const tabs = document.querySelectorAll('.gallery-tab:not(.disabled)');
+  const panels = document.querySelectorAll('.gallery-panel');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      const target = tab.getAttribute('data-tab');
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      panels.forEach(function(p) {
+        p.classList.remove('active');
+        if (p.id === 'panel-' + target) {
+          p.classList.add('active');
+          // Re-trigger reveal animations for new panel items
+          p.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+            el.classList.remove('visible');
+            void el.offsetWidth; // force reflow
+            revealObs.observe(el);
+          });
+        }
+      });
+    });
+  });
+
+  // === Smooth scroll for anchor links ===
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      const id = a.getAttribute('href');
+      if (id.length <= 1) return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        const offset = nav.offsetHeight + 16;
+        const y = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
 </script>
 </body>
 </html>
