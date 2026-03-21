@@ -6,30 +6,34 @@
 <title>居酒屋 みのり | Izakaya Minori - Sukhumvit, Bangkok</title>
 <meta name="description" content="バンコク・スクンビットの大衆居酒屋みのり。豊富なメニューと広々座敷で、ご家族・グループでのお食事に。">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 :root{
-  --warm-cream:#faf6f0;
-  --paper:#fff8f0;
-  --bark:#3d2b1f;
-  --bark-light:#5c4033;
-  --lantern:#d4543a;
-  --lantern-glow:#e8714a;
-  --gold-accent:#c9a44a;
-  --straw:#e8dcc8;
-  --charcoal:#2a2a2a;
-  --soft-gray:#8a8279;
-  --section-bg:#f5efe6;
+  --cream:#fdf8f2;
+  --warm-white:#fffcf7;
+  --linen:#f5ede2;
+  --parchment:#ede4d6;
+  --wood:#6b4830;
+  --wood-deep:#4a2e18;
+  --wood-light:#8b6542;
+  --terracotta:#c2694a;
+  --terracotta-soft:#d4805e;
+  --honey:#d4a04a;
+  --honey-light:#e8c47a;
+  --charcoal:#3a3530;
+  --warm-gray:#8a7e72;
+  --text-body:#4a4238;
+  --border-warm:rgba(180,155,125,.2);
 }
 
 html{font-size:16px;scroll-behavior:smooth}
 body{
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-  color:var(--charcoal);
-  background:var(--warm-cream);
-  line-height:1.8;
+  font-family:'Zen Maru Gothic','Noto Serif JP',sans-serif;
+  color:var(--text-body);
+  background:var(--cream);
+  line-height:1.85;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -41,373 +45,419 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
-  background:
-    linear-gradient(175deg, var(--bark) 0%, var(--bark-light) 40%, #6b4c3b 100%);
+  background:var(--cream);
   overflow:hidden;
 }
 .hero::before{
   content:'';
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 600px 400px at 20% 30%, rgba(212,84,58,.12) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 80% 70%, rgba(201,164,74,.08) 0%, transparent 70%);
+    radial-gradient(ellipse 800px 600px at 15% 20%, rgba(212,160,74,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 500px at 85% 80%, rgba(194,105,74,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 400px at 50% 50%, rgba(232,196,122,.05) 0%, transparent 60%);
   pointer-events:none;
 }
-/* Noren-like decorative bars */
+/* Warm noren accent stripe at top */
 .hero::after{
   content:'';
   position:absolute;top:0;left:0;right:0;
-  height:6px;
-  background:repeating-linear-gradient(90deg, var(--lantern) 0 40px, transparent 40px 48px);
+  height:5px;
+  background:linear-gradient(90deg, var(--terracotta), var(--honey), var(--terracotta));
+  opacity:.6;
 }
 
-.hero-inner{position:relative;z-index:1;padding:2rem 1.5rem;max-width:700px;}
+.hero-inner{
+  position:relative;z-index:1;
+  padding:2rem 1.5rem;max-width:720px;
+}
 
-.hero-badge{
+.hero-locale{
   display:inline-block;
-  font-size:.85rem;
-  letter-spacing:.3em;
-  color:var(--gold-accent);
-  border:1px solid rgba(201,164,74,.4);
-  padding:.4em 1.6em;
-  margin-bottom:2rem;
-  font-weight:500;
+  font-size:.82rem;
+  letter-spacing:.35em;
+  color:var(--warm-gray);
+  border-bottom:1px solid var(--parchment);
+  padding-bottom:.4em;
+  margin-bottom:2.5rem;
 }
 
 .hero h1{
-  font-family:'Noto Sans JP',sans-serif;
+  font-family:'Noto Serif JP',serif;
   font-weight:900;
-  font-size:clamp(2.8rem,7vw,4.5rem);
-  color:#fff;
-  letter-spacing:.05em;
-  line-height:1.2;
-  margin-bottom:.3em;
+  font-size:clamp(2.6rem,7vw,4.2rem);
+  color:var(--wood-deep);
+  letter-spacing:.06em;
+  line-height:1.25;
+  margin-bottom:.4em;
 }
 .hero h1 span{
   display:block;
-  font-size:.35em;
+  font-size:.3em;
   font-weight:400;
-  letter-spacing:.15em;
-  color:rgba(255,255,255,.6);
-  margin-top:.5em;
+  letter-spacing:.2em;
+  color:var(--wood-light);
+  margin-top:.7em;
+  font-family:'Zen Maru Gothic',sans-serif;
 }
 
 .hero-tagline{
-  font-size:clamp(1rem,2.5vw,1.25rem);
-  color:rgba(255,255,255,.85);
+  font-size:clamp(1rem,2.5vw,1.2rem);
+  color:var(--text-body);
   margin-bottom:2.5rem;
   font-weight:400;
+  line-height:1.9;
 }
 
 .hero-cta{
   display:inline-block;
-  background:var(--lantern);
+  background:var(--terracotta);
   color:#fff;
-  padding:.9em 2.8em;
+  padding:.85em 3em;
   font-size:1rem;
   font-weight:700;
   border:none;
-  border-radius:2px;
+  border-radius:3px;
   text-decoration:none;
-  letter-spacing:.08em;
-  transition:background .25s;
+  letter-spacing:.1em;
+  transition:all .3s ease;
 }
-.hero-cta:hover{background:var(--lantern-glow)}
+.hero-cta:hover{
+  background:var(--terracotta-soft);
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(194,105,74,.2);
+}
 
 .hero-hours{
   margin-top:2rem;
-  font-size:.9rem;
-  color:rgba(255,255,255,.5);
-  letter-spacing:.05em;
+  font-size:.88rem;
+  color:var(--warm-gray);
+  letter-spacing:.04em;
+}
+
+/* ─── DIVIDERS ─── */
+.wave-divider{
+  width:100%;
+  height:40px;
+  position:relative;
+  overflow:hidden;
+}
+.wave-divider::before{
+  content:'';
+  position:absolute;
+  left:50%;transform:translateX(-50%);
+  width:120px;height:1px;
+  background:var(--parchment);
+  top:50%;
+}
+.wave-divider::after{
+  content:'';
+  position:absolute;
+  left:50%;transform:translateX(-50%);
+  width:8px;height:8px;
+  background:var(--honey);
+  border-radius:50%;
+  top:50%;margin-top:-4px;
 }
 
 /* ─── SECTION FOUNDATIONS ─── */
 section{padding:5rem 1.5rem}
-.section-narrow{max-width:900px;margin:0 auto}
-.section-wide{max-width:1100px;margin:0 auto}
+.section-narrow{max-width:880px;margin:0 auto}
+.section-wide{max-width:1060px;margin:0 auto}
 
 .section-label{
-  font-size:.8rem;
-  letter-spacing:.25em;
+  font-size:.78rem;
+  letter-spacing:.3em;
   text-transform:uppercase;
-  color:var(--soft-gray);
-  margin-bottom:.6rem;
+  color:var(--terracotta);
+  margin-bottom:.5rem;
+  font-weight:500;
 }
 .section-title{
-  font-family:'Noto Sans JP',sans-serif;
-  font-weight:900;
-  font-size:clamp(1.8rem,4vw,2.6rem);
-  color:var(--bark);
-  margin-bottom:.4em;
-  line-height:1.3;
+  font-family:'Noto Serif JP',serif;
+  font-weight:700;
+  font-size:clamp(1.7rem,4vw,2.4rem);
+  color:var(--wood-deep);
+  margin-bottom:.5em;
+  line-height:1.35;
 }
 .section-lead{
-  font-size:1.05rem;
-  color:var(--bark-light);
-  max-width:600px;
+  font-size:1.02rem;
+  color:var(--text-body);
+  max-width:580px;
   margin-bottom:3rem;
+  line-height:1.85;
 }
 
 /* ─── MENU CATEGORIES ─── */
-.menu-section{background:var(--section-bg)}
-
-.menu-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:0;
-}
+.menu-section{background:var(--warm-white)}
 
 .menu-category{
-  border-bottom:1px solid var(--straw);
-  padding:2.5rem 0;
+  padding:2.2rem 0;
+  position:relative;
 }
-.menu-category:last-child{border-bottom:none}
+.menu-category + .menu-category{
+  border-top:1px solid var(--border-warm);
+}
 
 .menu-cat-header{
   display:flex;
   align-items:baseline;
   gap:1rem;
-  margin-bottom:1.2rem;
+  margin-bottom:1rem;
   flex-wrap:wrap;
 }
 .menu-cat-name{
-  font-family:'Noto Sans JP',sans-serif;
+  font-family:'Noto Serif JP',serif;
   font-weight:700;
-  font-size:1.35rem;
-  color:var(--bark);
+  font-size:1.3rem;
+  color:var(--wood);
 }
 .menu-cat-name-en{
-  font-size:.85rem;
-  color:var(--soft-gray);
-  letter-spacing:.05em;
+  font-size:.82rem;
+  color:var(--warm-gray);
+  letter-spacing:.04em;
+  font-style:italic;
 }
 .menu-cat-count{
-  font-size:.75rem;
-  background:var(--bark);
+  font-size:.72rem;
+  background:var(--terracotta);
   color:#fff;
-  padding:.15em .7em;
-  border-radius:1px;
-  font-weight:500;
+  padding:.2em .75em;
+  border-radius:2px;
+  font-weight:600;
+  letter-spacing:.02em;
 }
 
 .menu-cat-desc{
   font-size:.95rem;
-  color:var(--bark-light);
-  margin-bottom:1rem;
-  line-height:1.7;
+  color:var(--text-body);
+  margin-bottom:1.2rem;
+  line-height:1.8;
 }
 
 .menu-items{
   display:flex;
   flex-wrap:wrap;
-  gap:.5rem .8rem;
+  gap:.5rem .7rem;
 }
 .menu-item{
   font-size:.88rem;
   color:var(--charcoal);
-  background:rgba(255,255,255,.7);
-  padding:.35em .9em;
-  border-radius:1px;
+  background:var(--linen);
+  padding:.4em 1em;
+  border-radius:3px;
   white-space:nowrap;
+  border:1px solid rgba(180,155,125,.12);
 }
 .menu-item .price{
-  color:var(--lantern);
+  color:var(--terracotta);
   font-weight:700;
-  margin-left:.4em;
+  margin-left:.5em;
 }
 
 /* ─── POPULAR DISHES ─── */
-.popular-section{background:var(--warm-cream)}
+.popular-section{background:var(--cream)}
 
-.popular-grid{
+/* Editorial staggered layout, not uniform grid */
+.popular-layout{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:2rem;
+  grid-template-columns:1fr;
+  gap:3.5rem;
 }
 
-.popular-card{
-  background:var(--paper);
-  border:1px solid var(--straw);
-  padding:0;
-  overflow:hidden;
+.popular-item{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2.5rem;
+  align-items:center;
 }
-.popular-card-img{
-  height:200px;
-  background:var(--straw);
+.popular-item:nth-child(even){
+  direction:rtl;
+}
+.popular-item:nth-child(even) > *{
+  direction:ltr;
+}
+
+.popular-img{
+  aspect-ratio:4/3;
+  background:var(--linen);
+  border-radius:4px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:.85rem;
-  color:var(--soft-gray);
-  letter-spacing:.05em;
+  font-size:.88rem;
+  color:var(--warm-gray);
+  letter-spacing:.04em;
+  border:1px solid var(--border-warm);
 }
-.popular-card-body{padding:1.5rem}
-.popular-card-rank{
-  font-size:.75rem;
-  color:var(--lantern);
+
+.popular-body{}
+.popular-rank{
+  font-size:.78rem;
+  color:var(--terracotta);
   font-weight:700;
-  letter-spacing:.1em;
-  margin-bottom:.3rem;
+  letter-spacing:.12em;
+  margin-bottom:.5rem;
 }
-.popular-card h3{
-  font-family:'Noto Sans JP',sans-serif;
+.popular-body h3{
+  font-family:'Noto Serif JP',serif;
   font-weight:700;
-  font-size:1.2rem;
-  color:var(--bark);
-  margin-bottom:.2em;
+  font-size:1.35rem;
+  color:var(--wood-deep);
+  margin-bottom:.15em;
 }
-.popular-card .en-name{
+.popular-body .en-name{
   font-size:.82rem;
-  color:var(--soft-gray);
-  margin-bottom:.8em;
+  color:var(--warm-gray);
+  font-style:italic;
+  margin-bottom:1em;
 }
-.popular-card p{
-  font-size:.92rem;
-  color:var(--bark-light);
-  line-height:1.7;
+.popular-body p.desc{
+  font-size:.95rem;
+  color:var(--text-body);
+  line-height:1.85;
+  margin-bottom:1rem;
 }
-.popular-card .card-price{
-  display:block;
-  margin-top:1rem;
-  font-size:1.1rem;
+.popular-price{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.2rem;
   font-weight:700;
-  color:var(--lantern);
+  color:var(--terracotta);
 }
 
 /* ─── GROUP / FAMILY ─── */
 .group-section{
-  background:var(--bark);
-  color:#fff;
+  background:var(--linen);
 }
-.group-section .section-label{color:rgba(255,255,255,.4)}
-.group-section .section-title{color:#fff}
-.group-section .section-lead{color:rgba(255,255,255,.7)}
+
+.group-intro{
+  margin-bottom:3rem;
+}
 
 .group-features{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:2rem;
+  grid-template-columns:1fr;
+  gap:0;
 }
 .group-feature{
-  border-left:3px solid var(--lantern);
-  padding-left:1.5rem;
+  padding:2rem 0;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:1.5rem;
+  align-items:start;
 }
-.group-feature h3{
-  font-size:1.1rem;
-  font-weight:700;
-  margin-bottom:.5em;
-  color:#fff;
-}
-.group-feature p{
-  font-size:.92rem;
-  color:rgba(255,255,255,.7);
-  line-height:1.7;
+.group-feature + .group-feature{
+  border-top:1px solid var(--border-warm);
 }
 
-.group-capacity{
+.group-feature-marker{
+  width:48px;
+  height:48px;
+  background:var(--warm-white);
+  border:2px solid var(--honey-light);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Noto Serif JP',serif;
+  font-weight:700;
+  font-size:.9rem;
+  color:var(--wood);
+  flex-shrink:0;
+  margin-top:.2rem;
+}
+.group-feature-content h3{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--wood-deep);
+  margin-bottom:.4em;
+}
+.group-feature-content p{
+  font-size:.95rem;
+  color:var(--text-body);
+  line-height:1.8;
+}
+
+.capacity-strip{
   margin-top:3rem;
+  background:var(--warm-white);
+  border:1px solid var(--border-warm);
+  border-radius:4px;
+  padding:2rem;
   display:flex;
   flex-wrap:wrap;
+  justify-content:space-around;
   gap:1.5rem;
 }
-.capacity-item{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  padding:1.2rem 1.8rem;
-  text-align:center;
-  flex:1;
-  min-width:150px;
-}
+.capacity-item{text-align:center;min-width:120px}
 .capacity-number{
-  font-family:'Noto Sans JP',sans-serif;
+  font-family:'Noto Serif JP',serif;
   font-weight:900;
-  font-size:2rem;
-  color:var(--gold-accent);
+  font-size:2.2rem;
+  color:var(--terracotta);
   line-height:1;
 }
 .capacity-label{
-  font-size:.85rem;
-  color:rgba(255,255,255,.5);
-  margin-top:.4em;
-}
-
-/* ─── VALUE ─── */
-.value-section{background:var(--section-bg)}
-
-.value-list{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.5rem;
-}
-.value-item{
-  background:var(--paper);
-  border:1px solid var(--straw);
-  padding:1.8rem;
-}
-.value-item h3{
-  font-family:'Noto Sans JP',sans-serif;
-  font-weight:700;
-  font-size:1.05rem;
-  color:var(--bark);
-  margin-bottom:.6em;
-}
-.value-item p{
-  font-size:.92rem;
-  color:var(--bark-light);
-  line-height:1.7;
-}
-.value-highlight{
-  display:inline-block;
-  background:var(--lantern);
-  color:#fff;
   font-size:.82rem;
-  font-weight:700;
-  padding:.2em .7em;
-  margin-bottom:.8em;
+  color:var(--warm-gray);
+  margin-top:.4em;
+  letter-spacing:.03em;
 }
 
 /* ─── COURSE / NOMIHOUDAI ─── */
-.course-section{background:var(--warm-cream)}
+.course-section{background:var(--warm-white)}
 
-.course-grid{
+.course-layout{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  grid-template-columns:1fr;
   gap:2rem;
 }
+@media(min-width:700px){
+  .course-layout{
+    grid-template-columns:1fr 1.15fr 1fr;
+  }
+}
+
 .course-card{
-  background:var(--paper);
-  border:2px solid var(--straw);
+  background:var(--cream);
+  border:1px solid var(--border-warm);
+  border-radius:4px;
   padding:2rem;
   position:relative;
 }
 .course-card.featured{
-  border-color:var(--lantern);
+  border-color:var(--terracotta);
+  border-width:2px;
+  box-shadow:0 8px 30px rgba(194,105,74,.08);
 }
 .course-card.featured::before{
   content:'一番人気';
   position:absolute;top:-1px;right:1.5rem;
-  background:var(--lantern);color:#fff;
-  font-size:.75rem;font-weight:700;
-  padding:.3em 1em;
-  letter-spacing:.05em;
+  background:var(--terracotta);color:#fff;
+  font-size:.72rem;font-weight:700;
+  padding:.35em 1em;
+  border-radius:0 0 3px 3px;
+  letter-spacing:.06em;
 }
 .course-card h3{
-  font-family:'Noto Sans JP',sans-serif;
+  font-family:'Noto Serif JP',serif;
   font-weight:700;
-  font-size:1.15rem;
-  color:var(--bark);
+  font-size:1.12rem;
+  color:var(--wood-deep);
   margin-bottom:.3em;
 }
 .course-card .course-price{
+  font-family:'Noto Serif JP',serif;
   font-size:1.4rem;
-  font-weight:900;
-  color:var(--lantern);
-  margin-bottom:1rem;
+  font-weight:700;
+  color:var(--terracotta);
+  margin-bottom:1.2rem;
 }
 .course-card .course-price small{
-  font-size:.65em;
-  font-weight:500;
-  color:var(--soft-gray);
+  font-size:.6em;
+  font-weight:400;
+  color:var(--warm-gray);
 }
 .course-card ul{
   list-style:none;
@@ -415,16 +465,17 @@ section{padding:5rem 1.5rem}
 }
 .course-card li{
   font-size:.9rem;
-  color:var(--bark-light);
-  padding:.3em 0;
-  border-bottom:1px dotted var(--straw);
+  color:var(--text-body);
+  padding:.35em 0;
+  border-bottom:1px dotted var(--parchment);
+  line-height:1.6;
 }
 .course-card li:last-child{border-bottom:none}
 
 /* ─── ACCESS ─── */
-.access-section{background:var(--bark);color:#fff}
-.access-section .section-label{color:rgba(255,255,255,.4)}
-.access-section .section-title{color:#fff}
+.access-section{
+  background:var(--linen);
+}
 
 .access-grid{
   display:grid;
@@ -436,7 +487,7 @@ section{padding:5rem 1.5rem}
 .access-info{
   display:flex;
   flex-direction:column;
-  gap:1.5rem;
+  gap:1.2rem;
 }
 .access-row{
   display:flex;
@@ -445,81 +496,98 @@ section{padding:5rem 1.5rem}
 }
 .access-label{
   min-width:80px;
-  font-size:.82rem;
-  color:rgba(255,255,255,.45);
+  font-size:.8rem;
+  color:var(--warm-gray);
   letter-spacing:.1em;
   flex-shrink:0;
+  font-weight:500;
 }
 .access-value{
   font-size:1rem;
-  color:rgba(255,255,255,.9);
-  line-height:1.6;
+  color:var(--text-body);
+  line-height:1.65;
 }
-.access-value a{color:var(--gold-accent);text-decoration:none}
-.access-value a:hover{text-decoration:underline}
+.access-value a{
+  color:var(--terracotta);
+  text-decoration:none;
+  border-bottom:1px solid rgba(194,105,74,.3);
+  transition:border-color .2s;
+}
+.access-value a:hover{border-color:var(--terracotta)}
 
 .access-map{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
+  background:var(--warm-white);
+  border:1px solid var(--border-warm);
+  border-radius:4px;
   height:300px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:.85rem;
-  color:rgba(255,255,255,.3);
+  font-size:.88rem;
+  color:var(--warm-gray);
 }
 
 .access-reserve{
   grid-column:1/-1;
   text-align:center;
-  margin-top:1rem;
+  margin-top:1.5rem;
+  padding-top:2rem;
+  border-top:1px solid var(--border-warm);
 }
 .reserve-btn{
   display:inline-block;
-  background:var(--lantern);
+  background:var(--terracotta);
   color:#fff;
   padding:1em 3.5em;
   font-size:1.05rem;
   font-weight:700;
   border:none;
-  border-radius:2px;
+  border-radius:3px;
   text-decoration:none;
-  letter-spacing:.08em;
-  transition:background .25s;
+  letter-spacing:.1em;
+  transition:all .3s ease;
 }
-.reserve-btn:hover{background:var(--lantern-glow)}
+.reserve-btn:hover{
+  background:var(--terracotta-soft);
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(194,105,74,.18);
+}
 .reserve-note{
   display:block;
   margin-top:.8rem;
   font-size:.82rem;
-  color:rgba(255,255,255,.4);
+  color:var(--warm-gray);
 }
 
 /* ─── FOOTER ─── */
 footer{
-  background:var(--charcoal);
-  color:rgba(255,255,255,.4);
+  background:var(--wood-deep);
+  color:rgba(255,255,255,.45);
   text-align:center;
   padding:3rem 1.5rem;
   font-size:.82rem;
-  letter-spacing:.03em;
+  letter-spacing:.04em;
 }
-footer strong{color:rgba(255,255,255,.7)}
+footer strong{color:rgba(255,255,255,.75)}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:768px){
   section{padding:3.5rem 1.2rem}
   .access-grid{grid-template-columns:1fr;gap:2rem}
   .access-map{height:200px}
-  .popular-card-img{height:160px}
-  .group-capacity{flex-direction:column}
-  .capacity-item{min-width:unset}
+  .popular-item{grid-template-columns:1fr;gap:1.5rem}
+  .popular-item:nth-child(even){direction:ltr}
+  .popular-img{aspect-ratio:16/9}
+  .capacity-strip{flex-direction:column;align-items:center}
+  .group-feature{grid-template-columns:1fr;gap:.8rem}
+  .group-feature-marker{width:36px;height:36px;font-size:.78rem}
 }
 
 @media(max-width:480px){
-  .hero{min-height:90vh}
+  .hero{min-height:92vh}
   .menu-cat-header{flex-direction:column;gap:.3rem}
   .menu-items{gap:.4rem}
+  .course-layout{gap:1.5rem}
 }
 </style>
 </head>
@@ -528,7 +596,7 @@ footer strong{color:rgba(255,255,255,.7)}
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">SUKHUMVIT, BANGKOK</div>
+    <div class="hero-locale">SUKHUMVIT, BANGKOK</div>
     <h1>
       居酒屋 みのり
       <span>Izakaya Minori</span>
@@ -549,126 +617,124 @@ footer strong{color:rgba(255,255,255,.7)}
     <h2 class="section-title">全120品以上。迷うのも楽しい。</h2>
     <p class="section-lead">定番から季節の一品まで、「あれも食べたい」が止まらないメニュー構成です。</p>
 
-    <div class="menu-grid">
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">刺身・鮮魚</span>
-          <span class="menu-cat-name-en">Sashimi &amp; Fresh Fish</span>
-          <span class="menu-cat-count">18品</span>
-        </div>
-        <p class="menu-cat-desc">毎日仕入れる鮮魚を、厚切りで。盛り合わせは2名様から。</p>
-        <div class="menu-items">
-          <span class="menu-item">刺身五点盛り<span class="price">590B</span></span>
-          <span class="menu-item">サーモン刺身<span class="price">280B</span></span>
-          <span class="menu-item">マグロぶつ切り<span class="price">320B</span></span>
-          <span class="menu-item">タコわさび<span class="price">180B</span></span>
-          <span class="menu-item">しめ鯖<span class="price">220B</span></span>
-          <span class="menu-item">カンパチ刺身<span class="price">350B</span></span>
-        </div>
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">刺身・鮮魚</span>
+        <span class="menu-cat-name-en">Sashimi &amp; Fresh Fish</span>
+        <span class="menu-cat-count">18品</span>
       </div>
-
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">焼き物</span>
-          <span class="menu-cat-name-en">Grilled</span>
-          <span class="menu-cat-count">22品</span>
-        </div>
-        <p class="menu-cat-desc">炭火でじっくり。串焼き、魚の塩焼き、ホルモンまで幅広く。</p>
-        <div class="menu-items">
-          <span class="menu-item">焼き鳥盛り合わせ（5本）<span class="price">290B</span></span>
-          <span class="menu-item">ホッケ一夜干し<span class="price">380B</span></span>
-          <span class="menu-item">豚バラ串<span class="price">120B</span></span>
-          <span class="menu-item">手羽先<span class="price">180B</span></span>
-          <span class="menu-item">イカの丸焼き<span class="price">280B</span></span>
-          <span class="menu-item">牛タン塩焼き<span class="price">420B</span></span>
-          <span class="menu-item">つくね（月見）<span class="price">140B</span></span>
-        </div>
+      <p class="menu-cat-desc">毎日仕入れる鮮魚を、厚切りで。盛り合わせは2名様から。</p>
+      <div class="menu-items">
+        <span class="menu-item">刺身五点盛り<span class="price">590B</span></span>
+        <span class="menu-item">サーモン刺身<span class="price">280B</span></span>
+        <span class="menu-item">マグロぶつ切り<span class="price">320B</span></span>
+        <span class="menu-item">タコわさび<span class="price">180B</span></span>
+        <span class="menu-item">しめ鯖<span class="price">220B</span></span>
+        <span class="menu-item">カンパチ刺身<span class="price">350B</span></span>
       </div>
+    </div>
 
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">揚げ物</span>
-          <span class="menu-cat-name-en">Deep Fried</span>
-          <span class="menu-cat-count">15品</span>
-        </div>
-        <p class="menu-cat-desc">カリッ、ジュワッ。ビールが進む揚げたてを。</p>
-        <div class="menu-items">
-          <span class="menu-item">鶏の唐揚げ<span class="price">220B</span></span>
-          <span class="menu-item">エビフライ（3本）<span class="price">320B</span></span>
-          <span class="menu-item">コロッケ<span class="price">160B</span></span>
-          <span class="menu-item">軟骨唐揚げ<span class="price">180B</span></span>
-          <span class="menu-item">アジフライ<span class="price">240B</span></span>
-          <span class="menu-item">チーズフライ<span class="price">200B</span></span>
-        </div>
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">焼き物</span>
+        <span class="menu-cat-name-en">Grilled</span>
+        <span class="menu-cat-count">22品</span>
       </div>
-
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">煮物・鍋</span>
-          <span class="menu-cat-name-en">Simmered &amp; Hot Pot</span>
-          <span class="menu-cat-count">12品</span>
-        </div>
-        <p class="menu-cat-desc">冷房で冷えた体に、あったかい一品を。鍋は2名様から。</p>
-        <div class="menu-items">
-          <span class="menu-item">肉じゃが<span class="price">240B</span></span>
-          <span class="menu-item">もつ煮込み<span class="price">220B</span></span>
-          <span class="menu-item">おでん盛り合わせ<span class="price">280B</span></span>
-          <span class="menu-item">寄せ鍋（2名～）<span class="price">890B</span></span>
-          <span class="menu-item">もつ鍋（2名～）<span class="price">980B</span></span>
-        </div>
+      <p class="menu-cat-desc">炭火でじっくり。串焼き、魚の塩焼き、ホルモンまで幅広く。</p>
+      <div class="menu-items">
+        <span class="menu-item">焼き鳥盛り合わせ（5本）<span class="price">290B</span></span>
+        <span class="menu-item">ホッケ一夜干し<span class="price">380B</span></span>
+        <span class="menu-item">豚バラ串<span class="price">120B</span></span>
+        <span class="menu-item">手羽先<span class="price">180B</span></span>
+        <span class="menu-item">イカの丸焼き<span class="price">280B</span></span>
+        <span class="menu-item">牛タン塩焼き<span class="price">420B</span></span>
+        <span class="menu-item">つくね（月見）<span class="price">140B</span></span>
       </div>
+    </div>
 
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">サラダ・一品</span>
-          <span class="menu-cat-name-en">Salad &amp; Small Plates</span>
-          <span class="menu-cat-count">20品</span>
-        </div>
-        <p class="menu-cat-desc">とりあえずの枝豆から、しっかりポテサラまで。</p>
-        <div class="menu-items">
-          <span class="menu-item">枝豆<span class="price">100B</span></span>
-          <span class="menu-item">冷やしトマト<span class="price">140B</span></span>
-          <span class="menu-item">ポテトサラダ<span class="price">160B</span></span>
-          <span class="menu-item">シーザーサラダ<span class="price">220B</span></span>
-          <span class="menu-item">たこわさ<span class="price">160B</span></span>
-          <span class="menu-item">明太子卵焼き<span class="price">200B</span></span>
-          <span class="menu-item">冷奴<span class="price">100B</span></span>
-        </div>
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">揚げ物</span>
+        <span class="menu-cat-name-en">Deep Fried</span>
+        <span class="menu-cat-count">15品</span>
       </div>
-
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">ご飯・麺・〆</span>
-          <span class="menu-cat-name-en">Rice, Noodles &amp; Finishers</span>
-          <span class="menu-cat-count">14品</span>
-        </div>
-        <p class="menu-cat-desc">飲んだ後の〆。焼きおにぎり、お茶漬け、ラーメンも。</p>
-        <div class="menu-items">
-          <span class="menu-item">焼きおにぎり（2個）<span class="price">160B</span></span>
-          <span class="menu-item">鮭茶漬け<span class="price">180B</span></span>
-          <span class="menu-item">焼きそば<span class="price">220B</span></span>
-          <span class="menu-item">〆のラーメン<span class="price">240B</span></span>
-          <span class="menu-item">明太子ご飯<span class="price">160B</span></span>
-          <span class="menu-item">釜玉うどん<span class="price">200B</span></span>
-        </div>
+      <p class="menu-cat-desc">カリッ、ジュワッ。ビールが進む揚げたてを。</p>
+      <div class="menu-items">
+        <span class="menu-item">鶏の唐揚げ<span class="price">220B</span></span>
+        <span class="menu-item">エビフライ（3本）<span class="price">320B</span></span>
+        <span class="menu-item">コロッケ<span class="price">160B</span></span>
+        <span class="menu-item">軟骨唐揚げ<span class="price">180B</span></span>
+        <span class="menu-item">アジフライ<span class="price">240B</span></span>
+        <span class="menu-item">チーズフライ<span class="price">200B</span></span>
       </div>
+    </div>
 
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <span class="menu-cat-name">ドリンク</span>
-          <span class="menu-cat-name-en">Drinks</span>
-          <span class="menu-cat-count">25品+</span>
-        </div>
-        <p class="menu-cat-desc">生ビール、日本酒、焼酎、サワー、ソフトドリンクまで。</p>
-        <div class="menu-items">
-          <span class="menu-item">生ビール<span class="price">180B</span></span>
-          <span class="menu-item">ハイボール<span class="price">180B</span></span>
-          <span class="menu-item">レモンサワー<span class="price">160B</span></span>
-          <span class="menu-item">日本酒（一合）<span class="price">280B~</span></span>
-          <span class="menu-item">芋焼酎<span class="price">200B</span></span>
-          <span class="menu-item">梅酒ロック<span class="price">200B</span></span>
-          <span class="menu-item">ソフトドリンク各種<span class="price">80B</span></span>
-        </div>
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">煮物・鍋</span>
+        <span class="menu-cat-name-en">Simmered &amp; Hot Pot</span>
+        <span class="menu-cat-count">12品</span>
+      </div>
+      <p class="menu-cat-desc">冷房で冷えた体に、あったかい一品を。鍋は2名様から。</p>
+      <div class="menu-items">
+        <span class="menu-item">肉じゃが<span class="price">240B</span></span>
+        <span class="menu-item">もつ煮込み<span class="price">220B</span></span>
+        <span class="menu-item">おでん盛り合わせ<span class="price">280B</span></span>
+        <span class="menu-item">寄せ鍋（2名～）<span class="price">890B</span></span>
+        <span class="menu-item">もつ鍋（2名～）<span class="price">980B</span></span>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">サラダ・一品</span>
+        <span class="menu-cat-name-en">Salad &amp; Small Plates</span>
+        <span class="menu-cat-count">20品</span>
+      </div>
+      <p class="menu-cat-desc">とりあえずの枝豆から、しっかりポテサラまで。</p>
+      <div class="menu-items">
+        <span class="menu-item">枝豆<span class="price">100B</span></span>
+        <span class="menu-item">冷やしトマト<span class="price">140B</span></span>
+        <span class="menu-item">ポテトサラダ<span class="price">160B</span></span>
+        <span class="menu-item">シーザーサラダ<span class="price">220B</span></span>
+        <span class="menu-item">たこわさ<span class="price">160B</span></span>
+        <span class="menu-item">明太子卵焼き<span class="price">200B</span></span>
+        <span class="menu-item">冷奴<span class="price">100B</span></span>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">ご飯・麺・〆</span>
+        <span class="menu-cat-name-en">Rice, Noodles &amp; Finishers</span>
+        <span class="menu-cat-count">14品</span>
+      </div>
+      <p class="menu-cat-desc">飲んだ後の〆。焼きおにぎり、お茶漬け、ラーメンも。</p>
+      <div class="menu-items">
+        <span class="menu-item">焼きおにぎり（2個）<span class="price">160B</span></span>
+        <span class="menu-item">鮭茶漬け<span class="price">180B</span></span>
+        <span class="menu-item">焼きそば<span class="price">220B</span></span>
+        <span class="menu-item">〆のラーメン<span class="price">240B</span></span>
+        <span class="menu-item">明太子ご飯<span class="price">160B</span></span>
+        <span class="menu-item">釜玉うどん<span class="price">200B</span></span>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <div class="menu-cat-header">
+        <span class="menu-cat-name">ドリンク</span>
+        <span class="menu-cat-name-en">Drinks</span>
+        <span class="menu-cat-count">25品+</span>
+      </div>
+      <p class="menu-cat-desc">生ビール、日本酒、焼酎、サワー、ソフトドリンクまで。</p>
+      <div class="menu-items">
+        <span class="menu-item">生ビール<span class="price">180B</span></span>
+        <span class="menu-item">ハイボール<span class="price">180B</span></span>
+        <span class="menu-item">レモンサワー<span class="price">160B</span></span>
+        <span class="menu-item">日本酒（一合）<span class="price">280B~</span></span>
+        <span class="menu-item">芋焼酎<span class="price">200B</span></span>
+        <span class="menu-item">梅酒ロック<span class="price">200B</span></span>
+        <span class="menu-item">ソフトドリンク各種<span class="price">80B</span></span>
       </div>
     </div>
   </div>
@@ -681,39 +747,41 @@ footer strong{color:rgba(255,255,255,.7)}
     <h2 class="section-title">みんなが頼む、みのりの定番</h2>
     <p class="section-lead">迷ったらまずはこれ。常連さんのリピート率が物語る人気メニュー。</p>
 
-    <div class="popular-grid">
-      <div class="popular-card">
-        <div class="popular-card-img">[ 刺身五点盛り ]</div>
-        <div class="popular-card-body">
-          <p class="popular-card-rank">No.1</p>
+    <div class="popular-layout">
+
+      <div class="popular-item">
+        <div class="popular-img">[ 刺身五点盛り ]</div>
+        <div class="popular-body">
+          <p class="popular-rank">No.1</p>
           <h3>刺身五点盛り</h3>
           <p class="en-name">Sashimi Five Kinds Platter</p>
-          <p>その日の仕入れで変わる五点盛り。厚切りにこだわった、みのりの看板メニュー。ふたりで分けてちょうどいいボリューム。</p>
-          <span class="card-price">590B</span>
+          <p class="desc">その日の仕入れで変わる五点盛り。厚切りにこだわった、みのりの看板メニュー。ふたりで分けてちょうどいいボリューム。</p>
+          <span class="popular-price">590B</span>
         </div>
       </div>
 
-      <div class="popular-card">
-        <div class="popular-card-img">[ もつ鍋 ]</div>
-        <div class="popular-card-body">
-          <p class="popular-card-rank">No.2</p>
+      <div class="popular-item">
+        <div class="popular-img">[ もつ鍋 ]</div>
+        <div class="popular-body">
+          <p class="popular-rank">No.2</p>
           <h3>もつ鍋</h3>
           <p class="en-name">Motsu Nabe (Offal Hot Pot)</p>
-          <p>濃厚味噌ベースのスープにぷりぷりのもつ。〆のちゃんぽん麺まで含めて、テーブルの真ん中が一番盛り上がるメニュー。</p>
-          <span class="card-price">980B（2名様～）</span>
+          <p class="desc">濃厚味噌ベースのスープにぷりぷりのもつ。〆のちゃんぽん麺まで含めて、テーブルの真ん中が一番盛り上がるメニュー。</p>
+          <span class="popular-price">980B（2名様～）</span>
         </div>
       </div>
 
-      <div class="popular-card">
-        <div class="popular-card-img">[ 鶏の唐揚げ ]</div>
-        <div class="popular-card-body">
-          <p class="popular-card-rank">No.3</p>
+      <div class="popular-item">
+        <div class="popular-img">[ 鶏の唐揚げ ]</div>
+        <div class="popular-body">
+          <p class="popular-rank">No.3</p>
           <h3>鶏の唐揚げ</h3>
           <p class="en-name">Fried Chicken Karaage</p>
-          <p>にんにく醤油に一晩漬けた鶏もも肉を、注文ごとに揚げたてで。外はカリカリ、中はジューシー。ビールとの相性は言うまでもなく。</p>
-          <span class="card-price">220B</span>
+          <p class="desc">にんにく醤油に一晩漬けた鶏もも肉を、注文ごとに揚げたてで。外はカリカリ、中はジューシー。ビールとの相性は言うまでもなく。</p>
+          <span class="popular-price">220B</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -721,30 +789,44 @@ footer strong{color:rgba(255,255,255,.7)}
 <!-- ═══ GROUP / FAMILY SEATING ═══ -->
 <section class="group-section" id="group">
   <div class="section-wide">
-    <p class="section-label">For Groups &amp; Families</p>
-    <h2 class="section-title">大人数でも、家族でも。<br>広々使える空間。</h2>
-    <p class="section-lead">掘りごたつ座敷、テーブル個室、カウンター。人数とシーンに合わせてご案内します。</p>
+    <div class="group-intro">
+      <p class="section-label">For Groups &amp; Families</p>
+      <h2 class="section-title">大人数でも、家族でも。<br>広々使える空間。</h2>
+      <p class="section-lead">掘りごたつ座敷、テーブル個室、カウンター。人数とシーンに合わせてご案内します。</p>
+    </div>
 
     <div class="group-features">
       <div class="group-feature">
-        <h3>掘りごたつ座敷</h3>
-        <p>足を伸ばしてゆったり。お子様連れのご家族にも好評です。靴を脱いでくつろげる、みのり自慢のスペース。</p>
+        <div class="group-feature-marker">座</div>
+        <div class="group-feature-content">
+          <h3>掘りごたつ座敷</h3>
+          <p>足を伸ばしてゆったり。お子様連れのご家族にも好評です。靴を脱いでくつろげる、みのり自慢のスペース。</p>
+        </div>
       </div>
       <div class="group-feature">
-        <h3>半個室テーブル</h3>
-        <p>仕切りで区切った半個室は、会社の飲み会や接待にも。周りを気にせず、自分たちのペースで楽しめます。</p>
+        <div class="group-feature-marker">個</div>
+        <div class="group-feature-content">
+          <h3>半個室テーブル</h3>
+          <p>仕切りで区切った半個室は、会社の飲み会や接待にも。周りを気にせず、自分たちのペースで楽しめます。</p>
+        </div>
       </div>
       <div class="group-feature">
-        <h3>カウンター席</h3>
-        <p>おひとりさまや少人数でサクッと。板前の仕事を眺めながら、目の前で仕上がる料理を待つ時間も贅沢です。</p>
+        <div class="group-feature-marker">席</div>
+        <div class="group-feature-content">
+          <h3>カウンター席</h3>
+          <p>おひとりさまや少人数でサクッと。板前の仕事を眺めながら、目の前で仕上がる料理を待つ時間も贅沢です。</p>
+        </div>
       </div>
       <div class="group-feature">
-        <h3>貸切対応</h3>
-        <p>30名様以上で貸切のご相談も承ります。歓送迎会、忘年会、周年パーティーなど、お気軽にお問い合わせください。</p>
+        <div class="group-feature-marker">貸</div>
+        <div class="group-feature-content">
+          <h3>貸切対応</h3>
+          <p>30名様以上で貸切のご相談も承ります。歓送迎会、忘年会、周年パーティーなど、お気軽にお問い合わせください。</p>
+        </div>
       </div>
     </div>
 
-    <div class="group-capacity">
+    <div class="capacity-strip">
       <div class="capacity-item">
         <div class="capacity-number">80</div>
         <div class="capacity-label">総席数</div>
@@ -772,7 +854,7 @@ footer strong{color:rgba(255,255,255,.7)}
     <h2 class="section-title">宴会コース・飲み放題</h2>
     <p class="section-lead">幹事さんも安心。予算に合わせた宴会プランをご用意しています。</p>
 
-    <div class="course-grid">
+    <div class="course-layout">
       <div class="course-card">
         <h3>みのりコース</h3>
         <div class="course-price">1,200B <small>/1名（税込）</small></div>
@@ -814,38 +896,6 @@ footer strong{color:rgba(255,255,255,.7)}
           <li>ソフトドリンク</li>
           <li>+200Bでプレミアム日本酒追加</li>
         </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ VALUE ═══ -->
-<section class="value-section" id="value">
-  <div class="section-wide">
-    <p class="section-label">Why Minori</p>
-    <h2 class="section-title">「また来たい」には理由がある</h2>
-    <p class="section-lead">毎日通える価格帯と、毎日来ても飽きないメニューの幅。</p>
-
-    <div class="value-list">
-      <div class="value-item">
-        <span class="value-highlight">価格</span>
-        <h3>一品100Bから。お会計で驚かない。</h3>
-        <p>枝豆100B、唐揚げ220B、生ビール180B。バンコクの日本食としては良心的な価格設定です。安くても手を抜かない、それがみのりの約束。</p>
-      </div>
-      <div class="value-item">
-        <span class="value-highlight">メニュー数</span>
-        <h3>全120品超。毎週来ても新しい発見。</h3>
-        <p>刺身、焼き物、揚げ物、煮物、鍋、サラダ、〆まで。「あれもこれも」が叶うから、好みがバラバラなグループでも全員満足。</p>
-      </div>
-      <div class="value-item">
-        <span class="value-highlight">立地</span>
-        <h3>駅から徒歩3分。集まりやすい。</h3>
-        <p>BTSプロンポン駅から徒歩3分。雨の日でもほぼ濡れずに到着。二次会にも、ふらっと一杯にも。</p>
-      </div>
-      <div class="value-item">
-        <span class="value-highlight">安心感</span>
-        <h3>日本語OK。初めてでも迷わない。</h3>
-        <p>日本語メニュー、日本語対応スタッフ常駐。タイに来たばかりの方も、長くお住まいの方も、変わらず居心地よく過ごせます。</p>
       </div>
     </div>
   </div>
