@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEEB - ご提案資料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0a0f1a;
+    --off-white: #faf9f7;
+    --terracotta: #c4703f;
+    --gray-800: #2a2a2a;
+    --gray-600: #4a4a4a;
+    --gray-400: #8a8a8a;
+    --gray-200: #d4d4d4;
+    --gray-100: #efefed;
+  }
+
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', 'Inter', sans-serif;
+    color: var(--navy);
+    background: var(--navy);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    line-height: 1.7;
+  }
+
+  /* ===== SHARED PAGE STYLES ===== */
+  .page {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 48px;
+    width: 100%;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-400);
+    letter-spacing: 0.08em;
+  }
+
+  /* Typography */
+  h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+  }
+
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.5;
+    margin-bottom: 36px;
+    letter-spacing: 0.02em;
+  }
+
+  h3 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--gray-600);
+  }
+
+  /* ===== PAGE 1: COVER ===== */
+  .cover {
+    background: var(--navy);
+    color: var(--off-white);
+    justify-content: flex-end;
+    padding-bottom: 0;
+  }
+
+  .cover .page-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding-bottom: 80px;
+  }
+
+  .cover-logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+
+  .cover-logo-sub {
+    font-size: 13px;
+    color: rgba(250,249,247,0.4);
+    margin-bottom: 60px;
+  }
+
+  .cover h1 {
+    font-size: 42px;
+    color: var(--off-white);
+    margin-bottom: 48px;
+  }
+
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(250,249,247,0.12);
+    padding-top: 24px;
+    font-size: 13px;
+    color: rgba(250,249,247,0.4);
+    line-height: 1.7;
+  }
+
+  .cover .page-num { color: rgba(250,249,247,0.2); }
+
+  /* ===== PAGE 2: PROBLEM ===== */
+  .problem {
+    background: var(--off-white);
+  }
+
+  .problem h2 {
+    font-size: 28px;
+    margin-bottom: 44px;
+  }
+
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .problem-item {
+    display: grid;
+    grid-template-columns: 4px 1fr;
+    gap: 20px;
+  }
+
+  .problem-bar {
+    background: var(--terracotta);
+    border-radius: 2px;
+  }
+
+  .problem-item p {
+    font-size: 17px;
+    color: var(--navy);
+    line-height: 1.7;
+    font-weight: 500;
+  }
+
+  .problem-item p .highlight {
+    color: var(--terracotta);
+    font-weight: 700;
+  }
+
+  .problem-stat {
+    margin-top: 44px;
+    padding: 28px 32px;
+    background: var(--navy);
+    border-radius: 12px;
+    color: var(--off-white);
+  }
+
+  .problem-stat-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--terracotta);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .problem-stat p {
+    font-size: 15px;
+    color: rgba(250,249,247,0.65);
+  }
+
+  /* ===== PAGE 3: WHAT WE DO ===== */
+  .solution {
+    background: var(--off-white);
+  }
+
+  .solution-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .solution-card {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+  }
+
+  .solution-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--terracotta);
+    line-height: 1;
+    padding-top: 4px;
+  }
+
+  .solution-card h3 {
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .solution-card p {
+    font-size: 15px;
+    color: var(--gray-600);
+  }
+
+  .solution-card .sub-note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--gray-400);
+    font-style: italic;
+  }
+
+  /* ===== PAGE 4: TRANSLATION EXAMPLES ===== */
+  .translation {
+    background: var(--off-white);
+  }
+
+  .tl-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .tl-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .tl-dish {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+
+  .tl-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .tl-side {
+    padding: 16px 20px;
+    border-radius: 8px;
+  }
+
+  .tl-side.google {
+    background: var(--gray-100);
+  }
+
+  .tl-side.jeeb {
+    background: var(--navy);
+    color: var(--off-white);
+  }
+
+  .tl-side-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .tl-side.google .tl-side-label {
+    color: var(--gray-400);
+  }
+
+  .tl-side.jeeb .tl-side-label {
+    color: var(--terracotta);
+  }
+
+  .tl-side-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  .tl-side.google .tl-side-text {
+    color: var(--gray-600);
+  }
+
+  .tl-side.jeeb .tl-side-text {
+    color: var(--off-white);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .tl-cta {
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  .tl-cta a {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--navy);
+    color: var(--off-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== PAGE 5: SAMPLES ===== */
+  .samples {
+    background: var(--navy);
+    color: var(--off-white);
+  }
+
+  .samples h2 {
+    color: var(--off-white);
+  }
+
+  .samples-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .sample-category {
+    margin-bottom: 8px;
+  }
+
+  .sample-category-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+
+  .sample-link {
+    display: block;
+    padding: 16px 20px;
+    background: rgba(250,249,247,0.06);
+    border: 1px solid rgba(250,249,247,0.08);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--off-white);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+  }
+
+  .sample-link:hover {
+    background: rgba(250,249,247,0.1);
+  }
+
+  .sample-link .sample-type {
+    font-size: 12px;
+    color: rgba(250,249,247,0.4);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* ===== PAGE 6: PRICING ===== */
+  .pricing {
+    background: var(--off-white);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .p-card {
+    padding: 32px 24px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    position: relative;
+  }
+
+  .p-card.featured {
+    border: 2px solid var(--terracotta);
+    transform: scale(1.03);
+  }
+
+  .p-card-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 18px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .p-card-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .p-card-price {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--terracotta);
+    line-height: 1.1;
+  }
+
+  .p-card-price span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gray-400);
+  }
+
+  .p-card-desc {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+    list-style: none;
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 2;
+  }
+
+  .p-card-desc li {
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .p-card-desc li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--terracotta);
+  }
+
+  .p-notes {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 32px;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .p-note {
+    text-align: center;
+  }
+
+  .p-note-val {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .p-note-label {
+    font-size: 13px;
+    color: var(--gray-400);
+  }
+
+  .p-annual {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--gray-600);
+  }
+
+  .p-annual strong {
+    color: var(--terracotta);
+  }
+
+  /* ===== PAGE 7: HOW IT WORKS ===== */
+  .how {
+    background: var(--off-white);
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .steps::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    bottom: 24px;
+    width: 2px;
+    background: var(--gray-200);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: 20px 0;
+  }
+
+  .step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--off-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h3 {
+    font-size: 19px;
+    margin-bottom: 6px;
+    padding-top: 4px;
+  }
+
+  .step-content p {
+    font-size: 15px;
+    color: var(--gray-600);
+  }
+
+  .step-content .free-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--terracotta);
+    background: rgba(196,112,63,0.1);
+    padding: 2px 12px;
+    border-radius: 4px;
+  }
+
+  /* ===== PAGE 8: CONTACT ===== */
+  .contact {
+    background: var(--navy);
+    color: var(--off-white);
+  }
+
+  .contact h2 {
+    color: var(--off-white);
+    font-size: 34px;
+    margin-bottom: 44px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .contact-item {
+    padding: 28px 24px;
+    background: rgba(250,249,247,0.05);
+    border: 1px solid rgba(250,249,247,0.08);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .contact-item-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+
+  .contact-qr {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed rgba(250,249,247,0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 12px;
+    color: rgba(250,249,247,0.3);
+  }
+
+  .contact-item-val {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--off-white);
+  }
+
+  .contact-item-val.small {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(250,249,247,0.6);
+  }
+
+  .contact-message {
+    text-align: center;
+    font-size: 17px;
+    color: rgba(250,249,247,0.6);
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  .contact-message strong {
+    color: var(--off-white);
+    font-weight: 600;
+  }
+
+  .contact-footer {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(250,249,247,0.08);
+    font-size: 12px;
+    color: rgba(250,249,247,0.3);
+    line-height: 1.9;
+  }
+
+  .contact .page-num { color: rgba(250,249,247,0.2); }
+
+  /* ===== PRINT ===== */
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  @media print {
+    html { scroll-snap-type: none; }
+    body { background: white; }
+    .page {
+      width: 297mm;
+      height: 210mm;
+      page-break-after: always;
+      scroll-snap-align: none;
+    }
+    .page:last-child { page-break-after: auto; }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .page-inner { padding: 40px 28px; }
+    h2 { font-size: 24px; }
+    .cover h1 { font-size: 30px; }
+    .pricing-grid, .contact-grid { grid-template-columns: 1fr; }
+    .samples-grid { grid-template-columns: 1fr; }
+    .tl-comparison { grid-template-columns: 1fr; }
+    .p-card.featured { transform: none; }
+    .p-notes { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<section class="page cover">
+  <div class="page-inner">
+    <div class="cover-logo">JEEB</div>
+    <div class="cover-logo-sub">ジーブ</div>
+    <h1>メニュー写真1枚で、<br>あなたの店が変わる。</h1>
+    <div class="cover-meta">
+      <div>
+        VANNESS ASIA CO., LTD<br>
+        バンコクの飲食店のためのデジタルサービス
+      </div>
+      <div>2026年3月</div>
+    </div>
+  </div>
+  <div class="page-num">01 / 08</div>
+</section>
+
+<!-- ===== PAGE 2: THE PROBLEM ===== -->
+<section class="page problem">
+  <div class="page-inner">
+    <h2>あなたの店の前を、<br>毎日何人が通り過ぎていますか？</h2>
+
+    <ul class="problem-list">
+      <li class="problem-item">
+        <div class="problem-bar"></div>
+        <p>バンコクには年間<span class="highlight">3,000万人以上</span>の外国人観光客が訪れています。その多くがスマホで「近くのレストラン」を検索しています。</p>
+      </li>
+      <li class="problem-item">
+        <div class="problem-bar"></div>
+        <p>Webサイトがなければ、検索結果に出ない。<br>検索結果に出なければ、<span class="highlight">存在しないのと同じ</span>です。</p>
+      </li>
+      <li class="problem-item">
+        <div class="problem-bar"></div>
+        <p>タイ語だけのメニューを渡されても、外国人には読めません。<br><span class="highlight">読めなければ、隣の店に行く</span>だけです。</p>
+      </li>
+      <li class="problem-item">
+        <div class="problem-bar"></div>
+        <p>Google翻訳で「揚げ出し豆腐」は <span class="highlight">"Fried Tofu"</span> になります。<br>それでは誰も「食べたい」と思いません。</p>
+      </li>
+    </ul>
+
+    <div class="problem-stat">
+      <div class="problem-stat-num">3,000万+</div>
+      <p>バンコクを訪れる外国人観光客（年間）。彼らは今、スマホであなたの店を探しています。</p>
+    </div>
+  </div>
+  <div class="page-num">02 / 08</div>
+</section>
+
+<!-- ===== PAGE 3: WHAT WE DO ===== -->
+<section class="page solution">
+  <div class="page-inner">
+    <h2>メニュー写真1枚から、<br>全部やります。</h2>
+
+    <div class="solution-grid">
+
+      <div class="solution-card">
+        <div class="solution-num">1</div>
+        <div>
+          <h3>4言語メニュー翻訳</h3>
+          <p>日本語・英語・タイ語・中国語。ただの直訳ではなく、外国人が「食べたい」と思う説明文を作成します。Google翻訳の "Fried Tofu" とは次元が違います。</p>
+          <p class="sub-note">翻訳サンプル集（24品）は次ページでご確認いただけます。</p>
+        </div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">2</div>
+        <div>
+          <h3>御社専用Webサイトを即日作成</h3>
+          <p>多言語対応・QRメニュー付きのサイトを、メニュー写真から即日で構築。スマホで見て、そのまま来店につながるサイトです。</p>
+          <p class="sub-note">ラーメン店・居酒屋など8種類のサンプルを制作済み。</p>
+        </div>
+      </div>
+
+      <div class="solution-card">
+        <div class="solution-num">3</div>
+        <div>
+          <h3>SNS運用代行</h3>
+          <p>「今日はこれを撮ってください」と毎日具体的に指示します。何を投稿するか考える必要はありません。写真を送るだけです。</p>
+          <p class="sub-note">考えなくていい。送るだけ。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-num">03 / 08</div>
+</section>
+
+<!-- ===== PAGE 4: TRANSLATION EXAMPLES ===== -->
+<section class="page translation">
+  <div class="page-inner">
+    <h2>Google翻訳 vs 弊社サービス</h2>
+
+    <div class="tl-examples">
+
+      <div class="tl-card">
+        <div class="tl-dish">揚げ出し豆腐</div>
+        <div class="tl-comparison">
+          <div class="tl-side google">
+            <div class="tl-side-label">Google Translate</div>
+            <div class="tl-side-text">"Fried Tofu"</div>
+          </div>
+          <div class="tl-side jeeb">
+            <div class="tl-side-label">JEEB</div>
+            <div class="tl-side-text">"Silken tofu, lightly fried to a golden crisp, served in a warm savory dashi broth."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-card">
+        <div class="tl-dish">土瓶蒸し</div>
+        <div class="tl-comparison">
+          <div class="tl-side google">
+            <div class="tl-side-label">Google Translate</div>
+            <div class="tl-side-text">"Earthen Pot Steam"</div>
+          </div>
+          <div class="tl-side jeeb">
+            <div class="tl-side-label">JEEB</div>
+            <div class="tl-side-text">"A delicate clear broth of matsutake mushroom, shrimp, and seasonal vegetables, steamed in a traditional clay teapot. Sip directly from the spout."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-card">
+        <div class="tl-dish">もつ鍋</div>
+        <div class="tl-comparison">
+          <div class="tl-side google">
+            <div class="tl-side-label">Google Translate</div>
+            <div class="tl-side-text">"Internal Organs Hot Pot"</div>
+          </div>
+          <div class="tl-side jeeb">
+            <div class="tl-side-label">JEEB</div>
+            <div class="tl-side-text">"Tender beef offal simmered in a rich garlic-soy broth with cabbage, chives, and tofu. A Hakata specialty, finished with champon noodles."</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tl-cta">
+      <a href="#">24品の翻訳サンプル集を見る</a>
+    </div>
+  </div>
+  <div class="page-num">04 / 08</div>
+</section>
+
+<!-- ===== PAGE 5: PRODUCTION SAMPLES ===== -->
+<section class="page samples">
+  <div class="page-inner">
+    <h2>すでに、ここまで作れます。</h2>
+
+    <div class="samples-grid">
+      <div class="sample-category">
+        <div class="sample-category-label">Ramen</div>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/" target="_blank">
+          Type A - Afuri
+          <div class="sample-type">淡麗系ラーメン</div>
+        </a>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/" target="_blank">
+          Type B - Ivan
+          <div class="sample-type">クリエイティブラーメン</div>
+        </a>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/" target="_blank">
+          Type C - Nagi
+          <div class="sample-type">濃厚系ラーメン</div>
+        </a>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/" target="_blank">
+          Type D - Hayashida
+          <div class="sample-type">王道醤油ラーメン</div>
+        </a>
+      </div>
+      <div class="sample-category">
+        <div class="sample-category-label">Izakaya</div>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/" target="_blank">
+          Type A - Yakitori
+          <div class="sample-type">焼鳥専門店</div>
+        </a>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/" target="_blank">
+          Type B - Neo
+          <div class="sample-type">ネオ居酒屋</div>
+        </a>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/" target="_blank">
+          Type C - Robata
+          <div class="sample-type">炉端焼き</div>
+        </a>
+        <a class="sample-link" href="https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/" target="_blank">
+          Type D - Family
+          <div class="sample-type">ファミリー居酒屋</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="page-num">05 / 08</div>
+</section>
+
+<!-- ===== PAGE 6: PRICING ===== -->
+<section class="page pricing">
+  <div class="page-inner">
+    <h2>月額฿2,000から。初期費用฿0。</h2>
+
+    <div class="pricing-grid">
+
+      <div class="p-card">
+        <div class="p-card-name">ライト</div>
+        <div class="p-card-price">฿2,000<span>/月</span></div>
+        <ul class="p-card-desc">
+          <li>多言語Webサイト構築</li>
+          <li>4言語メニュー翻訳</li>
+          <li>QRメニュー作成</li>
+          <li>メニュー更新（月2回）</li>
+        </ul>
+      </div>
+
+      <div class="p-card featured">
+        <div class="p-card-badge">おすすめ</div>
+        <div class="p-card-name">スタンダード</div>
+        <div class="p-card-price">฿5,000<span>/月</span></div>
+        <ul class="p-card-desc">
+          <li>ライトの全機能</li>
+          <li>SNS運用代行（週3投稿）</li>
+          <li>毎日の撮影指示</li>
+          <li>投稿コンテンツ作成</li>
+          <li>メニュー更新（無制限）</li>
+        </ul>
+      </div>
+
+      <div class="p-card">
+        <div class="p-card-name">プレミアム</div>
+        <div class="p-card-price">฿10,000<span>/月</span></div>
+        <ul class="p-card-desc">
+          <li>スタンダードの全機能</li>
+          <li>アクセス分析レポート</li>
+          <li>月次コンサルティング</li>
+          <li>広告運用サポート</li>
+          <li>優先対応</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="p-notes">
+      <div class="p-note">
+        <div class="p-note-val">฿0</div>
+        <div class="p-note-label">初期費用</div>
+      </div>
+      <div class="p-note">
+        <div class="p-note-val">2週間</div>
+        <div class="p-note-label">無料トライアル</div>
+      </div>
+      <div class="p-note">
+        <div class="p-note-val">いつでも</div>
+        <div class="p-note-label">解約可能</div>
+      </div>
+    </div>
+
+    <div class="p-annual">年払いで<strong>2ヶ月分無料</strong>（10ヶ月分の料金で12ヶ月ご利用いただけます）</div>
+  </div>
+  <div class="page-num">06 / 08</div>
+</section>
+
+<!-- ===== PAGE 7: HOW IT WORKS ===== -->
+<section class="page how">
+  <div class="page-inner">
+    <h2>始め方は、<br>メニューの写真を送るだけ。</h2>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <h3>メニューの写真を1枚送る</h3>
+          <p>LINEかInstagramで、メニュー表の写真を送ってください。それだけで始まります。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <h3>24時間以内にサンプルが届く</h3>
+          <p>翻訳メニューとWebサイトのサンプルをお送りします。</p>
+          <span class="free-tag">無料</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <h3>2週間、試してみる</h3>
+          <p>気に入ったら2週間の無料トライアルを開始。実際の効果を確認できます。</p>
+          <span class="free-tag">無料</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-circle">4</div>
+        <div class="step-content">
+          <h3>気に入ったら契約</h3>
+          <p>月額฿2,000から。いつでも解約できます。リスクはゼロです。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-num">07 / 08</div>
+</section>
+
+<!-- ===== PAGE 8: CONTACT ===== -->
+<section class="page contact">
+  <div class="page-inner">
+    <h2>まずは1枚、<br>送ってみてください。</h2>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-item-label">LINE</div>
+        <div class="contact-qr">LINE QR</div>
+        <div class="contact-item-val">LINE公式アカウント</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Instagram</div>
+        <div class="contact-qr">IG QR</div>
+        <div class="contact-item-val">@jeeb.bkk</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Email</div>
+        <div style="padding-top: 36px;">
+          <div class="contact-item-val">info@jeeb.bkk</div>
+          <div class="contact-item-val small" style="margin-top: 12px;">Tel: xxx-xxx-xxxx</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-message">
+      メニューの写真を<strong>1枚送るだけ</strong>。<br>
+      <strong>24時間以内</strong>にサンプルが届きます。<strong>無料</strong>です。
+    </div>
+
+    <div class="contact-footer">
+      VANNESS ASIA CO., LTD<br>
+      64/1 Room No. 210, Soi Pasi 1, Ekamai Road, Klong Tan Nuea, Wattana, Bangkok 10110<br>
+      TAX ID: 0105567229649
+    </div>
+  </div>
+  <div class="page-num">08 / 08</div>
+</section>
+
+</body>
+</html>
