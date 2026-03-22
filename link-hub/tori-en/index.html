@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>炭火焼鳥 TORI-EN | Thonglor, Bangkok</title>
+<meta name="description" content="炭火焼鳥 TORI-EN - 備長炭で焼く本格焼鳥。Thonglor Soi 13, Bangkok.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600&family=Noto+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1410;
+  --bg-card:#241e18;
+  --bg-card-hover:#2e261e;
+  --amber:#d4a24e;
+  --amber-light:#e8c47a;
+  --amber-dim:#a07830;
+  --cream:#f0e6d4;
+  --cream-soft:#c8b89a;
+  --charcoal:#2a2420;
+  --charcoal-light:#3a3228;
+  --glow:rgba(212,162,78,0.08);
+  --radius:12px;
+  --font-jp:'Noto Sans JP',sans-serif;
+  --font-th:'Noto Sans Thai',sans-serif;
+  --font-cn:'Noto Sans SC',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-jp);
+  background:var(--bg);
+  color:var(--cream);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body[data-lang="th"]{font-family:var(--font-th),var(--font-jp),sans-serif}
+body[data-lang="zh"]{font-family:var(--font-cn),var(--font-jp),sans-serif}
+
+/* Fade-in animation */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.fade-in{animation:fadeUp .6s ease both}
+.fade-in-d1{animation-delay:.1s}
+.fade-in-d2{animation-delay:.2s}
+.fade-in-d3{animation-delay:.3s}
+.fade-in-d4{animation-delay:.4s}
+.fade-in-d5{animation-delay:.5s}
+.fade-in-d6{animation-delay:.6s}
+
+/* Language switcher */
+.lang-switch{
+  position:fixed;top:0;right:0;z-index:100;
+  display:flex;gap:2px;
+  background:rgba(26,20,16,0.92);
+  backdrop-filter:blur(8px);
+  border-radius:0 0 0 var(--radius);
+  padding:6px 8px;
+  border-bottom:1px solid var(--charcoal-light);
+  border-left:1px solid var(--charcoal-light);
+}
+.lang-switch button{
+  background:none;border:none;cursor:pointer;
+  color:var(--cream-soft);font-size:12px;
+  padding:4px 8px;border-radius:6px;
+  font-weight:400;transition:all .25s ease;
+  font-family:var(--font-jp);
+  white-space:nowrap;
+}
+.lang-switch button:hover{color:var(--cream)}
+.lang-switch button.active{
+  background:var(--amber-dim);
+  color:var(--cream);
+  font-weight:600;
+}
+
+/* Container */
+.container{
+  max-width:480px;
+  margin:0 auto;
+  padding:52px 20px 40px;
+}
+
+/* Smoke decorative line */
+.smoke-line{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent);
+  margin:0 auto;
+  opacity:.6;
+}
+
+/* Header */
+.header{text-align:center;padding:24px 0 8px}
+.header-logo{
+  font-size:14px;letter-spacing:6px;
+  color:var(--amber-dim);
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.header h1{
+  font-size:28px;font-weight:700;
+  color:var(--cream);
+  letter-spacing:2px;
+  line-height:1.3;
+  margin-bottom:6px;
+}
+.header-sub{
+  font-size:20px;font-weight:300;
+  color:var(--amber-light);
+  letter-spacing:3px;
+  margin-bottom:16px;
+}
+.tagline{
+  font-size:14px;
+  color:var(--cream-soft);
+  letter-spacing:1px;
+  line-height:1.6;
+  margin-bottom:8px;
+}
+.location{
+  font-size:12px;
+  color:var(--amber-dim);
+  letter-spacing:2px;
+  margin-top:12px;
+}
+
+/* Transition for language swap */
+[data-i18n]{transition:opacity .3s ease}
+
+/* Cards grid */
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:28px 0;
+}
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--charcoal-light);
+  border-radius:var(--radius);
+  padding:20px 16px;
+  text-decoration:none;
+  color:var(--cream);
+  transition:all .25s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:8px;
+}
+.card:hover{
+  background:var(--bg-card-hover);
+  border-color:var(--amber-dim);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.3);
+}
+.card-icon{
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;
+  background:linear-gradient(135deg,var(--amber-dim),var(--amber));
+  margin-bottom:4px;
+  flex-shrink:0;
+}
+.card-icon svg{width:18px;height:18px;fill:var(--bg)}
+.card-label{font-size:13px;font-weight:400;line-height:1.4;color:var(--cream-soft)}
+.card.full-width{grid-column:1/-1}
+
+/* Section titles */
+.section-title{
+  text-align:center;
+  font-size:13px;
+  letter-spacing:4px;
+  color:var(--amber-dim);
+  text-transform:uppercase;
+  margin:36px 0 20px;
+}
+
+/* Dish cards */
+.dishes{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.dish{
+  display:flex;gap:16px;
+  background:var(--bg-card);
+  border:1px solid var(--charcoal-light);
+  border-radius:var(--radius);
+  padding:16px;
+  align-items:flex-start;
+}
+.dish-img{
+  width:80px;height:80px;
+  border-radius:8px;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;
+  color:var(--cream);
+  letter-spacing:1px;
+  text-align:center;
+  line-height:1.3;
+}
+.dish-img-tsukune{background:linear-gradient(135deg,#5a3e2a,#8a6040)}
+.dish-img-negima{background:linear-gradient(135deg,#3a4a2a,#5a7040)}
+.dish-img-kawa{background:linear-gradient(135deg,#6a5030,#9a7850)}
+.dish-name{
+  font-size:16px;font-weight:600;
+  color:var(--amber-light);
+  margin-bottom:4px;
+}
+.dish-desc{
+  font-size:13px;
+  color:var(--cream-soft);
+  line-height:1.5;
+}
+
+/* Map placeholder */
+.map-placeholder{
+  background:var(--charcoal);
+  border:1px solid var(--charcoal-light);
+  border-radius:var(--radius);
+  height:180px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin:20px 0 32px;
+}
+.map-placeholder svg{width:28px;height:28px;fill:var(--amber-dim);opacity:.6}
+.map-placeholder span{
+  font-size:12px;color:var(--cream-soft);
+  letter-spacing:2px;opacity:.6;
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  padding:24px 0 16px;
+  border-top:1px solid var(--charcoal-light);
+}
+.footer-hours{
+  font-size:14px;color:var(--cream-soft);
+  margin-bottom:4px;
+}
+.footer-phone{
+  font-size:13px;color:var(--amber-dim);
+  margin-bottom:16px;
+  letter-spacing:1px;
+}
+.footer-brand{
+  font-size:11px;color:var(--cream-soft);
+  opacity:.4;letter-spacing:1px;
+}
+.footer-brand a{color:var(--cream-soft);text-decoration:none}
+.footer-brand a:hover{color:var(--amber)}
+</style>
+</head>
+<body data-lang="ja">
+
+<!-- Language Switcher -->
+<nav class="lang-switch" aria-label="Language">
+  <button class="active" onclick="setLang('ja')">JP</button>
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('th')">TH</button>
+  <button onclick="setLang('zh')">CN</button>
+</nav>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header fade-in">
+    <div class="header-logo">Charcoal Grill</div>
+    <h1>炭火焼鳥</h1>
+    <div class="header-sub">TORI-EN</div>
+    <div class="smoke-line"></div>
+    <p class="tagline" data-i18n="tagline">備長炭で焼く本格焼鳥</p>
+    <p class="location">Thonglor Soi 13, Bangkok</p>
+  </header>
+
+  <!-- Link Cards -->
+  <div class="cards">
+    <a href="#menu" class="card fade-in fade-in-d1">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 3h18v2H3V3zm0 4h12v2H3V7zm0 4h18v2H3v-2zm0 4h12v2H3v-2zm0 4h18v2H3v-2z"/></svg>
+      </div>
+      <span class="card-label" data-i18n="link_menu">メニューを見る</span>
+    </a>
+    <a href="#reserve" class="card fade-in fade-in-d2">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V9h14v10zm0-12H5V5h14v2z"/></svg>
+      </div>
+      <span class="card-label" data-i18n="link_reserve">予約する</span>
+    </a>
+    <a href="#access" class="card fade-in fade-in-d3">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+      </div>
+      <span class="card-label" data-i18n="link_access">アクセス</span>
+    </a>
+    <a href="https://instagram.com/example" target="_blank" rel="noopener" class="card fade-in fade-in-d4">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2zm-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </div>
+      <span class="card-label">Instagram</span>
+    </a>
+    <a href="#line" class="card fade-in fade-in-d5">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.82 2 10.5c0 2.83 1.68 5.34 4.22 6.95L5.5 21l3.92-2.13c.83.15 1.69.23 2.58.23 5.52 0 10-3.82 10-8.6C22 5.82 17.52 2 12 2z"/></svg>
+      </div>
+      <span class="card-label" data-i18n="link_line">LINE で問い合わせ</span>
+    </a>
+    <a href="#maps" class="card fade-in fade-in-d6">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5a.5.5 0 00.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5a.5.5 0 00-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+      </div>
+      <span class="card-label">Google Maps</span>
+    </a>
+  </div>
+
+  <!-- Menu Section -->
+  <div class="smoke-line"></div>
+  <h2 class="section-title fade-in" data-i18n="section_signature" id="menu">おすすめ</h2>
+
+  <div class="dishes">
+    <div class="dish fade-in fade-in-d1">
+      <div class="dish-img dish-img-tsukune">つくね<br>Tsukune</div>
+      <div>
+        <div class="dish-name">つくね</div>
+        <p class="dish-desc" data-i18n="dish_tsukune">自家製の鶏つくね。卵黄につけてどうぞ。</p>
+      </div>
+    </div>
+    <div class="dish fade-in fade-in-d2">
+      <div class="dish-img dish-img-negima">ねぎま<br>Negima</div>
+      <div>
+        <div class="dish-name">ねぎま</div>
+        <p class="dish-desc" data-i18n="dish_negima">もも肉と白ねぎの定番串。備長炭の香りが引き立つ一品。</p>
+      </div>
+    </div>
+    <div class="dish fade-in fade-in-d3">
+      <div class="dish-img dish-img-kawa">皮<br>Kawa</div>
+      <div>
+        <div class="dish-name">皮</div>
+        <p class="dish-desc" data-i18n="dish_kawa">丁寧に巻いてパリパリに焼き上げた鶏皮。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Placeholder -->
+  <div class="smoke-line"></div>
+  <h2 class="section-title fade-in" data-i18n="section_access" id="access">アクセス</h2>
+  <div class="map-placeholder fade-in" id="maps">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+    <span>Google Maps</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer fade-in">
+    <p class="footer-hours">17:00 - 24:00</p>
+    <p class="footer-phone">02-XXX-XXXX</p>
+    <p class="footer-brand">Powered by <a href="#">JEEB</a></p>
+  </footer>
+
+</div>
+
+<script>
+const i18n = {
+  ja: {
+    tagline: '備長炭で焼く本格焼鳥',
+    link_menu: 'メニューを見る',
+    link_reserve: '予約する',
+    link_access: 'アクセス',
+    link_line: 'LINE で問い合わせ',
+    section_signature: 'おすすめ',
+    section_access: 'アクセス',
+    dish_tsukune: '自家製の鶏つくね。卵黄につけてどうぞ。',
+    dish_negima: 'もも肉と白ねぎの定番串。備長炭の香りが引き立つ一品。',
+    dish_kawa: '丁寧に巻いてパリパリに焼き上げた鶏皮。'
+  },
+  en: {
+    tagline: 'Authentic Charcoal-Grilled Yakitori',
+    link_menu: 'View Menu',
+    link_reserve: 'Reserve a Table',
+    link_access: 'How to Get Here',
+    link_line: 'Contact via LINE',
+    section_signature: 'Signature Dishes',
+    section_access: 'Access',
+    dish_tsukune: 'Handmade chicken meatball, served with a rich egg yolk dip.',
+    dish_negima: 'Classic skewer of juicy thigh meat and green onion, kissed by binchotan smoke.',
+    dish_kawa: 'Carefully folded and grilled to a perfect, crispy finish.'
+  },
+  th: {
+    tagline: 'ยากิโทริย่างถ่านบินโชตันแท้',
+    link_menu: 'ดูเมนู',
+    link_reserve: 'จองโต๊ะ',
+    link_access: 'วิธีเดินทาง',
+    link_line: 'ติดต่อผ่าน LINE',
+    section_signature: 'เมนูแนะนำ',
+    section_access: 'การเดินทาง',
+    dish_tsukune: 'มีทบอลไก่ทำสด เสิร์ฟพร้อมไข่แดงสำหรับจิ้ม',
+    dish_negima: 'ไม้เสียบสุดคลาสสิก เนื้อขาไก่ฉ่ำกับต้นหอมญี่ปุ่น อบอวลด้วยควันถ่านบินโชตัน',
+    dish_kawa: 'หนังไก่ม้วนอย่างพิถีพิถัน ย่างจนกรอบสมบูรณ์แบบ'
+  },
+  zh: {
+    tagline: '备长炭正宗烤鸡肉串',
+    link_menu: '查看菜单',
+    link_reserve: '预约座位',
+    link_access: '如何到达',
+    link_line: '通过LINE联系',
+    section_signature: '招牌推荐',
+    section_access: '交通指南',
+    dish_tsukune: '手工鸡肉丸，搭配浓郁蛋黄蘸酱享用。',
+    dish_negima: '经典鸡腿肉配大葱串烧，备长炭烟香四溢。',
+    dish_kawa: '精心卷制，炭烤至完美酥脆的鸡皮。'
+  }
+};
+
+function setLang(lang) {
+  document.body.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim() === {ja:'JP',en:'EN',th:'TH',zh:'CN'}[lang]);
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key]) {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.textContent = i18n[lang][key];
+        el.style.opacity = '1';
+      }, 150);
+    }
+  });
+}
+</script>
+</body>
+</html>
