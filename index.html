@@ -41,6 +41,12 @@ section{position:relative}
 .nav-cta{display:inline-block;padding:10px 28px;background:#c4703f;color:#faf9f7;text-decoration:none;font-size:.82rem;letter-spacing:.06em;border-radius:6px;transition:background .3s,transform .2s;font-weight:500}
 .nav-cta:hover{background:#d4804f;transform:translateY(-1px)}
 
+/* ─── Language Switcher ─── */
+.lang-switcher{display:flex;gap:4px;align-items:center;margin-right:12px}
+.lang-btn{background:none;border:1px solid rgba(232,228,223,.15);color:rgba(232,228,223,.5);font-size:.72rem;letter-spacing:.04em;padding:5px 9px;border-radius:4px;cursor:pointer;transition:all .25s;font-family:'Noto Sans JP','Inter',sans-serif;white-space:nowrap}
+.lang-btn:hover{color:#e8e4df;border-color:rgba(232,228,223,.3)}
+.lang-btn.active{background:rgba(196,112,63,.15);border-color:rgba(196,112,63,.4);color:#c4703f}
+
 /* Hamburger */
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:110}
 .hamburger span{display:block;width:22px;height:1.5px;background:#e8e4df;transition:transform .3s,opacity .3s}
@@ -179,7 +185,7 @@ section{position:relative}
 .pricing-card{border:1px solid rgba(232,228,223,.06);border-radius:16px;padding:44px 36px;transition:border-color .4s,transform .4s;position:relative}
 .pricing-card:hover{border-color:rgba(232,228,223,.12);transform:translateY(-4px)}
 .pricing-card.featured{border-color:rgba(196,112,63,.25);background:rgba(196,112,63,.03)}
-.pricing-card.featured::before{content:'おすすめ';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#c4703f;color:#faf9f7;font-size:.7rem;padding:4px 16px;border-radius:100px;letter-spacing:.08em}
+.pricing-card.featured::before{content:attr(data-badge);position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#c4703f;color:#faf9f7;font-size:.7rem;padding:4px 16px;border-radius:100px;letter-spacing:.08em}
 .pricing-name{font-family:'Noto Serif JP',serif;font-size:1.05rem;margin-bottom:8px;color:rgba(232,228,223,.7);letter-spacing:.06em}
 .pricing-price{font-family:'Noto Serif JP',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:700;margin-bottom:6px;color:#e8e4df}
 .pricing-price span{font-size:.9rem;font-weight:400;color:rgba(232,228,223,.4)}
@@ -213,6 +219,8 @@ section{position:relative}
 /* ─── Responsive ─── */
 @media(max-width:768px){
   .nav-links,.nav-cta-wrap{display:none}
+  .lang-switcher{margin-right:8px}
+  .lang-btn{font-size:.65rem;padding:4px 6px}
   .hamburger{display:flex}
   .hero{min-height:90vh}
   .hero-label{margin-bottom:28px}
@@ -544,7 +552,7 @@ section{position:relative}
         </ul>
         <a href="#start" class="pricing-btn">相談する</a>
       </div>
-      <div class="pricing-card featured rv rv-delay-1">
+      <div class="pricing-card featured rv rv-delay-1" data-badge="おすすめ">
         <div class="pricing-name">スタンダード</div>
         <div class="pricing-price">฿5,000<span>/月</span></div>
         <div class="pricing-period">Web + 多言語メニュー</div>
@@ -696,6 +704,360 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
+
+/* ─── i18n Language Switcher ─── */
+const translations = {
+  ja: {
+    nav_services: 'サービス',
+    nav_portfolio: '制作実績',
+    nav_pricing: '料金',
+    nav_cta: '無料相談',
+    hero_h1: 'あなたの店を、<br><em>世界に届ける。</em>',
+    hero_sub: 'バンコクの飲食店のための<br>Web制作・多言語メニュー・SNS運用',
+    reality_h2: 'バンコクには数千の飲食店がある。<br>そのほとんどが、まだ<em>世界に届いていない。</em>',
+    reality_quiet: '英語メニューがない。Googleで見つからない。<br>SNSが止まっている。——それだけで、届くはずの客を逃している。',
+    s01_index: 'Service 01',
+    s01_h2: '即日、あなたの店の<br>Webサイトを作る。',
+    s01_p1: '店名とジャンルを教えてください。その日のうちに、プロ品質のサンプルサイトをお見せします。気に入ったら、そのまま公開。',
+    s01_p2: 'テンプレートではありません。あなたの店のためだけに作ります。',
+    s02_index: 'Service 02',
+    s02_h2: 'メニューを、<br>世界の言葉に。',
+    s02_p1: 'メニューを日本語・英語・タイ語・中国語に翻訳。ただの機械翻訳ではなく、料理の魅力が伝わる言葉で。',
+    s02_p2: '「炙りチャーシュー」を "grilled pork" で終わらせない。',
+    s03_index: 'Service 03',
+    s03_h2: 'SNSを、<br>毎日動かし続ける。',
+    s03_p1: '「何を投稿すればいいかわからない」——その悩みを解決します。毎日、具体的な投稿指示をお届け。写真の撮り方、キャプション、ハッシュタグまで。',
+    s03_p2: 'あなたは料理に集中してください。',
+    steps_h2: 'はじめ方は、シンプルです。',
+    steps_lead: 'まずは無料でサンプルを作ります。<br>納得してから、はじめてください。',
+    step1_h3: 'ご連絡ください',
+    step1_p: 'LINE・Instagram・メール、どれでも。店名とジャンルだけ教えてください。',
+    step2_h3: '即日サンプル制作',
+    step2_p: 'あなたの店のサンプルサイトを、その日のうちにお見せします。完全無料です。',
+    step3_h3: 'フィードバック・調整',
+    step3_p: '気になる点があれば修正します。満足いくまで調整。納得できなければ、費用はかかりません。',
+    step4_h3: '公開・運用開始',
+    step4_p: 'サイトを公開し、必要に応じてSNS運用や多言語メニューも開始します。',
+    pricing_h2: '料金',
+    pricing_lead: 'シンプルで、わかりやすく。<br>隠れた費用はありません。',
+    plan1_name: 'ライト',
+    plan2_name: 'スタンダード',
+    plan3_name: 'プレミアム',
+    plan_consult: '相談する',
+    footer_ops: '運営: VANNESS ASIA CO., LTD',
+    footer_service: 'ITコンサルティング / デジタルマーケティング / Web制作',
+    footer_copy: '&copy; 2026 JEEB. All rights reserved.',
+    start_h2: 'まずは、話しましょう。',
+    start_sub: '無料でサンプルサイトを制作します。<br>お気軽にご連絡ください。',
+    start_cta: '無料相談する',
+    pricing_badge: 'おすすめ',
+  },
+  en: {
+    nav_services: 'Services',
+    nav_portfolio: 'Portfolio',
+    nav_pricing: 'Pricing',
+    nav_cta: 'Free Consultation',
+    hero_h1: 'Bring your restaurant<br><em>to the world.</em>',
+    hero_sub: 'Web design, multilingual menus & SNS management<br>for Bangkok restaurants',
+    reality_h2: 'Bangkok has thousands of restaurants.<br>Most of them are still <em>invisible to the world.</em>',
+    reality_quiet: 'No English menu. Not found on Google.<br>SNS has stopped. — That alone is costing you customers.',
+    s01_index: 'Service 01',
+    s01_h2: 'We build your restaurant\'s website<br>— the same day.',
+    s01_p1: 'Tell us your restaurant name and genre. We\'ll show you a professional-quality sample site the same day. If you like it, we go live.',
+    s01_p2: 'Not a template. Built specifically for your restaurant.',
+    s02_index: 'Service 02',
+    s02_h2: 'Your menu,<br>in the world\'s languages.',
+    s02_p1: 'We translate your menu into Japanese, English, Thai & Chinese. Not just machine translation — words that convey the appeal of your food.',
+    s02_p2: 'We don\'t just translate "Aburi Chashu" as "grilled pork".',
+    s03_index: 'Service 03',
+    s03_h2: 'Keep your SNS active,<br>every single day.',
+    s03_p1: '"I don\'t know what to post" — we solve that. Daily, specific posting instructions delivered to you. From photo tips to captions and hashtags.',
+    s03_p2: 'You focus on the cooking.',
+    steps_h2: 'Getting started is simple.',
+    steps_lead: 'We\'ll make a free sample first.<br>Only start when you\'re satisfied.',
+    step1_h3: 'Contact us',
+    step1_p: 'LINE, Instagram, or email — any works. Just tell us your restaurant name and genre.',
+    step2_h3: 'Same-day sample',
+    step2_p: 'We\'ll show you a sample site for your restaurant the same day. Completely free.',
+    step3_h3: 'Feedback & adjustments',
+    step3_p: 'We\'ll revise anything you\'re unsure about. Adjust until you\'re satisfied. If you\'re not happy, there\'s no charge.',
+    step4_h3: 'Launch & start',
+    step4_p: 'We launch the site and, if needed, begin SNS management and multilingual menus.',
+    pricing_h2: 'Pricing',
+    pricing_lead: 'Simple and transparent.<br>No hidden fees.',
+    plan1_name: 'Light',
+    plan2_name: 'Standard',
+    plan3_name: 'Premium',
+    plan_consult: 'Consult',
+    footer_ops: 'Operated by: VANNESS ASIA CO., LTD',
+    footer_service: 'IT Consulting / Digital Marketing / Web Design',
+    footer_copy: '&copy; 2026 JEEB. All rights reserved.',
+    start_h2: 'Let\'s talk first.',
+    start_sub: 'We\'ll create a free sample site.<br>Feel free to reach out.',
+    start_cta: 'Free Consultation',
+    pricing_badge: 'Recommended',
+  },
+  th: {
+    nav_services: 'บริการ',
+    nav_portfolio: 'ผลงาน',
+    nav_pricing: 'ราคา',
+    nav_cta: 'ปรึกษาฟรี',
+    hero_h1: 'ส่งร้านของคุณ<br><em>ไปทั่วโลก</em>',
+    hero_sub: 'เว็บไซต์ เมนูหลายภาษา และจัดการ SNS<br>สำหรับร้านอาหารในกรุงเทพ',
+    reality_h2: 'กรุงเทพมีร้านอาหารนับพัน<br>ส่วนใหญ่ยัง<em>ไม่ถึงมือลูกค้าทั่วโลก</em>',
+    reality_quiet: 'ไม่มีเมนูภาษาอังกฤษ หาใน Google ไม่เจอ<br>SNS หยุดอัปเดต — แค่นี้ก็เสียลูกค้าไปแล้ว',
+    s01_index: 'Service 01',
+    s01_h2: 'สร้างเว็บไซต์ร้านคุณ<br>ได้ภายในวันเดียว',
+    s01_p1: 'บอกชื่อร้านและประเภทอาหาร เราจะแสดงตัวอย่างเว็บไซต์คุณภาพระดับมืออาชีพให้ดูในวันเดียวกัน ถ้าชอบ เผยแพร่ได้เลย',
+    s01_p2: 'ไม่ใช่เทมเพลต สร้างเฉพาะสำหรับร้านของคุณโดยตรง',
+    s02_index: 'Service 02',
+    s02_h2: 'เมนูของคุณ<br>ในทุกภาษาของโลก',
+    s02_p1: 'แปลเมนูเป็นภาษาญี่ปุ่น อังกฤษ ไทย และจีน ไม่ใช่แค่แปลด้วยเครื่อง แต่เป็นคำที่สื่อถึงเสน่ห์ของอาหาร',
+    s02_p2: 'เราไม่ได้แค่แปล "อาบุริชาชู" ว่า "หมูย่าง"',
+    s03_index: 'Service 03',
+    s03_h2: 'ดูแล SNS ของคุณ<br>ทุกวัน',
+    s03_p1: '"ไม่รู้จะโพสต์อะไร" — เราแก้ปัญหานั้น ส่งคำแนะนำโพสต์ที่ชัดเจนให้ทุกวัน ตั้งแต่เคล็ดลับถ่ายรูป แคปชั่น ไปจนถึงแฮชแท็ก',
+    s03_p2: 'คุณโฟกัสกับอาหารได้เลย',
+    steps_h2: 'เริ่มต้นง่ายมาก',
+    steps_lead: 'เราจะทำตัวอย่างฟรีก่อน<br>พอใจแล้วค่อยเริ่ม',
+    step1_h3: 'ติดต่อเรา',
+    step1_p: 'LINE Instagram หรืออีเมล อย่างไหนก็ได้ บอกแค่ชื่อร้านและประเภทอาหาร',
+    step2_h3: 'ตัวอย่างภายในวัน',
+    step2_p: 'เราจะแสดงตัวอย่างเว็บไซต์ร้านคุณให้ดูในวันเดียวกัน ฟรีทั้งหมด',
+    step3_h3: 'แก้ไขตามต้องการ',
+    step3_p: 'มีอะไรที่ต้องการปรับ เราแก้ให้ ปรับจนพอใจ ถ้าไม่พอใจ ไม่มีค่าใช้จ่าย',
+    step4_h3: 'เปิดตัวและเริ่มต้น',
+    step4_p: 'เผยแพร่เว็บไซต์ และเริ่ม SNS หรือเมนูหลายภาษาตามที่ต้องการ',
+    pricing_h2: 'ราคา',
+    pricing_lead: 'เรียบง่ายและโปร่งใส<br>ไม่มีค่าใช้จ่ายซ่อนเร้น',
+    plan1_name: 'ไลท์',
+    plan2_name: 'สแตนดาร์ด',
+    plan3_name: 'พรีเมียม',
+    plan_consult: 'ปรึกษา',
+    footer_ops: 'ดำเนินการโดย: VANNESS ASIA CO., LTD',
+    footer_service: 'ที่ปรึกษาไอที / การตลาดดิจิทัล / ออกแบบเว็บไซต์',
+    footer_copy: '&copy; 2026 JEEB. สงวนลิขสิทธิ์',
+    start_h2: 'มาคุยกันก่อน',
+    start_sub: 'เราจะสร้างตัวอย่างเว็บไซต์ฟรีให้<br>ติดต่อได้เลย',
+    start_cta: 'ปรึกษาฟรี',
+    pricing_badge: 'แนะนำ',
+  },
+  zh: {
+    nav_services: '服务',
+    nav_portfolio: '作品集',
+    nav_pricing: '价格',
+    nav_cta: '免费咨询',
+    hero_h1: '让你的餐厅<br><em>走向世界</em>',
+    hero_sub: '曼谷餐厅的网站制作·多语言菜单·SNS运营',
+    reality_h2: '曼谷有数千家餐厅<br>大多数还<em>未能触达世界各地的顾客</em>',
+    reality_quiet: '没有英文菜单。Google搜不到。<br>SNS停止更新。——仅此就让你损失了本可到来的顾客。',
+    s01_index: 'Service 01',
+    s01_h2: '当天为您<br>制作餐厅网站',
+    s01_p1: '告诉我们您的店名和类型，当天就为您展示专业级示例网站。满意的话直接上线。',
+    s01_p2: '不是模板，而是专为您的餐厅量身定制。',
+    s02_index: 'Service 02',
+    s02_h2: '将菜单翻译成<br>世界语言',
+    s02_p1: '将菜单翻译成日语、英语、泰语和中文。不仅仅是机器翻译，而是能传递美食魅力的文字。',
+    s02_p2: '我们不会把"炙烧叉烧"简单翻译成"烤猪肉"。',
+    s03_index: 'Service 03',
+    s03_h2: '每天持续<br>运营您的SNS',
+    s03_p1: '"不知道该发什么" — 我们来解决这个问题。每天为您提供具体的发帖指引，从拍照技巧到文案和标签。',
+    s03_p2: '您专注于烹饪，其他交给我们。',
+    steps_h2: '开始很简单',
+    steps_lead: '先免费制作样本<br>满意后再开始',
+    step1_h3: '联系我们',
+    step1_p: 'LINE、Instagram或邮件均可。只需告诉我们您的店名和类型。',
+    step2_h3: '当天制作样本',
+    step2_p: '我们当天就为您展示餐厅示例网站，完全免费。',
+    step3_h3: '反馈与调整',
+    step3_p: '有任何不满意的地方我们都会修改，调整到您满意为止。不满意则无需付费。',
+    step4_h3: '正式上线运营',
+    step4_p: '网站上线，并根据需要开始SNS运营和多语言菜单服务。',
+    pricing_h2: '价格',
+    pricing_lead: '简单透明<br>没有隐藏费用',
+    plan1_name: '轻量版',
+    plan2_name: '标准版',
+    plan3_name: '高级版',
+    plan_consult: '咨询',
+    footer_ops: '运营方: VANNESS ASIA CO., LTD',
+    footer_service: 'IT咨询 / 数字营销 / 网站制作',
+    footer_copy: '&copy; 2026 JEEB. 版权所有',
+    start_h2: '先来聊聊吧',
+    start_sub: '我们将免费制作示例网站<br>欢迎随时联系',
+    start_cta: '免费咨询',
+    pricing_badge: '推荐',
+  }
+};
+
+let currentLang = localStorage.getItem('jeeb_lang') || 'ja';
+
+function applyLang(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  currentLang = lang;
+  localStorage.setItem('jeeb_lang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh' : lang;
+
+  // Fade out
+  document.body.style.transition = 'opacity 0.2s ease';
+  document.body.style.opacity = '0.7';
+
+  setTimeout(() => {
+    // Nav
+    const navLinks = document.querySelectorAll('.nav-links a');
+    if (navLinks[0]) navLinks[0].textContent = t.nav_services;
+    if (navLinks[1]) navLinks[1].textContent = t.nav_portfolio;
+    if (navLinks[2]) navLinks[2].textContent = t.nav_pricing;
+    const navCta = document.querySelector('.nav-cta');
+    if (navCta) navCta.textContent = t.nav_cta;
+    // Mobile menu links
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+    if (mobileLinks[0]) mobileLinks[0].textContent = t.nav_services;
+    if (mobileLinks[1]) mobileLinks[1].textContent = t.nav_portfolio;
+    if (mobileLinks[2]) mobileLinks[2].textContent = t.nav_pricing;
+    if (mobileLinks[3]) mobileLinks[3].textContent = t.nav_cta;
+
+    // Hero
+    const heroH1 = document.querySelector('.hero-content h1');
+    if (heroH1) heroH1.innerHTML = t.hero_h1;
+    const heroSub = document.querySelector('.hero-sub');
+    if (heroSub) heroSub.innerHTML = t.hero_sub;
+
+    // Reality
+    const realityH2 = document.querySelector('.reality-statement h2');
+    if (realityH2) realityH2.innerHTML = t.reality_h2;
+    const realityQuiet = document.querySelector('.reality-quiet');
+    if (realityQuiet) realityQuiet.innerHTML = t.reality_quiet;
+
+    // Services
+    const serviceTexts = document.querySelectorAll('.service-text');
+    if (serviceTexts[0]) {
+      const idx = serviceTexts[0].querySelector('.service-index');
+      if (idx) idx.textContent = t.s01_index;
+      const h2 = serviceTexts[0].querySelector('h2');
+      if (h2) h2.innerHTML = t.s01_h2;
+      const ps = serviceTexts[0].querySelectorAll('p');
+      if (ps[0]) ps[0].textContent = t.s01_p1;
+      if (ps[1]) ps[1].textContent = t.s01_p2;
+    }
+    if (serviceTexts[1]) {
+      const idx = serviceTexts[1].querySelector('.service-index');
+      if (idx) idx.textContent = t.s02_index;
+      const h2 = serviceTexts[1].querySelector('h2');
+      if (h2) h2.innerHTML = t.s02_h2;
+      const ps = serviceTexts[1].querySelectorAll('p');
+      if (ps[0]) ps[0].textContent = t.s02_p1;
+      if (ps[1]) ps[1].textContent = t.s02_p2;
+    }
+    if (serviceTexts[2]) {
+      const idx = serviceTexts[2].querySelector('.service-index');
+      if (idx) idx.textContent = t.s03_index;
+      const h2 = serviceTexts[2].querySelector('h2');
+      if (h2) h2.innerHTML = t.s03_h2;
+      const ps = serviceTexts[2].querySelectorAll('p');
+      if (ps[0]) ps[0].textContent = t.s03_p1;
+      if (ps[1]) ps[1].textContent = t.s03_p2;
+    }
+
+    // Steps
+    const stepsH2 = document.querySelector('.steps h2');
+    if (stepsH2) stepsH2.textContent = t.steps_h2;
+    const stepsLead = document.querySelector('.steps-lead');
+    if (stepsLead) stepsLead.innerHTML = t.steps_lead;
+    const stepItems = document.querySelectorAll('.step-item');
+    const stepData = [
+      { h3: t.step1_h3, p: t.step1_p },
+      { h3: t.step2_h3, p: t.step2_p },
+      { h3: t.step3_h3, p: t.step3_p },
+      { h3: t.step4_h3, p: t.step4_p },
+    ];
+    stepItems.forEach((item, i) => {
+      if (stepData[i]) {
+        const h3 = item.querySelector('h3');
+        const p = item.querySelector('p');
+        if (h3) h3.textContent = stepData[i].h3;
+        if (p) p.textContent = stepData[i].p;
+      }
+    });
+
+    // Pricing
+    const pricingH2 = document.querySelector('.pricing h2');
+    if (pricingH2) pricingH2.textContent = t.pricing_h2;
+    const pricingLead = document.querySelector('.pricing-lead');
+    if (pricingLead) pricingLead.innerHTML = t.pricing_lead;
+    // Update featured badge
+    const featuredCard = document.querySelector('.pricing-card.featured');
+    if (featuredCard) {
+      featuredCard.setAttribute('data-badge', t.pricing_badge);
+    }
+    // Plan names
+    const planNames = document.querySelectorAll('.pricing-name');
+    if (planNames[0]) planNames[0].textContent = t.plan1_name;
+    if (planNames[1]) planNames[1].textContent = t.plan2_name;
+    if (planNames[2]) planNames[2].textContent = t.plan3_name;
+    // Consult buttons
+    document.querySelectorAll('.pricing-btn').forEach(btn => {
+      btn.textContent = t.plan_consult;
+    });
+
+    // Start / CTA section
+    const startH2 = document.querySelector('.start h2');
+    if (startH2) startH2.textContent = t.start_h2;
+    const startSub = document.querySelector('.start-sub');
+    if (startSub) startSub.innerHTML = t.start_sub;
+    const startCta = document.querySelector('.start-cta');
+    if (startCta) startCta.textContent = t.start_cta;
+
+    // Footer
+    const footerDivs = document.querySelectorAll('footer .inner > div');
+    if (footerDivs[1]) {
+      const lines = footerDivs[1].querySelectorAll('div');
+      if (lines[0]) lines[0].textContent = t.footer_ops;
+      if (lines[3]) lines[3].textContent = t.footer_service;
+    }
+    const footerCopy = document.querySelector('.footer-copy');
+    if (footerCopy) footerCopy.innerHTML = t.footer_copy;
+
+    // Update active lang button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // Fade in
+    document.body.style.opacity = '1';
+  }, 200);
+}
+
+// Build language switcher UI and inject into nav
+(function buildLangSwitcher() {
+  const switcher = document.createElement('div');
+  switcher.className = 'lang-switcher';
+  const langs = [
+    { code: 'ja', label: '日本語' },
+    { code: 'en', label: 'English' },
+    { code: 'th', label: 'ภาษาไทย' },
+    { code: 'zh', label: '中文' },
+  ];
+  langs.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'lang-btn' + (l.code === currentLang ? ' active' : '');
+    btn.dataset.lang = l.code;
+    btn.textContent = l.label;
+    btn.addEventListener('click', () => applyLang(l.code));
+    switcher.appendChild(btn);
+  });
+
+  // Insert before the nav-cta-wrap
+  const navCtaWrap = document.querySelector('.nav-cta-wrap');
+  if (navCtaWrap) {
+    navCtaWrap.parentNode.insertBefore(switcher, navCtaWrap);
+  }
+
+  // Apply saved lang on load
+  if (currentLang !== 'ja') {
+    applyLang(currentLang);
+  }
+})();
 
 /* ─── Sticky Nav ─── */
 const nav = document.getElementById('nav');
