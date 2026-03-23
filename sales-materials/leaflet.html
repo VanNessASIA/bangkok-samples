@@ -187,41 +187,40 @@
   /* QR section */
   .qr-section{
     display:flex;
-    align-items:center;
-    gap:5mm;
+    align-items:flex-start;
+    justify-content:center;
+    gap:4mm;
     background:#fff;
     border:1px solid var(--light-grey);
     border-radius:4px;
     padding:4mm 5mm;
     margin-top:auto;
   }
-  .qr-placeholder{
-    width:22mm;
-    height:22mm;
-    border:2px solid var(--navy);
-    border-radius:3px;
+  .qr-item{
     display:flex;
+    flex-direction:column;
     align-items:center;
-    justify-content:center;
-    font-size:0.6rem;
-    color:var(--grey-text);
-    text-align:center;
-    flex-shrink:0;
+    gap:2mm;
+    flex:1;
   }
-  .qr-text{
-    font-size:0.85rem;
+  .qr-item img{
+    width:18mm;
+    height:18mm;
+    display:block;
+    border-radius:2px;
   }
-  .qr-text .qr-label{
+  .qr-item-label{
+    font-size:0.72rem;
     font-weight:700;
     color:var(--navy);
-    display:block;
-    margin-bottom:1mm;
+    text-align:center;
+    line-height:1.4;
   }
-  .qr-text .qr-url{
-    color:var(--terra);
-    font-family:'Inter',sans-serif;
-    font-size:0.75rem;
-    word-break:break-all;
+  .qr-divider{
+    width:1px;
+    background:var(--light-grey);
+    align-self:stretch;
+    flex-shrink:0;
   }
 
 
@@ -536,10 +535,19 @@
   </div>
 
   <div class="qr-section">
-    <div class="qr-placeholder">QR<br>CODE</div>
-    <div class="qr-text">
-      <span class="qr-label">サンプルサイトを今すぐ見る</span>
-      <span class="qr-url">vannessasia.github.io/bangkok-samples/</span>
+    <div class="qr-item">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fvannessasia.github.io%2Fbangkok-samples%2Fsales-materials%2Fmenu-translation-showcase.html" alt="メニュー翻訳サンプル集QR">
+      <span class="qr-item-label">メニュー翻訳<br>サンプル集</span>
+    </div>
+    <div class="qr-divider"></div>
+    <div class="qr-item">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fvannessasia.github.io%2Fbangkok-samples%2Framen%2Ftype-a-afuri%2F" alt="ラーメン店サンプルQR">
+      <span class="qr-item-label">ラーメン店<br>サンプル</span>
+    </div>
+    <div class="qr-divider"></div>
+    <div class="qr-item">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fvannessasia.github.io%2Fbangkok-samples%2Fizakaya%2Ftype-a-yakitori%2F" alt="居酒屋サンプルQR">
+      <span class="qr-item-label">居酒屋<br>サンプル</span>
     </div>
   </div>
 
