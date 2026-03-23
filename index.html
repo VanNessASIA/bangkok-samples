@@ -120,6 +120,7 @@ section{position:relative}
 .showcase{padding:clamp(100px,14vw,180px) 0;background:#faf9f7;color:#2c2825}
 .showcase h2{font-size:clamp(1.8rem,3.5vw,3rem);text-align:center;margin-bottom:16px;color:#2c2825}
 .showcase-lead{text-align:center;color:rgba(44,40,37,.5);max-width:500px;margin:0 auto 60px;font-size:clamp(.9rem,1.1vw,1rem);font-weight:300}
+.showcase-closing{text-align:center;color:rgba(44,40,37,.45);max-width:520px;margin:48px auto 0;font-size:clamp(.85rem,1vw,.95rem);font-weight:300;letter-spacing:.02em}
 /* Featured showcase */
 .showcase-featured{position:relative;max-width:960px;margin:0 auto 60px;border-radius:16px;overflow:hidden;background:#1a1f2e;box-shadow:0 40px 100px rgba(0,0,0,.15)}
 .showcase-featured-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
@@ -358,8 +359,8 @@ section{position:relative}
 <!-- ─── Showcase ─── -->
 <section class="showcase" id="showcase">
   <div class="inner">
-    <h2 class="rv">実際に、見てください。</h2>
-    <p class="showcase-lead rv rv-delay-1">すべてJEEBが制作したサンプルサイトです。<br>あなたの店でも、同じクオリティで作れます。</p>
+    <h2 class="rv">すでに、ここまで揃っています。</h2>
+    <p class="showcase-lead rv rv-delay-1">ラーメン、居酒屋、その先の業態まで。<br>雰囲気も見せ方も変えたサンプルを、すでに複数ご用意しています。</p>
 
     <div class="showcase-tabs rv rv-delay-1">
       <button class="showcase-tab active" data-category="ramen">ラーメン</button>
@@ -385,6 +386,8 @@ section{position:relative}
 
     <!-- Thumbnails -->
     <div class="showcase-grid rv" id="showcaseGrid"></div>
+
+    <p class="showcase-closing rv rv-delay-1">「こんなに種類があるの？」と思ってもらえるところから、提案は始まります。</p>
   </div>
 </section>
 
@@ -622,15 +625,15 @@ section{position:relative}
 /* ─── Showcase Data ─── */
 const sites = {
   ramen: [
-    { name: '麺匠 SORA', type: 'Type A — 洗練・ミニマル', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/' },
-    { name: '麺道 KENJI', type: 'Type B — 力強い・情熱系', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/' },
-    { name: '剛麺 THUNDER', type: 'Type C — インパクト・大胆', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/' },
+    { name: '麺匠 SORA', type: '洗練・ミニマル — 上質な一杯を伝える', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-a-afuri/' },
+    { name: '麺道 KENJI', type: '力強い・情熱系 — 熱量が伝わる構成', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-b-ivan/' },
+    { name: '剛麺 THUNDER', type: 'インパクト重視 — 大胆に目を引くデザイン', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-c-nagi/' },
     { name: '麺処 清水', type: 'Type D — 和・伝統的', url: 'https://vannessasia.github.io/bangkok-samples/ramen/type-d-hayashida/' }
   ],
   izakaya: [
-    { name: '炭火横丁 たけし', type: 'Type A — 炭火焼き・本格派', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/' },
-    { name: '炎とソーダ', type: 'Type B — ネオ居酒屋', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/' },
-    { name: '炉端 蔵人', type: 'Type C — 炉端焼き・落ち着き', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/' },
+    { name: '炭火横丁 たけし', type: '本格派 — 炭の香りが伝わる重厚感', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-a-yakitori/' },
+    { name: '炎とソーダ', type: 'ネオ居酒屋 — 若い客層に刺さる鮮度感', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-b-neo/' },
+    { name: '炉端 蔵人', type: '落ち着き系 — 大人が通いたくなる雰囲気', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-c-robata/' },
     { name: '居酒屋 みのり', type: 'Type D — 家庭的・温かみ', url: 'https://vannessasia.github.io/bangkok-samples/izakaya/type-d-family/' }
   ]
 };
